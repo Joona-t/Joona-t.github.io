@@ -126,22 +126,10 @@ body::after {
   margin: 0 auto;
   padding: 72px 20px 36px;
   min-height: 100vh;
-  background-image:
-    url("/assets/bg-mushrooms.svg"),
-    url("/assets/bg-clouds-rainbow.svg"),
-    url("/assets/bg-sparkles.svg");
-  background-size:
-    clamp(300px, 34vw, 520px) auto,
-    clamp(320px, 40vw, 620px) auto,
-    320px 320px;
-  background-position:
-    left bottom,
-    right 56%,
-    0 0;
-  background-repeat:
-    no-repeat,
-    no-repeat,
-    repeat;
+  background-image: url("/assets/bg-sparkles.svg");
+  background-size: 320px 320px;
+  background-position: 0 0;
+  background-repeat: repeat;
 }
 
 .page::before {
@@ -169,8 +157,43 @@ body::after {
 }
 
 .hero {
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
   text-align: center;
   padding: clamp(28px, 6vw, 56px);
+}
+
+.hero::before,
+.hero::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+  filter: saturate(0.88);
+}
+
+.hero::before {
+  left: clamp(-300px, -26vw, -170px);
+  bottom: clamp(-90px, -9vw, -28px);
+  width: clamp(220px, 23vw, 330px);
+  aspect-ratio: 3 / 2;
+  background: url("/assets/hero-mushrooms.png") center / contain no-repeat;
+}
+
+.hero::after {
+  right: clamp(-300px, -27vw, -160px);
+  top: clamp(40%, 46%, 52%);
+  width: clamp(250px, 27vw, 380px);
+  aspect-ratio: 3 / 2;
+  transform: translateY(-50%);
+  background: url("/assets/hero-clouds.png") center / contain no-repeat;
+}
+
+.hero > * {
+  position: relative;
+  z-index: 1;
 }
 
 .eyebrow {
@@ -186,6 +209,16 @@ h1 {
   font-size: clamp(2.2rem, 6vw, 4rem);
   line-height: 1.02;
   color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.48rem;
+}
+
+.title-icon {
+  width: clamp(28px, 4.2vw, 42px);
+  height: clamp(28px, 4.2vw, 42px);
+  border-radius: 12px;
+  flex: 0 0 auto;
 }
 
 .subtitle {
@@ -319,14 +352,12 @@ footer p {
 @media (max-width: 760px) {
   .page {
     padding-top: 48px;
-    background-size:
-      clamp(220px, 42vw, 320px) auto,
-      clamp(220px, 48vw, 360px) auto,
-      260px 260px;
-    background-position:
-      left bottom,
-      right 62%,
-      0 0;
+    background-size: 260px 260px;
+  }
+
+  .hero::before,
+  .hero::after {
+    display: none;
   }
 
   .project-grid {
