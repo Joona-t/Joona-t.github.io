@@ -3,6 +3,11 @@
   --midPink: #ff79c6;
   --softPink: #ffd1ea;
   --blush: #ffb3d9;
+  --frameHot: #e2499f;
+  --frameSoft: #ea89b5;
+  --bgLeft: #ded2d6;
+  --bgMid: #e9c4d0;
+  --bgRight: #efb4c6;
   --white: #ffffff;
   --ink: #2b1b2b;
   --lightCard: #fff7fc;
@@ -23,9 +28,9 @@ body {
   font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
   color: var(--ink);
   background:
-    radial-gradient(46% 36% at 18% 10%, rgba(255, 255, 255, 0.26), transparent 72%),
-    radial-gradient(38% 30% at 82% 16%, rgba(255, 179, 217, 0.32), transparent 70%),
-    linear-gradient(152deg, var(--softPink) 0%, var(--midPink) 54%, var(--hotPink) 100%);
+    linear-gradient(90deg, var(--frameHot) 0%, var(--frameSoft) 100%) top / 100% 74px no-repeat,
+    radial-gradient(60% 52% at 50% 76%, rgba(244, 122, 192, 0.35), transparent 72%),
+    linear-gradient(102deg, var(--bgLeft) 0%, var(--bgMid) 49%, var(--bgRight) 100%);
   position: relative;
   overflow-x: hidden;
 }
@@ -47,8 +52,9 @@ body::after {
   pointer-events: none;
   z-index: 0;
   background:
-    radial-gradient(24% 22% at 22% 65%, rgba(255, 247, 252, 0.22), transparent 75%),
-    radial-gradient(30% 24% at 78% 70%, rgba(255, 255, 255, 0.18), transparent 74%);
+    radial-gradient(62% 28% at 50% 12%, rgba(255, 255, 255, 0.28), transparent 72%),
+    radial-gradient(26% 24% at 18% 74%, rgba(255, 247, 252, 0.16), transparent 70%),
+    radial-gradient(26% 24% at 82% 74%, rgba(255, 255, 255, 0.14), transparent 70%);
 }
 
 .sparkle-layer {
@@ -62,7 +68,7 @@ body::after {
   position: absolute;
   left: var(--x);
   top: var(--y);
-  opacity: 0.03;
+  opacity: 0.02;
   transform: translate(-50%, -50%) rotate(var(--rot, 0deg));
   animation: twinkle 9s ease-in-out infinite;
 }
@@ -180,6 +186,22 @@ h1 {
 .button-row {
   justify-content: center;
   margin-top: 1.45rem;
+}
+
+.btn-icon {
+  gap: 0.44rem;
+}
+
+.icon-book {
+  width: 15px;
+  height: 15px;
+  display: inline-flex;
+}
+
+.icon-book svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
 }
 
 .btn {
