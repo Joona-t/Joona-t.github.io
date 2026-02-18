@@ -27,10 +27,8 @@ body {
   min-height: 100vh;
   font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
   color: var(--ink);
-  background:
-    linear-gradient(90deg, var(--frameHot) 0%, var(--frameSoft) 100%) top / 100% 74px no-repeat,
-    url("images/background-artwork.png") center / cover no-repeat fixed,
-    linear-gradient(102deg, var(--bgLeft) 0%, var(--bgMid) 49%, var(--bgRight) 100%);
+  background: url("images/background-artwork.png") center / cover no-repeat fixed;
+  background-color: var(--softPink);
   position: relative;
   overflow-x: hidden;
 }
@@ -284,7 +282,7 @@ footer p {
 
 @media (max-width: 760px) {
   body {
-    background-attachment: scroll, scroll, scroll;
+    background-attachment: scroll;
   }
 
   .page {
