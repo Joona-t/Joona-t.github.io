@@ -169,25 +169,26 @@ body::after {
   content: "";
   position: absolute;
   pointer-events: none;
-  z-index: 0;
-  opacity: 0.5;
-  filter: saturate(0.88);
+  z-index: -1;
+  filter: none;
 }
 
 .hero::before {
-  left: clamp(-300px, -26vw, -170px);
-  bottom: clamp(-90px, -9vw, -28px);
-  width: clamp(220px, 23vw, 330px);
+  left: clamp(-420px, -33vw, -240px);
+  bottom: clamp(-88px, -8vw, -24px);
+  width: clamp(300px, 32vw, 560px);
   aspect-ratio: 3 / 2;
+  opacity: 0.92;
   background: url("/assets/hero-mushrooms.png") center / contain no-repeat;
 }
 
 .hero::after {
-  right: clamp(-300px, -27vw, -160px);
-  top: clamp(40%, 46%, 52%);
-  width: clamp(250px, 27vw, 380px);
+  right: clamp(-430px, -34vw, -230px);
+  top: 50%;
+  width: clamp(320px, 35vw, 620px);
   aspect-ratio: 3 / 2;
   transform: translateY(-50%);
+  opacity: 0.78;
   background: url("/assets/hero-clouds.png") center / contain no-repeat;
 }
 
