@@ -292,3 +292,22 @@ footer p {
     grid-template-columns: 1fr;
   }
 }
+
+/* Spiral background canvases */
+.spiral-bg {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 280px;
+  height: 280px;
+  opacity: 0.55;
+  pointer-events: none;
+  z-index: 0;
+}
+
+#spiral-left  { left: calc(50% - 580px); }
+#spiral-right { right: calc(50% - 580px); }
+
+@media (max-width: 1100px) {
+  .spiral-bg { display: none; }
+}
