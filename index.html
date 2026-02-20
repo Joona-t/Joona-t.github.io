@@ -1,105 +1,209 @@
-﻿<!doctype html>
-<!-- EDIT ME:
-X_PROFILE_URL
-EMAIL_ADDRESS
-GOODREADS_PROFILE_URL
-ANTI_BRAINROT_INSTALL_URL
-ANTI_BRAINROT_SOURCE_URL
-VSCODE_THEME_MARKETPLACE_URL
--->
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>LoveSpark</title>
-  <meta name="description" content="Retro pink tools for focus, creativity, and calm.">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LoveSpark — Retro pink tools for the internet</title>
+  <meta name="description" content="Free, open source browser tools. No ads. Ever. Built with love.">
   <meta property="og:title" content="LoveSpark">
-  <meta property="og:description" content="Retro pink tools for focus, creativity, and calm.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://Joona-t.github.io/">
-  <meta property="og:image" content="https://Joona-t.github.io/og.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="LoveSpark">
-  <meta name="twitter:description" content="Retro pink tools for focus, creativity, and calm.">
-  <meta name="twitter:image" content="https://Joona-t.github.io/og.png">
-  <!-- Export og.svg to og.png and place og.png in the site root before sharing links. -->
+  <meta property="og:description" content="Retro pink tools for a calmer, more beautiful internet.">
+  <meta property="og:image" content="og.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <canvas id="spiral-left"  class="spiral-bg"></canvas>
-  <canvas id="spiral-right" class="spiral-bg"></canvas>
-  <div class="sparkle-layer" aria-hidden="true">
-    <span class="sparkle star" style="--x:10%;--y:15%;--rot:0deg"></span>
-    <span class="sparkle heart" style="--x:16%;--y:28%;--rot:45deg"></span>
-    <span class="sparkle star" style="--x:24%;--y:11%;--rot:12deg"></span>
-    <span class="sparkle heart" style="--x:32%;--y:24%;--rot:45deg"></span>
-    <span class="sparkle star" style="--x:68%;--y:24%;--rot:0deg"></span>
-    <span class="sparkle heart" style="--x:76%;--y:11%;--rot:45deg"></span>
-    <span class="sparkle star" style="--x:84%;--y:28%;--rot:12deg"></span>
-    <span class="sparkle heart" style="--x:90%;--y:15%;--rot:45deg"></span>
-    <span class="sparkle star" style="--x:14%;--y:80%;--rot:0deg"></span>
-    <span class="sparkle heart" style="--x:24%;--y:72%;--rot:45deg"></span>
-    <span class="sparkle star" style="--x:76%;--y:72%;--rot:0deg"></span>
-    <span class="sparkle heart" style="--x:86%;--y:80%;--rot:45deg"></span>
-  </div>
 
-  <main class="page">
-    <section class="hero card-surface">
-      <p class="eyebrow">Portfolio</p>
-      <h1>LoveSpark</h1>
-      <p class="subtitle">Retro pink tools for focus, creativity, and calm.</p>
-      <figure class="hero-photo-wrap">
-        <img class="hero-photo" src="images/adhd.png" alt="Portrait with ADHD artwork in front of a bookshelf.">
-      </figure>
-      <div class="button-row">
-        <a class="btn" href="https://github.com/Joona-t" target="_blank" rel="noreferrer">GitHub</a>
-        <a class="btn" href="https://x.com/The_Null_Path" target="_blank" rel="noreferrer">X</a>
-        <a class="btn" href="mailto:tyrninoksa.joona@gmail.com">Email</a>
-        <a class="btn" href="https://thenullpath.substack.com/?utm_campaign=profile_chips" target="_blank" rel="noreferrer">Substack</a>
-        <a class="btn btn-icon" href="https://www.goodreads.com/user/show/193189842" target="_blank" rel="noreferrer">
-          <span class="icon-book" aria-hidden="true">
-            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <path d="M4 5.5C4 4.12 5.12 3 6.5 3H20v16.5c0 .83-.67 1.5-1.5 1.5H8.5A4.5 4.5 0 0 1 4 16.5V5.5Zm4.5-.5A2.5 2.5 0 0 0 6 7.5v9a2.5 2.5 0 0 0 2.5 2.5H18V5H8.5Z"/>
-            </svg>
-          </span>
-          <span>Goodreads</span>
-        </a>
+  <!-- Grain overlay -->
+  <div class="grain-overlay" aria-hidden="true"></div>
+
+  <!-- Ambient glow blobs -->
+  <div class="glow-blob glow-blob-1" aria-hidden="true"></div>
+  <div class="glow-blob glow-blob-2" aria-hidden="true"></div>
+  <div class="glow-blob glow-blob-3" aria-hidden="true"></div>
+
+  <!-- Binary spiral canvas -->
+  <canvas id="spiral-canvas" aria-hidden="true"></canvas>
+
+  <!-- Static sparkle field (JS populates) -->
+  <div id="sparkle-field" aria-hidden="true"></div>
+
+  <!-- Mouse trail container -->
+  <div id="cursor-sparks" aria-hidden="true"></div>
+
+  <!-- ═══════════════════════════════════ HERO ═══════════════════════════════════ -->
+  <header class="hero" id="top">
+    <div class="hero-inner">
+
+      <div class="starburst-wrap" aria-hidden="true">
+        <div class="starburst"></div>
+        <div class="starburst starburst-slow"></div>
       </div>
-    </section>
 
-    <section class="projects">
-      <h2>Projects (more on the way...)</h2>
-      <div class="project-grid">
-        <article class="card">
-          <h3>Anti Brainrot <span>(Chrome Extension)</span></h3>
-          <p>Inspired by Unhook. Removes YouTube algorithm distractions.</p>
-          <div class="actions">
-            <a class="btn btn-small" href="https://chromewebstore.google.com/detail/hjelmbgmpfmdimlkiodnembgnolojppm?utm_source=item-share-cb" target="_blank" rel="noreferrer">Install</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <h3>Valentine Light <span>(VS Code Theme)</span></h3>
-          <p>Soft retro pink developer theme for calm, readable coding sessions.</p>
-          <div class="actions">
-            <a class="btn btn-small" href="https://marketplace.visualstudio.com/items?itemName=Joona-t.valentine-light" target="_blank" rel="noreferrer">Install</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <h3>LoveSpark Retro Pink <span>(Chrome Theme)</span></h3>
-          <p>Bubblegum-retro pink browser theme with smooth gradients and clean readability.</p>
-          <div class="actions">
-            <a class="btn btn-small" href="https://chromewebstore.google.com/detail/ohadfchkfldfppkhbjdfjghcfdlcaakd?utm_source=item-share-cb" target="_blank" rel="noreferrer">Store</a>
-          </div>
-        </article>
+      <div class="heart-orb" aria-hidden="true">
+        <span class="heart-glyph">♡</span>
+        <div class="orb-ring orb-ring-1"></div>
+        <div class="orb-ring orb-ring-2"></div>
+        <div class="orb-ring orb-ring-3"></div>
       </div>
-    </section>
 
-    <footer>
-      <p>&copy; <span id="year"></span> LoveSpark. Built with intent.</p>
-    </footer>
-  </main>
+      <h1 class="logo-text">LoveSpark</h1>
+      <p class="tagline">Retro pink tools for a calmer,<br>more beautiful internet.</p>
+      <p class="sub-tagline">Free&nbsp;&nbsp;·&nbsp;&nbsp;Open source&nbsp;&nbsp;·&nbsp;&nbsp;No ads. Ever.</p>
+      <a href="#tools" class="hero-cta">See the tools ✦</a>
+
+    </div>
+  </header>
+
+  <!-- ══════════════════════════════════ TOOLS ══════════════════════════════════ -->
+  <section class="tools-section" id="tools">
+    <div class="section-header">
+      <span class="section-deco" aria-hidden="true">✦</span>
+      <h2 class="section-title">The Suite</h2>
+      <span class="section-deco" aria-hidden="true">✦</span>
+    </div>
+
+    <div class="tools-grid">
+
+      <div class="win98-card">
+        <div class="titlebar">
+          <span class="win-title">Anti Brainrot</span>
+          <div class="win-buttons">
+            <span class="win-btn" aria-hidden="true">─</span>
+            <span class="win-btn" aria-hidden="true">□</span>
+            <span class="win-btn win-btn-close" aria-hidden="true">✕</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-badge">Chrome Extension</div>
+          <p class="card-desc">Block infinite scroll traps, autoplay rabbit holes, and algorithmic attention hooks designed to keep you stuck.</p>
+          <a href="https://chromewebstore.google.com/detail/hjelmbgmpfmdimlkiodnembgnolojppm" target="_blank" rel="noopener" class="card-link">Install ✦</a>
+        </div>
+      </div>
+
+      <div class="win98-card">
+        <div class="titlebar">
+          <span class="win-title">Valentine Light</span>
+          <div class="win-buttons">
+            <span class="win-btn" aria-hidden="true">─</span>
+            <span class="win-btn" aria-hidden="true">□</span>
+            <span class="win-btn win-btn-close" aria-hidden="true">✕</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-badge">VS Code Theme</div>
+          <p class="card-desc">A soft, creamy pink syntax theme for VS Code. Code like you're writing love letters. Warm, readable, easy on the eyes.</p>
+          <a href="https://marketplace.visualstudio.com/items?itemName=Joona-t.valentine-light" target="_blank" rel="noopener" class="card-link">Install ✦</a>
+        </div>
+      </div>
+
+      <div class="win98-card">
+        <div class="titlebar">
+          <span class="win-title">LoveSpark Retro Pink</span>
+          <div class="win-buttons">
+            <span class="win-btn" aria-hidden="true">─</span>
+            <span class="win-btn" aria-hidden="true">□</span>
+            <span class="win-btn win-btn-close" aria-hidden="true">✕</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-badge">Chrome Theme</div>
+          <p class="card-desc">Dress your browser in deep mauve and hot pink. Every tab, toolbar, and new page — reclaimed and beautified.</p>
+          <a href="https://chromewebstore.google.com/detail/ohadfchkfldfppkhbjdfjghcfdlcaakd" target="_blank" rel="noopener" class="card-link">Install ✦</a>
+        </div>
+      </div>
+
+      <div class="win98-card">
+        <div class="titlebar">
+          <span class="win-title">LoveSpark Cursor Pack</span>
+          <div class="win-buttons">
+            <span class="win-btn" aria-hidden="true">─</span>
+            <span class="win-btn" aria-hidden="true">□</span>
+            <span class="win-btn win-btn-close" aria-hidden="true">✕</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-badge">Chrome Extension</div>
+          <p class="card-desc">Replace your boring system cursor with a custom pink sparkle pointer. Small thing. Big mood.</p>
+          <span class="card-link card-link--soon">Coming soon ♡</span>
+        </div>
+      </div>
+
+      <div class="win98-card">
+        <div class="titlebar">
+          <span class="win-title">I Don't Want Cookies</span>
+          <div class="win-buttons">
+            <span class="win-btn" aria-hidden="true">─</span>
+            <span class="win-btn" aria-hidden="true">□</span>
+            <span class="win-btn win-btn-close" aria-hidden="true">✕</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-badge">Chrome Extension</div>
+          <p class="card-desc">Auto-dismiss cookie banners. Decline tracking, accept necessary — without the click-through ritual every single time.</p>
+          <span class="card-link card-link--soon">Coming soon ♡</span>
+        </div>
+      </div>
+
+      <div class="win98-card">
+        <div class="titlebar">
+          <span class="win-title">Popup Blocker</span>
+          <div class="win-buttons">
+            <span class="win-btn" aria-hidden="true">─</span>
+            <span class="win-btn" aria-hidden="true">□</span>
+            <span class="win-btn win-btn-close" aria-hidden="true">✕</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-badge">Chrome Extension</div>
+          <p class="card-desc">Block popup windows, tab hijacks, and YouTube ads across 4 layers — CSS, JS, network rules, and video player.</p>
+          <span class="card-link card-link--soon">Coming soon ♡</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═════════════════════════════════ MISSION ═════════════════════════════════ -->
+  <section class="mission-section" id="mission">
+    <div class="section-header">
+      <span class="section-deco" aria-hidden="true">✿</span>
+      <h2 class="section-title">Mission</h2>
+      <span class="section-deco" aria-hidden="true">✿</span>
+    </div>
+    <div class="mission-inner">
+      <p class="mission-text">
+        Built with love, not algorithms.<br><br>
+        LoveSpark exists to make your corner of the internet
+        feel like yours again — unhurried, untracked,
+        and a little more beautiful.
+      </p>
+      <div class="mission-sparkles" aria-hidden="true">
+        <span>✦</span><span>★</span><span>♡</span><span>✦</span><span>✿</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════ SUPPORT ════════════════════════════════ -->
+  <section class="support-section" id="support">
+    <div class="support-inner">
+      <p class="support-text">If LoveSpark brings you joy,<br>consider buying me a coffee&nbsp;♡</p>
+      <a href="https://ko-fi.com" target="_blank" rel="noopener" class="kofi-btn">☕ Buy me a coffee</a>
+      <p class="support-sub">No pressure. Every bit keeps this going.</p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════ FOOTER ════════════════════════════════ -->
+  <footer class="site-footer">
+    <p class="footer-copy">© LoveSpark. Built with intent.</p>
+    <div class="footer-links">
+      <a href="https://github.com/Joona-t" target="_blank" rel="noopener" class="footer-link">GitHub</a>
+      <span class="footer-sep" aria-hidden="true">✦</span>
+      <a href="https://x.com/Joona-t" target="_blank" rel="noopener" class="footer-link">X / Twitter</a>
+    </div>
+    <p class="footer-heart" aria-hidden="true">♡</p>
+  </footer>
 
   <script src="script.js"></script>
 </body>
