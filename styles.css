@@ -337,9 +337,17 @@ body {
     0 0 50px rgba(255, 77, 166, 0.25);
 }
 
+.hero-cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
 .hero-cta {
   display: inline-block;
-  margin-top: 0.5rem;
   padding: 0.75rem 2rem;
   background: var(--hot-pink);
   color: var(--deep-wine);
@@ -359,6 +367,24 @@ body {
   box-shadow:
     6px 6px 0 var(--deep-wine),
     0 0 30px rgba(255,110,180,0.7);
+}
+
+.hero-cta--null {
+  background: linear-gradient(135deg, #ff3366 0%, #cc0033 100%);
+  color: #ffe0ec;
+  border-color: #ff0044;
+  box-shadow:
+    4px 4px 0 #660022,
+    0 0 18px rgba(255,0,68,0.6),
+    0 0 36px rgba(255,110,180,0.3);
+}
+
+.hero-cta--null:hover {
+  transform: translate(-2px, -2px);
+  box-shadow:
+    6px 6px 0 #660022,
+    0 0 28px rgba(255,0,68,0.8),
+    0 0 56px rgba(255,110,180,0.5);
 }
 
 /* ════════════════════════════ SECTION HEADERS ═══════════════════════════════ */
