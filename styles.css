@@ -370,21 +370,21 @@ body {
 }
 
 .hero-cta--null {
-  background: linear-gradient(135deg, #ff3366 0%, #cc0033 100%);
-  color: #ffe0ec;
-  border-color: #ff0044;
+  background: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%);
+  color: #f5e9ff;
+  border-color: #c084fc;
   box-shadow:
-    4px 4px 0 #660022,
-    0 0 18px rgba(255,0,68,0.6),
-    0 0 36px rgba(255,110,180,0.3);
+    4px 4px 0 #3b0764,
+    0 0 18px rgba(168,85,247,0.6),
+    0 0 36px rgba(124,58,237,0.3);
 }
 
 .hero-cta--null:hover {
   transform: translate(-2px, -2px);
   box-shadow:
-    6px 6px 0 #660022,
-    0 0 28px rgba(255,0,68,0.8),
-    0 0 56px rgba(255,110,180,0.5);
+    6px 6px 0 #3b0764,
+    0 0 28px rgba(168,85,247,0.8),
+    0 0 56px rgba(124,58,237,0.5);
 }
 
 /* ════════════════════════════ SECTION HEADERS ═══════════════════════════════ */
