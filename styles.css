@@ -761,6 +761,81 @@ body {
   }
 }
 
+/* ════════════════════════════ AARON CARD ════════════════════════════════════ */
+.win98-card--aaron {
+  background: #0d1117;
+  border-top: 2px solid #1a5c35;
+  border-left: 2px solid #1a5c35;
+  border-right: 2px solid #071a0e;
+  border-bottom: 2px solid #071a0e;
+  box-shadow:
+    inset 1px 1px 0 rgba(34,197,94,0.12),
+    inset -1px -1px 0 rgba(0,0,0,0.6),
+    4px 4px 0 rgba(0,0,0,0.6),
+    0 0 30px rgba(34,197,94,0.05);
+}
+
+.win98-card--aaron:hover {
+  box-shadow:
+    inset 1px 1px 0 rgba(34,197,94,0.12),
+    inset -1px -1px 0 rgba(0,0,0,0.6),
+    8px 8px 0 rgba(0,0,0,0.6),
+    0 0 40px rgba(34,197,94,0.14);
+}
+
+.win98-card--aaron .titlebar {
+  background: linear-gradient(90deg, #071a0e 0%, #0f3d22 45%, #071a0e 100%);
+  border-bottom: 1px solid #1a5c35;
+}
+
+.win98-card--aaron .win-btn {
+  background: linear-gradient(180deg, #0f3d22 0%, #071a0e 100%);
+  border-top: 1px solid #22c55e;
+  border-left: 1px solid #22c55e;
+  border-right: 1px solid #071a0e;
+  border-bottom: 1px solid #071a0e;
+  color: #86efac;
+}
+
+.win98-card--aaron .win-btn:hover {
+  background: linear-gradient(180deg, #166534 0%, #0d4a26 100%);
+}
+
+.win98-card--aaron .win-btn-close {
+  background: linear-gradient(180deg, #1a3520 0%, #0a1f10 100%);
+}
+
+.win98-card--aaron .win-btn-close:hover {
+  background: linear-gradient(180deg, #dc2626 0%, #991b1b 100%);
+}
+
+.win98-card--aaron .card-badge {
+  background: #22c55e;
+  color: #052e16;
+  border-color: #16a34a;
+}
+
+.win98-card--aaron .card-desc {
+  color: #94a3b8;
+}
+
+.win98-card--aaron .card-link--soon {
+  color: #22c55e;
+  font-style: normal;
+  opacity: 0.75;
+}
+
+.aaron-memorial {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: #4b5563;
+  font-style: italic;
+  letter-spacing: 0.03em;
+  border-top: 1px solid #1e2d22;
+  padding-top: 0.65rem;
+  margin-top: 0.1rem;
+}
+
 /* ════════════════════════════ SCROLLBAR ═════════════════════════════════════ */
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
