@@ -387,6 +387,26 @@ body {
     0 0 56px rgba(124,58,237,0.5);
 }
 
+.hero-cta--zara {
+  background: #000000;
+  color: #f5d742;
+  border-color: #cc2222;
+  text-shadow: 0 0 8px rgba(245,215,66,0.6);
+  box-shadow:
+    4px 4px 0 #1a0000,
+    0 0 12px rgba(204,34,34,0.4),
+    0 0 28px rgba(204,34,34,0.15);
+}
+
+.hero-cta--zara:hover {
+  transform: translate(-2px, -2px);
+  text-shadow: 0 0 14px rgba(245,215,66,0.9);
+  box-shadow:
+    6px 6px 0 #1a0000,
+    0 0 20px rgba(204,34,34,0.6),
+    0 0 48px rgba(204,34,34,0.25);
+}
+
 /* ════════════════════════════ SECTION HEADERS ═══════════════════════════════ */
 .section-header {
   display: flex;
