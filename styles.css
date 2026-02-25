@@ -339,7 +339,7 @@ body {
 
 .hero-cta-group {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 1rem;
   align-items: center;
   justify-content: center;
@@ -350,7 +350,7 @@ body {
   display: inline-block;
   padding: 0.75rem 2rem;
   background: var(--hot-pink);
-  color: var(--deep-wine);
+  color: #ffffff;
   font-family: var(--font-pixel);
   font-size: 0.6rem;
   text-decoration: none;
