@@ -589,6 +589,42 @@ body {
   letter-spacing: 0.04em;
 }
 
+/* ════════════════════════════ NOTICE SECTION ════════════════════════════════ */
+.notice-section {
+  position: relative;
+  z-index: 2;
+  padding: 3rem 2rem 0;
+  text-align: center;
+}
+
+.notice-inner {
+  max-width: 600px;
+  margin: 0 auto;
+  background: rgba(255, 110, 180, 0.06);
+  border: 1px solid rgba(255, 110, 180, 0.2);
+  padding: 2rem 2.5rem;
+  border-radius: 12px;
+}
+
+.notice-text {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--bubblegum);
+  line-height: 1.8;
+  letter-spacing: 0.02em;
+}
+
+.notice-link {
+  color: var(--hot-pink);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 110, 180, 0.4);
+  transition: border-color 0.2s ease;
+}
+
+.notice-link:hover {
+  border-color: var(--hot-pink);
+}
+
 /* ════════════════════════════ MISSION SECTION ═══════════════════════════════ */
 .mission-section {
   position: relative;
@@ -750,6 +786,10 @@ body {
 
   .hero {
     padding: 5rem 1.5rem 3rem;
+  }
+
+  .notice-inner {
+    padding: 1.5rem 1.2rem;
   }
 
   .mission-inner {
