@@ -865,6 +865,14 @@ body {
   opacity: 0.75;
 }
 
+.win98-card--aaron .card-link {
+  background: linear-gradient(180deg, #4ade80 0%, #16a34a 100%);
+  border-top: 2px solid #86efac;
+  border-left: 2px solid #86efac;
+  border-right: 2px solid #0a5c2b;
+  border-bottom: 2px solid #0a5c2b;
+}
+
 .aaron-memorial {
   font-family: var(--font-mono);
   font-size: 0.68rem;
