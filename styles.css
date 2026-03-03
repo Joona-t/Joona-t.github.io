@@ -498,7 +498,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.35rem 0.5rem;
+  padding: 0.5rem 0.65rem;
   background: linear-gradient(90deg, #c8458a 0%, #e8659c 40%, #b0307a 100%);
   border-bottom: 1px solid #8a2060;
   user-select: none;
@@ -506,14 +506,14 @@ body {
 
 .win-title {
   font-family: var(--font-pixel);
-  font-size: 0.45rem;
+  font-size: 0.55rem;
   color: #fff;
   letter-spacing: 0.04em;
   text-shadow: 1px 1px 0 rgba(0,0,0,0.4);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 70%;
+  max-width: 75%;
 }
 
 .win-buttons {
@@ -558,11 +558,11 @@ body {
 
 .card-badge {
   display: inline-block;
-  padding: 0.2rem 0.6rem;
+  padding: 0.25rem 0.7rem;
   background: var(--hot-pink);
   color: #fff;
   font-family: var(--font-pixel);
-  font-size: 0.38rem;
+  font-size: 0.45rem;
   letter-spacing: 0.06em;
   border: 1px solid var(--deep-wine);
   align-self: flex-start;
@@ -817,7 +817,7 @@ body {
   }
 
   .win-title {
-    font-size: 0.38rem;
+    font-size: 0.48rem;
   }
 }
 
