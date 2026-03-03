@@ -407,6 +407,26 @@ body {
     0 0 48px rgba(204,34,34,0.25);
 }
 
+.hero-cta--forging {
+  background: #0A0A0A;
+  color: #FF6A00;
+  border-color: #FF6A00;
+  text-shadow: 0 0 8px rgba(255,106,0,0.6);
+  box-shadow:
+    4px 4px 0 #1a0800,
+    0 0 12px rgba(255,106,0,0.4),
+    0 0 28px rgba(255,106,0,0.15);
+}
+
+.hero-cta--forging:hover {
+  transform: translate(-2px, -2px);
+  text-shadow: 0 0 14px rgba(255,106,0,0.9);
+  box-shadow:
+    6px 6px 0 #1a0800,
+    0 0 20px rgba(255,106,0,0.6),
+    0 0 48px rgba(255,106,0,0.25);
+}
+
 /* ════════════════════════════ SECTION HEADERS ═══════════════════════════════ */
 .section-header {
   display: flex;
