@@ -428,25 +428,25 @@ body {
 }
 
 .hero-cta--games {
-  background: #0a1628;
-  color: #7dd3fc;
+  background: linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%);
+  color: #ffffff;
   border-color: #38bdf8;
-  text-shadow: 0 0 8px rgba(56,189,248,0.6), 0 0 20px rgba(255,110,180,0.15);
+  text-shadow: 0 0 8px rgba(255,182,218,0.5), 0 0 20px rgba(56,189,248,0.4);
   box-shadow:
-    4px 4px 0 #071a2e,
-    0 0 12px rgba(56,189,248,0.4),
-    0 0 28px rgba(56,189,248,0.15),
-    0 0 40px rgba(255,110,180,0.06);
+    4px 4px 0 #0c4a6e,
+    0 0 12px rgba(14,165,233,0.5),
+    0 0 28px rgba(14,165,233,0.2),
+    0 0 40px rgba(255,110,180,0.1);
 }
 
 .hero-cta--games:hover {
   transform: translate(-2px, -2px);
-  text-shadow: 0 0 14px rgba(56,189,248,0.9), 0 0 28px rgba(255,110,180,0.2);
+  text-shadow: 0 0 14px rgba(255,182,218,0.8), 0 0 28px rgba(56,189,248,0.6);
   box-shadow:
-    6px 6px 0 #071a2e,
-    0 0 20px rgba(56,189,248,0.6),
-    0 0 48px rgba(56,189,248,0.25),
-    0 0 60px rgba(255,110,180,0.1);
+    6px 6px 0 #0c4a6e,
+    0 0 20px rgba(14,165,233,0.7),
+    0 0 48px rgba(14,165,233,0.3),
+    0 0 60px rgba(255,110,180,0.15);
 }
 
 /* ════════════════════════════ SECTION HEADERS ═══════════════════════════════ */
