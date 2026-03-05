@@ -427,6 +427,28 @@ body {
     0 0 48px rgba(255,106,0,0.25);
 }
 
+.hero-cta--games {
+  background: #0a1628;
+  color: #7dd3fc;
+  border-color: #38bdf8;
+  text-shadow: 0 0 8px rgba(56,189,248,0.6), 0 0 20px rgba(255,110,180,0.15);
+  box-shadow:
+    4px 4px 0 #071a2e,
+    0 0 12px rgba(56,189,248,0.4),
+    0 0 28px rgba(56,189,248,0.15),
+    0 0 40px rgba(255,110,180,0.06);
+}
+
+.hero-cta--games:hover {
+  transform: translate(-2px, -2px);
+  text-shadow: 0 0 14px rgba(56,189,248,0.9), 0 0 28px rgba(255,110,180,0.2);
+  box-shadow:
+    6px 6px 0 #071a2e,
+    0 0 20px rgba(56,189,248,0.6),
+    0 0 48px rgba(56,189,248,0.25),
+    0 0 60px rgba(255,110,180,0.1);
+}
+
 /* ════════════════════════════ SECTION HEADERS ═══════════════════════════════ */
 .section-header {
   display: flex;
@@ -902,78 +924,6 @@ body {
   border-top: 1px solid #1e2d22;
   padding-top: 0.65rem;
   margin-top: 0.1rem;
-}
-
-/* ════════════════════════════ GAMES CARD ════════════════════════════════════ */
-.win98-card--games {
-  background: #0a1628;
-  border-top: 2px solid #1a4c7a;
-  border-left: 2px solid #1a4c7a;
-  border-right: 2px solid #071a2e;
-  border-bottom: 2px solid #071a2e;
-  box-shadow:
-    inset 1px 1px 0 rgba(56,189,248,0.08),
-    inset -1px -1px 0 rgba(0,0,0,0.6),
-    4px 4px 0 rgba(0,0,0,0.6),
-    0 0 30px rgba(56,189,248,0.05);
-}
-
-.win98-card--games:hover {
-  box-shadow:
-    inset 1px 1px 0 rgba(56,189,248,0.12),
-    inset -1px -1px 0 rgba(0,0,0,0.6),
-    8px 8px 0 rgba(0,0,0,0.6),
-    0 0 40px rgba(56,189,248,0.14),
-    0 0 60px rgba(255,110,180,0.06);
-}
-
-.win98-card--games .titlebar {
-  background: linear-gradient(90deg, #071a2e 0%, #0f3d5e 45%, #071a2e 100%);
-  border-bottom: 1px solid #1a4c7a;
-}
-
-.win98-card--games .win-btn {
-  background: linear-gradient(180deg, #0f3d5e 0%, #071a2e 100%);
-  border-top: 1px solid #38bdf8;
-  border-left: 1px solid #38bdf8;
-  border-right: 1px solid #071a2e;
-  border-bottom: 1px solid #071a2e;
-  color: #7dd3fc;
-}
-
-.win98-card--games .win-btn:hover {
-  background: linear-gradient(180deg, #164e7a 0%, #0d3a5c 100%);
-}
-
-.win98-card--games .win-btn-close {
-  background: linear-gradient(180deg, #1a2e40 0%, #0a1628 100%);
-}
-
-.win98-card--games .win-btn-close:hover {
-  background: linear-gradient(180deg, #dc2626 0%, #991b1b 100%);
-}
-
-.win98-card--games .card-badge {
-  background: #38bdf8;
-  color: #052e50;
-  border-color: #0ea5e9;
-}
-
-.win98-card--games .card-desc {
-  color: #b0c4d8;
-}
-
-.win98-card--games .card-link {
-  background: linear-gradient(180deg, #7dd3fc 0%, #0ea5e9 100%);
-  border-top: 2px solid #bae6fd;
-  border-left: 2px solid #bae6fd;
-  border-right: 2px solid #075985;
-  border-bottom: 2px solid #075985;
-  color: #052e50;
-}
-
-.win98-card--games .card-link:hover {
-  box-shadow: 0 0 20px rgba(56,189,248,0.4), 0 0 40px rgba(255,110,180,0.1);
 }
 
 /* ════════════════════════════ SCROLLBAR ═════════════════════════════════════ */
