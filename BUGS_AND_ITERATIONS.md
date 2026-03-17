@@ -1,6 +1,71 @@
 # Bugs & Iterations
 
-_No entries yet. Document bugs, fixes, and iterations here as they occur._
+## : |2026-02-18|||Revert "Add background artwork asset"
+
+**Problem:** |2026-02-18|||Revert "Add background artwork asset"
+**Details:** This reverts commit b6346ae3add4fd672955a9645c68090d24276638.
+**Files:** images/background-artwork.png
+**Commit:** 0aa4cab
+
+## : |2026-02-18|||Fix background as CSS-only layer with overlay and assets path
+
+**Problem:** |2026-02-18|||Fix background as CSS-only layer with overlay and assets path
+**Files:** assets/lovespark-bg.png,styles.css
+**Commit:** 2749684
+
+## : |2026-03-06|||Fix Games hero CTA: vibrant ocean blue gradient, white text, pink glow, moved above Zarathustra
+
+**Problem:** |2026-03-06|||Fix Games hero CTA: vibrant ocean blue gradient, white text, pink glow, moved above Zarathustra
+**Files:** index.html,styles.css
+**Commit:** 6d43f8f
+
+## : |2026-02-18|||Revert "Add side art around hero card and LoveSpark title icon"
+
+**Problem:** |2026-02-18|||Revert "Add side art around hero card and LoveSpark title icon"
+**Details:** This reverts commit da0abb9d437c0665aa60abdfc448e797f9d3ce2d.
+**Files:** assets/hero-clouds.png,assets/hero-mushrooms.png,assets/lovespark-icon.png,index.html,styles.css
+**Commit:** 88aa457
+
+## : |2026-02-18|||Revert "Use artwork-only background without duplicate gradient layer"
+
+**Problem:** |2026-02-18|||Revert "Use artwork-only background without duplicate gradient layer"
+**Details:** This reverts commit ae261f57431e3ab938efddd23b05031cf0a3bc7e.
+**Files:** styles.css
+**Commit:** 8c198e4
+
+## : |2026-02-18|||Revert "Reposition side art outside hero card and keep card clean"
+
+**Problem:** |2026-02-18|||Revert "Reposition side art outside hero card and keep card clean"
+**Details:** This reverts commit 317d367aa5c8a04798eac04ed07d07184e021122.
+**Files:** styles.css
+**Commit:** a5574fc
+
+## : |2026-02-20|||fix: add ko-fi link (ko-fi.com/joonat)
+
+**Problem:** |2026-02-20|||fix: add ko-fi link (ko-fi.com/joonat)
+**Files:** index.html
+**Commit:** aa7c2e8
+
+## : |2026-02-18|||Revert "Add responsive background artwork layer and readability overlay"
+
+**Problem:** |2026-02-18|||Revert "Add responsive background artwork layer and readability overlay"
+**Details:** This reverts commit cb3df3036591d192b3404151bc2aa3180942447a.
+**Files:** styles.css
+**Commit:** cae4773
+
+## : |2026-02-18|||Revert "Add layered decorative background composition on page wrapper"
+
+**Problem:** |2026-02-18|||Revert "Add layered decorative background composition on page wrapper"
+**Details:** This reverts commit fba2f247688ae4df0cfb6d56f40078be1f8aee0f.
+**Files:** assets/bg-clouds-rainbow.svg,assets/bg-mushrooms.svg,assets/bg-sparkles.svg,styles.css
+**Commit:** d11f440
+
+## : |2026-02-18|||Revert "Fix background as CSS-only layer with overlay and assets path"
+
+**Problem:** |2026-02-18|||Revert "Fix background as CSS-only layer with overlay and assets path"
+**Details:** This reverts commit 2749684639c0c3ddbe56fb0113a6747925cf711c.
+**Files:** assets/lovespark-bg.png,styles.css
+**Commit:** d775085
 
 <!-- Format:
 ## YYYY-MM-DD: Short Title
