@@ -224,22 +224,6 @@ document.querySelectorAll('.win-btn-close').forEach(btn => {
   });
 });
 
-// ══════════════════════════════════════════════════════════════════════════════
-// CATEGORY FILTER
-// ══════════════════════════════════════════════════════════════════════════════
-
-(function initCategoryFilter() {
-  const filterSelect = document.getElementById('category-filter');
-  if (!filterSelect) return;
-
-  filterSelect.addEventListener('change', () => {
-    const val = filterSelect.value;
-    document.querySelectorAll('.win98-card').forEach(card => {
-      card.style.display = (val === 'all' || card.dataset.category === val) ? '' : 'none';
-    });
-  });
-})();
-
 // Inject wobble keyframe
 const wobbleStyle = document.createElement('style');
 wobbleStyle.textContent = `
