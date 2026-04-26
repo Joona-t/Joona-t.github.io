@@ -242,6 +242,18 @@ body {
   letter-spacing: -0.02em;
 }
 
+/* Hero mark — the breathing charcoal-glyph wordmark video.
+   Uses mix-blend-mode so the video's bubblegum bg (#FFE6F2) blends
+   into the page's pink gradient instead of sitting like a hard rect. */
+.hero-mark {
+  display: block;
+  width: 100%;
+  max-width: 920px;
+  height: auto;
+  margin: 0 auto 14px;
+  mix-blend-mode: multiply;
+}
+
 .tagline {
   font-family: var(--font-body);
   font-size: clamp(16px, 2vw, 22px);
