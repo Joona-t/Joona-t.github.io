@@ -1,187 +1,82 @@
-// LoveSpark — script.js
-// Sparkle field, mouse trail, binary spiral canvas.
+// LoveSpark — bubble gum Y2K script.
+// Sparkle field, cursor trail, smooth scroll, card-close wobble easter egg.
 'use strict';
 
 // ══════════════════════════════════════════════════════════════════════════════
-// BINARY SPIRAL
+// STATIC SPARKLE FIELD — twinkles scattered across the page
 // ══════════════════════════════════════════════════════════════════════════════
-
-(function initSpiral() {
-  const canvas = document.getElementById('spiral-canvas');
-  if (!canvas) return;
-
-  const ctx = canvas.getContext('2d');
-  let W, H, animFrame;
-
-  // Each arm segment: {angle, radius, char, glitch, glitchTimer}
-  const ARMS = 4;
-  const STEPS_PER_ARM = 60;
-  const CHAR_SPACING = 18; // px between chars along the arm
-  const SPIRAL_TIGHTNESS = 0.18; // radians per step
-
-  const segments = [];
-
-  function buildSegments() {
-    segments.length = 0;
-    for (let arm = 0; arm < ARMS; arm++) {
-      const armOffset = (arm / ARMS) * Math.PI * 2;
-      for (let s = 0; s < STEPS_PER_ARM; s++) {
-        const angle  = armOffset + s * SPIRAL_TIGHTNESS;
-        const radius = s * CHAR_SPACING * 0.55;
-        segments.push({
-          angle,
-          radius,
-          char: Math.random() > 0.5 ? '1' : '0',
-          opacity: 0.3 + Math.random() * 0.7,
-          glitchTimer: Math.random() * 120 | 0,
-          glitchInterval: (40 + Math.random() * 120) | 0,
-        });
-      }
-    }
-  }
-
-  function resize() {
-    W = canvas.width  = window.innerWidth;
-    H = canvas.height = window.innerHeight;
-  }
-
-  let rotation = 0;
-  let frame = 0;
-
-  function draw() {
-    ctx.clearRect(0, 0, W, H);
-
-    const cx = W / 2;
-    const cy = H / 2;
-
-    ctx.font = '11px "DM Mono", monospace';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-
-    for (const seg of segments) {
-      // Glitch: occasionally flip bit
-      seg.glitchTimer++;
-      if (seg.glitchTimer >= seg.glitchInterval) {
-        seg.char = seg.char === '0' ? '1' : '0';
-        seg.glitchTimer = 0;
-        seg.glitchInterval = (40 + Math.random() * 120) | 0;
-        seg.opacity = 0.2 + Math.random() * 0.8;
-      }
-
-      const a = seg.angle + rotation;
-      const x = cx + Math.cos(a) * seg.radius;
-      const y = cy + Math.sin(a) * seg.radius;
-
-      // Fade based on radius (inner bright, outer dim)
-      const distFade = 1 - seg.radius / (STEPS_PER_ARM * CHAR_SPACING * 0.55);
-      const alpha = seg.opacity * Math.max(0.1, distFade) * 0.9;
-
-      // Alternate purple / pink
-      const usesPurple = (seg.radius / 30 + seg.angle) % 2 > 1;
-      ctx.fillStyle = usesPurple
-        ? `rgba(192, 132, 252, ${alpha})`
-        : `rgba(255, 110, 180, ${alpha})`;
-
-      ctx.fillText(seg.char, x, y);
-    }
-
-    rotation += 0.0012;
-    frame++;
-    animFrame = requestAnimationFrame(draw);
-  }
-
-  // Pause when tab is hidden
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) {
-      cancelAnimationFrame(animFrame);
-    } else {
-      animFrame = requestAnimationFrame(draw);
-    }
-  });
-
-  resize();
-  buildSegments();
-  draw();
-  window.addEventListener('resize', () => { resize(); buildSegments(); });
-})();
-
-// ══════════════════════════════════════════════════════════════════════════════
-// STATIC SPARKLE FIELD
-// Scattered ✦ ★ ♡ ✿ that twinkle independently at fixed positions.
-// ══════════════════════════════════════════════════════════════════════════════
-
 (function initSparkleField() {
-  const field  = document.getElementById('sparkle-field');
+  const field = document.getElementById('sparkle-field');
   if (!field) return;
 
-  const GLYPHS  = ['✦', '★', '♡', '✿', '✦', '✦', '★'];
-  const COUNT   = 55;
+  const GLYPHS = ['✦', '★', '♡', '✿', '⋆', '✧'];
+  const COLORS = ['#FF4FB3', '#FF79C6', '#FFF5B5', '#C5E1FF', '#B5F0E2'];
+  const COUNT = 48;
 
   for (let i = 0; i < COUNT; i++) {
-    const el  = document.createElement('span');
-    el.className = 'spark';
+    const el = document.createElement('span');
     el.textContent = GLYPHS[i % GLYPHS.length];
-
-    const x    = Math.random() * 100;
-    const y    = Math.random() * 100;
-    const dur  = (2 + Math.random() * 4).toFixed(2);
-    const del  = (Math.random() * 5).toFixed(2);
-    const size = 8 + Math.random() * 10;
-
-    // Purple sparkles ~25% of the time
-    const color = Math.random() > 0.75 ? '#c084fc' : '#ff6eb4';
+    const x = Math.random() * 100;
+    const y = Math.random() * 100;
+    const dur = (3 + Math.random() * 4).toFixed(2);
+    const del = (Math.random() * 6).toFixed(2);
+    const size = 9 + Math.random() * 12;
+    const color = COLORS[Math.floor(Math.random() * COLORS.length)];
 
     el.style.cssText = `
       left: ${x}%;
-      top:  ${y}%;
+      top: ${y}%;
       font-size: ${size}px;
       color: ${color};
-      --dur: ${dur}s;
-      --delay: -${del}s;
-      text-shadow: 0 0 6px ${color};
+      text-shadow: 0 0 8px ${color};
+      animation: sparkleTwinkle ${dur}s ease-in-out infinite;
+      animation-delay: -${del}s;
     `;
-
     field.appendChild(el);
   }
+
+  // Inject the twinkle keyframe (kept here so styles.css stays component-focused)
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes sparkleTwinkle {
+      0%, 100% { opacity: 0.15; transform: scale(0.7); }
+      50%      { opacity: 1;    transform: scale(1.15); }
+    }
+  `;
+  document.head.appendChild(style);
 })();
 
 // ══════════════════════════════════════════════════════════════════════════════
-// CURSOR SPARKLE TRAIL
-// Small glyphs burst from cursor position, float up and fade.
+// CURSOR SPARK TRAIL — small glyphs burst from cursor, drift up, fade
 // ══════════════════════════════════════════════════════════════════════════════
-
 (function initCursorTrail() {
   const container = document.getElementById('cursor-sparks');
   if (!container) return;
 
-  const GLYPHS   = ['✦', '★', '♡', '✿', '*', '·'];
-  const COLORS   = ['#ff6eb4', '#ffb3d9', '#c084fc', '#fff5f9'];
-  let   lastTime = 0;
-  const THROTTLE = 50; // ms between spawns
+  const GLYPHS = ['✦', '★', '♡', '⋆', '✧'];
+  const COLORS = ['#FF4FB3', '#FFB3D9', '#FFF5B5', '#C5E1FF'];
+  const THROTTLE = 60;
+  let lastTime = 0;
 
   function spawnSpark(x, y) {
-    const el    = document.createElement('span');
-    el.className = 'cursor-spark';
+    const el = document.createElement('span');
     el.textContent = GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
-
-    const dx = (Math.random() - 0.5) * 60;
-    const dy = -(20 + Math.random() * 50);
+    const dx = (Math.random() - 0.5) * 50;
+    const dy = -(20 + Math.random() * 40);
     const color = COLORS[Math.floor(Math.random() * COLORS.length)];
-    const size  = 8 + Math.random() * 8;
+    const size = 9 + Math.random() * 7;
 
     el.style.cssText = `
       left: ${x}px;
-      top:  ${y}px;
+      top: ${y}px;
       font-size: ${size}px;
       color: ${color};
+      text-shadow: 0 0 6px ${color};
       --dx: ${dx.toFixed(0)}px;
       --dy: ${dy.toFixed(0)}px;
-      text-shadow: 0 0 6px ${color};
+      animation: cursorSparkFly 800ms ease-out forwards;
     `;
-
     container.appendChild(el);
-
-    // Remove after animation
     el.addEventListener('animationend', () => el.remove());
   }
 
@@ -191,12 +86,21 @@
     lastTime = now;
     spawnSpark(e.clientX, e.clientY);
   });
+
+  // Inject the fly keyframe — uses CSS custom props for direction
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes cursorSparkFly {
+      0%   { transform: translate(0, 0) scale(0.6); opacity: 1; }
+      100% { transform: translate(var(--dx, 0), var(--dy, -30px)) scale(1.4); opacity: 0; }
+    }
+  `;
+  document.head.appendChild(style);
 })();
 
 // ══════════════════════════════════════════════════════════════════════════════
-// SMOOTH SCROLL (hero CTA)
+// SMOOTH SCROLL — hero CTA "See the tools ✦" anchors to the suite
 // ══════════════════════════════════════════════════════════════════════════════
-
 document.querySelectorAll('a[href^="#"]').forEach(link => {
   link.addEventListener('click', e => {
     const target = document.querySelector(link.getAttribute('href'));
@@ -208,9 +112,8 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 });
 
 // ══════════════════════════════════════════════════════════════════════════════
-// WIN98 CARD CLOSE BUTTON — small easter egg: card wobbles, doesn't close
+// CARD CLOSE BUTTON — easter egg: card wobbles instead of closing
 // ══════════════════════════════════════════════════════════════════════════════
-
 document.querySelectorAll('.win-btn-close').forEach(btn => {
   btn.addEventListener('click', () => {
     const card = btn.closest('.win98-card');
@@ -218,22 +121,17 @@ document.querySelectorAll('.win-btn-close').forEach(btn => {
     card.style.animation = 'none';
     card.offsetHeight; // force reflow
     card.style.animation = 'cardWobble 0.4s ease';
-    card.addEventListener('animationend', () => {
-      card.style.animation = '';
-    }, { once: true });
+    card.addEventListener('animationend', () => { card.style.animation = ''; }, { once: true });
   });
 });
-
-// Inject wobble keyframe
 const wobbleStyle = document.createElement('style');
 wobbleStyle.textContent = `
   @keyframes cardWobble {
-    0%   { transform: translate(-3px, -4px) rotate(0deg); }
-    20%  { transform: translate(-3px, -4px) rotate(-2deg); }
-    40%  { transform: translate(-3px, -4px) rotate(2deg);  }
-    60%  { transform: translate(-3px, -4px) rotate(-1deg); }
-    80%  { transform: translate(-3px, -4px) rotate(1deg);  }
-    100% { transform: translate(-3px, -4px) rotate(0deg);  }
+    0%   { transform: translateY(-4px) rotate(-0.4deg); }
+    25%  { transform: translateY(-4px) rotate(2deg); }
+    50%  { transform: translateY(-4px) rotate(-2deg); }
+    75%  { transform: translateY(-4px) rotate(1deg); }
+    100% { transform: translateY(-4px) rotate(-0.4deg); }
   }
 `;
 document.head.appendChild(wobbleStyle);

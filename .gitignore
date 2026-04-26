@@ -1,0 +1,5 @@
+# Local dev preview server (not part of the deployed site)
+scratch/
+
+# Claude Code local config (not part of the deployed site)
+.claude/
