@@ -4,8 +4,12 @@
 
 /* ══════════════════════════════════ TOKENS ══════════════════════════════════ */
 :root {
-  /* Bubble gum palette */
-  --bg-pink-1:   #FFE6F2;
+  /* Pastel pink "paper" palette — flat, paper-like, matches the hero MP4 bg
+     EXACTLY so the wordmark video has no visible rectangle around it. */
+  --paper-pink:  #FFE0EC;     /* page bg + hero MP4 bg — must match */
+  --paper-warm:  #FFD9E8;     /* slightly deeper for cards */
+  --paper-edge:  #F5C7DB;
+  --bg-pink-1:   #FFE0EC;     /* aliased so legacy selectors keep working */
   --bg-pink-2:   #FFD1EA;
   --bg-pink-3:   #FFB7D9;
   --hot-pink:    #FF4FB3;
@@ -26,6 +30,13 @@
   --font-pixel:   'Press Start 2P', monospace;
   --font-mono:    'DM Mono', 'Courier New', monospace;
   --font-body:    'Quicksand', 'M PLUS Rounded 1c', system-ui, sans-serif;
+
+  /* Symmetric layout rhythm — every gap in the hero is a multiple of these */
+  --gap-xs: 8px;
+  --gap-sm: 16px;
+  --gap-md: 24px;
+  --gap-lg: 36px;
+  --gap-xl: 56px;
 }
 
 /* ══════════════════════════════════ RESET ═══════════════════════════════════ */
@@ -37,11 +48,13 @@ body {
   font-size: 16px;
   line-height: 1.6;
   color: var(--ink);
-  background:
-    radial-gradient(ellipse at top,    var(--bg-pink-1) 0%, transparent 60%),
-    radial-gradient(ellipse at bottom, var(--bg-pink-3) 0%, transparent 70%),
-    linear-gradient(180deg, var(--bg-pink-2) 0%, var(--bg-pink-3) 100%);
+  /* Flat pastel pink "paper" + subtle grain. Matches the hero MP4 bg
+     exactly (#FFE0EC) so the video dissolves into the page. */
+  background-color: var(--paper-pink);
+  background-image: url("assets/paper-grain-pink.png");
+  background-repeat: repeat;
   background-attachment: fixed;
+  background-size: 200px 200px;
   min-height: 100vh;
   overflow-x: hidden;
   cursor: default;
@@ -61,7 +74,12 @@ body {
 }
 
 /* ════════════════════════════ GLOW BLOBS ════════════════════════════════════ */
+/* Glow blobs hidden — the flat pastel "paper" page bg replaces them.
+   Keeping the elements in DOM (script.js queries them) but invisible. */
 .glow-blob {
+  display: none;
+}
+.glow-blob-keep {
   pointer-events: none;
   position: fixed;
   border-radius: 50%;
@@ -133,16 +151,24 @@ body {
 }
 
 /* ════════════════════════════════ HERO ══════════════════════════════════════ */
+/* Symmetric vertical rhythm: every gap in the hero is a --gap-* token.
+   Layout from top to bottom:
+     padding-top (56px) → heart (260px) → 36px → wordmark (max 720px wide)
+     → 24px → tagline → 8px → sub-tagline → 24px → social row → 36px → CTAs
+     → padding-bottom (56px). */
 .hero {
   position: relative;
   z-index: 2;
-  padding: 64px 24px 56px;
+  padding: var(--gap-xl) var(--gap-md);
   text-align: center;
 }
 .hero-inner {
-  max-width: 800px;
+  max-width: 880px;
   margin: 0 auto;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* Starbursts behind the heart — slow rotating decoration */
@@ -178,18 +204,19 @@ body {
 }
 @keyframes starburstSpin { to { transform: translateX(-50%) rotate(360deg); } }
 
-/* Heart orb — the radiating + pulsating centerpiece */
+/* Heart orb — the radiating + pulsating centerpiece. Sized to feel
+   proportional to the wordmark below (which is ~720px wide). */
 .heart-orb {
   position: relative;
-  width: 220px;
-  height: 220px;
-  margin: 0 auto 20px;
+  width: 240px;
+  height: 240px;
+  margin: 0 0 var(--gap-lg);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .heart-glyph {
-  font-size: 140px;
+  font-size: 160px;
   line-height: 1;
   background: radial-gradient(circle at 35% 30%, #FFE6F2 0%, var(--hot-pink-2) 45%, var(--hot-pink) 100%);
   -webkit-background-clip: text;
@@ -212,7 +239,7 @@ body {
 
 .orb-ring {
   position: absolute;
-  width: 170px; height: 170px;
+  width: 190px; height: 190px;
   border-radius: 50%;
   border: 2px solid var(--hot-pink);
   opacity: 0;
@@ -243,15 +270,14 @@ body {
 }
 
 /* Hero mark — the breathing charcoal-glyph wordmark video.
-   Uses mix-blend-mode so the video's bubblegum bg (#FFE6F2) blends
-   into the page's pink gradient instead of sitting like a hard rect. */
+   The video bg is #FFE0EC, identical to body bg, so it blends seamlessly
+   without needing mix-blend-mode (which was creating contrast issues). */
 .hero-mark {
   display: block;
   width: 100%;
-  max-width: 920px;
+  max-width: 720px;
   height: auto;
-  margin: 0 auto 14px;
-  mix-blend-mode: multiply;
+  margin: 0 0 var(--gap-md);
 }
 
 .tagline {
@@ -259,23 +285,24 @@ body {
   font-size: clamp(16px, 2vw, 22px);
   font-weight: 500;
   color: var(--ink);
-  margin: 0 auto 8px;
+  margin: 0 auto var(--gap-xs);
   max-width: 520px;
+  line-height: 1.4;
 }
 .sub-tagline {
   font-family: var(--font-mono);
   font-size: 12px;
   color: var(--ink-soft);
   letter-spacing: 0.08em;
-  margin: 0 auto 24px;
+  margin: 0 auto var(--gap-md);
 }
 
 .hero-socials {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 8px 14px;
-  margin-bottom: 22px;
+  gap: var(--gap-xs) 14px;
+  margin: 0 0 var(--gap-lg);
   font-family: var(--font-mono);
   font-size: 13px;
 }
@@ -295,7 +322,7 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   gap: 10px;
-  margin-top: 8px;
+  margin: 0;
 }
 .hero-cta {
   display: inline-flex;
@@ -649,12 +676,14 @@ body {
 
 /* ════════════════════════════ MOBILE ════════════════════════════════════════ */
 @media (max-width: 760px) {
-  .hero { padding: 40px 16px 36px; }
-  .heart-orb { width: 180px; height: 180px; margin-bottom: 14px; }
-  .heart-glyph { font-size: 110px; }
-  .orb-ring { width: 140px; height: 140px; }
+  .hero { padding: var(--gap-lg) var(--gap-sm); }
+  .heart-orb { width: 200px; height: 200px; margin-bottom: var(--gap-md); }
+  .heart-glyph { font-size: 130px; }
+  .orb-ring { width: 160px; height: 160px; }
   .starburst { width: 220px; height: 220px; }
   .starburst-slow { width: 280px; height: 280px; }
+  .hero-mark { max-width: 92vw; margin-bottom: var(--gap-sm); }
+  .hero-socials { margin-bottom: var(--gap-md); font-size: 12px; }
   .tools-grid { grid-template-columns: 1fr; gap: 16px; padding: 0 16px; }
   .hero-cta { padding: 10px 18px; font-size: 13px; }
   .hero-cta-group { gap: 8px; }
