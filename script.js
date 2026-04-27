@@ -1,6 +1,47 @@
 // LoveSpark — bubble gum Y2K script.
-// Sparkle field, cursor trail, smooth scroll, card-close wobble easter egg.
+// Wavy rings, sparkle field, cursor trail, smooth scroll, card-close wobble.
 'use strict';
+
+// ══════════════════════════════════════════════════════════════════════════════
+// WAVY ORB RINGS — generate undulating circle paths for each .orb-ring SVG
+// Each ring's perimeter is a sine-modulated radius:
+//   r(θ) = baseR + amp · sin(waves · θ + phase)
+// Combined with the CSS scale + rotate animation, the wave bumps appear to
+// travel around the perimeter as the ring radiates outward — gives an
+// organic, breathing-water feel rather than a hard sonar ping.
+// ══════════════════════════════════════════════════════════════════════════════
+(function initWavyRings() {
+  const rings = document.querySelectorAll('.orb-ring');
+  if (!rings.length) return;
+
+  // Per-ring parameters: [waves, amplitude, phaseOffset]
+  // Different wave counts so neighboring rings don't sync visually.
+  const params = [
+    { waves: 8,  amp: 6, phase: 0      },
+    { waves: 11, amp: 5, phase: 1.2    },
+    { waves: 14, amp: 4, phase: 2.4    },
+  ];
+
+  function makeWavyCircle(baseR, amp, waves, phase, samples = 140) {
+    const cx = 100, cy = 100;  // center within viewBox 0..200
+    let d = '';
+    for (let i = 0; i <= samples; i++) {
+      const theta = (i / samples) * Math.PI * 2;
+      const r = baseR + amp * Math.sin(waves * theta + phase);
+      const x = cx + r * Math.cos(theta);
+      const y = cy + r * Math.sin(theta);
+      d += (i === 0 ? 'M' : 'L') + x.toFixed(2) + ',' + y.toFixed(2);
+    }
+    return d + 'Z';
+  }
+
+  rings.forEach((ring, i) => {
+    const path = ring.querySelector('path');
+    if (!path) return;
+    const p = params[i % params.length];
+    path.setAttribute('d', makeWavyCircle(78, p.amp, p.waves, p.phase));
+  });
+})();
 
 // ══════════════════════════════════════════════════════════════════════════════
 // STATIC SPARKLE FIELD — twinkles scattered across the page
