@@ -216,13 +216,19 @@ body {
   justify-content: center;
 }
 /* Charcoal-glyph heart video — neon pink heart of dust + glyphs that
-   breathes on the same cadence as the wordmark below. */
+   breathes on the same cadence as the wordmark below.
+   Radial mask fades the square video frame's corners into full
+   transparency, so only the heart silhouette + nearby dust appear
+   on the page. Eliminates the visible rectangle without needing
+   a transparent video format. */
 .heart-mark {
-  width: 220px;
-  height: 220px;
+  width: 240px;
+  height: 240px;
   object-fit: contain;
   position: relative;
   z-index: 2;
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 50%, rgba(0,0,0,0.6) 62%, transparent 75%);
+          mask-image: radial-gradient(circle at 50% 50%, #000 50%, rgba(0,0,0,0.6) 62%, transparent 75%);
   filter:
     drop-shadow(0 0 18px var(--shadow-hot))
     drop-shadow(0 8px 22px rgba(196, 84, 138, 0.35));
