@@ -726,3 +726,59 @@ body {
     transform: none;
   }
 }
+
+/* ════════════════════════════ RETRO-ONLY ELEMENTS HIDDEN IN KAWAII ══════════ */
+/* The retro markup (heart glyph, CSS rings, raw <h1> wordmark) lives in the
+   DOM alongside the kawaii video markup so theme swap is instant. In kawaii
+   (default, no html.theme-retro class) we hide it. */
+html:not(.theme-retro) .heart-glyph,
+html:not(.theme-retro) .orb-ring-css,
+html:not(.theme-retro) .logo-text {
+  display: none;
+}
+
+/* ════════════════════════════ KAWAII THEME SWITCHER ═════════════════════════ */
+.theme-switcher {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 1000;
+  display: inline-flex;
+  gap: 4px;
+  padding: 4px;
+  background: rgba(255, 250, 253, 0.85);
+  border: 1px solid var(--paper-edge);
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 16px var(--shadow-soft);
+  font-family: var(--font-body);
+}
+.theme-pill {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--ink-soft);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  padding: 8px 14px;
+  min-height: 32px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.theme-pill:hover {
+  color: var(--hot-pink);
+}
+.theme-pill[aria-pressed="true"] {
+  background: linear-gradient(180deg, var(--hot-pink) 0%, var(--deep-mauve) 100%);
+  color: #fff;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.6) inset, 0 2px 4px var(--shadow-hot);
+}
+.theme-pill:focus-visible {
+  outline: 2px solid var(--deep-mauve);
+  outline-offset: 2px;
+}

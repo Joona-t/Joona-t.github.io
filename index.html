@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>(()=>{try{const t=localStorage.getItem('lovespark-theme');if(t==='retro')document.documentElement.classList.add('theme-retro');}catch(_){}})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LoveSpark — Retro pink tools for the internet</title>
@@ -11,9 +12,16 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=2026-05-05">
+  <link rel="stylesheet" href="styles-retro.css?v=2026-05-05">
 </head>
 <body>
+
+  <!-- Theme switcher (kawaii ⇄ retro) -->
+  <div class="theme-switcher" role="group" aria-label="Site theme">
+    <button class="theme-pill" data-theme="pink"  type="button" aria-pressed="true">kawaii</button>
+    <button class="theme-pill" data-theme="retro" type="button" aria-pressed="false">retro</button>
+  </div>
 
   <!-- Grain overlay -->
   <div class="grain-overlay" aria-hidden="true"></div>
@@ -49,15 +57,18 @@
         <svg class="orb-ring orb-ring-1" viewBox="0 0 200 200"><path fill="none" stroke="#FF1493" stroke-width="2" stroke-linejoin="round"/></svg>
         <svg class="orb-ring orb-ring-2" viewBox="0 0 200 200"><path fill="none" stroke="#FF1493" stroke-width="2" stroke-linejoin="round"/></svg>
         <svg class="orb-ring orb-ring-3" viewBox="0 0 200 200"><path fill="none" stroke="#FF79C6" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        <span class="heart-glyph" aria-hidden="true">&#x2661;</span>
+        <div class="orb-ring-css orb-ring-css-1"></div>
+        <div class="orb-ring-css orb-ring-css-2"></div>
+        <div class="orb-ring-css orb-ring-css-3"></div>
       </div>
 
       <video class="hero-mark"
              src="assets/hero-pastel.mp4"
              poster="assets/hero-pastel.jpg"
              autoplay loop muted playsinline
-             aria-label="LoveSpark">
-        <h1 class="logo-text">LoveSpark</h1>
-      </video>
+             aria-label="LoveSpark"></video>
+      <h1 class="logo-text">LoveSpark</h1>
       <p class="tagline">Retro pink tools for a calmer,<br>more beautiful internet.</p>
       <p class="sub-tagline">Free&nbsp;&nbsp;·&nbsp;&nbsp;Open source&nbsp;&nbsp;·&nbsp;&nbsp;No ads. Ever.</p>
 
@@ -427,6 +438,6 @@
     <p class="footer-heart" aria-hidden="true">♡</p>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=2026-05-05"></script>
 </body>
 </html>

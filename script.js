@@ -3,6 +3,50 @@
 'use strict';
 
 // ══════════════════════════════════════════════════════════════════════════════
+// THEME SWITCHER — kawaii (default) ⇄ retro
+// The FOUC-prevention script in <head> already applied html.theme-retro if
+// the user previously chose retro. This wires the switcher buttons and
+// syncs across tabs via the storage event.
+// ══════════════════════════════════════════════════════════════════════════════
+(function setupThemeSwitcher() {
+  const KEY = 'lovespark-theme';
+
+  function init() {
+    const root = document.documentElement;
+    const pills = document.querySelectorAll('.theme-pill');
+    if (!pills.length) {
+      console.warn('[lovespark] theme switcher pills not found');
+      return;
+    }
+
+    function apply(theme) {
+      root.classList.toggle('theme-retro', theme === 'retro');
+      pills.forEach(p => p.setAttribute('aria-pressed', String(p.dataset.theme === theme)));
+      try { localStorage.setItem(KEY, theme); } catch (_) {}
+    }
+
+    const current = root.classList.contains('theme-retro') ? 'retro' : 'pink';
+    pills.forEach(p => p.setAttribute('aria-pressed', String(p.dataset.theme === current)));
+
+    pills.forEach(p => {
+      p.addEventListener('click', () => apply(p.dataset.theme));
+    });
+
+    window.addEventListener('storage', (e) => {
+      if (e.key === KEY && (e.newValue === 'pink' || e.newValue === 'retro')) {
+        apply(e.newValue);
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+
+// ══════════════════════════════════════════════════════════════════════════════
 // WAVY ORB RINGS — generate undulating circle paths for each .orb-ring SVG
 // Each ring's perimeter is a sine-modulated radius:
 //   r(θ) = baseR + amp · sin(waves · θ + phase)
