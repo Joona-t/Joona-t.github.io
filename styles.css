@@ -783,16 +783,38 @@ html:not(.theme-retro) .logo-text {
   outline-offset: 2px;
 }
 
-/* ════════════════════════════ CATEGORY SUB-SECTIONS ════════════════════════════ */
-/* Visual dividers between groups of cards inside .tools-section.
-   Pattern: pixel-mono pink heading + fading pink rule. Pure presentation. */
-.category-header {
+/* ════════════════════════════ CATEGORY DISCLOSURE SECTIONS ════════════════════════════ */
+/* <details class="category"> wraps each <summary class="category-header"> and a .tools-grid.
+   Default state: closed. Click summary to toggle. Aligned to .tools-grid's max-width + padding. */
+details.category {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+details.category + details.category { margin-top: 8px; }
+
+summary.category-header {
   display: flex;
   align-items: center;
   gap: 14px;
-  margin: 36px 0 16px;
-  padding: 0 8px;
+  padding: 14px 4px;
+  margin: 18px 0 0;
+  cursor: pointer;
+  list-style: none;          /* Firefox */
+  user-select: none;
+  border-radius: 8px;
+  transition: background-color 150ms ease;
 }
+summary.category-header::-webkit-details-marker { display: none; } /* Safari/Chrome */
+summary.category-header::marker { display: none; }                 /* future */
+summary.category-header:hover {
+  background-color: rgba(255, 79, 179, 0.06);
+}
+summary.category-header:focus-visible {
+  outline: 2px solid var(--deep-mauve);
+  outline-offset: 2px;
+}
+
 .category-title {
   font-family: var(--font-mono);
   font-size: clamp(16px, 2.2vw, 22px);
@@ -804,16 +826,51 @@ html:not(.theme-retro) .logo-text {
   line-height: 1;
   white-space: nowrap;
 }
+.category-count {
+  font-family: var(--font-mono);
+  font-size: clamp(13px, 1.7vw, 16px);
+  color: var(--hot-pink);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.category-count::before { content: "· "; opacity: 0.7; }
+
 .category-rule {
   flex: 1;
   height: 2px;
   background: linear-gradient(90deg, var(--hot-pink) 0%, transparent 100%);
   border-radius: 1px;
 }
-/* First category sits closer to the existing "The Suite" heading. */
-.tools-section .category-header:first-of-type { margin-top: 8px; }
 
-@media (max-width: 600px) {
-  .category-header { margin: 24px 0 10px; gap: 10px; padding: 0 16px; }
+.category-chevron {
+  display: inline-block;
+  color: var(--hot-pink);
+  font-size: 0.95em;
+  line-height: 1;
+  transform: rotate(0deg);
+  transition: transform 220ms ease;
+}
+details.category[open] > summary .category-chevron {
+  transform: rotate(90deg);
+}
+
+/* When open, give a little breathing room before the cards. */
+details.category[open] > .tools-grid {
+  margin-top: 14px;
+  margin-bottom: 8px;
+}
+
+/* First category sits closer to the existing "The Suite" heading. */
+details.category:first-of-type > summary.category-header { margin-top: 4px; }
+
+@media (max-width: 760px) {
+  details.category { padding: 0 16px; }
+  summary.category-header { padding: 12px 4px; gap: 10px; }
   .category-title { font-size: clamp(15px, 4.6vw, 18px); letter-spacing: 0.06em; }
+  .category-count { font-size: 13px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .category-chevron { transition: none; }
+  summary.category-header { transition: none; }
 }

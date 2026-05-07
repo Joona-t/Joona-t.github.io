@@ -879,7 +879,14 @@ html.theme-retro .theme-pill:focus-visible {
   outline-offset: 2px;
 }
 
-/* ════════════════════════════ CATEGORY SUB-SECTIONS (RETRO) ════════════════════════════ */
+/* ════════════════════════════ CATEGORY DISCLOSURE SECTIONS (RETRO) ════════════════════════════ */
+html.theme-retro summary.category-header:hover {
+  background-color: rgba(255, 110, 180, 0.08);
+}
+html.theme-retro summary.category-header:focus-visible {
+  outline: 2px solid var(--hot-pink);
+  outline-offset: 2px;
+}
 html.theme-retro .category-title {
   font-family: var(--font-pixel);
   font-size: clamp(0.65rem, 1.8vw, 0.95rem);
@@ -889,7 +896,18 @@ html.theme-retro .category-title {
   font-weight: 400;
   text-transform: uppercase;
 }
+html.theme-retro .category-count {
+  font-family: var(--font-pixel);
+  font-size: clamp(0.55rem, 1.4vw, 0.8rem);
+  color: var(--hot-pink);
+  text-shadow: 0 0 6px rgba(255, 110, 180, 0.4);
+  font-weight: 400;
+}
 html.theme-retro .category-rule {
   background: linear-gradient(90deg, var(--hot-pink) 0%, transparent 100%);
   box-shadow: 0 0 8px var(--hot-pink);
+}
+html.theme-retro .category-chevron {
+  color: var(--hot-pink);
+  text-shadow: 0 0 6px rgba(255, 110, 180, 0.5);
 }
