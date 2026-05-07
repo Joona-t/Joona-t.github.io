@@ -878,3 +878,18 @@ html.theme-retro .theme-pill:focus-visible {
   outline: 2px solid var(--hot-pink);
   outline-offset: 2px;
 }
+
+/* ════════════════════════════ CATEGORY SUB-SECTIONS (RETRO) ════════════════════════════ */
+html.theme-retro .category-title {
+  font-family: var(--font-pixel);
+  font-size: clamp(0.65rem, 1.8vw, 0.95rem);
+  color: var(--cream);
+  text-shadow: 0 0 10px rgba(255, 110, 180, 0.45);
+  letter-spacing: 0.1em;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+html.theme-retro .category-rule {
+  background: linear-gradient(90deg, var(--hot-pink) 0%, transparent 100%);
+  box-shadow: 0 0 8px var(--hot-pink);
+}

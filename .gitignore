@@ -3,3 +3,6 @@ scratch/
 
 # Claude Code local config (not part of the deployed site)
 .claude/
+
+# Superpowers brainstorm artifacts (mockups, server state)
+.superpowers/

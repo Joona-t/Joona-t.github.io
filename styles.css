@@ -782,3 +782,38 @@ html:not(.theme-retro) .logo-text {
   outline: 2px solid var(--deep-mauve);
   outline-offset: 2px;
 }
+
+/* ════════════════════════════ CATEGORY SUB-SECTIONS ════════════════════════════ */
+/* Visual dividers between groups of cards inside .tools-section.
+   Pattern: pixel-mono pink heading + fading pink rule. Pure presentation. */
+.category-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 36px 0 16px;
+  padding: 0 8px;
+}
+.category-title {
+  font-family: var(--font-mono);
+  font-size: clamp(16px, 2.2vw, 22px);
+  font-weight: 700;
+  color: var(--deep-mauve);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 1;
+  white-space: nowrap;
+}
+.category-rule {
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(90deg, var(--hot-pink) 0%, transparent 100%);
+  border-radius: 1px;
+}
+/* First category sits closer to the existing "The Suite" heading. */
+.tools-section .category-header:first-of-type { margin-top: 8px; }
+
+@media (max-width: 600px) {
+  .category-header { margin: 24px 0 10px; gap: 10px; padding: 0 16px; }
+  .category-title { font-size: clamp(15px, 4.6vw, 18px); letter-spacing: 0.06em; }
+}
