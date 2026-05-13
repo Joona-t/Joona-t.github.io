@@ -112,14 +112,14 @@
   swarm.setAttribute('aria-hidden', 'true');
 
   // Tuned via Dyson Swarm Studio (Apps & Tools/dyson-swarm-studio/). 5 sparse
-  // shells from r=165 → r=480, fast orbits (56–111 s), big bright dots.
+  // shells from r=165 → r=480, slow orbits (300–593 s), big bright dots.
   // [radius px, particle count, orbit duration s, direction]
   const SHELLS = [
-    [165, 138,  56, 'normal'],
-    [244, 176,  70, 'reverse'],
-    [323, 215,  84, 'normal'],
-    [401, 253,  98, 'reverse'],
-    [480, 292, 111, 'normal'],
+    [165, 138, 300, 'normal'],
+    [244, 176, 373, 'reverse'],
+    [323, 215, 447, 'normal'],
+    [401, 253, 520, 'reverse'],
+    [480, 292, 593, 'normal'],
   ];
 
   // Deep mauve palette — gives the swarm enough contrast against the pink page
