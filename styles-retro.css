@@ -912,3 +912,6 @@ html.theme-retro .category-chevron {
   text-shadow: 0 0 6px rgba(255, 110, 180, 0.5);
 }
 
+/* Dyson swarm is kawaii-only — retro keeps its classic sparkle-field. */
+html.theme-retro .dyson-swarm { display: none; }
+

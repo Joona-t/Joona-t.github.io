@@ -88,7 +88,80 @@
 })();
 
 // ══════════════════════════════════════════════════════════════════════════════
-// STATIC SPARKLE FIELD — twinkles scattered across the page
+// DYSON SWARM — kawaii only. Concentric orbital shells of very fine pink dust
+// around the heart. Replaces the older sparkle-field glyphs + wavy orb-rings
+// for the kawaii theme. CSS in styles.css gates visibility via
+// html:not(.theme-retro), so retro is untouched.
+//
+// Design notes:
+//   - 7 shells, ~60–130 particles each → ~600 total. Static dots inside an
+//     animated parent (only the 7 shells animate), so this is cheap.
+//   - Per-dot jitter (angle, radial offset, size, opacity, hue) keeps the
+//     "swarm" reading natural instead of clinical concentric circles.
+//   - Particles are 0.7–2.1 px and 0.12–0.45 alpha — visible enough to suggest
+//     structure, not enough to fight the heart or wordmark.
+// ══════════════════════════════════════════════════════════════════════════════
+(function initDysonSwarm() {
+  const host = document.querySelector('.heart-orb');
+  if (!host) return;
+  // Avoid double-injection if this script ever runs twice.
+  if (host.querySelector('.dyson-swarm')) return;
+
+  const swarm = document.createElement('div');
+  swarm.className = 'dyson-swarm';
+  swarm.setAttribute('aria-hidden', 'true');
+
+  // [radius px, particle count, orbit duration s, direction]
+  const SHELLS = [
+    [125,  60,  92, 'normal'],
+    [155,  72, 108, 'reverse'],
+    [188,  84, 128, 'normal'],
+    [224,  96, 152, 'reverse'],
+    [264, 110, 180, 'normal'],
+    [310, 120, 215, 'reverse'],
+    [365, 132, 255, 'normal'],
+  ];
+
+  const COLORS = [
+    'rgba(255,  79, 179, 0.42)',
+    'rgba(255, 121, 198, 0.36)',
+    'rgba(255, 183, 217, 0.30)',
+    'rgba(196,  84, 138, 0.34)',
+    'rgba(255, 245, 250, 0.28)',
+  ];
+
+  for (const [radius, count, duration, direction] of SHELLS) {
+    const shell = document.createElement('div');
+    shell.className = 'dyson-shell';
+    shell.style.animation =
+      `dysonOrbit ${duration}s linear infinite ${direction}`;
+
+    for (let i = 0; i < count; i++) {
+      // Even angular spread + small jitter so the ring doesn't pulse visibly
+      const angle = (i / count) * 360 + (Math.random() - 0.5) * 4;
+      // Radial jitter — keeps shells from looking like hard wire-frames
+      const r = radius + (Math.random() - 0.5) * 18;
+      const size = (0.7 + Math.random() * 1.4).toFixed(2);
+      const opacity = (0.12 + Math.random() * 0.33).toFixed(2);
+      const color = COLORS[Math.floor(Math.random() * COLORS.length)];
+
+      const dust = document.createElement('span');
+      dust.style.cssText =
+        `--a:${angle.toFixed(2)}deg;` +
+        `--r:${r.toFixed(1)}px;` +
+        `width:${size}px;height:${size}px;` +
+        `background:${color};opacity:${opacity};`;
+      shell.appendChild(dust);
+    }
+    swarm.appendChild(shell);
+  }
+
+  host.appendChild(swarm);
+})();
+
+// ══════════════════════════════════════════════════════════════════════════════
+// STATIC SPARKLE FIELD — twinkles scattered across the page (retro only;
+// hidden in kawaii via CSS — the Dyson swarm above is the kawaii equivalent).
 // ══════════════════════════════════════════════════════════════════════════════
 (function initSparkleField() {
   const field = document.getElementById('sparkle-field');
