@@ -111,19 +111,15 @@
   swarm.className = 'dyson-swarm';
   swarm.setAttribute('aria-hidden', 'true');
 
-  // Tuned via _swarm-preview sandbox — visible orbital structure (Dyson swarm)
-  // instead of invisible pink-on-pink dust. 9 shells from r=115 → r=480.
+  // Tuned via Dyson Swarm Studio (Apps & Tools/dyson-swarm-studio/). 5 sparse
+  // shells from r=165 → r=480, fast orbits (56–111 s), big bright dots.
   // [radius px, particle count, orbit duration s, direction]
   const SHELLS = [
-    [115,  90,  90, 'normal'],
-    [161, 115, 112, 'reverse'],
-    [206, 140, 134, 'normal'],
-    [252, 166, 156, 'reverse'],
-    [298, 191, 178, 'normal'],
-    [343, 216, 200, 'reverse'],
-    [389, 241, 222, 'normal'],
-    [434, 266, 244, 'reverse'],
-    [480, 292, 266, 'normal'],
+    [165, 138,  56, 'normal'],
+    [244, 176,  70, 'reverse'],
+    [323, 215,  84, 'normal'],
+    [401, 253,  98, 'reverse'],
+    [480, 292, 111, 'normal'],
   ];
 
   // Deep mauve palette — gives the swarm enough contrast against the pink page
@@ -136,9 +132,9 @@
     'rgba(255, 121, 198, 0.40)',
   ];
 
-  const DOT_SIZE = 1.8;    // base, multiplied by per-dot 0.55..1.5 jitter
-  const DOT_OPACITY = 0.55; // base, multiplied by per-dot 0.4..1.9 jitter
-  const RADIAL_JITTER = 26; // px, breaks hard wire-frame look
+  const DOT_SIZE = 2.5;     // base, multiplied by per-dot 0.55..1.5 jitter
+  const DOT_OPACITY = 0.74; // base, multiplied by per-dot 0.4..1.9 jitter
+  const RADIAL_JITTER = 33; // px, breaks hard wire-frame look
 
   for (const [radius, count, duration, direction] of SHELLS) {
     const shell = document.createElement('div');
