@@ -111,24 +111,34 @@
   swarm.className = 'dyson-swarm';
   swarm.setAttribute('aria-hidden', 'true');
 
+  // Tuned via _swarm-preview sandbox — visible orbital structure (Dyson swarm)
+  // instead of invisible pink-on-pink dust. 9 shells from r=115 → r=480.
   // [radius px, particle count, orbit duration s, direction]
   const SHELLS = [
-    [125,  60,  92, 'normal'],
-    [155,  72, 108, 'reverse'],
-    [188,  84, 128, 'normal'],
-    [224,  96, 152, 'reverse'],
-    [264, 110, 180, 'normal'],
-    [310, 120, 215, 'reverse'],
-    [365, 132, 255, 'normal'],
+    [115,  90,  90, 'normal'],
+    [161, 115, 112, 'reverse'],
+    [206, 140, 134, 'normal'],
+    [252, 166, 156, 'reverse'],
+    [298, 191, 178, 'normal'],
+    [343, 216, 200, 'reverse'],
+    [389, 241, 222, 'normal'],
+    [434, 266, 244, 'reverse'],
+    [480, 292, 266, 'normal'],
   ];
 
+  // Deep mauve palette — gives the swarm enough contrast against the pink page
+  // background to actually read as a Dyson swarm rather than disappear.
   const COLORS = [
-    'rgba(255,  79, 179, 0.42)',
-    'rgba(255, 121, 198, 0.36)',
-    'rgba(255, 183, 217, 0.30)',
-    'rgba(196,  84, 138, 0.34)',
-    'rgba(255, 245, 250, 0.28)',
+    'rgba( 90,  42,  71, 0.55)',
+    'rgba(140,  56,  98, 0.50)',
+    'rgba(196,  84, 138, 0.55)',
+    'rgba(255,  79, 179, 0.45)',
+    'rgba(255, 121, 198, 0.40)',
   ];
+
+  const DOT_SIZE = 1.8;    // base, multiplied by per-dot 0.55..1.5 jitter
+  const DOT_OPACITY = 0.55; // base, multiplied by per-dot 0.4..1.9 jitter
+  const RADIAL_JITTER = 26; // px, breaks hard wire-frame look
 
   for (const [radius, count, duration, direction] of SHELLS) {
     const shell = document.createElement('div');
@@ -139,10 +149,9 @@
     for (let i = 0; i < count; i++) {
       // Even angular spread + small jitter so the ring doesn't pulse visibly
       const angle = (i / count) * 360 + (Math.random() - 0.5) * 4;
-      // Radial jitter — keeps shells from looking like hard wire-frames
-      const r = radius + (Math.random() - 0.5) * 18;
-      const size = (0.7 + Math.random() * 1.4).toFixed(2);
-      const opacity = (0.12 + Math.random() * 0.33).toFixed(2);
+      const r = radius + (Math.random() - 0.5) * RADIAL_JITTER;
+      const size = Math.max(0.3, DOT_SIZE * (0.55 + Math.random() * 0.95)).toFixed(2);
+      const opacity = Math.min(1, DOT_OPACITY * (0.4 + Math.random() * 1.5)).toFixed(2);
       const color = COLORS[Math.floor(Math.random() * COLORS.length)];
 
       const dust = document.createElement('span');
