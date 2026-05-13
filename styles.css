@@ -117,11 +117,12 @@ body {
 /* The spiral canvas is no longer used — keep selector for safety, hide it. */
 #spiral-canvas { display: none; }
 
-/* Kawaii replaces the full-page #sparkle-field glyphs with the heart-centred
-   Dyson swarm (see initDysonSwarm in script.js). The wavy SVG .orb-ring paths
-   stay visible — they're part of the kawaii signature look. Retro keeps its
-   classic sparkle-field; its styling is below. */
+/* Kawaii replaces BOTH the full-page #sparkle-field glyphs AND the wavy
+   .orb-ring paths around the heart with the heart-centred Dyson swarm
+   (see initDysonSwarm in script.js). Retro keeps both originals; its
+   styling is below. */
 html:not(.theme-retro) #sparkle-field { display: none; }
+html:not(.theme-retro) .orb-ring { display: none; }
 
 #sparkle-field {
   position: fixed;
