@@ -381,6 +381,7 @@ body {
 .hero-cta--zara    { background: linear-gradient(180deg, #FFB58A 0%, #E37B46 100%); border-color: #A24E1F; box-shadow: 0 4px 0 #A24E1F, 0 8px 18px rgba(227, 123, 70, 0.4); }
 .hero-cta--forging { background: linear-gradient(180deg, #FF8A4F 0%, #D63E1E 100%); border-color: #821D08; box-shadow: 0 4px 0 #821D08, 0 8px 18px rgba(214, 62, 30, 0.4); }
 .hero-cta--games   { background: linear-gradient(180deg, var(--candy-mint) 0%, #5BCFB7 100%); color: #0D4438; border-color: #1F6E5C; box-shadow: 0 4px 0 #1F6E5C, 0 8px 18px rgba(91, 207, 183, 0.45); text-shadow: 0 1px 0 rgba(255,255,255,0.4); }
+.hero-cta--youtube { background: linear-gradient(180deg, #FF3333 0%, #CC0000 100%); border-color: #8A0000; box-shadow: 0 4px 0 #8A0000, 0 8px 18px rgba(255, 0, 0, 0.4); }
 
 /* ════════════════════════════ SECTION HEADER ════════════════════════════════ */
 .section-header {
@@ -554,37 +555,6 @@ body {
   background: linear-gradient(180deg, #FFD7B5 0%, #F5A87A 100%);
 }
 
-/* YouTube channel — special card variant: white body, red titlebar */
-.win98-card--youtube {
-  background: #fff;
-  border-color: #ff0000;
-}
-.win98-card--youtube:hover {
-  border-color: #cc0000;
-  box-shadow: 0 12px 32px rgba(255, 0, 0, 0.28);
-}
-.win98-card--youtube .titlebar {
-  background: linear-gradient(180deg, #ff3333 0%, #cc0000 100%);
-  border-bottom-color: #cc0000;
-}
-.win98-card--youtube .win-title {
-  color: #b30000;
-  background: rgba(255, 255, 255, 0.92);
-}
-.win98-card--youtube .card-badge {
-  color: #ff0000;
-}
-.win98-card--youtube .card-link {
-  background: linear-gradient(180deg, #ff3333 0%, #cc0000 100%);
-  border-color: #8a0000;
-  box-shadow: 0 3px 0 #8a0000, 0 6px 14px rgba(255, 0, 0, 0.35);
-}
-.win98-card--youtube .card-link:hover {
-  box-shadow: 0 5px 0 #8a0000, 0 10px 20px rgba(255, 0, 0, 0.45);
-}
-.win98-card--youtube .card-link:active {
-  box-shadow: 0 1px 0 #8a0000;
-}
 .aaron-memorial {
   font-family: var(--font-body);
   font-style: italic;
