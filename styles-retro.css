@@ -911,3 +911,31 @@ html.theme-retro .category-chevron {
   color: var(--hot-pink);
   text-shadow: 0 0 6px rgba(255, 110, 180, 0.5);
 }
+
+/* YouTube channel — special card variant in retro theme */
+html.theme-retro .win98-card--youtube {
+  background: #fff;
+  border-color: #ff1a1a;
+  box-shadow: 0 0 18px rgba(255, 26, 26, 0.45);
+}
+html.theme-retro .win98-card--youtube:hover {
+  box-shadow: 0 0 26px rgba(255, 26, 26, 0.65);
+}
+html.theme-retro .win98-card--youtube .titlebar {
+  background: linear-gradient(180deg, #ff3a3a 0%, #cc0000 100%);
+  box-shadow: 0 0 12px rgba(255, 26, 26, 0.5) inset;
+}
+html.theme-retro .win98-card--youtube .win-title {
+  color: #b30000;
+  background: rgba(255, 255, 255, 0.95);
+  text-shadow: none;
+}
+html.theme-retro .win98-card--youtube .card-badge {
+  color: #cc0000;
+  text-shadow: 0 0 6px rgba(255, 26, 26, 0.4);
+}
+html.theme-retro .win98-card--youtube .card-link {
+  background: linear-gradient(180deg, #ff3a3a 0%, #cc0000 100%);
+  border-color: #8a0000;
+  box-shadow: 0 0 14px rgba(255, 26, 26, 0.5);
+}
