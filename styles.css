@@ -388,9 +388,14 @@ html:not(.theme-retro) .starburst { display: none; }
 .sub-tagline {
   font-family: var(--font-mono);
   font-size: 12px;
-  color: var(--ink-soft);
+  color: var(--hot-pink-2);
   letter-spacing: 0.08em;
   margin: 0 auto var(--gap-md);
+  text-shadow:
+    0 0 4px var(--hot-pink-2),
+    0 0 8px var(--hot-pink),
+    0 0 16px var(--hot-pink),
+    0 0 28px var(--hot-pink);
 }
 
 .hero-socials {
