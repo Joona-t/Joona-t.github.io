@@ -340,11 +340,13 @@ html:not(.theme-retro) .starburst { display: none; }
   pointer-events: none;
   overflow: visible;
   transform-origin: center;
-  animation: orbRadiate 7s ease-out infinite;
+  /* Synced to .heart-mark heartBeatGentle 4.5s cycle — one ripple per breath.
+     Triplet stagger (0 / 150 / 300 ms) gives layered depth without breaking sync. */
+  animation: orbRadiate 4.5s ease-out infinite;
 }
 .orb-ring-1 { animation-delay: 0s;    }
-.orb-ring-2 { animation-delay: 2.33s; }
-.orb-ring-3 { animation-delay: 4.67s; }
+.orb-ring-2 { animation-delay: 0.15s; }
+.orb-ring-3 { animation-delay: 0.30s; }
 @keyframes orbRadiate {
   0%   { transform: scale(0.55) rotate(0deg);   opacity: 0.8; }
   60%  { opacity: 0.4; }
