@@ -1,5 +1,13 @@
 # Bugs & Iterations
 
+## 2026-06-14: "Sneak Peeks" gallery section — dropdown panels of unpublished-project screenshots
+
+**Feature:** A gallery on the live site showing screenshots of not-yet-published projects (the "Coming Soon" / Sparky Lab ones), each project as a click-to-expand dropdown like the existing Suite panels — click to reveal pictures. Vertical accordion chosen over a horizontal layout (Joona's call; it scales and matches the page idiom).
+**Approach:** Reused the page's existing **pure-CSS `<details class="category">` pattern verbatim** for each project dropdown — zero new interaction JS, keyboard + screen-reader accessible for free, reduced-motion already handled. Hardcoded HTML (the page is not JSON-driven). New `#gallery` section sits right after "The Suite", before the Notice. Each screenshot is framed in the existing `.win98-card` browser-tab motif; an optional **lightbox** (new, ~50 lines) gives click-to-zoom with Esc/backdrop close, focus trap, scroll lock, and a `prefers-reduced-motion` guard. Added a hero "Sneak peeks ✦" CTA (uses the existing smooth-scroll).
+**Key finding — no screenshots existed yet:** The only image on disk for these projects was `~/Downloads/Sparky read.png`, which turned out to be Sparky **cover art**, not a UI screenshot — so it's seeded into Sparky Reads honestly labeled "Cover art · UI screenshots coming soon". The other two projects (LoveSpark Dashboard, Cozy Sleep) render a dashed-border "Screenshots coming soon ♡" placeholder. Gallery ships as a **working shell**: drop PNGs into `images/gallery/<slug>/` and add one `<img>` line — no other code change. Empty state is a first-class rendered state, not a gap.
+**Brand / a11y:** Sparky mascot added to the section header (rule #3), sourced on-brand from existing mascot art. Section stays transparent over the page's flat `--paper-pink` bg — NOT `--ls-bg-gradient`, which would break the hero MP4 colour-match. Verified in-browser via eval/inspect (preview_screenshot returns blank in this harness): 16:9 image frames, 3-col→1-col responsive, no gallery-caused horizontal overflow, lightbox focus management + Esc close, no console errors.
+**Files:** index.html, styles.css, script.js, images/sparky.png (new), images/gallery/** (new: seed + .gitkeep ×2), BUGS_AND_ITERATIONS.md
+
 ## 2026-05-05: Theme switcher (kawaii ⇄ retro)
 
 **Problem:** Joona wanted both site eras live — the current "bubble gum Y2K kawaii" hero plus the older dark-wine, ♡-glyph + CSS-rings hero — switchable from the UI to "showcase our taste". The pre-redesign aesthetic only existed in git history (commit `0891dce`, parent of `ad48db6`).
