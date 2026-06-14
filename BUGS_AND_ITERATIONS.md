@@ -1,5 +1,17 @@
 # Bugs & Iterations
 
+## 2026-06-14: Gallery iteration — real Tongue & Sparky screenshots + adversarial-review fixes
+
+**Change:** Swapped the placeholder/cover-art content for the real provided screenshots of the two flagship unpublished apps — **Tongue** (macOS language tutor, kana-drill view) and **Sparky** (macOS knowledge-OS Command Center) — from `~/Documents/screenshots/{Tongue,Sparky}.png`. Both panels default to `open` so the real apps show immediately. Removed the Sparky Reads "cover art" stand-in (it was mascot art, not a UI screenshot) and reverted that panel to a placeholder. Panel order: Tongue, Sparky (populated) → Cozy Sleep, LoveSpark Dashboard, Sparky Reads (placeholders).
+**Image optimization:** Source PNGs were 4.3 MB / 9.5 MB — far too heavy for a public page. No cwebp/pngquant available, so `sips -Z 1600 -s format jpeg -s formatOptions 86` → tongue-01.jpg 229 KB (1600×962), sparky-01.jpg 369 KB (1600×1039). Resolves the review's 2.5 MB-image finding; UI gradients compress cleanly as JPEG, text stays crisp at 1600px.
+**A11y fixes from the background adversarial review (6-dimension, 10-agent workflow):**
+  - **P1** — lightbox close ✕ was white on `--hot-pink` = 2.9:1 (fails AA). Now `background: var(--ink)` → white-on-ink ~11:1.
+  - **P2** — `.gallery-empty` text `--ink-soft` on `--bg-pink-1` = 4.49:1. Now `--ink` → 9.22:1.
+  - **P3** — `.gallery-subtitle` `--ink-soft` on `--paper-pink` = 4.49:1. Now `--ink` → 9.22:1.
+  (`.gallery-caption` stays `--ink-soft` — it sits on `--paper` #FFFAFD at 5.33:1, passes.)
+**Verified in-browser (eval/inspect):** 5 panels render, both JPEGs load + valid, no leftover 404 for the removed cover art, contrast tokens applied (empty/subtitle/lightbox-close), lightbox open + Esc-close + focus management intact, no console errors.
+**Files:** index.html, styles.css, images/gallery/tongue/tongue-01.jpg (new), images/gallery/sparky/sparky-01.jpg (new), images/gallery/sparky-reads/sparky-reads-01.png (removed), BUGS_AND_ITERATIONS.md
+
 ## 2026-06-14: "Sneak Peeks" gallery section — dropdown panels of unpublished-project screenshots
 
 **Feature:** A gallery on the live site showing screenshots of not-yet-published projects (the "Coming Soon" / Sparky Lab ones), each project as a click-to-expand dropdown like the existing Suite panels — click to reveal pictures. Vertical accordion chosen over a horizontal layout (Joona's call; it scales and matches the page idiom).

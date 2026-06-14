@@ -987,7 +987,7 @@ details.category:first-of-type > summary.category-header { margin-top: 4px; }
   font-family: var(--font-body);
   font-size: 15px;
   line-height: 1.55;
-  color: var(--ink-soft);
+  color: var(--ink); /* AA: --ink-soft on paper-pink is 4.49:1, just under 4.5 */
   max-width: 520px;
   text-align: center;
   margin: 0;
@@ -1041,7 +1041,7 @@ details.category:first-of-type > summary.category-header { margin-top: 4px; }
   font-family: var(--font-body);
   font-size: 14px;
   font-weight: 600;
-  color: var(--ink-soft);
+  color: var(--ink); /* AA: --ink-soft on bg-pink-1 is 4.49:1, just under 4.5 */
   background: var(--bg-pink-1);
   border: 1.5px dashed var(--hot-pink-2);
   border-radius: 14px;
@@ -1104,7 +1104,7 @@ details.category:first-of-type > summary.category-header { margin-top: 4px; }
   height: 44px;
   border-radius: 50%;
   border: 2px solid var(--paper);
-  background: var(--hot-pink);
+  background: var(--ink); /* AA: white glyph on --hot-pink was 2.9:1; on --ink ~11:1 */
   color: var(--paper);
   font-size: 18px;
   font-weight: 700;
