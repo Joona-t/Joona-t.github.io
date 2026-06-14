@@ -1,5 +1,10 @@
 # Bugs & Iterations
 
+## 2026-06-14: Sneak Peeks gallery — Tongue & Sparky only
+
+**Change:** Added the "Sneak Peeks" gallery section (after The Suite) showing the two unpublished flagship apps with real screenshots — Tongue (kana drill) and Sparky (Command Center). Screenshots optimized via `sips -Z 1600 -s format jpeg -s formatOptions 86` → 229 KB / 369 KB (from 4.3 MB / 9.5 MB source PNGs). Only apps we have screenshots for are listed; placeholder panels for Cozy Sleep / Dashboard / Sparky Reads were removed for now and return when their shots exist.
+**Files:** index.html, styles.css, images/gallery/{tongue,sparky}/*.jpg, images/sparky.png
+
 ## 2026-05-05: Theme switcher (kawaii ⇄ retro)
 
 **Problem:** Joona wanted both site eras live — the current "bubble gum Y2K kawaii" hero plus the older dark-wine, ♡-glyph + CSS-rings hero — switchable from the UI to "showcase our taste". The pre-redesign aesthetic only existed in git history (commit `0891dce`, parent of `ad48db6`).

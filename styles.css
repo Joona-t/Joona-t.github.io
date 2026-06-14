@@ -952,3 +952,106 @@ details.category:first-of-type > summary.category-header { margin-top: 4px; }
   .category-chevron { transition: none; }
   summary.category-header { transition: none; }
 }
+
+/* ═══════════════════════════════════ SNEAK PEEKS ════════════════════════════════
+   Screenshots of unpublished projects. Each project reuses the pure-CSS
+   <details class="category"> dropdown; opening one reveals the FULL, uncropped
+   shot — no window chrome, no crop. Zero JS. */
+.gallery-section {
+  position: relative;
+  z-index: 2;
+  padding: 8px 0 56px;
+}
+
+.gallery-intro {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  max-width: 760px;
+  margin: -8px auto 4px;
+  padding: 0 24px;
+  flex-wrap: wrap;
+}
+
+.gallery-mascot {
+  width: 72px;
+  height: 72px;
+  flex: 0 0 auto;
+  filter: drop-shadow(0 4px 10px var(--shadow-soft));
+  animation: gallerySparkyBob 4s ease-in-out infinite;
+}
+
+@keyframes gallerySparkyBob {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50%      { transform: translateY(-6px) rotate(2deg); }
+}
+
+.gallery-subtitle {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink);
+  max-width: 520px;
+  text-align: center;
+  margin: 0;
+}
+
+/* When a project dropdown is open, give the shot room to breathe. */
+details.gallery-project[open] > .gallery-body {
+  margin-top: 14px;
+  margin-bottom: 8px;
+}
+
+/* The full screenshot — natural aspect ratio, scaled to fit. NEVER cropped. */
+.gallery-shot {
+  margin: 0 auto;
+  max-width: 920px;
+}
+
+.gallery-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+  border: 1.5px solid var(--paper-edge);
+  box-shadow: 0 10px 30px var(--shadow-soft);
+  background: var(--paper);
+}
+
+.gallery-caption {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-soft);
+  text-align: center;
+  margin: 10px 0 0;
+}
+
+/* Project with no shots on disk yet. */
+.gallery-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 28px 20px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--bg-pink-1);
+  border: 1.5px dashed var(--hot-pink-2);
+  border-radius: 14px;
+}
+
+.gallery-empty-icon { font-size: 18px; }
+
+@media (max-width: 760px) {
+  .gallery-intro { gap: 12px; }
+  .gallery-mascot { width: 60px; height: 60px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-mascot { animation: none; }
+}
