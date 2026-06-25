@@ -2005,3 +2005,7 @@ html.theme-candy .hero-mark{
   -webkit-mask-image: radial-gradient(ellipse 70% 58% at 50% 50%, #000 54%, rgba(0,0,0,0.45) 76%, transparent 92%);
           mask-image: radial-gradient(ellipse 70% 58% at 50% 50%, #000 54%, rgba(0,0,0,0.45) 76%, transparent 92%);
 }
+
+/* candy: darken drops the videos' light baked-in backgrounds, keeping only the pink heart/letters on the gradient */
+html.theme-candy .heart-mark,
+html.theme-candy .hero-mark{ mix-blend-mode: darken !important; }
