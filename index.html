@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script>(()=>{try{const t=localStorage.getItem('lovespark-theme');if(t==='retro')document.documentElement.classList.add('theme-retro');}catch(_){}})();</script>
+  <script>(()=>{try{const t=localStorage.getItem('lovespark-theme');const m={retro:'theme-retro',candy:'theme-candy',basalt:'theme-basalt'};if(m[t])document.documentElement.classList.add(m[t]);}catch(_){}})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LoveSpark — Retro pink tools for the internet</title>
@@ -12,15 +12,17 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=2026-06-25-basalt">
-  <link rel="stylesheet" href="styles-retro.css?v=2026-06-25-basalt">
+  <link rel="stylesheet" href="styles.css?v=2026-06-25-themes">
+  <link rel="stylesheet" href="styles-retro.css?v=2026-06-25-themes">
 </head>
 <body>
 
   <!-- Theme switcher (kawaii ⇄ retro) -->
   <div class="theme-switcher" role="group" aria-label="Site theme">
-    <button class="theme-pill" data-theme="pink"  type="button" aria-pressed="true">kawaii</button>
-    <button class="theme-pill" data-theme="retro" type="button" aria-pressed="false">retro</button>
+    <button class="theme-pill" data-theme="pink"   type="button" aria-pressed="true">kawaii</button>
+    <button class="theme-pill" data-theme="candy"  type="button" aria-pressed="false">candy</button>
+    <button class="theme-pill" data-theme="basalt" type="button" aria-pressed="false">basalt</button>
+    <button class="theme-pill" data-theme="retro"  type="button" aria-pressed="false">retro</button>
   </div>
 
   <!-- Grain overlay -->
@@ -58,6 +60,7 @@
         <svg class="orb-ring orb-ring-2" viewBox="0 0 200 200"><path fill="none" stroke="#FF1493" stroke-width="2" stroke-linejoin="round"/></svg>
         <svg class="orb-ring orb-ring-3" viewBox="0 0 200 200"><path fill="none" stroke="#FF79C6" stroke-width="1.5" stroke-linejoin="round"/></svg>
         <span class="heart-glyph" aria-hidden="true">&#x2661;</span>
+        <span class="ankh-glyph" aria-hidden="true"></span>
         <div class="orb-ring-css orb-ring-css-1"></div>
         <div class="orb-ring-css orb-ring-css-2"></div>
         <div class="orb-ring-css orb-ring-css-3"></div>

@@ -825,3 +825,62 @@ html.theme-retro .category-chevron {
 /* Dyson swarm is kawaii-only — retro keeps its classic sparkle-field. */
 html.theme-retro .dyson-swarm { display: none; }
 
+
+
+/* ===================== 4-THEME FORGE: retro re-pin --- */
+/* ═══════════════════════ RETRO ALIGNMENT — 4-THEME SYSTEM ═══════════════════════
+   Append to styles-retro.css (after the existing .hero-cta-group block, ~line 301).
+   PURPOSE: retro currently inherits the dark "Basalt Monolith" look from the BASE
+   .hero-cta (styles.css). The re-theme reassigns the base default to PINK carved-stone
+   and relocates the dark stone skin into html.theme-basalt. To keep retro's existing
+   appearance (dark stone buttons on the wine-dark cosmic bg) DECOUPLED from whatever
+   the new base default becomes, retro re-pins the dark Basalt Monolith skin explicitly.
+   This is ALIGNMENT only — visually identical to retro today. No redesign. ============ */
+
+/* Re-assert the dark carved-stone skin so retro no longer depends on the base default.
+   Skeleton (layout/sizing/glyph/::before grain/::after ember vein/hover-active-focus)
+   stays inherited from base .hero-cta — only the SKIN props are re-pinned here. */
+html.theme-retro .hero-cta {
+  color: #b4b8be;
+  background: linear-gradient(180deg, #282b30 0%, #1f2125 52%, #16171a 100%);
+  border: 1px solid #0a0b0d;
+  box-shadow:
+    inset 0 1px 0 rgba(140,146,156,0.16),
+    inset 0 -1px 2px rgba(0,0,0,0.7),
+    inset 0 0 0 1px rgba(0,0,0,0.4),
+    0 1px 0 rgba(0,0,0,0.8),
+    0 6px 16px rgba(0,0,0,0.45);
+  text-shadow: 0 1px 0 rgba(0,0,0,0.85);
+}
+/* Hover/focus ember wake — re-pinned so it survives regardless of base default skin.
+   Per-button --ember/--ember-hot accents are inherited from base (styles.css:497-501). */
+html.theme-retro .hero-cta:hover,
+html.theme-retro .hero-cta:focus-visible {
+  color: var(--ember-hot);
+  background:
+    radial-gradient(120% 160% at 50% 120%, rgba(122,78,22,0.42) 0%, rgba(122,78,22,0) 60%),
+    linear-gradient(180deg, #2b2e33 0%, #1f2125 52%, #16171a 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(160,166,176,0.2),
+    inset 0 -1px 2px rgba(0,0,0,0.7),
+    inset 0 0 14px rgba(217,162,59,0.16),
+    0 1px 0 rgba(0,0,0,0.8),
+    0 0 0 1px var(--ember),
+    0 6px 18px rgba(0,0,0,0.5);
+  text-shadow: 0 0 8px var(--ember-hot), 0 1px 0 rgba(0,0,0,0.85);
+}
+html.theme-retro .hero-cta:focus-visible { outline: 2px solid var(--ember-hot); outline-offset: 3px; }
+
+/* ── 4-PILL SWITCHER: existing html.theme-retro .theme-switcher already uses
+   inline-flex + flex-wrap + gap:4px and 32px pills, so the two NEW pills
+   (data-theme="candy" / "basalt") fit and wrap with zero structural change.
+   Only tighten horizontal padding slightly at narrow widths so 4 pills don't
+   force an ugly 2+2 wrap on small phones. Keeps 32px touch target + visible
+   :hover/:focus-visible from the existing rules (styles-retro.css:764-790). ── */
+@media (max-width: 380px) {
+  html.theme-retro .theme-pill { padding: 8px 10px; letter-spacing: 0.02em; }
+}
+
+/* prefers-reduced-motion: base .hero-cta hover-transform suppression
+   (styles.css:844-846) still applies; the re-pinned hover above only changes
+   color/background/shadow (already transition-gated), no new motion introduced. */

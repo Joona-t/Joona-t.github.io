@@ -19,13 +19,20 @@
       return;
     }
 
+    const CLASS = { retro: 'theme-retro', candy: 'theme-candy', basalt: 'theme-basalt' };
+    const VALID = ['pink', 'candy', 'basalt', 'retro'];
+
     function apply(theme) {
-      root.classList.toggle('theme-retro', theme === 'retro');
+      if (!VALID.includes(theme)) theme = 'pink';
+      root.classList.remove('theme-retro', 'theme-candy', 'theme-basalt');
+      if (CLASS[theme]) root.classList.add(CLASS[theme]);  // pink = no class (default)
       pills.forEach(p => p.setAttribute('aria-pressed', String(p.dataset.theme === theme)));
       try { localStorage.setItem(KEY, theme); } catch (_) {}
     }
 
-    const current = root.classList.contains('theme-retro') ? 'retro' : 'pink';
+    const current = root.classList.contains('theme-retro') ? 'retro'
+      : root.classList.contains('theme-candy') ? 'candy'
+      : root.classList.contains('theme-basalt') ? 'basalt' : 'pink';
     pills.forEach(p => p.setAttribute('aria-pressed', String(p.dataset.theme === current)));
 
     pills.forEach(p => {
@@ -33,7 +40,7 @@
     });
 
     window.addEventListener('storage', (e) => {
-      if (e.key === KEY && (e.newValue === 'pink' || e.newValue === 'retro')) {
+      if (e.key === KEY && VALID.includes(e.newValue)) {
         apply(e.newValue);
       }
     });
