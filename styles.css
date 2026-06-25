@@ -139,8 +139,8 @@ body {
    (see initDysonSwarm in script.js). The wavy .orb-ring paths (the heart's
    pulse) stay visible — they're the kawaii signature. Retro keeps all
    three originals; its styling is below. */
-html:not(.theme-retro) #sparkle-field { display: none; }
-html:not(.theme-retro) .starburst { display: none; }
+html:not(.theme-retro):not(.theme-basalt) #sparkle-field { display: none; }
+html:not(.theme-retro):not(.theme-basalt) .starburst { display: none; }
 
 #sparkle-field {
   position: fixed;
@@ -850,9 +850,9 @@ html:not(.theme-retro) .starburst { display: none; }
 /* The retro markup (heart glyph, CSS rings, raw <h1> wordmark) lives in the
    DOM alongside the kawaii video markup so theme swap is instant. In kawaii
    (default, no html.theme-retro class) we hide it. */
-html:not(.theme-retro) .heart-glyph,
-html:not(.theme-retro) .orb-ring-css,
-html:not(.theme-retro) .logo-text {
+html:not(.theme-retro):not(.theme-basalt) .heart-glyph,
+html:not(.theme-retro):not(.theme-basalt) .orb-ring-css,
+html:not(.theme-retro):not(.theme-basalt) .logo-text {
   display: none;
 }
 
@@ -1096,3 +1096,901 @@ details.gallery-project[open] > .gallery-body {
 @media (prefers-reduced-motion: reduce) {
   .gallery-mascot { animation: none; }
 }
+
+
+/* ===================== 4-THEME FORGE ===================== */
+/* --- KAWAII (default) pink carved-stone .hero-cta --- */
+/* ════════════════════════════ HERO CTA BUTTONS ══════════════════════════════
+   KAWAII DEFAULT (no theme class) = PINK CARVED-STONE.
+   Same incised-tablet skeleton as the old Basalt Monolith (Cinzel
+   inscriptional small-caps, ::before stone grain, ::after ember vein that
+   wakes on hover, translateY active, focus ring) — recolored to warm pink
+   granite. Label is deep plum #5a1030 for WCAG-AA on pink stone
+   (6.43:1 darkest stop → 9.0:1 lightest). A rose-gold #d98aa8 ember wakes
+   on hover via the vein/glow/glyph; the body label only deepens (never goes
+   rose-gold, which would fail AA at 13px).
+
+   NOTE: the dark ash-grey palette this replaces now lives under
+   html.theme-basalt (basalt agent's scope). This block is the bare
+   .hero-cta = the kawaii skin. Skeleton properties unchanged; only the
+   *skin* (color/background/border/box-shadow/text-shadow/::before/::after/
+   hover) is recolored. */
+.hero-cta {
+  --ember: #d98aa8;          /* rose-gold ember (kawaii default) */
+  --ember-hot: #ff8fc4;      /* hot pink wake */
+  --stone-ink: #5a1030;      /* deep plum label — AA on pink stone */
+  --stone-ink-hot: #4a0c26;  /* hover label deepens, never lightens */
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Cinzel','Cormorant Garamond',Georgia,serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-variant: small-caps;
+  padding: 13px 22px;
+  min-height: 44px;
+  border-radius: 3px;
+  text-decoration: none;
+  cursor: pointer;
+  color: var(--stone-ink);
+  /* warm pink granite face: lighter top bevel → deeper rose base */
+  background: linear-gradient(180deg, #f2c7da 0%, #e8aecb 52%, #dd9bbe 100%);
+  border: 1px solid #b5618a;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.7),          /* top light bevel */
+    inset 0 -1px 2px rgba(122,32,72,0.45),         /* base shadow lip */
+    inset 0 0 0 1px rgba(255,255,255,0.25),        /* inner hairline */
+    0 1px 0 rgba(122,32,72,0.35),                  /* incised drop */
+    0 6px 16px rgba(196,84,138,0.30);              /* soft rose cast */
+  text-shadow: 0 1px 0 rgba(255,255,255,0.55);     /* carved-in label */
+  transition: color 0.4s ease, box-shadow 0.4s ease, background 0.4s ease, transform 0.15s ease;
+  overflow: hidden;
+}
+/* stone grain — same fractalNoise tablet texture, lightened for pink granite */
+.hero-cta::before {
+  content:""; position:absolute; inset:0; border-radius:3px; pointer-events:none;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='90' height='44'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/><feColorMatrix type='saturate' values='0'/></filter><rect width='90' height='44' filter='url(%23g)' opacity='0.07'/></svg>");
+  mix-blend-mode:overlay; opacity:0.45;
+}
+/* ember vein — rose-gold line, wakes on hover (identical mechanic) */
+.hero-cta::after {
+  content:""; position:absolute; left:16px; right:16px; bottom:7px; height:1px; border-radius:1px; pointer-events:none;
+  background:linear-gradient(90deg, transparent, var(--ember), transparent);
+  opacity:0; box-shadow:0 0 8px var(--ember);
+  transition:opacity 0.4s ease;
+}
+.hero-cta > * { position:relative; z-index:1; }
+.hero-cta .cta-glyph { font-size:15px; line-height:1; opacity:0.85; transition:color 0.4s ease, text-shadow 0.4s ease, opacity 0.4s ease; }
+.hero-cta:hover, .hero-cta:focus-visible {
+  color: var(--stone-ink-hot);
+  /* warm rose wake rising from below + brighter granite face */
+  background:
+    radial-gradient(120% 160% at 50% 120%, rgba(217,138,168,0.40) 0%, rgba(217,138,168,0) 60%),
+    linear-gradient(180deg, #f7d4e3 0%, #edb6d1 52%, #e2a3c4 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.85),
+    inset 0 -1px 2px rgba(122,32,72,0.40),
+    inset 0 0 14px rgba(255,143,196,0.22),
+    0 1px 0 rgba(122,32,72,0.30),
+    0 0 0 1px var(--ember),
+    0 6px 18px rgba(196,84,138,0.42);
+  text-shadow: 0 0 8px rgba(255,143,196,0.55), 0 1px 0 rgba(255,255,255,0.6);
+}
+.hero-cta:hover::after, .hero-cta:focus-visible::after { opacity:0.9; }
+.hero-cta:hover .cta-glyph, .hero-cta:focus-visible .cta-glyph { color: var(--ember-hot); opacity:1; text-shadow:0 0 10px var(--ember-hot); }
+.hero-cta:active { transform: translateY(1px); }
+.hero-cta:focus-visible { outline:2px solid #b3185c; outline-offset:3px; }  /* candy focus #b3185c, 3.12:1 on stone */
+
+/* Per-button ember — signature hues kept, but remapped to pink-coordinated
+   tones so the set still reads as "ours" in the kawaii pink skin. */
+.hero-cta--glyph   { --ember:#e8a9c7; --ember-hot:#ffc4e0; }  /* warm rose */
+.hero-cta--null    { --ember:#c79be0; --ember-hot:#e4cbf5; }  /* lilac-pink */
+.hero-cta--zara    { --ember:#e89ab0; --ember-hot:#ffbcd0; }  /* coral-rose */
+.hero-cta--forging { --ember:#f08aa2; --ember-hot:#ff9eb6; }  /* hot coral-pink */
+.hero-cta--games   { --ember:#8fd6c8; --ember-hot:#bdeee2; }  /* mint kept, softened toward candy */
+
+/* --- CANDY (glass) theme --- */
+/* ════════════════════════════════════════════════════════════════════════════
+   CANDY THEME — glass-sticker (html.theme-candy)
+   LoveSpark candy design system. Scoped entirely under html.theme-candy so
+   kawaii (base), retro, and basalt are untouched. Candy reuses the kawaii pink
+   ♡ video heart + Dyson swarm + orb-rings (they leak in via the existing
+   html:not(.theme-retro) selectors — intended). Everything below is SKIN only.
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* ── TOKENS ─────────────────────────────────────────────────────────────────
+   Candy default palette from the LoveSpark design system. Scoped to the class
+   so they only exist when candy is active. */
+html.theme-candy {
+  --ls-bg-mid:#ffd9ec;
+  --ls-bg-gradient:linear-gradient(145deg,#ffd3e5 0%,#ffe8d9 28%,#ffd9ec 55%,#ffe2cc 78%,#ffcbe0 100%);
+  --ls-glass:linear-gradient(135deg,#fffafd,#ffeef3 45%,#ffdfe9 75%,#ffcfe0);
+  --ls-glass-solid:#fff3f8;
+  --ls-glass-light:rgba(255,250,253,.62);
+  --ls-glass-strong:#fffbfe;
+  --ls-glass-border:rgba(255,255,255,.7);
+  --ls-pink-accent:#ff49a6;
+  --ls-pink-deep:#e91e8c;
+  --ls-magenta:#e91e8c;
+  --ls-text:#4a0827;
+  --ls-text-muted:#6b2848;
+  --ls-text-strong:#2a0413;
+  --ls-heading:#2a0413;
+  --ls-glow:0 8px 18px rgba(255,124,182,.30), 0 1px 4px rgba(255,208,224,.45);
+  --ls-glow-strong:0 12px 30px rgba(255,73,166,.40), 0 2px 8px rgba(255,208,224,.55);
+  --ls-halo-btn:0 6px 14px rgba(233,30,140,.40);
+  --ls-halo-pill:0 2px 4px rgba(233,30,140,.35);
+  --ls-radius:20px;
+  --ls-radius-sm:14px;
+  --ls-grad-btn:linear-gradient(135deg,#d81b73 0%,#a51259 100%);
+  --ls-grad-pill:linear-gradient(180deg,#ff6fbe,#ff49a6 55%,#e91e8c);
+  --ls-grad-text:linear-gradient(120deg,#c92e72 0%,#b3185c 45%,#d4327a 100%);
+  --ls-grain:.55;
+  --ls-focus:#b3185c;
+  --ls-btn-tx:#ffffff;
+  --ls-noise:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ── PAGE BACKGROUND ────────────────────────────────────────────────────────
+   Cream→pink candy gradient replaces the flat pastel paper. Fixed so it doesn't
+   scroll. Text base recolored to candy plum. */
+html.theme-candy body {
+  color: var(--ls-text);
+  background-color: var(--ls-bg-mid);
+  background-image: var(--ls-bg-gradient);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+/* Soften the multiply grain so the glass gloss can read on candy. */
+html.theme-candy .grain-overlay { opacity: 0.03; }
+
+/* ── HEADER : THEME SWITCHER ────────────────────────────────────────────────
+   Frosted candy capsule; active pill = deep --ls-grad-btn (white text legal). */
+html.theme-candy .theme-switcher {
+  background: var(--ls-glass-light);
+  border: 1px solid var(--ls-glass-border);
+  box-shadow: var(--ls-glow);
+}
+html.theme-candy .theme-pill { color: var(--ls-text-muted); }
+html.theme-candy .theme-pill:hover { color: var(--ls-pink-deep); }
+html.theme-candy .theme-pill[aria-pressed="true"] {
+  background: var(--ls-grad-btn);
+  color: var(--ls-btn-tx);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.45) inset, var(--ls-halo-pill);
+}
+html.theme-candy .theme-pill:focus-visible {
+  outline: 2px solid var(--ls-focus);
+  outline-offset: 2px;
+}
+
+/* ── HERO : WORDMARK + TAGLINES + SOCIALS ───────────────────────────────────
+   The kawaii video .hero-mark + ♡ heart show by default in candy (leaked in).
+   We retint the textual hero bits to candy and give .logo-text the candy
+   gradient in case it is ever surfaced. */
+html.theme-candy .logo-text {
+  background: var(--ls-grad-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: var(--ls-heading);
+  filter: drop-shadow(0 3px 0 rgba(255,255,255,0.6))
+          drop-shadow(0 10px 26px rgba(255,73,166,0.30));
+}
+@supports not ((-webkit-background-clip:text) or (background-clip:text)) {
+  html.theme-candy .logo-text { -webkit-text-fill-color: currentColor; color: var(--ls-heading); }
+}
+/* Tagline = readable plum body on the cream gradient. */
+html.theme-candy .tagline { color: var(--ls-text); }
+/* Sub-tagline: keep the glow but recolor to candy pink (decorative line). */
+html.theme-candy .sub-tagline {
+  color: var(--ls-pink-deep);
+  text-shadow:
+    0 0 4px rgba(255,73,166,0.55),
+    0 0 10px rgba(255,73,166,0.40),
+    0 0 20px rgba(255,124,182,0.35);
+}
+/* Social row: plum text, candy-pink underline that deepens on hover. */
+html.theme-candy .hero-social-link {
+  color: var(--ls-text);
+  border-bottom-color: var(--ls-pink-accent);
+}
+html.theme-candy .hero-social-link:hover {
+  color: var(--ls-pink-deep);
+  border-color: var(--ls-pink-deep);
+}
+html.theme-candy .footer-sep { color: var(--ls-pink-accent); }
+
+/* Heart tint: candy keeps the kawaii ♡; nudge its drop-shadow toward candy
+   glow (the video itself is unchanged). */
+html.theme-candy .heart-mark {
+  filter:
+    drop-shadow(0 0 18px rgba(255,73,166,0.40))
+    drop-shadow(0 10px 26px rgba(233,30,140,0.30));
+}
+
+/* ── HERO CTA : GLASS PILLS (NOT stone) ─────────────────────────────────────
+   Full override of the base basalt skin. Glossy cream→pink glass fill, white
+   ~0.85 edge stroke, pink halo glow, PLUM label on the cream glass surface
+   (plum-on-cream >12:1). No text ever rides the bright --ls-grad-pill. */
+html.theme-candy .hero-cta {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  font-variant: normal;
+  padding: 13px 24px;
+  border-radius: 999px;
+  color: var(--ls-text);
+  background: var(--ls-glass);
+  border: 1.5px solid var(--ls-glass-border);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.85) inset,
+    0 -2px 6px rgba(233,30,140,0.06) inset,
+    var(--ls-halo-btn);
+  text-shadow: 0 1px 0 rgba(255,255,255,0.7);
+  transition: transform 0.16s ease, box-shadow 0.3s ease, filter 0.2s ease, color 0.2s ease;
+}
+/* Re-skin the inherited ::before (was stone grain) → soft white gloss cap. */
+html.theme-candy .hero-cta::before {
+  background-image: none;
+  background: linear-gradient(180deg, rgba(255,255,255,0.55), transparent 60%);
+  border-radius: 999px;
+  inset: 0 0 auto 0;
+  height: 52%;
+  mix-blend-mode: normal;
+  opacity: 1;
+}
+/* Re-skin the inherited ::after (was ember vein) → faint candy underglow line. */
+html.theme-candy .hero-cta::after {
+  background: linear-gradient(90deg, transparent, var(--ls-pink-accent), transparent);
+  box-shadow: 0 0 10px rgba(255,73,166,0.45);
+  opacity: 0;
+}
+html.theme-candy .hero-cta .cta-glyph { color: var(--ls-pink-deep); opacity: 0.9; }
+html.theme-candy .hero-cta:hover,
+html.theme-candy .hero-cta:focus-visible {
+  color: var(--ls-pink-deep);
+  background: var(--ls-glass-strong);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.9) inset,
+    var(--ls-glow-strong);
+  text-shadow: 0 1px 0 rgba(255,255,255,0.8);
+  transform: translateY(-2px);
+}
+html.theme-candy .hero-cta:hover::after,
+html.theme-candy .hero-cta:focus-visible::after { opacity: 0.85; }
+html.theme-candy .hero-cta:hover .cta-glyph,
+html.theme-candy .hero-cta:focus-visible .cta-glyph { color: var(--ls-pink-deep); opacity: 1; text-shadow: none; }
+html.theme-candy .hero-cta:active { transform: translateY(1px); }
+html.theme-candy .hero-cta:focus-visible { outline: 2px solid var(--ls-focus); outline-offset: 3px; }
+/* Per-button accents remapped from gold embers to soft candy halos so the set
+   still reads as one family but stays glass. */
+html.theme-candy .hero-cta--glyph   { --ember:var(--ls-pink-accent); --ember-hot:var(--ls-pink-deep); }
+html.theme-candy .hero-cta--null    { --ember:#c39bff; --ember-hot:#a36bff; }
+html.theme-candy .hero-cta--zara    { --ember:#ff9ecb; --ember-hot:#ff5fa8; }
+html.theme-candy .hero-cta--forging { --ember:#ff8fb3; --ember-hot:#ff4f8f; }
+html.theme-candy .hero-cta--games   { --ember:#7fe3cf; --ember-hot:#34c7a6; }
+
+/* ── SECTION HEADERS ────────────────────────────────────────────────────────
+   Candy gradient-text title; deco sparkle in candy pink. */
+html.theme-candy .section-deco {
+  color: var(--ls-pink-accent);
+  text-shadow: 0 0 12px rgba(255,73,166,0.55);
+}
+html.theme-candy .section-title {
+  background: var(--ls-grad-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: var(--ls-heading);
+  filter: drop-shadow(0 2px 0 rgba(255,255,255,0.6));
+}
+@supports not ((-webkit-background-clip:text) or (background-clip:text)) {
+  html.theme-candy .section-title { -webkit-text-fill-color: currentColor; color: var(--ls-heading); }
+}
+
+/* ── TOOL CARDS : GLASS-STICKER (.win98-card) ───────────────────────────────
+   Gradient glass fill, NO hard border, film-grain ::before + white gloss
+   ::after, halo shadow. Real children (.titlebar/.card-body) are lifted above
+   the pseudo layers via z-index. */
+html.theme-candy .win98-card {
+  background: var(--ls-glass);
+  border: 0;
+  border-radius: var(--ls-radius);
+  box-shadow: var(--ls-glow);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+html.theme-candy .win98-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  z-index: 0;
+  pointer-events: none;
+  background-image: var(--ls-noise);
+  background-size: 140px 140px;
+  mix-blend-mode: soft-light;
+  opacity: calc(0.055 * var(--ls-grain));
+}
+html.theme-candy .win98-card::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 42%;
+  border-radius: inherit;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(255,255,255,0.5), transparent);
+  mix-blend-mode: plus-lighter;
+}
+/* Lift real card content above grain + gloss. */
+html.theme-candy .win98-card > .titlebar,
+html.theme-candy .win98-card > .card-body { position: relative; z-index: 1; }
+html.theme-candy .win98-card:hover {
+  transform: translateY(-2px) rotate(-0.3deg);
+  box-shadow: var(--ls-glow-strong);
+}
+/* Titlebar = frosted glass tab strip (no hard border). */
+html.theme-candy .titlebar {
+  background: linear-gradient(180deg, var(--ls-glass-strong) 0%, var(--ls-glass-solid) 100%);
+  border-bottom: 1px solid var(--ls-glass-border);
+}
+html.theme-candy .win-title {
+  color: var(--ls-text-muted);
+  background: rgba(255,255,255,0.6);
+}
+html.theme-candy .win-btn {
+  background: rgba(255,255,255,0.7);
+  color: var(--ls-text-muted);
+}
+html.theme-candy .win-buttons .win-btn:nth-child(2) { background: rgba(255,111,190,0.45); }
+html.theme-candy .win-btn-close { background: var(--ls-pink-deep) !important; color: #fff !important; }
+/* Card text on glass: badge = candy pink (large/uppercase ok), desc = muted plum. */
+html.theme-candy .card-badge { color: var(--ls-pink-deep); }
+html.theme-candy .card-desc { color: var(--ls-text-muted); }
+
+/* card-link = the ONE legal white-on-pink: deep --ls-grad-btn fill. */
+html.theme-candy .card-link {
+  color: var(--ls-btn-tx);
+  background: var(--ls-grad-btn);
+  border: 1.5px solid rgba(255,255,255,0.5);
+  box-shadow: var(--ls-halo-btn);
+  text-shadow: none;
+}
+html.theme-candy .card-link:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--ls-glow-strong);
+  filter: brightness(1.04);
+}
+html.theme-candy .card-link:active { transform: translateY(1px); box-shadow: var(--ls-halo-pill); }
+/* Soon = quiet frosted chip, plum label on glass. */
+html.theme-candy .card-link--soon {
+  background: var(--ls-glass-light);
+  color: var(--ls-text-muted);
+  border: 1.5px dashed var(--ls-pink-accent);
+  box-shadow: none;
+  text-shadow: none;
+}
+html.theme-candy .card-link--soon:hover { transform: none; box-shadow: none; filter: none; }
+/* Aaron variant keeps a warm titlebar but in candy glass terms. */
+html.theme-candy .win98-card--aaron .titlebar {
+  background: linear-gradient(180deg, #fff2ea 0%, #ffe0d2 100%);
+}
+
+/* ── CATEGORY DISCLOSURE ────────────────────────────────────────────────────
+   Plum/pink accents on the cream gradient. */
+html.theme-candy summary.category-header:hover { background-color: rgba(233,30,140,0.06); }
+html.theme-candy summary.category-header:focus-visible {
+  outline: 2px solid var(--ls-focus);
+  outline-offset: 2px;
+}
+html.theme-candy .category-title { color: var(--ls-pink-deep); }
+html.theme-candy .category-count { color: var(--ls-pink-accent); }
+html.theme-candy .category-rule {
+  background: linear-gradient(90deg, var(--ls-pink-accent) 0%, transparent 100%);
+}
+html.theme-candy .category-chevron { color: var(--ls-pink-accent); }
+
+/* ── SNEAK PEEKS / GALLERY ──────────────────────────────────────────────────
+   Glass framing for shots; candy text. */
+html.theme-candy .gallery-subtitle { color: var(--ls-text); }
+html.theme-candy .gallery-img {
+  border: 1.5px solid var(--ls-glass-border);
+  box-shadow: var(--ls-glow);
+  background: var(--ls-glass-solid);
+}
+html.theme-candy .gallery-caption { color: var(--ls-text-muted); }
+html.theme-candy .gallery-empty {
+  color: var(--ls-text);
+  background: var(--ls-glass-light);
+  border: 1.5px dashed var(--ls-pink-accent);
+}
+
+/* ── NOTICE ─────────────────────────────────────────────────────────────────
+   Glass card with a candy-pink left accent. */
+html.theme-candy .notice-inner {
+  background: var(--ls-glass);
+  border: 0;
+  border-left: 4px solid var(--ls-pink-accent);
+  border-radius: var(--ls-radius-sm);
+  box-shadow: var(--ls-glow);
+}
+html.theme-candy .notice-text { color: var(--ls-text-muted); }
+html.theme-candy .notice-link {
+  color: var(--ls-pink-deep);
+  border-bottom-color: var(--ls-pink-accent);
+}
+html.theme-candy .notice-link:hover { color: var(--ls-text-strong); border-color: var(--ls-pink-deep); }
+
+/* ── MISSION ────────────────────────────────────────────────────────────────*/
+html.theme-candy .mission-text { color: var(--ls-text); }
+html.theme-candy .mission-sparkles {
+  color: var(--ls-pink-accent);
+  text-shadow: 0 0 10px rgba(255,73,166,0.40);
+}
+html.theme-candy .mission-sparkles span:nth-child(3) { color: #ffb84f; }
+html.theme-candy .mission-sparkles span:nth-child(5) { color: #34c7a6; }
+
+/* ── SUPPORT / CONTACT ──────────────────────────────────────────────────────
+   Glass card, candy gradient-text heading, deep-pill Ko-fi button (white text). */
+html.theme-candy .support-inner {
+  background: var(--ls-glass);
+  border: 0;
+  border-radius: var(--ls-radius);
+  box-shadow: var(--ls-glow);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+html.theme-candy .support-inner::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 42%;
+  border-radius: inherit;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(255,255,255,0.5), transparent);
+  mix-blend-mode: plus-lighter;
+}
+html.theme-candy .support-inner > * { position: relative; z-index: 1; }
+html.theme-candy .support-text {
+  background: var(--ls-grad-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: var(--ls-heading);
+}
+@supports not ((-webkit-background-clip:text) or (background-clip:text)) {
+  html.theme-candy .support-text { -webkit-text-fill-color: currentColor; color: var(--ls-heading); }
+}
+html.theme-candy .kofi-btn {
+  color: var(--ls-btn-tx);
+  background: var(--ls-grad-btn);
+  border: 1.5px solid rgba(255,255,255,0.5);
+  box-shadow: var(--ls-halo-btn);
+  text-shadow: none;
+}
+html.theme-candy .kofi-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--ls-glow-strong);
+  filter: brightness(1.04);
+}
+html.theme-candy .kofi-btn:active { transform: translateY(1px); box-shadow: var(--ls-halo-pill); }
+html.theme-candy .support-sub { color: var(--ls-text-muted); }
+
+/* ── FOOTER ─────────────────────────────────────────────────────────────────*/
+html.theme-candy .footer-copy { color: var(--ls-text-muted); }
+html.theme-candy .footer-heart { color: var(--ls-pink-accent); }
+
+/* ── REDUCED MOTION (candy) ─────────────────────────────────────────────────
+   Suppress the hover lifts introduced above. (Base reduced-motion already kills
+   keyframe animations on shared elements; this re-covers candy's hover skins.) */
+@media (prefers-reduced-motion: reduce) {
+  html.theme-candy .win98-card:hover,
+  html.theme-candy .hero-cta:hover,
+  html.theme-candy .card-link:hover,
+  html.theme-candy .kofi-btn:hover { transform: none; }
+}
+
+/* ── MOBILE (candy) ─────────────────────────────────────────────────────────
+   Match base mobile CTA sizing; pills stay legible. */
+@media (max-width: 760px) {
+  html.theme-candy .hero-cta { padding: 11px 20px; font-size: 13px; }
+}
+
+/* --- BASALT theme + ankh hero --- */
+/* ════════════════════════════════════════════════════════════════════════════
+   BASALT THEME  —  html.theme-basalt
+   Dark ash-grey carved-stone ground, ember-gold accents, light stone text,
+   Cinzel/Cormorant serious serif wordmark + headings (SOLID, not gradient).
+   Add this block to styles.css AFTER the existing rules so it overrides cleanly.
+   Every rule is scoped under html.theme-basalt; kawaii (default) is untouched.
+
+   PREREQUISITE LEAK FIX (do this too — see notes): the kawaii-only rules at
+   styles.css:142-143 and 853-857 use html:not(.theme-retro) and WILL leak into
+   basalt. Re-scope them to add :not(.theme-candy):not(.theme-basalt), e.g.
+     html:not(.theme-retro):not(.theme-candy):not(.theme-basalt) #sparkle-field {…}
+   (same for .starburst, .heart-glyph, .orb-ring-css, .logo-text). Without this,
+   basalt inherits the kawaii hide of .heart-glyph/.logo-text and the basalt
+   wordmark/ankh swap below partially fails.
+   ════════════════════════════════════════════════════════════════════════════ */
+
+html.theme-basalt {
+  /* Basalt token palette */
+  --bs-stone-1:   #24262b;   /* lit stone */
+  --bs-stone-2:   #16171a;   /* mid stone */
+  --bs-stone-3:   #0f1012;   /* deep stone / page floor */
+  --bs-stone-edge:#0a0b0d;   /* carved edge */
+  --bs-stone-card:#1b1d21;   /* card stone */
+  --bs-ember:     #d9a23b;   /* ember-gold */
+  --bs-ember-hot: #f4c46a;   /* hot ember */
+  --bs-text:      #c9cdd3;   /* light stone text */
+  --bs-text-soft: #9aa0a8;   /* muted stone text (4.6:1 on stone) */
+  --bs-text-dim:  #7e848c;
+  --bs-line:      rgba(217,162,59,0.22);
+  --bs-glow:      0 0 18px rgba(217,162,59,0.28), 0 0 40px rgba(217,162,59,0.14);
+  --bs-noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ── PAGE GROUND ───────────────────────────────────────────────────────────── */
+html.theme-basalt body {
+  color: var(--bs-text);
+  background-color: var(--bs-stone-3);
+  background-image:
+    radial-gradient(120% 90% at 50% 8%, #24262b 0%, #16171a 46%, #0f1012 100%);
+  background-attachment: fixed;
+}
+/* Carved-stone grain across the whole page */
+html.theme-basalt .grain-overlay {
+  background-image: var(--bs-noise);
+  background-size: 160px 160px;
+  mix-blend-mode: soft-light;
+  opacity: 0.5;
+}
+/* Kill the pink ambient glow blobs; replace with cold ember pools */
+html.theme-basalt .glow-blob { display: none; }
+html.theme-basalt .glow-blob.glow-blob-keep,
+html.theme-basalt .glow-blob-1 {
+  display: block;
+  background: radial-gradient(circle, rgba(217,162,59,0.10) 0%, transparent 70%);
+}
+
+/* Hide the pink page sparkle field + cursor trail glyphs (carved stone is calm) */
+html.theme-basalt #sparkle-field,
+html.theme-basalt #cursor-sparks,
+html.theme-basalt .starburst,
+html.theme-basalt .starburst-slow { display: none; }
+
+/* ── HERO HEART → ANKH SWAP (the crucial deliverable) ──────────────────────────
+   Suppress EVERY heart variant from both kawaii markup (.heart-mark video +
+   svg.orb-ring) and retro/fallback markup (.heart-glyph + .orb-ring-css), and
+   show the studio-rendered ankh relic instead. The kawaii JS Dyson swarm also
+   injects .dyson-swarm into .heart-orb — hide it too. */
+html.theme-basalt .heart-mark,
+html.theme-basalt svg.orb-ring,
+html.theme-basalt .orb-ring-css,
+html.theme-basalt .heart-glyph,
+html.theme-basalt .dyson-swarm { display: none !important; }
+
+/* The orb container becomes the relic stage */
+html.theme-basalt .heart-orb {
+  width: 260px;
+  height: 260px;
+}
+
+/* The ankh relic. Add <span class="ankh-glyph" aria-hidden="true"></span> inside
+   .heart-orb (see heroSwap). It is display:none everywhere by default; basalt
+   turns it on and paints assets/icon-ankh.png with an ember-lit glow. */
+.ankh-glyph { display: none; }          /* global default-hide (put in styles.css base) */
+
+html.theme-basalt .ankh-glyph {
+  display: block;
+  position: relative;
+  z-index: 2;
+  width: 180px;
+  height: 240px;
+  /* studio-rendered ankh PNG, ember-lit */
+  background: url("assets/icon-ankh.png") center / contain no-repeat;
+  /* ember halo behind the relic */
+  filter:
+    drop-shadow(0 0 14px rgba(217,162,59,0.55))
+    drop-shadow(0 10px 26px rgba(0,0,0,0.6));
+  animation: ankhEmber 5s ease-in-out infinite;
+}
+/* Ember pool glow ring behind the ankh, carved into the stone */
+html.theme-basalt .heart-orb::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 230px;
+  height: 230px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(217,162,59,0.22) 0%, rgba(217,162,59,0.06) 45%, transparent 70%);
+  z-index: 0;
+  pointer-events: none;
+  animation: ankhPool 5s ease-in-out infinite;
+}
+@keyframes ankhEmber {
+  0%, 100% { filter: drop-shadow(0 0 12px rgba(217,162,59,0.45)) drop-shadow(0 10px 26px rgba(0,0,0,0.6)); transform: scale(1); }
+  50%      { filter: drop-shadow(0 0 22px rgba(244,196,106,0.70)) drop-shadow(0 10px 26px rgba(0,0,0,0.6)); transform: scale(1.015); }
+}
+@keyframes ankhPool {
+  0%, 100% { opacity: 0.7; }
+  50%      { opacity: 1; }
+}
+
+/* ── WORDMARK ──────────────────────────────────────────────────────────────────
+   Hide BOTH wordmark videos (.hero-mark kawaii video) and show the retro <h1>
+   .logo-text restyled as a solid carved-serif wordmark (NOT gradient). */
+html.theme-basalt .hero-mark { display: none; }
+html.theme-basalt .logo-text {
+  display: block;
+  font-family: 'Cinzel', 'Cormorant Garamond', Georgia, serif;
+  font-weight: 600;
+  font-size: clamp(46px, 7.5vw, 92px);
+  letter-spacing: 0.04em;
+  line-height: 1.02;
+  /* solid stone text — override the kawaii gradient-clip entirely */
+  background: none;
+  -webkit-background-clip: border-box;
+          background-clip: border-box;
+  -webkit-text-fill-color: var(--bs-text);
+  color: var(--bs-text);
+  text-shadow:
+    0 1px 0 rgba(0,0,0,0.8),
+    0 0 18px rgba(217,162,59,0.18);
+  filter: none;
+}
+
+/* ── TAGLINES ──────────────────────────────────────────────────────────────── */
+html.theme-basalt .tagline {
+  color: var(--bs-text);
+  font-family: 'OpenDyslexic', var(--font-body);
+}
+html.theme-basalt .sub-tagline {
+  color: var(--bs-ember);
+  text-shadow: 0 0 6px rgba(217,162,59,0.4);
+}
+
+/* ── SECTION HEADINGS ──────────────────────────────────────────────────────── */
+html.theme-basalt .section-title {
+  font-family: 'Cinzel', 'Cormorant Garamond', Georgia, serif;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--bs-text);
+  background: none;
+  -webkit-text-fill-color: var(--bs-text);
+  text-shadow: 0 0 16px rgba(217,162,59,0.15);
+}
+html.theme-basalt .section-deco { color: var(--bs-ember); }
+
+/* ── SOCIAL ROW ────────────────────────────────────────────────────────────── */
+html.theme-basalt .hero-social-link {
+  color: var(--bs-text);
+  border-bottom-color: var(--bs-ember);
+}
+html.theme-basalt .hero-social-link:hover,
+html.theme-basalt .hero-social-link:focus-visible {
+  color: var(--bs-ember-hot);
+  border-bottom-color: var(--bs-ember-hot);
+}
+html.theme-basalt .footer-sep { color: var(--bs-ember); }
+
+/* ── HERO CTA BUTTONS ──────────────────────────────────────────────────────────
+   The Basalt Monolith look (currently the base .hero-cta) is the basalt skin —
+   so under basalt the buttons just KEEP the base styling. We only re-assert the
+   ember-gold default accent here in case the kawaii re-theme remaps base embers
+   to pink. Per-button --ember accents (styles.css:497-501) still apply. */
+html.theme-basalt .hero-cta {
+  --ember: #d9a23b;
+  --ember-hot: #f4c46a;
+  color: #b4b8be;
+  background: linear-gradient(180deg, #282b30 0%, #1f2125 52%, #16171a 100%);
+  border: 1px solid #0a0b0d;
+}
+
+/* ── CARDS  (dark glass-stone) ─────────────────────────────────────────────── */
+html.theme-basalt .win98-card {
+  background: linear-gradient(180deg, #202329 0%, #1b1d21 60%, #131418 100%);
+  border: 1px solid var(--bs-stone-edge);
+  box-shadow:
+    inset 0 1px 0 rgba(160,166,176,0.10),
+    0 6px 18px rgba(0,0,0,0.5);
+}
+html.theme-basalt .titlebar {
+  background: linear-gradient(180deg, #2a2d33 0%, #1f2226 100%);
+  border-bottom: 1px solid var(--bs-stone-edge);
+}
+html.theme-basalt .win-title { color: var(--bs-text); }
+html.theme-basalt .card-body { color: var(--bs-text-soft); }
+html.theme-basalt .card-desc { color: var(--bs-text-soft); }
+html.theme-basalt .card-badge {
+  background: rgba(217,162,59,0.14);
+  color: var(--bs-ember-hot);
+  border: 1px solid var(--bs-line);
+}
+html.theme-basalt .card-link {
+  color: var(--bs-ember);
+  background: rgba(217,162,59,0.08);
+  border: 1px solid var(--bs-line);
+}
+html.theme-basalt .card-link:hover,
+html.theme-basalt .card-link:focus-visible {
+  color: var(--bs-ember-hot);
+  background: rgba(217,162,59,0.16);
+  border-color: var(--bs-ember);
+}
+html.theme-basalt .card-link--soon {
+  color: var(--bs-text-dim);
+  background: rgba(255,255,255,0.04);
+  border: 1px dashed var(--bs-stone-edge);
+}
+html.theme-basalt .win-buttons .win-btn { background: #3a3d44; }
+html.theme-basalt .win-btn-close { background: var(--bs-ember) !important; color: #16171a !important; }
+
+/* ── CATEGORY DISCLOSURE ───────────────────────────────────────────────────── */
+html.theme-basalt .category-header { color: var(--bs-text); }
+html.theme-basalt .category-title { color: var(--bs-text); }
+html.theme-basalt .category-count { color: var(--bs-ember); }
+html.theme-basalt .category-rule { border-color: var(--bs-line); background: var(--bs-line); }
+html.theme-basalt .category-chevron { color: var(--bs-ember); }
+
+/* ── SNEAK PEEKS / GALLERY ─────────────────────────────────────────────────── */
+html.theme-basalt .gallery-project {
+  background: linear-gradient(180deg, #1b1d21 0%, #131418 100%);
+  border: 1px solid var(--bs-stone-edge);
+}
+html.theme-basalt .gallery-intro,
+html.theme-basalt .gallery-caption { color: var(--bs-text-soft); }
+html.theme-basalt .gallery-shot { border: 1px solid var(--bs-stone-edge); }
+
+/* ── NOTICE / MISSION / SUPPORT ────────────────────────────────────────────── */
+html.theme-basalt .notice-inner,
+html.theme-basalt .mission-inner,
+html.theme-basalt .support-inner {
+  background: linear-gradient(180deg, #1b1d21 0%, #131418 100%);
+  border: 1px solid var(--bs-stone-edge);
+}
+html.theme-basalt .notice-text,
+html.theme-basalt .mission-text,
+html.theme-basalt .support-text,
+html.theme-basalt .support-sub { color: var(--bs-text-soft); }
+html.theme-basalt .notice-link,
+html.theme-basalt .mission-text a { color: var(--bs-ember); }
+html.theme-basalt .notice-link:hover,
+html.theme-basalt .notice-link:focus-visible { color: var(--bs-ember-hot); }
+html.theme-basalt .kofi-btn {
+  background: linear-gradient(180deg, #2c2f35 0%, #1f2125 100%);
+  color: var(--bs-ember-hot);
+  border: 1px solid var(--bs-ember);
+  box-shadow: var(--bs-glow);
+}
+html.theme-basalt .kofi-btn:hover,
+html.theme-basalt .kofi-btn:focus-visible {
+  background: linear-gradient(180deg, #34373d 0%, #24262b 100%);
+  color: #fff;
+}
+
+/* ── FOOTER ────────────────────────────────────────────────────────────────── */
+html.theme-basalt .site-footer { color: var(--bs-text-dim); }
+html.theme-basalt .footer-copy { color: var(--bs-text-dim); }
+html.theme-basalt .footer-heart { color: var(--bs-ember); }
+
+/* ── THEME SWITCHER (re-skinned to stone) ──────────────────────────────────── */
+html.theme-basalt .theme-switcher {
+  background: rgba(22,23,26,0.85);
+  border: 1px solid var(--bs-stone-edge);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+}
+html.theme-basalt .theme-pill { color: var(--bs-text-soft); }
+html.theme-basalt .theme-pill:hover { color: var(--bs-ember-hot); }
+html.theme-basalt .theme-pill[aria-pressed="true"] {
+  background: linear-gradient(180deg, var(--bs-ember) 0%, #b3812a 100%);
+  color: #16171a;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.25) inset, 0 2px 6px rgba(0,0,0,0.5);
+}
+html.theme-basalt .theme-pill:focus-visible {
+  outline: 2px solid var(--bs-ember-hot);
+  outline-offset: 2px;
+}
+
+/* ── FOCUS RINGS (don't inherit kawaii pink) ───────────────────────────────── */
+html.theme-basalt a:focus-visible,
+html.theme-basalt button:focus-visible,
+html.theme-basalt summary:focus-visible {
+  outline: 2px solid var(--bs-ember-hot);
+  outline-offset: 3px;
+}
+
+/* ── REDUCED MOTION ────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  html.theme-basalt .ankh-glyph { animation: none; }
+  html.theme-basalt .heart-orb::after { animation: none; opacity: 0.85; }
+}
+
+/* ===== FORGE a11y fixes (verify phase) ===== */
+.hero-cta:focus-visible{ outline-color:#7a1540; }                 /* kawaii focus ring >=3:1 on pink granite */
+html.theme-candy .section-deco,
+html.theme-candy .footer-sep,
+html.theme-candy .footer-heart,
+html.theme-candy .category-count,
+html.theme-candy .mission-sparkles{ color:#b3185c; }              /* darker pink >=3:1 on candy gradient */
+html.theme-basalt .card-link--soon{ color:#8a9099; }              /* >=4.5:1 on card stone */
+
+/* basalt wordmark = ember-gold Cinzel (owner choice) */
+html.theme-basalt .logo-text{ color:#d9a23b; -webkit-text-fill-color:#d9a23b; text-shadow:0 1px 0 rgba(0,0,0,.8), 0 0 22px rgba(217,162,59,.35); }
+
+/* basalt ankh relic: ember spice ankh, screen-blend drops the dark ground so it glows on stone */
+html.theme-basalt .ankh-glyph{ width:248px; height:248px; background-image:url("assets/ankh-basalt.gif"); mix-blend-mode:screen; filter:drop-shadow(0 0 16px rgba(244,196,106,.45)); }
+
+/* basalt per-button embers = warm ember/copper (override the kawaii pink embers that leak into base) */
+html.theme-basalt .hero-cta--glyph   { --ember:#d9a23b; --ember-hot:#f4c46a; }
+html.theme-basalt .hero-cta--null    { --ember:#c2933f; --ember-hot:#e6c277; }
+html.theme-basalt .hero-cta--zara    { --ember:#c98a3a; --ember-hot:#f0b15e; }
+html.theme-basalt .hero-cta--forging { --ember:#d96a2f; --ember-hot:#ff9e5a; }
+html.theme-basalt .hero-cta--games   { --ember:#9a9a5e; --ember-hot:#ccc98f; }
+
+/* basalt button hover/focus = gold ember (was inheriting kawaii rose glow) */
+html.theme-basalt .hero-cta:hover,
+html.theme-basalt .hero-cta:focus-visible{
+  color:var(--ember-hot);
+  background:radial-gradient(120% 160% at 50% 120%, rgba(122,78,22,.42) 0%, rgba(122,78,22,0) 60%), linear-gradient(180deg,#2b2e33 0%,#1f2125 52%,#16171a 100%);
+  box-shadow:inset 0 1px 0 rgba(160,166,176,.2), inset 0 -1px 2px rgba(0,0,0,.7), inset 0 0 14px rgba(217,162,59,.16), 0 1px 0 rgba(0,0,0,.8), 0 0 0 1px var(--ember), 0 6px 18px rgba(0,0,0,.5);
+  text-shadow:0 0 8px var(--ember-hot), 0 1px 0 rgba(0,0,0,.85);
+}
+html.theme-basalt .hero-cta:focus-visible{ outline:2px solid var(--ember-hot); outline-offset:3px; }
+
+/* basalt button REST shadow = dark stone (was inheriting kawaii rose drop-shadow) */
+html.theme-basalt .hero-cta{
+  box-shadow:
+    inset 0 1px 0 rgba(140,146,156,0.16),
+    inset 0 -1px 2px rgba(0,0,0,0.7),
+    inset 0 0 0 1px rgba(0,0,0,0.4),
+    0 1px 0 rgba(0,0,0,0.8),
+    0 6px 16px rgba(0,0,0,0.45);
+  text-shadow:0 1px 0 rgba(0,0,0,0.85);
+}
+html.theme-basalt .hero-cta::before{ mix-blend-mode:overlay; opacity:0.55; }
+
+/* basalt ankh = the GLYPH GRID STUDIO ankh (cream-paper render), inverted + ember-tinted so it glows on stone */
+html.theme-basalt .ankh-glyph{
+  width:240px; height:240px;
+  background-image:url("assets/hero-ankh.png");
+  background-size:contain; background-position:center; background-repeat:no-repeat;
+  mix-blend-mode:normal;
+  filter: invert(1) sepia(0.75) saturate(2.4) hue-rotate(350deg) brightness(0.95)
+          drop-shadow(0 0 18px rgba(244,196,106,.45));
+}
+
+/* force the invert+ember tint over the ankhEmber keyframe filter (animations are overridden by !important) */
+html.theme-basalt .ankh-glyph{
+  animation: none !important;
+  background-image:url("assets/hero-ankh.png") !important;
+  filter: invert(1) sepia(0.7) saturate(2.6) hue-rotate(352deg) brightness(1.0)
+          drop-shadow(0 0 20px rgba(244,196,106,.5)) !important;
+}
+
+/* FINAL basalt ankh: the glyph-grid studio cream-paper ankh, aged + framed as a lit relic (no invert) */
+html.theme-basalt .ankh-glyph{
+  animation:none !important;
+  width:200px !important; height:200px !important;
+  background-image:url("assets/hero-ankh.png") !important;
+  background-size:cover !important; background-position:center !important;
+  mix-blend-mode:normal !important;
+  filter: sepia(0.30) brightness(0.93) contrast(1.05) !important;
+  border-radius:3px;
+  box-shadow:
+    0 0 0 1px rgba(217,162,59,.5),
+    0 0 26px rgba(217,162,59,.30),
+    0 12px 34px rgba(0,0,0,.62) !important;
+}
+html.theme-basalt .heart-orb::after{ width:300px !important; height:300px !important; }
