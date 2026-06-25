@@ -1994,3 +1994,14 @@ html.theme-basalt .ankh-glyph{
     0 12px 34px rgba(0,0,0,.62) !important;
 }
 html.theme-basalt .heart-orb::after{ width:300px !important; height:300px !important; }
+
+/* candy (default): blend the heart + wordmark videos into the gradient — drop the pink boxes */
+html.theme-candy .heart-mark,
+html.theme-candy .hero-mark{ mix-blend-mode: multiply; }
+
+/* candy: feather the LoveSpark wordmark video's rectangle edges so the pale panel blends out */
+html.theme-candy .hero-mark{
+  mix-blend-mode: multiply;
+  -webkit-mask-image: radial-gradient(ellipse 70% 58% at 50% 50%, #000 54%, rgba(0,0,0,0.45) 76%, transparent 92%);
+          mask-image: radial-gradient(ellipse 70% 58% at 50% 50%, #000 54%, rgba(0,0,0,0.45) 76%, transparent 92%);
+}
