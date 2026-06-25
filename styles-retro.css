@@ -361,6 +361,23 @@ html.theme-retro .hero-cta--forging {
     0 0 12px rgba(255,106,0,0.4),
     0 0 28px rgba(255,106,0,0.15);
 }
+html.theme-retro .hero-cta--glyph {
+  background: #0A0A0A;
+  color: #D9B964;
+  border-color: #D9B964;
+  text-shadow: 0 0 8px rgba(217,185,100,0.6);
+  box-shadow:
+    4px 4px 0 #14100a,
+    0 0 12px rgba(217,185,100,0.4),
+    0 0 28px rgba(217,185,100,0.15);
+}
+html.theme-retro .hero-cta--glyph:hover {
+  transform: translate(-2px, -2px);
+  box-shadow:
+    6px 6px 0 #14100a,
+    0 0 18px rgba(217,185,100,0.6),
+    0 0 40px rgba(217,185,100,0.25);
+}
 html.theme-retro .hero-cta--forging:hover {
   transform: translate(-2px, -2px);
   text-shadow: 0 0 14px rgba(255,106,0,0.9);
