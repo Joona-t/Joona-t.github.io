@@ -1660,6 +1660,14 @@ html.theme-basalt .glow-blob { display: none; }
 html.theme-basalt .glow-blob.glow-blob-keep,
 html.theme-basalt .glow-blob-1 {
   display: block;
+  /* FIX: .glow-blob-1 has no .glow-blob-keep class, so it never inherits
+     position:fixed. In basalt it's set to display:block, so it rendered as a
+     520x520 STATIC block in normal flow — pushing the whole hero ~520px down
+     (the "empty space on theme switch" bug). Pin it like a keep-blob. */
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(100px);
+  z-index: 0;
   background: radial-gradient(circle, rgba(217,162,59,0.10) 0%, transparent 70%);
 }
 
