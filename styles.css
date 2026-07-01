@@ -982,11 +982,34 @@ details.category[open] > .tools-grid {
 /* First category sits closer to the existing "The Suite" heading. */
 details.category:first-of-type > summary.category-header { margin-top: 4px; }
 
+/* ── Category GROUP : one collapsible bar (e.g. "🧩 Chrome Extensions") that
+   nests the extension sub-categories, so apps/software lead and extensions tuck
+   away one click deep. The parent reuses .category-* classes (so it themes for
+   free); .group-body only handles the nested layout. */
+details.category-group[open] > .group-body { margin-top: 6px; margin-bottom: 4px; }
+.group-body {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.group-body > details.category {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  border-left: 2px solid rgba(255, 79, 179, 0.16);
+}
+.group-body > details.category + details.category { margin-top: 2px; }
+/* Indent + quiet the sub-category headers so the group title stays dominant. */
+.group-body > details.category > summary.category-header { margin: 6px 0 0; padding-left: 22px; }
+.group-body .category-title { font-size: clamp(14px, 1.9vw, 18px); }
+
 @media (max-width: 760px) {
   details.category { padding: 0 16px; }
   summary.category-header { padding: 12px 4px; gap: 10px; }
   .category-title { font-size: clamp(15px, 4.6vw, 18px); letter-spacing: 0.06em; }
   .category-count { font-size: 13px; }
+  .group-body { padding: 0 16px; }
+  .group-body > details.category > summary.category-header { padding-left: 16px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

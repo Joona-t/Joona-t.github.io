@@ -51,6 +51,25 @@ embed `<em>` / `<strong>`.
 | `memorial` | no | → `<p class="aaron-memorial">` (the Aaron card) |
 | `class` | no | extra class on the card div, e.g. `"win98-card--aaron"` |
 
+## Grouping categories (dropdown-in-a-dropdown)
+
+Give **consecutive** categories the same `"group"` value (a verbatim title, e.g.
+`"🧩 Chrome Extensions"`) and they get wrapped in a collapsible parent
+`<details class="category category-group">`. Opening the parent reveals the
+sub-categories; each still toggles to its own cards. This is how the browser
+extensions are tucked one click deep so apps/software lead "The Suite".
+
+```json
+{ "id": "cat-focus", "title": "🧠 Focus &amp; Neurodivergent", "cards": [ ... ],
+  "group": "🧩 Chrome Extensions" }
+```
+
+- The parent's count badge is the **total** of its child cards; its anchor id is
+  derived from the group title (`"🧩 Chrome Extensions"` → `grp-chrome-extensions`).
+- Categories without `group` render top-level as before. Order matters — put the
+  grouped categories next to each other, and put the app/software categories
+  first if you want them showcased above the fold.
+
 ## Keep it honest
 
 - `python3 scripts/build-gallery.py --check` — exits non-zero if `index.html` is

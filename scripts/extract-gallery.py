@@ -52,13 +52,36 @@ def parse_card(cls_full, inner):
     return card
 
 
+def group_spans(region):
+    """Character ranges (title, start, end) of each <details class="category
+    category-group">, matched with depth counting so nested leaf categories are
+    handled correctly."""
+    spans = []
+    stack = []
+    for m in re.finditer(r'<details class="([^"]+)" id="[^"]+">|</details>', region):
+        if m.group(0) == "</details>":
+            if stack:
+                is_group, title, start = stack.pop()
+                if is_group:
+                    spans.append((title, start, m.end()))
+        else:
+            classes = m.group(1)
+            is_group = "category-group" in classes
+            title = s(r'<h3 class="category-title">(.*?)</h3>', region[m.end():]) if is_group else None
+            stack.append((is_group, title, m.start()))
+    return spans
+
+
 def main():
     html = HTML.read_text(encoding="utf-8")
     region = s(r'<section class="tools-section" id="tools">(.*?)</section>', html)
     if region is None:
         raise SystemExit("could not find tools-section in index.html")
 
+    spans = group_spans(region)
     categories = []
+    # Exact class="category" skips the group parents; each leaf has no nested
+    # <details>, so the non-greedy body stops at the leaf's own close.
     for cm in re.finditer(
         r'<details class="category" id="([^"]+)">(.*?)</details>', region, re.DOTALL
     ):
@@ -71,7 +94,11 @@ def main():
                 body, re.DOTALL,
             )
         ]
-        categories.append({"id": cid, "title": title, "cards": cards})
+        cat = {"id": cid, "title": title, "cards": cards}
+        grp = next((t for t, a, b in spans if a < cm.start() < b), None)
+        if grp:
+            cat["group"] = grp
+        categories.append(cat)
 
     DATA.parent.mkdir(exist_ok=True)
     DATA.write_text(

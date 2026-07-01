@@ -1,6 +1,82 @@
 {
   "categories": [
     {
+      "id": "cat-mac-ios",
+      "title": "🍎 Mac &amp; iOS",
+      "cards": [
+        {
+          "title": "Glyph Grid Studio ▦",
+          "badge": "Mac App · Free",
+          "desc": "Generative glyph-grid art studio — ASCII portraits, flow fields, character-density shading. Live parameter exploration with seeded randomness for reproducible pieces. <strong>Now live</strong> — free, open source, universal macOS.",
+          "url": "https://lovespark.love/glyph-grid-studio/",
+          "link_label": "Download ✦"
+        },
+        {
+          "title": "Love Kana 🌸",
+          "badge": "Mac &amp; iOS App · Free",
+          "desc": "Learn every Japanese kana — free, forever. Hiragana and katakana taught the way the loved-but-pricey apps do: vivid mnemonics, real SM-2 spaced repetition, recognition → recall → stroke-order writing, and streaks. Every kana and every feature free — no paywall, no ads, no accounts. Built for neurodivergent learners: OpenDyslexic throughout, full VoiceOver and Dynamic Type."
+        },
+        {
+          "title": "Sparky ✨",
+          "badge": "Mac &amp; iOS App",
+          "desc": "A local knowledge brain for you and your AI agents. Sparky captures what matters into a private, typed knowledge graph with hybrid retrieval, then serves it back as memory — to your agents or to you. Focus timer, habits, study, notes, and a medication logger built in. No accounts, bring your own AI."
+        },
+        {
+          "title": "Tongue 🗣️",
+          "badge": "Mac &amp; iOS App",
+          "desc": "Dedicated language-learning app. Japanese and Mandarin now, Korean coming next. HVPT-aligned voice mode and a cross-language Sino bridge built in — and I'm learning the languages on it as I build it."
+        },
+        {
+          "title": "LoveSparkCards 🃏",
+          "badge": "Mac &amp; iOS App",
+          "desc": "Flashcards with SM2 spaced repetition. Built for language learners, students, and anyone who wants what they study to actually stick. TTS for language cards."
+        },
+        {
+          "title": "Sparky Reads 📖",
+          "badge": "Mac &amp; iOS App",
+          "desc": "A modern, intuitive, aesthetic alternative to Goodreads. Track what you read, rate, review, shelve — with optional AI for recommendations, summaries, and reading-mood matching when you want them."
+        },
+        {
+          "title": "Sparky Reads · Web 🌐",
+          "badge": "Web App",
+          "desc": "Sparky Reads in the browser — same modern Goodreads alternative, same optional AI recommendations &amp; summaries, no install required."
+        }
+      ]
+    },
+    {
+      "id": "cat-stem",
+      "title": "⚛️ STEM",
+      "cards": [
+        {
+          "title": "Axion Physics 🔭",
+          "badge": "Learning Platform",
+          "desc": "Frank Herbert's Dune is my favourite sci-fi series — so I built a physics course inside it. First principles mechanics, waves, and thermodynamics, with exercises that make the concepts stick.",
+          "soon_label": "TBA ✦"
+        },
+        {
+          "title": "Axion Algebra ✶",
+          "badge": "Learning Platform",
+          "desc": "A Herbert fan's take on math education: algebra through the maths behind ML, taught inside a Dune story. Real curriculum, real exercises — the kind that make things click, not just scroll past.",
+          "soon_label": "TBA ✦"
+        }
+      ]
+    },
+    {
+      "id": "cat-sparky-lab",
+      "title": "🧪 Sparky Lab",
+      "cards": [
+        {
+          "title": "Cozy Sleep 🌙",
+          "badge": "Sparky Experiment",
+          "desc": [
+            "Not another sleep tracker — Apple Health and Oura already do that. Cozy Sleep is a reasoning layer on top: it pulls in your sleep data plus meds, caffeine, training, and stress, and stitches one honest plain-English read on <em>why</em> you slept the way you did.",
+            "Testing this out as a personal recovery-intelligence experiment. Likely lands inside Sparky / the LoveSpark ecosystem rather than shipping as a standalone app."
+          ],
+          "soon_label": "In the lab ✦"
+        }
+      ]
+    },
+    {
       "id": "cat-focus",
       "title": "🧠 Focus &amp; Neurodivergent",
       "cards": [
@@ -33,8 +109,14 @@
           "badge": "Chrome Extension",
           "desc": "A beautiful, private notes app in every new tab. Categories, search, and themes — no account, every note stored locally.",
           "url": "https://chromewebstore.google.com/detail/cbekmfnggenafmgcmcnmaohdmaacppbm"
+        },
+        {
+          "title": "LoveSpark Dashboard 📊",
+          "badge": "Chrome Extension",
+          "desc": "A place to view all LoveSpark extensions by category."
         }
-      ]
+      ],
+      "group": "🧩 Chrome Extensions"
     },
     {
       "id": "cat-reading",
@@ -52,7 +134,8 @@
           "desc": "Free accessibility toolkit — dyslexia fonts, reading ruler, bionic reading, sensory controls, TTS &amp; more. No data collected.",
           "url": "https://chromewebstore.google.com/detail/ajnedhbnnndnnalbpiphlfgdkcihdjai"
         }
-      ]
+      ],
+      "group": "🧩 Chrome Extensions"
     },
     {
       "id": "cat-privacy",
@@ -87,7 +170,8 @@
           "badge": "Chrome Extension",
           "desc": "Block popup windows, tab hijacks, and YouTube ads across 4 layers — CSS, JS, network rules, and video player."
         }
-      ]
+      ],
+      "group": "🧩 Chrome Extensions"
     },
     {
       "id": "cat-themes",
@@ -111,7 +195,8 @@
           "desc": "A soft, creamy pink syntax theme for VS Code. Code like you're writing love letters. Warm, readable, easy on the eyes.",
           "url": "https://marketplace.visualstudio.com/items?itemName=Joona-t.valentine-light"
         }
-      ]
+      ],
+      "group": "🧩 Chrome Extensions"
     },
     {
       "id": "cat-knowledge",
@@ -125,94 +210,8 @@
           "memorial": "In memory of Aaron Swartz (1986–2013)",
           "url": "https://chromewebstore.google.com/detail/bphibjmkmdpndajmcggjbklcpkjgpaka"
         }
-      ]
-    },
-    {
-      "id": "cat-stem",
-      "title": "⚛️ STEM",
-      "cards": [
-        {
-          "title": "Axion Physics 🔭",
-          "badge": "Learning Platform",
-          "desc": "Frank Herbert's Dune is my favourite sci-fi series — so I built a physics course inside it. First principles mechanics, waves, and thermodynamics, with exercises that make the concepts stick.",
-          "soon_label": "TBA ✦"
-        },
-        {
-          "title": "Axion Algebra ✶",
-          "badge": "Learning Platform",
-          "desc": "A Herbert fan's take on math education: algebra through the maths behind ML, taught inside a Dune story. Real curriculum, real exercises — the kind that make things click, not just scroll past.",
-          "soon_label": "TBA ✦"
-        }
-      ]
-    },
-    {
-      "id": "cat-mac-ios",
-      "title": "🍎 Mac &amp; iOS",
-      "cards": [
-        {
-          "title": "Glyph Grid Studio ▦",
-          "badge": "Mac App · Free",
-          "desc": "Generative glyph-grid art studio — ASCII portraits, flow fields, character-density shading. Live parameter exploration with seeded randomness for reproducible pieces. <strong>Now live</strong> — free, open source, universal macOS.",
-          "url": "https://lovespark.love/glyph-grid-studio/",
-          "link_label": "Download ✦"
-        }
-      ]
-    },
-    {
-      "id": "cat-sparky-lab",
-      "title": "🧪 Sparky Lab",
-      "cards": [
-        {
-          "title": "Cozy Sleep 🌙",
-          "badge": "Sparky Experiment",
-          "desc": [
-            "Not another sleep tracker — Apple Health and Oura already do that. Cozy Sleep is a reasoning layer on top: it pulls in your sleep data plus meds, caffeine, training, and stress, and stitches one honest plain-English read on <em>why</em> you slept the way you did.",
-            "Testing this out as a personal recovery-intelligence experiment. Likely lands inside Sparky / the LoveSpark ecosystem rather than shipping as a standalone app."
-          ],
-          "soon_label": "In the lab ✦"
-        }
-      ]
-    },
-    {
-      "id": "cat-coming-soon",
-      "title": "✨ Coming Soon",
-      "cards": [
-        {
-          "title": "Sparky ✨",
-          "badge": "Mac &amp; iOS App",
-          "desc": "A local knowledge brain for you and your AI agents. Sparky captures what matters into a private, typed knowledge graph with hybrid retrieval, then serves it back as memory — to your agents or to you. Focus timer, habits, study, notes, and a medication logger built in. No accounts, bring your own AI."
-        },
-        {
-          "title": "LoveSparkCards 🃏",
-          "badge": "Mac &amp; iOS App",
-          "desc": "Flashcards with SM2 spaced repetition. Built for language learners, students, and anyone who wants what they study to actually stick. TTS for language cards."
-        },
-        {
-          "title": "Tongue 🗣️",
-          "badge": "Mac &amp; iOS App",
-          "desc": "Dedicated language-learning app. Japanese and Mandarin now, Korean coming next. HVPT-aligned voice mode and a cross-language Sino bridge built in — and I'm learning the languages on it as I build it."
-        },
-        {
-          "title": "Sparky Reads 📖",
-          "badge": "Mac &amp; iOS App",
-          "desc": "A modern, intuitive, aesthetic alternative to Goodreads. Track what you read, rate, review, shelve — with optional AI for recommendations, summaries, and reading-mood matching when you want them."
-        },
-        {
-          "title": "LoveSpark Dashboard 📊",
-          "badge": "Chrome Extension",
-          "desc": "A place to view all LoveSpark extensions by category."
-        },
-        {
-          "title": "Sparky Reads · Web 🌐",
-          "badge": "Web App",
-          "desc": "Sparky Reads in the browser — same modern Goodreads alternative, same optional AI recommendations &amp; summaries, no install required."
-        },
-        {
-          "title": "More Coming Soon ✨",
-          "desc": "I will be publishing more tools in the near future.",
-          "soon_label": "Stay tuned ♡"
-        }
-      ]
+      ],
+      "group": "🧩 Chrome Extensions"
     }
   ]
 }

@@ -23,6 +23,12 @@ and you may embed <em>/<strong>):
 
 Per-category: { "id": "cat-...", "title": "...", "cards": [ ... ] }
 The category count badge is COMPUTED from len(cards) — never hand-maintain it.
+
+Grouping (optional): give consecutive categories the SAME "group" string (a
+verbatim title, e.g. "🧩 Chrome Extensions") and they are wrapped in a collapsible
+parent <details class="category category-group"> whose count is the total of the
+child cards. Categories without "group" render top-level as before. The parent's
+id is derived from the group title (e.g. -> "grp-chrome-extensions").
 """
 import json
 import re
@@ -97,8 +103,49 @@ def render_category(cat):
     )
 
 
+def group_id(title):
+    """Derive a stable anchor id from a group title (emoji/punct stripped)."""
+    slug = re.sub(r"[^0-9A-Za-z]+", "-", title).strip("-").lower()
+    return "grp-" + (slug or "group")
+
+
+def render_group(title, cats):
+    n_cards = sum(len(c["cards"]) for c in cats)
+    children = "\n\n".join(render_category(c) for c in cats)
+    return (
+        f'    <details class="category category-group" id="{group_id(title)}">\n'
+        f'    <summary class="category-header">\n'
+        f'      <h3 class="category-title">{title}</h3>\n'
+        f'      <span class="category-count">{n_cards}</span>\n'
+        f'      <span class="category-rule" aria-hidden="true"></span>\n'
+        f'      <span class="category-chevron" aria-hidden="true">▸</span>\n'
+        f'    </summary>\n'
+        f'\n'
+        f'    <div class="group-body">\n'
+        f'\n'
+        f'{children}\n'
+        f'\n'
+        f'    </div>\n'
+        f'    </details>'
+    )
+
+
 def render_gallery(data):
-    return "\n\n".join(render_category(cat) for cat in data["categories"])
+    cats = data["categories"]
+    blocks = []
+    i = 0
+    while i < len(cats):
+        grp = cats[i].get("group")
+        if grp:
+            run = []
+            while i < len(cats) and cats[i].get("group") == grp:
+                run.append(cats[i])
+                i += 1
+            blocks.append(render_group(grp, run))
+        else:
+            blocks.append(render_category(cats[i]))
+            i += 1
+    return "\n\n".join(blocks)
 
 
 def main():
