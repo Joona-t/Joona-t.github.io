@@ -95,80 +95,118 @@
 })();
 
 // ══════════════════════════════════════════════════════════════════════════════
-// DYSON SWARM — kawaii only. Concentric orbital shells of very fine pink dust
-// around the heart. Replaces the older sparkle-field glyphs + wavy orb-rings
-// for the kawaii theme. CSS in styles.css gates visibility via
-// html:not(.theme-retro), so retro is untouched.
+// DYSON SWARM — kawaii + candy only. Concentric orbital shells of very fine
+// pink dust around the heart. Replaces the older sparkle-field glyphs + wavy
+// orb-rings for those themes. CSS hides it outright for retro/basalt
+// (styles-retro.css:826-ish, styles.css html.theme-basalt .dyson-swarm), but
+// building ~1074 DOM nodes just to immediately hide them wastes every retro/
+// basalt page load. So: gate on the active theme class before building at
+// all, deferred via requestIdleCallback so it never competes with first
+// paint even on the themes that do show it. If the visitor switches theme
+// client-side (pill click) into a swarm-visible theme and it was never
+// built, build it then too — see hookThemeSwitch() below.
 //
 // Design notes:
-//   - 7 shells, ~60–130 particles each → ~600 total. Static dots inside an
-//     animated parent (only the 7 shells animate), so this is cheap.
+//   - 5 shells, ~138–292 particles each → ~1074 total. Static dots inside an
+//     animated parent (only the 5 shells animate), so this is cheap once built.
 //   - Per-dot jitter (angle, radial offset, size, opacity, hue) keeps the
 //     "swarm" reading natural instead of clinical concentric circles.
 //   - Particles are 0.7–2.1 px and 0.12–0.45 alpha — visible enough to suggest
 //     structure, not enough to fight the heart or wordmark.
 // ══════════════════════════════════════════════════════════════════════════════
-(function initDysonSwarm() {
-  const host = document.querySelector('.heart-orb');
-  if (!host) return;
-  // Avoid double-injection if this script ever runs twice.
-  if (host.querySelector('.dyson-swarm')) return;
+(function dysonSwarmController() {
+  const HIDDEN_THEMES = ['theme-retro', 'theme-basalt'];
 
-  const swarm = document.createElement('div');
-  swarm.className = 'dyson-swarm';
-  swarm.setAttribute('aria-hidden', 'true');
-
-  // Tuned via Dyson Swarm Studio (Apps & Tools/dyson-swarm-studio/). 5 sparse
-  // shells from r=165 → r=480, slow orbits (300–593 s), big bright dots.
-  // [radius px, particle count, orbit duration s, direction]
-  const SHELLS = [
-    [165, 138, 300, 'normal'],
-    [244, 176, 373, 'reverse'],
-    [323, 215, 447, 'normal'],
-    [401, 253, 520, 'reverse'],
-    [480, 292, 593, 'normal'],
-  ];
-
-  // Deep mauve palette — gives the swarm enough contrast against the pink page
-  // background to actually read as a Dyson swarm rather than disappear.
-  const COLORS = [
-    'rgba( 90,  42,  71, 0.55)',
-    'rgba(140,  56,  98, 0.50)',
-    'rgba(196,  84, 138, 0.55)',
-    'rgba(255,  79, 179, 0.45)',
-    'rgba(255, 121, 198, 0.40)',
-  ];
-
-  const DOT_SIZE = 2.5;     // base, multiplied by per-dot 0.55..1.5 jitter
-  const DOT_OPACITY = 0.74; // base, multiplied by per-dot 0.4..1.9 jitter
-  const RADIAL_JITTER = 33; // px, breaks hard wire-frame look
-
-  for (const [radius, count, duration, direction] of SHELLS) {
-    const shell = document.createElement('div');
-    shell.className = 'dyson-shell';
-    shell.style.animation =
-      `dysonOrbit ${duration}s linear infinite ${direction}`;
-
-    for (let i = 0; i < count; i++) {
-      // Even angular spread + small jitter so the ring doesn't pulse visibly
-      const angle = (i / count) * 360 + (Math.random() - 0.5) * 4;
-      const r = radius + (Math.random() - 0.5) * RADIAL_JITTER;
-      const size = Math.max(0.3, DOT_SIZE * (0.55 + Math.random() * 0.95)).toFixed(2);
-      const opacity = Math.min(1, DOT_OPACITY * (0.4 + Math.random() * 1.5)).toFixed(2);
-      const color = COLORS[Math.floor(Math.random() * COLORS.length)];
-
-      const dust = document.createElement('span');
-      dust.style.cssText =
-        `--a:${angle.toFixed(2)}deg;` +
-        `--r:${r.toFixed(1)}px;` +
-        `width:${size}px;height:${size}px;` +
-        `background:${color};opacity:${opacity};`;
-      shell.appendChild(dust);
-    }
-    swarm.appendChild(shell);
+  function themeHidesSwarm() {
+    const root = document.documentElement;
+    return HIDDEN_THEMES.some(cls => root.classList.contains(cls));
   }
 
-  host.appendChild(swarm);
+  function buildDysonSwarm() {
+    const host = document.querySelector('.heart-orb');
+    if (!host) return;
+    // Avoid double-injection if this ever runs twice.
+    if (host.querySelector('.dyson-swarm')) return;
+
+    const swarm = document.createElement('div');
+    swarm.className = 'dyson-swarm';
+    swarm.setAttribute('aria-hidden', 'true');
+
+    // Tuned via Dyson Swarm Studio (Apps & Tools/dyson-swarm-studio/). 5 sparse
+    // shells from r=165 → r=480, slow orbits (300–593 s), big bright dots.
+    // [radius px, particle count, orbit duration s, direction]
+    const SHELLS = [
+      [165, 138, 300, 'normal'],
+      [244, 176, 373, 'reverse'],
+      [323, 215, 447, 'normal'],
+      [401, 253, 520, 'reverse'],
+      [480, 292, 593, 'normal'],
+    ];
+
+    // Deep mauve palette — gives the swarm enough contrast against the pink page
+    // background to actually read as a Dyson swarm rather than disappear.
+    const COLORS = [
+      'rgba( 90,  42,  71, 0.55)',
+      'rgba(140,  56,  98, 0.50)',
+      'rgba(196,  84, 138, 0.55)',
+      'rgba(255,  79, 179, 0.45)',
+      'rgba(255, 121, 198, 0.40)',
+    ];
+
+    const DOT_SIZE = 2.5;     // base, multiplied by per-dot 0.55..1.5 jitter
+    const DOT_OPACITY = 0.74; // base, multiplied by per-dot 0.4..1.9 jitter
+    const RADIAL_JITTER = 33; // px, breaks hard wire-frame look
+
+    for (const [radius, count, duration, direction] of SHELLS) {
+      const shell = document.createElement('div');
+      shell.className = 'dyson-shell';
+      shell.style.animation =
+        `dysonOrbit ${duration}s linear infinite ${direction}`;
+
+      for (let i = 0; i < count; i++) {
+        // Even angular spread + small jitter so the ring doesn't pulse visibly
+        const angle = (i / count) * 360 + (Math.random() - 0.5) * 4;
+        const r = radius + (Math.random() - 0.5) * RADIAL_JITTER;
+        const size = Math.max(0.3, DOT_SIZE * (0.55 + Math.random() * 0.95)).toFixed(2);
+        const opacity = Math.min(1, DOT_OPACITY * (0.4 + Math.random() * 1.5)).toFixed(2);
+        const color = COLORS[Math.floor(Math.random() * COLORS.length)];
+
+        const dust = document.createElement('span');
+        dust.style.cssText =
+          `--a:${angle.toFixed(2)}deg;` +
+          `--r:${r.toFixed(1)}px;` +
+          `width:${size}px;height:${size}px;` +
+          `background:${color};opacity:${opacity};`;
+        shell.appendChild(dust);
+      }
+      swarm.appendChild(shell);
+    }
+
+    host.appendChild(swarm);
+  }
+
+  function buildIfVisible() {
+    if (themeHidesSwarm()) return;
+    buildDysonSwarm();
+  }
+
+  function deferBuild() {
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(buildIfVisible, { timeout: 2000 });
+    } else {
+      setTimeout(buildIfVisible, 200);
+    }
+  }
+
+  deferBuild();
+
+  // If the visitor switches theme client-side into a swarm-visible theme
+  // (candy/kawaii) and it was never built (started on retro/basalt), build
+  // it now. The theme switcher above sets classes synchronously on click,
+  // so a microtask-free listener on the pills is enough.
+  document.querySelectorAll('.theme-pill').forEach(pill => {
+    pill.addEventListener('click', deferBuild);
+  });
 })();
 
 // ══════════════════════════════════════════════════════════════════════════════
