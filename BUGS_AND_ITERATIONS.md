@@ -8,6 +8,14 @@
 **Verification:** HTML parse clean (no mismatched/unclosed tags); rendered in browser at desktop + 375px mobile (no horizontal scroll, mascot loads, zero console errors); contrast ratios computed for every text pair (min 5.33:1); `ls-check .` 7 pass / 0 fail.
 **Files:** privacy/med-tracker.html (new)
 
+## 2026-07-09: ITER-002 — Gallery cards for Sparky Slug + CourseKit (staged for flip-day)
+
+**Problem:** Ship wave 2026-07 needs suite cards for Sparky Slug (candy run-and-gun browser game) and CourseKit (interactive study-guide generator, 14 courses); neither was in the gallery.
+**Root cause:** New products, not yet listed — repos still private, cards staged ahead of the public flip.
+**Fix:** Data-driven only (per the standing gallery rule — no hand-edited card HTML): added a CourseKit card to `cat-stem` (badge "Learning Platform", `Explore ✦` → GitHub repo) and a new single-card `cat-games` "🎮 Games" category after `cat-sparky-lab` with the Sparky Slug card (badge "Browser Game · Free", `Play ✦` → GitHub repo), then ran `scripts/build-gallery.py`. **Both card links 404 until the repos flip public — merge this commit only at flip-day** (the PR splits it from ITER-001 so the privacy page can be cherry-picked alone).
+**Verification:** `build-gallery.py --check` in sync (9 categories, 29 cards); DOM check in browser: `#cat-games` count 1 + Sparky Slug card, `#cat-stem` count 3 with CourseKit third, 29 total cards, zero console errors.
+**Files:** data/gallery.json, index.html
+
 ## 2026-07-01: Love Kana "Sneak Peeks" image landed
 
 **Change:** Screenshot arrived (`~/Documents/screenshots/Love Kana.png`, 1956×1424 PNG, 1.9 MB). Optimized to `images/gallery/love-kana/love-kana-01.jpg` via `sips -Z 1600 -s format jpeg -s formatOptions 86` → **1600×1165, 137 KB** (matches the other gallery shots' weight; a 1.9 MB PNG would've bloated the page). Re-added the deferred `🌸 Love Kana` gallery-project panel after `gal-tongue`, pointing at the JPG, with intrinsic dims set to avoid CLS.
