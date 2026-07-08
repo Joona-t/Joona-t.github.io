@@ -1,5 +1,13 @@
 # Bugs & Iterations
 
+## 2026-07-09: ITER-001 — Site-hosted privacy policy for Med Tracker (unblocks CWS)
+
+**Problem:** The lovespark-med-tracker extension repo is private, so its `PRIVACY.md` GitHub link 404s for the public — but the Chrome Web Store requires a publicly reachable privacy-policy URL before the extension can be submitted. The privacy URL must therefore be site-hosted.
+**Root cause:** LoveSpark's default privacy-URL convention (link the file on GitHub) assumes a public repo; med-tracker ships to CWS before its repo flips public.
+**Fix:** New standing path for extension privacy policies: `privacy/<ext>.html` on lovespark.love. First page `privacy/med-tracker.html` — content adapted verbatim from the repo's PRIVACY.md (effective 2026-07-08, v1.0.35+), self-contained single-file page (inline CSS mirroring the styles.css candy palette, DM Mono/Press Start 2P, Sparky mascot header, back link home). Deliberately independent of the homepage's animation-heavy stylesheet so it stays stable and loads instantly for CWS reviewers. WCAG note: the site's `--hot-pink`/`--deep-mauve` fail 4.5:1 as small text on `--paper` (2.90:1 / 4.08:1), so the page adds darkened text variants `--pink-strong #C2185B` (5.69:1) and `--mauve-dark #A8336B` (6.07:1) for headings/links/focus ring. Public URL once merged: `https://lovespark.love/privacy/med-tracker.html`.
+**Verification:** HTML parse clean (no mismatched/unclosed tags); rendered in browser at desktop + 375px mobile (no horizontal scroll, mascot loads, zero console errors); contrast ratios computed for every text pair (min 5.33:1); `ls-check .` 7 pass / 0 fail.
+**Files:** privacy/med-tracker.html (new)
+
 ## 2026-07-01: Love Kana "Sneak Peeks" image landed
 
 **Change:** Screenshot arrived (`~/Documents/screenshots/Love Kana.png`, 1956×1424 PNG, 1.9 MB). Optimized to `images/gallery/love-kana/love-kana-01.jpg` via `sips -Z 1600 -s format jpeg -s formatOptions 86` → **1600×1165, 137 KB** (matches the other gallery shots' weight; a 1.9 MB PNG would've bloated the page). Re-added the deferred `🌸 Love Kana` gallery-project panel after `gal-tongue`, pointing at the JPG, with intrinsic dims set to avoid CLS.
