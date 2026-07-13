@@ -65,6 +65,13 @@
           "badge": "Learning Platform",
           "desc": "A Herbert fan's take on math education: algebra through the maths behind ML, taught inside a Dune story. Real curriculum, real exercises — the kind that make things click, not just scroll past.",
           "soon_label": "TBA ✦"
+        },
+        {
+          "title": "CourseKit 📚",
+          "badge": "Learning Platform",
+          "desc": "Interactive study-guide generator — turn any subject into a structured, exercise-driven course. 14 courses built so far, from middle-school physics up. Free and open source.",
+          "url": "https://github.com/Joona-t/lovespark-coursekit",
+          "link_label": "Explore ✦"
         }
       ]
     },
@@ -80,6 +87,19 @@
             "Testing this out as a personal recovery-intelligence experiment. Likely lands inside Sparky / the LoveSpark ecosystem rather than shipping as a standalone app."
           ],
           "soon_label": "In the lab ✦"
+        }
+      ]
+    },
+    {
+      "id": "cat-games",
+      "title": "🎮 Games",
+      "cards": [
+        {
+          "title": "Sparky Slug 🐌",
+          "badge": "Browser Game · Free",
+          "desc": "Candy run-and-gun browser game starring Sparky. Four stages, bosses, a vehicle section, New Game+, secrets, Time Attack, unlockable costumes — and full accessibility options. No install, plays in your browser.",
+          "url": "https://github.com/Joona-t/lovespark-sparky-slug",
+          "link_label": "Play ✦"
         }
       ]
     },

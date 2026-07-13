@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — LoveSpark Med Tracker</title>
+  <meta name="description" content="Privacy policy for the LoveSpark Med Tracker browser extension. Everything stays on your device — zero data is ever transmitted.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <style>
+    /* Palette mirrors styles.css :root — keep in sync if the site palette changes. */
+    :root {
+      --paper-pink:  #FFE0EC;
+      --paper-warm:  #FFD9E8;
+      --paper-edge:  #F5C7DB;
+      --hot-pink:    #FF4FB3;
+      --deep-mauve:  #C4548A;
+      /* Darkened variants for text on --paper: site pinks fail WCAG 4.5:1 as
+         small text (hot-pink 2.90:1, deep-mauve 4.08:1). These pass:
+         pink-strong 5.69:1, mauve-dark 6.07:1 on #FFFAFD. */
+      --pink-strong: #C2185B;
+      --mauve-dark:  #A8336B;
+      --paper:       #FFFAFD;
+      --ink:         #5A2A47;
+      --ink-soft:    #8B5A75;
+      --shadow-soft: rgba(196, 84, 138, 0.18);
+      --font-pixel:  'Press Start 2P', monospace;
+      --font-mono:   'DM Mono', 'Courier New', monospace;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: var(--paper-pink);
+      color: var(--ink);
+      font-family: var(--font-mono);
+      font-size: 16px;
+      line-height: 1.7;
+      padding: 32px 20px 64px;
+    }
+    .policy-wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      background: var(--paper);
+      border: 2px solid var(--paper-edge);
+      border-radius: 18px;
+      box-shadow: 0 10px 40px var(--shadow-soft);
+      padding: 40px 36px 48px;
+    }
+    .policy-head {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+    .policy-mascot {
+      width: 64px;
+      height: 64px;
+      image-rendering: auto;
+      flex-shrink: 0;
+    }
+    h1 {
+      font-family: var(--font-pixel);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--mauve-dark);
+    }
+    .policy-meta {
+      color: var(--ink-soft);
+      font-size: 0.85rem;
+      margin-bottom: 24px;
+    }
+    .tldr {
+      background: var(--paper-warm);
+      border: 2px solid var(--paper-edge);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 28px;
+    }
+    h2 {
+      font-family: var(--font-pixel);
+      font-size: 0.75rem;
+      line-height: 1.9;
+      color: var(--pink-strong);
+      margin: 32px 0 12px;
+    }
+    p { margin-bottom: 14px; }
+    ul { margin: 0 0 14px 22px; }
+    li { margin-bottom: 8px; }
+    code {
+      background: var(--paper-warm);
+      border-radius: 6px;
+      padding: 1px 6px;
+      font-family: var(--font-mono);
+      font-size: 0.9em;
+    }
+    a { color: var(--pink-strong); }
+    a:hover { color: var(--mauve-dark); }
+    a:focus-visible {
+      outline: 3px solid var(--pink-strong);
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+    .back-link {
+      display: inline-block;
+      margin-bottom: 28px;
+      font-size: 0.9rem;
+      text-decoration: none;
+      border: 2px solid var(--paper-edge);
+      border-radius: 999px;
+      padding: 6px 16px;
+      background: var(--paper);
+      color: var(--mauve-dark);
+      box-shadow: 0 4px 14px var(--shadow-soft);
+    }
+    .back-link:hover { border-color: var(--pink-strong); color: var(--pink-strong); }
+    .policy-footer {
+      text-align: center;
+      color: var(--ink-soft);
+      font-size: 0.85rem;
+      margin-top: 40px;
+    }
+    @media (max-width: 480px) {
+      .policy-wrap { padding: 28px 20px 36px; }
+      h1 { font-size: 0.85rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="policy-wrap">
+    <a class="back-link" href="/">← lovespark.love</a>
+
+    <div class="policy-head">
+      <img class="policy-mascot" src="../images/sparky.png" width="64" height="64"
+           alt="Sparky, the LoveSpark mascot, grinning with two thumbs up">
+      <h1>Privacy Policy — LoveSpark Med&nbsp;Tracker</h1>
+    </div>
+    <p class="policy-meta">Effective date: 2026-07-08 · Applies to: LoveSpark Med Tracker version 1.0.35 and later</p>
+
+    <div class="tldr">
+      <p><strong>The short version:</strong> everything stays on your own device, and nothing is ever sent anywhere. No accounts, no analytics, no ads, no servers.</p>
+    </div>
+
+    <p>LoveSpark Med Tracker is a privacy-first browser extension. It exists to help you log your medication doses with one click and remind you when a dose is due — nothing more. This policy explains, in plain language, exactly what the extension stores, what it does not do, and why each permission it requests exists.</p>
+
+    <h2>What we store</h2>
+    <p>All data lives <strong>only</strong> in your browser's local extension storage (<code>chrome.storage.local</code>) on your own device. It never leaves your computer. Depending on how you use the extension, this may include:</p>
+    <ul>
+      <li><strong>Your medications</strong> — the names, dosages, and any labels you enter for the medications you want to track.</li>
+      <li><strong>Reminder schedules</strong> — the times and intervals you set for when doses are due.</li>
+      <li><strong>Dose logs</strong> — a record of the doses you mark as taken (which medication, and the date/time you logged it), so you can answer "did I take my meds?"</li>
+      <li><strong>Streaks and counters</strong> — derived tallies (e.g. consecutive on-time days, doses logged today) computed from your own dose logs.</li>
+      <li><strong>Settings and preferences</strong> — your chosen theme, notification preferences, and other UI options.</li>
+    </ul>
+    <p>This information is created by you, for you. There are no accounts, no sign-in, and no user profiles. If you uninstall the extension or clear its storage, this data is permanently removed from your device.</p>
+
+    <h2>What we transmit</h2>
+    <p><strong>Zero data is transmitted externally.</strong> LoveSpark Med Tracker:</p>
+    <ul>
+      <li>Sends <strong>no</strong> data to any server — there is no LoveSpark server, and no third-party server, involved at any point.</li>
+      <li>Contains <strong>no</strong> analytics, telemetry, tracking pixels, or usage reporting.</li>
+      <li>Runs <strong>no</strong> remote code and loads <strong>no</strong> remote resources.</li>
+      <li>Serves <strong>no</strong> ads.</li>
+    </ul>
+    <p>The extension functions entirely offline. It does not make network requests to store, sync, or report anything.</p>
+
+    <h2>Permissions</h2>
+    <p>The extension requests only the minimum permissions needed for its single purpose — medication tracking and reminders — and uses each one solely for that purpose:</p>
+    <ul>
+      <li><strong><code>storage</code></strong> — Saves your medications, schedules, dose logs, streaks, and settings locally in your browser so they persist between sessions. This is the only place your data is kept, and it stays on your device.</li>
+      <li><strong><code>alarms</code></strong> — Schedules the reminders you configure, so the extension can wake at the right time to prompt you about a due dose. Alarms are used only for your medication reminders; they trigger nothing that leaves your device.</li>
+      <li><strong><code>notifications</code></strong> — Displays the actual reminder notification ("time to take your medication") when a scheduled alarm fires. Notifications are generated locally from your own schedule and contain only the information you entered.</li>
+    </ul>
+
+    <h2>Host permissions</h2>
+    <p><strong>None.</strong> LoveSpark Med Tracker requests <strong>no host permissions</strong> and <strong>no access to any website</strong>. It cannot read, monitor, or modify the pages you visit.</p>
+    <p>Because it has no host access, the extension does <strong>not</strong>:</p>
+    <ul>
+      <li>Collect or track your browsing history or the URLs you visit.</li>
+      <li>Read, alter, or inject content into any web page.</li>
+      <li>Insert ads, trackers, or any third-party code into your browsing.</li>
+    </ul>
+    <p>The extension operates entirely within its own popup and background logic and never touches your web activity.</p>
+
+    <h2>Third-party services</h2>
+    <p><strong>None.</strong> LoveSpark Med Tracker uses no third-party services, SDKs, libraries-as-a-service, cloud storage, or external APIs. There are no third parties with whom data could be shared, because no data ever leaves your device.</p>
+
+    <h2>Children's privacy</h2>
+    <p>LoveSpark Med Tracker collects <strong>no personal data from anyone</strong>, including children under the age of 13. Because all information stays local to your device and nothing is ever transmitted, the extension is safe for users of all ages. We do not, and cannot, knowingly collect data from children — or from anyone.</p>
+
+    <h2>Changes to this policy</h2>
+    <p>If this policy is ever updated, the revised version will be published at this same address, the effective date and version at the top of this document will be updated, and the change history will be viewable in the site's public repository commit log.</p>
+
+    <h2>Contact</h2>
+    <p>Questions, concerns, or reports about privacy can be raised via GitHub issues on the extension's source repository:</p>
+    <p><a href="https://github.com/Joona-t/lovespark-med-tracker/issues" rel="noopener">github.com/Joona-t/lovespark-med-tracker/issues</a></p>
+
+    <h2>Source &amp; verification</h2>
+    <p>LoveSpark Med Tracker is built in the open under the MIT license, like every LoveSpark tool. The extension's source repository is at <a href="https://github.com/Joona-t/lovespark-med-tracker" rel="noopener">github.com/Joona-t/lovespark-med-tracker</a>, where the complete code can be read to verify that data stays local and nothing is transmitted.</p>
+
+    <p class="policy-footer">© LoveSpark. Built with intent. ♡</p>
+  </main>
+</body>
+</html>
