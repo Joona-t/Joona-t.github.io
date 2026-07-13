@@ -149,6 +149,13 @@
     Object.freeze({ term: "Slicer", definition: "Software that turns a model and profiles into toolpaths and G-code.", n: 8 }),
     Object.freeze({ term: "Volumetric flow", definition: "Plastic volume requested per second, commonly expressed in mm³/s.", n: 3 }),
   ]);
+  const OFFICIAL_RESOURCES = Object.freeze([
+    Object.freeze({ id: "a1-docs", label: "A1 documentation", lead: "↗", url: "https://wiki.bambulab.com/en/a1" }),
+    Object.freeze({ id: "quick-start", label: "Quick Start Guide (PDF)", lead: "PDF", url: "https://cdn1.bambulab.com/documentation/quick-start-a75adcb1d5d5e/Quick%20Start%20Guide%20for%20A1.pdf" }),
+    Object.freeze({ id: "maintenance", label: "A1 maintenance", lead: "↗", url: "https://wiki.bambulab.com/en/a1/maintenance/basic-maintenance" }),
+    Object.freeze({ id: "academy", label: "Bambu Lab Academy", lead: "↗", url: "https://bambulab.com/en/support/academy" }),
+    Object.freeze({ id: "recall", label: "U.S. A1 safety recall", lead: "!", url: "https://www.cpsc.gov/Recalls/2024/Bambu-Lab-Recalls-A1-3D-Printers-Due-to-Electric-Shock-and-Fire-Hazards" }),
+  ]);
   const sidebar = document.getElementById("sidebar");
   const article = document.getElementById("chapter");
   const content = document.getElementById("content");
@@ -362,6 +369,21 @@
     return link;
   }
 
+  function appendOfficialSidebarLink(parent, resource) {
+    const link = document.createElement("a");
+    link.className = "side-link side-link-official";
+    link.href = resource.url;
+    link.target = "_blank";
+    link.rel = "noopener";
+    link.dataset.officialResource = resource.id;
+    link.innerHTML = '<span class="n" aria-hidden="true"></span><span class="t"></span><span class="visually-hidden"> — official source, opens in a new tab</span>';
+    link.querySelector(".n").textContent = resource.lead;
+    link.querySelector(".t").textContent = resource.label;
+    link.addEventListener("click", () => closeDrawer(false));
+    parent.appendChild(link);
+    return link;
+  }
+
   function buildSidebar() {
     sidebar.replaceChildren();
 
@@ -374,6 +396,16 @@
       appendSidebarLink(TASK_PATHS[id].title, pathUrl(id), "path:" + id, "→");
     });
     appendSidebarLink("Glossary", viewUrl("glossary"), "view:glossary", "A");
+
+    const official = document.createElement("section");
+    official.className = "official-resources";
+    official.setAttribute("aria-label", "Official resources");
+    const officialHeading = document.createElement("h2");
+    officialHeading.className = "side-tier";
+    officialHeading.textContent = "Official resources";
+    official.appendChild(officialHeading);
+    OFFICIAL_RESOURCES.forEach((resource) => appendOfficialSidebarLink(official, resource));
+    sidebar.appendChild(official);
 
     const tierNote = document.createElement("p");
     tierNote.className = "side-tier-note";

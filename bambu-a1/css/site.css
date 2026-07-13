@@ -190,6 +190,18 @@ html[data-theme="light"] .ic-moon { display: none; }
 .side-done { margin-left: auto; color: var(--accent-text); font-weight: 700; }
 .side-link.is-complete .t { color: var(--text); }
 
+.official-resources {
+  margin-top: 16px;
+  padding-top: 4px;
+  border-top: 1px solid var(--border);
+}
+.official-resources .side-tier { margin-top: 10px; }
+.side-link-official { font-size: 13.5px; }
+.side-link-official .n {
+  color: var(--accent-text);
+  min-width: 24px;
+}
+
 .trust-legend {
   margin: 22px 8px 0;
   padding-top: 16px;
