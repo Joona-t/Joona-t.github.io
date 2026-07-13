@@ -48,6 +48,13 @@
       "title": "⚛️ STEM",
       "cards": [
         {
+          "title": "How the Bambu Lab A1 Works 🖨️",
+          "badge": "Interactive Tutorial",
+          "desc": "A sourced, chapter-by-chapter guide to the A1 3D printer — with a safe first-print route, symptom diagnosis, maintenance boundaries, and 18 hands-on simulations. Unofficial and independent.",
+          "url": "https://lovespark.love/bambu-a1/",
+          "link_label": "Start tutorial ✦"
+        },
+        {
           "title": "Axion Physics 🔭",
           "badge": "Learning Platform",
           "desc": "Frank Herbert's Dune is my favourite sci-fi series — so I built a physics course inside it. First principles mechanics, waves, and thermodynamics, with exercises that make the concepts stick.",
