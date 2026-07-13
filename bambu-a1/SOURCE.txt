@@ -1,0 +1,12 @@
+Bambu Lab A1 explainer deployment
+
+This directory is the static LoveSpark deployment of the verified tutorial tree
+from Joona-t/bambu-a1-explainer commit:
+
+142aff0ecfca65677a6be9ebb185581866a0a01f
+
+Public URL: https://lovespark.love/bambu-a1/
+
+The tutorial is unofficial and independent, is not affiliated with Bambu Lab,
+and links to current manufacturer and regulator guidance for controlling
+instructions.
