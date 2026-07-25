@@ -7,13 +7,13 @@ window.OPENAI_WATCH = {
     status: "https://status.openai.com/"
   },
   statusSnapshot: {
-    label: "Fully operational",
+    label: "Degraded performance",
     source: "https://status.openai.com/",
     window: "Live check",
     uptime: [
-      { name: "APIs", value: "Operational" },
-      { name: "ChatGPT", value: "Operational" },
-      { name: "Codex", value: "Operational" },
+      { name: "APIs", value: "Degraded performance" },
+      { name: "ChatGPT", value: "Degraded performance" },
+      { name: "Codex", value: "Degraded performance" },
       { name: "FedRAMP", value: "Operational" }
     ]
   },
