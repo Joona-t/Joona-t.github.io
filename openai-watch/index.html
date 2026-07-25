@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090a08">
+  <title>OpenAI Watch - Release Intelligence</title>
+  <meta name="description" content="A daily intelligence feed for OpenAI releases, patches, deprecations, security notes, and platform signals.">
+  <link rel="preload" href="assets/signal-globe.png" as="image" type="image/png">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="src/updates.js"></script>
+  <script defer src="src/app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#releaseFeed">Skip to release feed</a>
+
+  <header class="masthead">
+    <a class="wordmark" href="#top" aria-label="OpenAI Watch home">
+      <span>OA</span><span>/</span><span>WATCH</span>
+    </a>
+    <p class="edition">Independent release intelligence</p>
+    <div class="sync-chip" aria-label="Daily tracker automation status">
+      <span class="pulse" aria-hidden="true"></span>
+      <span>Daily agent</span>
+      <strong>09:00 local</strong>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="heroTitle">
+      <img class="hero-art" src="assets/signal-globe.png" alt="Abstract signal globe rendered like a technical screenprint">
+      <div class="hero-shade" aria-hidden="true"></div>
+      <div class="hero-content">
+        <p class="eyebrow">Release monitor / OpenAI ecosystem</p>
+        <h1 id="heroTitle">OpenAI<br><span>Watch</span></h1>
+        <p class="hero-deck">Every meaningful release, patch, retirement, and security signal. Verified against primary sources, once a day.</p>
+        <div class="hero-meta" aria-label="Tracker metadata">
+          <div>
+            <span>Last verified</span>
+            <strong id="verifiedDate">--</strong>
+          </div>
+          <div>
+            <span>Signals indexed</span>
+            <strong id="trackedCount">0</strong>
+          </div>
+          <div>
+            <span>System state</span>
+            <strong id="heroStatus">--</strong>
+          </div>
+        </div>
+      </div>
+      <p class="hero-stamp">Not affiliated with OpenAI</p>
+    </section>
+
+    <section class="ticker" aria-label="Latest signals">
+      <p class="ticker-label"><span class="pulse" aria-hidden="true"></span> Latest</p>
+      <div class="ticker-window">
+        <div class="ticker-track" id="tickerTrack"></div>
+      </div>
+    </section>
+
+    <section class="source-bar" aria-label="Official OpenAI source links">
+      <p>Primary sources</p>
+      <a href="https://help.openai.com/en/articles/6825453-chatgpt-release-notes" target="_blank" rel="noreferrer">ChatGPT notes <span>01</span></a>
+      <a href="https://developers.openai.com/api/docs/changelog" target="_blank" rel="noreferrer">API changelog <span>02</span></a>
+      <a href="https://openai.com/news/" target="_blank" rel="noreferrer">OpenAI news <span>03</span></a>
+      <a href="https://status.openai.com/" target="_blank" rel="noreferrer">System status <span>04</span></a>
+    </section>
+
+    <section class="ledger" id="releaseFeed" aria-labelledby="ledgerTitle">
+      <aside class="ledger-aside">
+        <div class="section-number">/ 001</div>
+        <h2 id="ledgerTitle">Signal<br>ledger</h2>
+        <p class="aside-copy">A reverse-chronological record. Product launches and quiet infrastructure changes carry equal weight here.</p>
+
+        <div class="status-readout">
+          <div class="readout-head">
+            <span>Live platform status</span>
+            <span class="pulse" aria-hidden="true"></span>
+          </div>
+          <strong id="statusLabel">--</strong>
+          <dl id="uptimeList"></dl>
+          <a href="https://status.openai.com/" target="_blank" rel="noreferrer">Open status page +</a>
+        </div>
+      </aside>
+
+      <div class="ledger-main">
+        <div class="controls">
+          <div class="control-topline">
+            <p>Filter the archive</p>
+            <p id="resultCount" aria-live="polite">0 entries</p>
+          </div>
+          <div class="filter-group" id="filters" aria-label="Update filters"></div>
+          <div class="search-row">
+            <label for="searchInput">Search archive</label>
+            <input id="searchInput" type="search" placeholder="Try: model, Codex, API" autocomplete="off">
+            <button type="button" id="sortButton">Newest first</button>
+          </div>
+        </div>
+
+        <div class="feed-heading">
+          <p id="activeFilter">All signals</p>
+          <p>Verified source links on every entry</p>
+        </div>
+        <ol class="update-feed" id="updateFeed"></ol>
+        <p class="empty-state" id="emptyState" hidden>No matching signals. Try a broader search.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>
+      <a class="footer-mark" href="#top">OA/WATCH</a>
+      <p>Independent, source-linked, and maintained by a daily agent.</p>
+    </div>
+    <p class="footer-note">OpenAI names and trademarks belong to OpenAI. This tracker is not affiliated with or endorsed by OpenAI.</p>
+    <a href="https://openai.com/policies/terms-of-use/" target="_blank" rel="noreferrer">Terms +</a>
+  </footer>
+</body>
+</html>
