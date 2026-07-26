@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-07-25",
+  verifiedAt: "2026-07-26",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -7,13 +7,13 @@ window.OPENAI_WATCH = {
     status: "https://status.openai.com/"
   },
   statusSnapshot: {
-    label: "Degraded performance",
+    label: "Operational",
     source: "https://status.openai.com/",
     window: "Live check",
     uptime: [
-      { name: "APIs", value: "Degraded performance" },
-      { name: "ChatGPT", value: "Degraded performance" },
-      { name: "Codex", value: "Degraded performance" },
+      { name: "APIs", value: "Operational" },
+      { name: "ChatGPT", value: "Operational" },
+      { name: "Codex", value: "Operational" },
       { name: "FedRAMP", value: "Operational" }
     ]
   },
