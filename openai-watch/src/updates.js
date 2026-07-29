@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-07-28",
+  verifiedAt: "2026-07-29",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -18,6 +18,18 @@ window.OPENAI_WATCH = {
     ]
   },
   updates: [
+    {
+      id: "gpt-transcribe-api-models",
+      date: "2026-07-28",
+      type: "release",
+      channel: "API",
+      title: "GPT Transcribe models launch for file and live audio",
+      summary: "The API adds GPT Transcribe for file transcription and final transcripts of committed Realtime turns, plus GPT Live Transcribe for low-latency streaming. Both models accept free-form context, keyword hints, and multiple expected input languages.",
+      tags: ["transcription", "audio", "realtime", "api"],
+      links: [
+        { label: "API changelog", url: "https://developers.openai.com/api/docs/changelog" }
+      ]
+    },
     {
       id: "chatgpt-health-launch",
       date: "2026-07-23",
