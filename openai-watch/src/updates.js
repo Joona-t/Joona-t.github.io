@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-07-29",
+  verifiedAt: "2026-07-30",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -18,6 +18,42 @@ window.OPENAI_WATCH = {
     ]
   },
   updates: [
+    {
+      id: "openai-terraform-provider",
+      date: "2026-07-29",
+      type: "release",
+      channel: "API",
+      title: "OpenAI ships an official Terraform provider",
+      summary: "The official provider brings API Platform resources into infrastructure-as-code workflows, covering projects, identities, roles, access assignments, service accounts, certificates, invitations, and project rate limits, with support for import and drift reconciliation.",
+      tags: ["terraform", "infrastructure as code", "api platform", "administration"],
+      links: [
+        { label: "API changelog", url: "https://developers.openai.com/api/docs/changelog" }
+      ]
+    },
+    {
+      id: "chatgpt-academic-researchers",
+      date: "2026-07-29",
+      type: "release",
+      channel: "ChatGPT",
+      title: "ChatGPT workspace program opens to academic researchers",
+      summary: "Eligible faculty and postdoctoral researchers can apply for 12 months of complimentary access to a dedicated workspace for up to five verified collaborators, with business data protections and Pro-level ChatGPT limits. The program does not include API credits.",
+      tags: ["academic research", "workspace", "collaboration", "education"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
+    {
+      id: "sign-in-with-chatgpt-beta",
+      date: "2026-07-29",
+      type: "release",
+      channel: "ChatGPT",
+      title: "Sign in with ChatGPT enters beta",
+      summary: "Select plugins and partner sites can now let users create or link accounts with ChatGPT identity. The initial rollout includes Airtable, GitLab, HubSpot, Notion, Supabase, and Vercel, while plugin permissions remain a separate approval step.",
+      tags: ["identity", "plugins", "authentication", "beta"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
     {
       id: "gpt-transcribe-api-models",
       date: "2026-07-28",
