@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-07-30",
+  verifiedAt: "2026-07-31",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -18,6 +18,19 @@ window.OPENAI_WATCH = {
     ]
   },
   updates: [
+    {
+      id: "gpt-56-price-fast-mode",
+      date: "2026-07-30",
+      type: "patch",
+      channel: "API",
+      title: "GPT-5.6 prices fall as Fast mode replaces Priority Processing",
+      summary: "OpenAI cut GPT-5.6 Luna pricing by 80% and Terra pricing by 20%, with lower usage consumption in Codex and ChatGPT Work. The API also adds backward-compatible Fast mode for Sol, delivering up to 2.5 times standard speed at twice the price while existing priority-tagged requests migrate automatically.",
+      tags: ["gpt-5.6", "pricing", "fast mode", "api"],
+      links: [
+        { label: "API changelog", url: "https://developers.openai.com/api/docs/changelog" },
+        { label: "Product announcement", url: "https://openai.com/index/advancing-the-price-performance-frontier-with-gpt-5-6/" }
+      ]
+    },
     {
       id: "openai-terraform-provider",
       date: "2026-07-29",
