@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-08-02",
+  verifiedAt: "2026-08-06",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -18,6 +18,66 @@ window.OPENAI_WATCH = {
     ]
   },
   updates: [
+    {
+      id: "gpt-56-fast-long-context",
+      date: "2026-08-05",
+      type: "patch",
+      channel: "API",
+      title: "GPT-5.6 Fast mode expands to long-context requests",
+      summary: "Fast mode now accepts prompts above 272K tokens for GPT-5.6 Sol, Terra, and Luna, with OpenAI advertising speeds up to 2.5 times the Standard tier.",
+      tags: ["gpt-5.6", "fast mode", "long context", "api"],
+      links: [
+        { label: "API changelog", url: "https://developers.openai.com/api/docs/changelog" }
+      ]
+    },
+    {
+      id: "api-key-usage-cost-reporting",
+      date: "2026-08-04",
+      type: "release",
+      channel: "API",
+      title: "Usage and cost reporting adds an API-key dimension",
+      summary: "API customers can filter and group dashboard data by API key, and use the same dimension in the Usage and Costs APIs for programmatic reporting.",
+      tags: ["usage", "costs", "api keys", "reporting"],
+      links: [
+        { label: "API changelog", url: "https://developers.openai.com/api/docs/changelog" }
+      ]
+    },
+    {
+      id: "education-work-codex-plugins",
+      date: "2026-08-04",
+      type: "release",
+      channel: "ChatGPT",
+      title: "Education plugins launch for ChatGPT Work and Codex",
+      summary: "OpenAI introduced three guided plugins for K–12 educators, college educators, and college students. They package role-specific skills, apps, and workflows and are available through ChatGPT Edu and ChatGPT for Teachers district deployments.",
+      tags: ["education", "plugins", "work", "codex"],
+      links: [
+        { label: "Product announcement", url: "https://openai.com/index/learn-teach-chatgpt-work-codex/" }
+      ]
+    },
+    {
+      id: "third-party-cyber-evaluation-incidents",
+      date: "2026-08-04",
+      type: "security",
+      channel: "News",
+      title: "OpenAI discloses two third-party cyber-evaluation incidents",
+      summary: "OpenAI reported separate UK AISI and Irregular evaluations where reduced safeguards, enabled internet access, or environment misconfiguration let model activity cross intended test boundaries. The evaluations were stopped or paused, affected infrastructure was contained, and OpenAI says it is strengthening third-party testing controls.",
+      tags: ["security", "cyber evaluations", "containment", "third party"],
+      links: [
+        { label: "Security disclosure", url: "https://openai.com/index/third-party-cyber-evaluations-involving-openai-models/" }
+      ]
+    },
+    {
+      id: "large-pastes-attachments-all-plans",
+      date: "2026-08-04",
+      type: "patch",
+      channel: "ChatGPT",
+      title: "Long pastes become attachments across all ChatGPT plans",
+      summary: "ChatGPT now converts composer pastes above 10,000 characters into attachments for Enterprise and Education, completing availability across all plans while retaining an option to move the content back into the message field.",
+      tags: ["composer", "attachments", "context", "enterprise"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
     {
       id: "gpt-56-price-fast-mode",
       date: "2026-07-30",
