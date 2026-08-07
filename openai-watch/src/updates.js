@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-08-06",
+  verifiedAt: "2026-08-07",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -18,6 +18,19 @@ window.OPENAI_WATCH = {
     ]
   },
   updates: [
+    {
+      id: "gpt-56-chatgpt-sol-luna-update",
+      date: "2026-08-06",
+      type: "release",
+      channel: "ChatGPT",
+      title: "GPT-5.6 Sol improves in ChatGPT as Luna expands to free users",
+      summary: "Plus and Pro users get an updated GPT-5.6 Sol with more focused, factually reliable answers and an adjustable thinking slider. GPT-5.6 Luna is becoming the default for Free and Go users, with unlimited text chats and a Think button scheduled to follow next week under abuse guardrails.",
+      tags: ["gpt-5.6", "sol", "luna", "free", "reasoning"],
+      links: [
+        { label: "Product announcement", url: "https://openai.com/index/improving-gpt-5-6-sol-in-chatgpt/" },
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
     {
       id: "gpt-56-fast-long-context",
       date: "2026-08-05",
