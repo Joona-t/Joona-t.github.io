@@ -1,3 +1,6 @@
+# macOS Finder metadata
+.DS_Store
+
 # Local dev preview server (not part of the deployed site)
 scratch/
 
@@ -7,3 +10,4 @@ scratch/
 # Superpowers brainstorm artifacts (mockups, server state)
 .superpowers/
 _swarm-preview/
+.gstack/
