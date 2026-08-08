@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-08-07",
+  verifiedAt: "2026-08-08",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -18,6 +18,30 @@ window.OPENAI_WATCH = {
     ]
   },
   updates: [
+    {
+      id: "astra-critical-cyber-controls",
+      date: "2026-08-07",
+      type: "security",
+      channel: "News",
+      title: "OpenAI strengthens controls as Astra approaches critical cyber capability",
+      summary: "Preliminary evaluations of the upcoming Astra model led OpenAI to conclude that Critical cybersecurity capability cannot yet be ruled out. OpenAI paused internal activities that do not meet stronger controls and added isolated testing, restricted access, enhanced model-weight protection, monitoring, and external testing plans.",
+      tags: ["astra", "cybersecurity", "preparedness", "safeguards"],
+      links: [
+        { label: "Security disclosure", url: "https://openai.com/index/responding-next-frontier-critical-cyber-capabilities/" }
+      ]
+    },
+    {
+      id: "voice-files-projects",
+      date: "2026-08-07",
+      type: "release",
+      channel: "ChatGPT",
+      title: "ChatGPT Voice adds files and Projects",
+      summary: "GPT-Live in ChatGPT Voice can now analyze uploaded files and answer questions about them. Voice also works in Projects with access to recent project chats, sources, and project instructions.",
+      tags: ["voice", "gpt-live", "files", "projects"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
     {
       id: "gpt-56-chatgpt-sol-luna-update",
       date: "2026-08-06",
