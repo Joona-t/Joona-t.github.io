@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-08-10",
+  verifiedAt: "2026-08-11",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -18,6 +18,43 @@ window.OPENAI_WATCH = {
     ]
   },
   updates: [
+    {
+      id: "daybreak-gpt-56-cyber-launch",
+      date: "2026-08-10",
+      type: "security",
+      channel: "News",
+      title: "Daybreak expands with GPT-5.6 Cyber and controlled access tiers",
+      summary: "OpenAI expanded Daybreak with Blue access for general defensive work and separately approved Red access to GPT-5.6 Cyber for advanced authorized testing. OpenAI says the model remains below its Critical cyber threshold and disclosed that it helped identify a high-severity V8 flaw fixed as CVE-2026-15903, alongside additional safeguards for controlled use.",
+      tags: ["daybreak", "gpt-5.6 cyber", "cybersecurity", "cve-2026-15903"],
+      links: [
+        { label: "Security announcement", url: "https://openai.com/index/expanding-daybreak-as-the-cyber-defense-window-narrows/" },
+        { label: "API changelog", url: "https://developers.openai.com/api/docs/changelog" }
+      ]
+    },
+    {
+      id: "chatgpt-business-premium-seats",
+      date: "2026-08-10",
+      type: "release",
+      channel: "ChatGPT",
+      title: "ChatGPT Business previews Premium seats",
+      summary: "OpenAI announced a forthcoming Premium seat for ChatGPT Business with five times the usage of Standard, no five-hour usage limit, weekly resets, and mixed seat management within one workspace. Pricing is listed at $125 monthly or $100 monthly with annual billing, with a waitlist and limited early access ahead of general availability.",
+      tags: ["business", "premium seats", "usage limits", "pricing"],
+      links: [
+        { label: "Product announcement", url: "https://openai.com/index/premium-seats-chatgpt-business/" }
+      ]
+    },
+    {
+      id: "chatgpt-restaurant-reservations",
+      date: "2026-08-10",
+      type: "release",
+      channel: "ChatGPT",
+      title: "ChatGPT adds restaurant reservation search",
+      summary: "ChatGPT can now surface available restaurant times from OpenTable, Resy, and Yelp and hand users off to book. The feature is rolling out across consumer plans on mobile, web, and desktop, with partner availability varying by region; ChatGPT Work is excluded.",
+      tags: ["restaurants", "reservations", "opentable", "resy", "yelp"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
     {
       id: "astra-critical-cyber-controls",
       date: "2026-08-07",
