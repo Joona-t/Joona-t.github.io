@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-08-11",
+  verifiedAt: "2026-08-12",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -18,6 +18,30 @@ window.OPENAI_WATCH = {
     ]
   },
   updates: [
+    {
+      id: "daybreak-models-aws-bedrock",
+      date: "2026-08-11",
+      type: "release",
+      channel: "API",
+      title: "Daybreak models become available through Amazon Bedrock",
+      summary: "Eligible Daybreak customers can now use both Blue and Red access levels in their existing AWS environments through Amazon Bedrock. Approved users can access the models from the Bedrock console or the Responses API through the bedrock-mantle endpoint.",
+      tags: ["daybreak", "aws", "amazon bedrock", "cybersecurity"],
+      links: [
+        { label: "Product announcement", url: "https://openai.com/index/daybreak-models-are-now-available-on-aws/" }
+      ]
+    },
+    {
+      id: "chatgpt-ads-five-market-launch",
+      date: "2026-08-11",
+      type: "release",
+      channel: "ChatGPT",
+      title: "ChatGPT Ads launches in five more countries",
+      summary: "OpenAI launched ChatGPT Ads in the United Kingdom, Mexico, Brazil, Japan, and South Korea, expanding the advertising test beyond its earlier markets. OpenAI says ChatGPT answers remain independent from ads and that advertisers do not receive users' conversations or personal details.",
+      tags: ["ads", "free", "go", "international rollout"],
+      links: [
+        { label: "Product update", url: "https://openai.com/index/testing-ads-in-chatgpt/" }
+      ]
+    },
     {
       id: "daybreak-gpt-56-cyber-launch",
       date: "2026-08-10",
