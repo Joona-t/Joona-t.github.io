@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-08-13",
+  verifiedAt: "2026-08-14",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -18,6 +18,43 @@ window.OPENAI_WATCH = {
     ]
   },
   updates: [
+    {
+      id: "chatgpt-google-drive-library",
+      date: "2026-08-13",
+      type: "release",
+      channel: "ChatGPT",
+      title: "Google Drive files become available in ChatGPT Library",
+      summary: "Users with the Google Drive plugin connected can browse Drive files and folders from Library, add them to chats without re-uploading, and keep Docs, Sheets, or Slides open beside a conversation. The web rollout covers Plus, Pro, Enterprise, Edu, Healthcare, and Business, while Shared Drives and mobile are not yet included.",
+      tags: ["google drive", "library", "plugins", "files"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
+    {
+      id: "chatgpt-computer-history-macos",
+      date: "2026-08-13",
+      type: "release",
+      channel: "ChatGPT",
+      title: "Computer History launches as an opt-in macOS feature",
+      summary: "ChatGPT and Codex can reference user-selected app and website activity through an optional macOS history timeline that records interaction events rather than screenshots or audio. It is off by default for Pro, Business, and Enterprise users, includes pause and deletion controls, and is unavailable in the EEA, UK, and Switzerland.",
+      tags: ["computer history", "macos", "privacy", "codex"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
+    {
+      id: "gpt-56-sol-ultrafast-preview",
+      date: "2026-08-13",
+      type: "release",
+      channel: "API",
+      title: "GPT-5.6 Sol Ultrafast enters limited API preview",
+      summary: "OpenAI introduced an Ultrafast service tier for GPT-5.6 Sol that can run up to 14 times faster than Standard processing and generate up to 750 output tokens per second. The Cerebras-powered tier is available to a select group of API customers, with broader access planned as capacity grows.",
+      tags: ["gpt-5.6 sol", "ultrafast", "api", "cerebras"],
+      links: [
+        { label: "Product announcement", url: "https://openai.com/index/previewing-ultrafast/" },
+        { label: "API changelog", url: "https://developers.openai.com/api/docs/changelog" }
+      ]
+    },
     {
       id: "daybreak-models-aws-bedrock",
       date: "2026-08-11",
