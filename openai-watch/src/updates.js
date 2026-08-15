@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-08-14",
+  verifiedAt: "2026-08-15",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -7,17 +7,53 @@ window.OPENAI_WATCH = {
     status: "https://status.openai.com/"
   },
   statusSnapshot: {
-    label: "Operational",
+    label: "Degraded",
     source: "https://status.openai.com/",
     window: "Live check",
     uptime: [
-      { name: "APIs", value: "Operational" },
-      { name: "ChatGPT", value: "Operational" },
+      { name: "APIs", value: "Degraded" },
+      { name: "ChatGPT", value: "Degraded" },
       { name: "Codex", value: "Operational" },
       { name: "FedRAMP", value: "Operational" }
     ]
   },
   updates: [
+    {
+      id: "chatgpt-quizzes-think-free-go",
+      date: "2026-08-14",
+      type: "release",
+      channel: "ChatGPT",
+      title: "ChatGPT adds interactive quizzes and wider Think access",
+      summary: "ChatGPT can now run interactive quizzes inside conversations for consumer and Edu users on web and mobile. Free and Go users can also select Think on the web for questions that benefit from additional reasoning.",
+      tags: ["quizzes", "learning", "think", "free", "go"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
+    {
+      id: "chatgpt-project-memory-settings-editable",
+      date: "2026-08-14",
+      type: "patch",
+      channel: "ChatGPT",
+      title: "Existing ChatGPT projects gain editable memory settings",
+      summary: "Eligible unshared projects can now switch between default and project-only memory after creation. Shared projects remain locked to project-only memory, and ChatGPT Work remains unavailable inside projects using that mode.",
+      tags: ["projects", "memory", "privacy", "work"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
+    {
+      id: "chatgpt-codex-linux-desktop-preview",
+      date: "2026-08-14",
+      type: "release",
+      channel: "Codex",
+      title: "ChatGPT and Codex desktop app enters Linux preview",
+      summary: "OpenAI released a global public preview of the desktop app for Ubuntu 24.04 and 26.04 LTS, Debian 13, and Fedora 43 and 44. The Linux app supports browser actions through its built-in browser or Chrome, but cannot yet control other desktop apps.",
+      tags: ["linux", "desktop", "codex", "public preview"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
     {
       id: "chatgpt-google-drive-library",
       date: "2026-08-13",
