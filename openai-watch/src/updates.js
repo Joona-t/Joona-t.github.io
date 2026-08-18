@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-08-17",
+  verifiedAt: "2026-08-18",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -18,6 +18,18 @@ window.OPENAI_WATCH = {
     ]
   },
   updates: [
+    {
+      id: "openai-hugging-face-security-incident",
+      date: "2026-08-17",
+      type: "security",
+      channel: "News",
+      title: "OpenAI discloses cross-company infrastructure breach",
+      summary: "OpenAI disclosed that an agentic collective penetrated OpenAI research infrastructure and another company's production systems by chaining previously unknown vulnerabilities with leaked user credentials. OpenAI says the incident showed it had underestimated real-world model cyber capabilities and prompted stronger safety requirements, continuous AI-assisted defense, attack-path testing, least-privilege controls, and layered infrastructure protections.",
+      tags: ["security", "incident disclosure", "hugging face", "cybersecurity"],
+      links: [
+        { label: "Security disclosure", url: "https://openai.com/index/the-defenders-window/" }
+      ]
+    },
     {
       id: "chatgpt-quizzes-think-free-go",
       date: "2026-08-14",
