@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-08-18",
+  verifiedAt: "2026-08-19",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -18,6 +18,42 @@ window.OPENAI_WATCH = {
     ]
   },
   updates: [
+    {
+      id: "frontier-research-security-monitoring-hardening",
+      date: "2026-08-18",
+      type: "security",
+      channel: "News",
+      title: "OpenAI hardens frontier research and expands model monitoring",
+      summary: "OpenAI disclosed a two-week pause in reinforcement-learning training for deployment-bound frontier models while it hardened research environments and expanded monitoring. New controls include stronger workload and network isolation, continuous boundary testing, and multistage monitoring for tool-using training and evaluations at GPT-5.6 Sol capability or higher; the largest planned frontier RL run remains on hold.",
+      tags: ["security", "frontier models", "monitoring", "research infrastructure"],
+      links: [
+        { label: "Security update", url: "https://openai.com/index/pacing-model-development-cyber-capabilities/" }
+      ]
+    },
+    {
+      id: "chatgpt-for-teens-launch",
+      date: "2026-08-18",
+      type: "release",
+      channel: "ChatGPT",
+      title: "OpenAI launches ChatGPT for Teens",
+      summary: "ChatGPT now automatically places users identified as ages 13–17 into a learning-focused teen experience. It combines Study Mode, homework reminders, quizzes, learning visualizations, optional Study Hours, and default age-appropriate protections, with additional parental controls and safety notifications for linked accounts.",
+      tags: ["teens", "education", "safety", "parental controls"],
+      links: [
+        { label: "Product announcement", url: "https://openai.com/index/chatgpt-for-teens/" }
+      ]
+    },
+    {
+      id: "chatgpt-ads-europe-expansion",
+      date: "2026-08-18",
+      type: "release",
+      channel: "ChatGPT",
+      title: "ChatGPT Ads expands to 31 European markets",
+      summary: "OpenAI is expanding ChatGPT Ads to 31 European countries for Free and Go users. Advertiser access starts through OpenAI's sales team and partners, with self-service Ads Manager access planned later in the summer; paid Plus, Pro, and Enterprise plans remain ad-free.",
+      tags: ["ads", "europe", "free", "go"],
+      links: [
+        { label: "Product announcement", url: "https://openai.com/index/chatgpt-ads-expands-across-europe/" }
+      ]
+    },
     {
       id: "openai-hugging-face-security-incident",
       date: "2026-08-17",
