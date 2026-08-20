@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-08-19",
+  verifiedAt: "2026-08-20",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -18,6 +18,18 @@ window.OPENAI_WATCH = {
     ]
   },
   updates: [
+    {
+      id: "private-safety-processing-zdr-preview",
+      date: "2026-08-19",
+      type: "security",
+      channel: "News",
+      title: "OpenAI previews cross-interaction safeguards compatible with ZDR",
+      summary: "OpenAI is testing Private Safety Processing with early customers to detect risk patterns across related frontier-model interactions while keeping Zero Data Retention content inaccessible to OpenAI personnel. Customer-controlled deployments retain content on customer infrastructure, while a planned OpenAI-hosted option uses customer-controlled encryption keys; broader rollout and a technical white paper are planned for September.",
+      tags: ["zero data retention", "privacy", "safety", "frontier models"],
+      links: [
+        { label: "Safety and privacy announcement", url: "https://openai.com/index/offering-zero-data-retention-for-frontier-models/" }
+      ]
+    },
     {
       id: "frontier-research-security-monitoring-hardening",
       date: "2026-08-18",
