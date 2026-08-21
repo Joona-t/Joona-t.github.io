@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-08-20",
+  verifiedAt: "2026-08-21",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -18,6 +18,90 @@ window.OPENAI_WATCH = {
     ]
   },
   updates: [
+    {
+      id: "api-prompt-caching-dashboard",
+      date: "2026-08-20",
+      type: "release",
+      channel: "API",
+      title: "API platform adds a Prompt Caching dashboard",
+      summary: "OpenAI added a dashboard for tracking prompt-cache hit rates, cache reads per write, and cached versus uncached token usage. Metrics can be filtered by model and service tier to help developers evaluate caching efficiency.",
+      tags: ["prompt caching", "dashboard", "usage", "api"],
+      links: [
+        { label: "API changelog", url: "https://developers.openai.com/api/docs/changelog" }
+      ]
+    },
+    {
+      id: "gpt-image-2-transparent-backgrounds-preview",
+      date: "2026-08-20",
+      type: "release",
+      channel: "API",
+      title: "GPT Image 2 adds transparent backgrounds in preview",
+      summary: "The Images API and Responses API image-generation tool can now produce transparent PNG or WebP backgrounds with GPT Image 2 and its April 21 snapshot. JPEG output does not support the new background option.",
+      tags: ["gpt-image-2", "transparent backgrounds", "images api", "responses api"],
+      links: [
+        { label: "API changelog", url: "https://developers.openai.com/api/docs/changelog" }
+      ]
+    },
+    {
+      id: "chatgpt-sites-url-change",
+      date: "2026-08-20",
+      type: "patch",
+      channel: "ChatGPT",
+      title: "ChatGPT Site owners can change hosted URLs",
+      summary: "Plus and Pro Site owners can change an existing ChatGPT-hosted URL without redeploying. OpenAI redirects the previous address, including its routes and query parameters, while leaving custom domains unchanged.",
+      tags: ["sites", "urls", "redirects", "plus", "pro"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
+    {
+      id: "apple-messages-plugin-desktop",
+      date: "2026-08-20",
+      type: "release",
+      channel: "Codex",
+      title: "Codex and ChatGPT Work add Apple Messages access",
+      summary: "On Apple silicon Macs, the Apple Messages plugin can read and search iMessage, SMS, and RCS conversations and prepare or send messages through the Messages app. Sending asks for approval of the message and recipients by default.",
+      tags: ["apple messages", "plugin", "macos", "codex", "work"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
+    {
+      id: "computer-history-pro-europe-expansion",
+      date: "2026-08-20",
+      type: "release",
+      channel: "ChatGPT",
+      title: "Computer History expands to Pro users in Europe",
+      summary: "The optional Computer History feature is now available to Pro users in the EEA, Switzerland, and the United Kingdom through the ChatGPT macOS app. It remains off by default and requires Memories.",
+      tags: ["computer history", "macos", "pro", "europe", "privacy"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
+    {
+      id: "codex-chat-read-only-share-links",
+      date: "2026-08-20",
+      type: "release",
+      channel: "Codex",
+      title: "Codex adds read-only chat snapshots",
+      summary: "Codex users can share a static chat snapshot with anyone who has its personal link. Tool calls and shell input and output are omitted, and known secret patterns are redacted, but OpenAI advises reviewing snapshots for other sensitive content before sharing.",
+      tags: ["codex", "sharing", "privacy", "redaction"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
+    {
+      id: "pinned-chats-desktop-ios-sync",
+      date: "2026-08-20",
+      type: "patch",
+      channel: "ChatGPT",
+      title: "Pinned chats sync between desktop and iOS",
+      summary: "Pinned chats now stay synchronized between the ChatGPT desktop app and iOS when both use the same Codex account. Android is not part of this update.",
+      tags: ["pinned chats", "sync", "desktop", "ios"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
     {
       id: "private-safety-processing-zdr-preview",
       date: "2026-08-19",
