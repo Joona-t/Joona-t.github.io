@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-08-21",
+  verifiedAt: "2026-08-22",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -18,6 +18,90 @@ window.OPENAI_WATCH = {
     ]
   },
   updates: [
+    {
+      id: "api-request-regional-processing",
+      date: "2026-08-21",
+      type: "release",
+      channel: "API",
+      title: "API adds per-request regional processing",
+      summary: "Eligible API customers can select regional processing for an individual request by using a region-prefixed domain with an API key from a project configured for Global geography. Existing endpoint, model, data-retention, and eligibility requirements still apply.",
+      tags: ["regional processing", "data controls", "api", "privacy"],
+      links: [
+        { label: "API changelog", url: "https://developers.openai.com/api/docs/changelog" }
+      ]
+    },
+    {
+      id: "gpt-56-sol-promotional-price-cut",
+      date: "2026-08-21",
+      type: "patch",
+      channel: "API",
+      title: "GPT-5.6 Sol API pricing falls",
+      summary: "OpenAI reduced GPT-5.6 Sol pricing to $4 per million input tokens and $20 per million output tokens. The promotional rates are scheduled to remain available at least through November 21, 2026.",
+      tags: ["gpt-5.6 sol", "pricing", "api", "promotion"],
+      links: [
+        { label: "API changelog", url: "https://developers.openai.com/api/docs/changelog" }
+      ]
+    },
+    {
+      id: "chatgpt-plugin-discovery-ranking",
+      date: "2026-08-21",
+      type: "patch",
+      channel: "ChatGPT",
+      title: "ChatGPT improves plugin discovery rankings",
+      summary: "Plugin recommendations on ChatGPT web and mobile now give more weight to tools that people continue using after installation. Availability still varies by plan, region, and workspace settings, and desktop is not included.",
+      tags: ["plugins", "discovery", "recommendations", "web", "mobile"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
+    {
+      id: "chatgpt-local-time-awareness",
+      date: "2026-08-21",
+      type: "patch",
+      channel: "ChatGPT",
+      title: "ChatGPT improves local-time awareness",
+      summary: "ChatGPT can now better account for a user's local time while answering time-sensitive questions during a conversation.",
+      tags: ["local time", "context", "time-sensitive answers"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
+    {
+      id: "chatgpt-web-progressive-loading",
+      date: "2026-08-21",
+      type: "patch",
+      channel: "ChatGPT",
+      title: "ChatGPT web speeds up long and interactive chats",
+      summary: "Long web conversations now load messages in smaller sections instead of fetching the full history at once. Interactive content can also begin appearing progressively while ChatGPT is still generating it.",
+      tags: ["web", "performance", "long conversations", "interactive content"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
+    {
+      id: "chatgpt-ios-photo-network-updates",
+      date: "2026-08-21",
+      type: "patch",
+      channel: "ChatGPT",
+      title: "ChatGPT iOS improves photo and connection access",
+      summary: "The iOS app adds a press-and-hold shortcut on the add button for recent photos and clearer messages when ChatGPT is waiting for an internet connection. Photo access requires the user's permission.",
+      tags: ["ios", "photos", "connectivity", "mobile"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
+    {
+      id: "chatgpt-android-images-recents",
+      date: "2026-08-21",
+      type: "patch",
+      channel: "ChatGPT",
+      title: "ChatGPT Android expands images and recent chats",
+      summary: "Generated images now use the full conversation width, and the Android sidebar shows up to eight recent conversations. The update requires ChatGPT for Android version 1.2026.216 or later.",
+      tags: ["android", "images", "recent chats", "mobile"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
     {
       id: "api-prompt-caching-dashboard",
       date: "2026-08-20",
