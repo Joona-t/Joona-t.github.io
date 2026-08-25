@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-08-24",
+  verifiedAt: "2026-08-25",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -18,6 +18,18 @@ window.OPENAI_WATCH = {
     ]
   },
   updates: [
+    {
+      id: "gpt-56-family-kiro-availability",
+      date: "2026-08-24",
+      type: "release",
+      channel: "News",
+      title: "GPT-5.6 model family launches in Kiro",
+      summary: "OpenAI's GPT-5.6 Sol, Terra, and Luna models are now available in AWS's Kiro software-development agent for planning, implementation, review, and testing workflows.",
+      tags: ["gpt-5.6", "kiro", "aws", "coding agents", "developer tools"],
+      links: [
+        { label: "Product announcement", url: "https://openai.com/index/gpt-5-6-in-kiro/" }
+      ]
+    },
     {
       id: "api-request-regional-processing",
       date: "2026-08-21",
