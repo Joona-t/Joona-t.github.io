@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-08-25",
+  verifiedAt: "2026-08-26",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -18,6 +18,42 @@ window.OPENAI_WATCH = {
     ]
   },
   updates: [
+    {
+      id: "chatgpt-scheduled-tasks-webhooks-sharing",
+      date: "2026-08-25",
+      type: "release",
+      channel: "ChatGPT",
+      title: "Scheduled tasks add webhooks and sharing",
+      summary: "ChatGPT Work scheduled tasks can now respond to supported Gmail, Slack, and GitHub activity for Plus and Pro users. Tasks can also be shared as independent copies across plans, while Free users can create up to three daily or one-time scheduled tasks without webhook triggers.",
+      tags: ["scheduled tasks", "webhooks", "sharing", "work", "automation"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
+    {
+      id: "chatgpt-work-signed-in-websites",
+      date: "2026-08-25",
+      type: "release",
+      channel: "ChatGPT",
+      title: "ChatGPT Work can use signed-in websites",
+      summary: "Plus and Pro users can sign in through ChatGPT Work's browser on web and mobile so it can continue supported tasks on authenticated sites. Credentials are not exposed to the model, and consequential actions such as reservations or payments still require confirmation.",
+      tags: ["work", "browser", "authentication", "plus", "pro"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
+    {
+      id: "admin-plugin-work-codex",
+      date: "2026-08-25",
+      type: "release",
+      channel: "Codex",
+      title: "Admin plugin launches for Work and Codex",
+      summary: "Workspace admins can use a new permission-aware plugin to review adoption and usage, manage members and groups, diagnose access, adjust supported limits, and automate recurring administrative workflows from ChatGPT Work and Codex.",
+      tags: ["admin plugin", "work", "codex", "workspace management", "permissions"],
+      links: [
+        { label: "Product announcement", url: "https://openai.com/index/introducing-admin-plugin/" }
+      ]
+    },
     {
       id: "gpt-56-family-kiro-availability",
       date: "2026-08-24",
