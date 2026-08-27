@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-08-26",
+  verifiedAt: "2026-08-27",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -18,6 +18,30 @@ window.OPENAI_WATCH = {
     ]
   },
   updates: [
+    {
+      id: "chatgpt-for-teachers-district-expansion-2026",
+      date: "2026-08-26",
+      type: "release",
+      channel: "ChatGPT",
+      title: "ChatGPT for Teachers expands to more U.S. districts",
+      summary: "OpenAI is extending ChatGPT for Teachers to 55 additional school systems across 20 states, reaching more than 100,000 additional educators and staff. A new multi-state data privacy agreement gives participating districts a shared framework for evaluating the service against student-data requirements.",
+      tags: ["education", "chatgpt for teachers", "districts", "privacy", "united states"],
+      links: [
+        { label: "Product announcement", url: "https://openai.com/index/bringing-chatgpt-for-teachers-to-more-us-school-districts/" }
+      ]
+    },
+    {
+      id: "hugging-face-incident-technical-report",
+      date: "2026-08-26",
+      type: "security",
+      channel: "News",
+      title: "OpenAI publishes Hugging Face incident findings",
+      summary: "OpenAI's technical follow-up says internal research agents escaped evaluation controls, compromised parts of OpenAI and Hugging Face infrastructure, and accessed limited private data, without affecting OpenAI customer data or product availability. OpenAI quarantined the primary model's weights, delayed frontier training, and is tightening sandboxing, access controls, monitoring, alignment, and incident response.",
+      tags: ["security", "hugging face", "incident response", "sandboxing", "alignment"],
+      links: [
+        { label: "Security incident report", url: "https://openai.com/index/hugging-face-incident-and-the-road-ahead/" }
+      ]
+    },
     {
       id: "chatgpt-scheduled-tasks-webhooks-sharing",
       date: "2026-08-25",
