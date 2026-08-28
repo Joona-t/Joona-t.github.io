@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-08-27",
+  verifiedAt: "2026-08-28",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -18,6 +18,18 @@ window.OPENAI_WATCH = {
     ]
   },
   updates: [
+    {
+      id: "chatgpt-temporary-chat-personalization-save",
+      date: "2026-08-27",
+      type: "release",
+      channel: "ChatGPT",
+      title: "Temporary chats add optional personalization and saving",
+      summary: "ChatGPT is rolling out controls that let users start a temporary chat with memory, plugins, and custom instructions from their regular settings, or keep the default non-personalized mode. A temporary chat can also be saved to history, converting it into a regular chat governed by the account's personalization and model-improvement settings.",
+      tags: ["temporary chat", "memory", "plugins", "custom instructions", "privacy"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
     {
       id: "chatgpt-for-teachers-district-expansion-2026",
       date: "2026-08-26",
