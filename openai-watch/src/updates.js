@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-08-28",
+  verifiedAt: "2026-08-29",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -18,6 +18,30 @@ window.OPENAI_WATCH = {
     ]
   },
   updates: [
+    {
+      id: "chatgpt-multiple-google-accounts",
+      date: "2026-08-28",
+      type: "release",
+      channel: "ChatGPT",
+      title: "ChatGPT connects multiple Google accounts",
+      summary: "ChatGPT users can connect multiple Google accounts for the Gmail, Google Calendar, and Google Contacts plugins, allowing personal and work data to be used together in one conversation. The release is available globally on supported Plus, Pro, Business, and Enterprise plans across web, desktop, iOS, and Android.",
+      tags: ["google accounts", "gmail", "google calendar", "google contacts", "plugins"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
+    {
+      id: "cursor-openai-model-access-wind-down",
+      date: "2026-08-28",
+      type: "deprecation",
+      channel: "News",
+      title: "OpenAI plans to end model access through Cursor",
+      summary: "OpenAI notified SpaceX that it intends to wind down its contract supplying OpenAI models to Cursor, with a proposed shutoff date of November 12, 2026. OpenAI says Cursor will not receive future OpenAI models while developers retain access during the notice period.",
+      tags: ["cursor", "model access", "deprecation", "developer tools", "contract"],
+      links: [
+        { label: "OpenAI announcement", url: "https://openai.com/index/our-decision-on-cursor-following-its-acquisition-by-spacex/" }
+      ]
+    },
     {
       id: "chatgpt-temporary-chat-personalization-save",
       date: "2026-08-27",
