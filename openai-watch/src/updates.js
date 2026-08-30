@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-08-29",
+  verifiedAt: "2026-08-30",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -18,6 +18,18 @@ window.OPENAI_WATCH = {
     ]
   },
   updates: [
+    {
+      id: "chatgpt-dalle-gpt-retirement",
+      date: "2026-08-30",
+      type: "deprecation",
+      channel: "ChatGPT",
+      title: "ChatGPT retires the official DALL-E GPT",
+      summary: "OpenAI retired its official DALL-E GPT in ChatGPT. ChatGPT Images remains available for image creation and editing, and user-created GPTs with image generation enabled are not affected.",
+      tags: ["dall-e", "gpts", "image generation", "deprecation", "chatgpt images"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
     {
       id: "chatgpt-multiple-google-accounts",
       date: "2026-08-28",
