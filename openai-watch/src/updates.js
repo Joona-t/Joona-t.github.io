@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-08-30",
+  verifiedAt: "2026-09-01",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -7,17 +7,89 @@ window.OPENAI_WATCH = {
     status: "https://status.openai.com/"
   },
   statusSnapshot: {
-    label: "Operational",
+    label: "Degraded performance",
     source: "https://status.openai.com/",
     window: "Live check",
     uptime: [
-      { name: "APIs", value: "Operational" },
+      { name: "APIs", value: "Degraded performance" },
       { name: "ChatGPT", value: "Operational" },
       { name: "Codex", value: "Operational" },
       { name: "FedRAMP", value: "Operational" }
     ]
   },
   updates: [
+    {
+      id: "chatgpt-personalized-sticker-packs",
+      date: "2026-08-31",
+      type: "release",
+      channel: "ChatGPT",
+      title: "ChatGPT creates shareable sticker packs",
+      summary: "ChatGPT mobile users can create personalized sticker packs from a prompt, template, or photo, then download them or add them to iMessage or WhatsApp on supported devices. The experience is available globally across ChatGPT plans.",
+      tags: ["stickers", "image generation", "mobile", "imessage", "whatsapp"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
+    {
+      id: "chatgpt-live-voice-lock-screen",
+      date: "2026-08-31",
+      type: "release",
+      channel: "ChatGPT",
+      title: "Live voice content reaches the iPhone Lock Screen",
+      summary: "ChatGPT can show content from a Live voice conversation through iOS Live Activities on the Lock Screen and Dynamic Island. Continuing Voice outside the app requires Background conversations to be enabled.",
+      tags: ["voice", "ios", "live activities", "lock screen", "dynamic island"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
+    {
+      id: "desktop-browser-webmcp-site-tools",
+      date: "2026-08-31",
+      type: "release",
+      channel: "Codex",
+      title: "Desktop browser adds WebMCP site tools",
+      summary: "ChatGPT Work and Codex can discover and use tools exposed by supported websites through WebMCP in the desktop app's built-in browser. Account, model, webpage, workspace, and confirmation requirements still apply, and the feature is not available through the Chrome extension.",
+      tags: ["webmcp", "site tools", "desktop browser", "work", "codex"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
+    {
+      id: "chatgpt-browser-extension-expanded-support",
+      date: "2026-08-31",
+      type: "release",
+      channel: "Codex",
+      title: "ChatGPT browser extension expands beyond Chrome",
+      summary: "The ChatGPT browser extension now supports Microsoft Edge, Brave, Opera, and Vivaldi for tab context and browser tasks in Work and Codex. Side chat is available in Edge, Brave, and Vivaldi, while Opera supports tab mentions and browser control.",
+      tags: ["browser extension", "edge", "brave", "opera", "vivaldi"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
+    {
+      id: "chatgpt-pronunciation-audio-phonetics",
+      date: "2026-08-31",
+      type: "patch",
+      channel: "ChatGPT",
+      title: "ChatGPT improves pronunciation help",
+      summary: "Pronunciation answers can now include tappable audio and a phonetic breakdown for a requested word or phrase.",
+      tags: ["pronunciation", "audio", "phonetics", "language learning"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
+    {
+      id: "chatgpt-ads-self-service-global-expansion",
+      date: "2026-08-31",
+      type: "release",
+      channel: "News",
+      title: "ChatGPT Ads expands self-service access",
+      summary: "OpenAI is launching self-service ChatGPT Ads purchasing through Ads Manager across India, Europe, the Middle East, and North Africa. The broader ads platform is now available in more than 40 countries through self-service, sales, agency, and technology-partner channels.",
+      tags: ["chatgpt ads", "ads manager", "self-service", "global expansion"],
+      links: [
+        { label: "Product announcement", url: "https://openai.com/index/expanding-access-to-ai-with-chatgpt-ads/" }
+      ]
+    },
     {
       id: "chatgpt-dalle-gpt-retirement",
       date: "2026-08-30",
@@ -28,6 +100,18 @@ window.OPENAI_WATCH = {
       tags: ["dall-e", "gpts", "image generation", "deprecation", "chatgpt images"],
       links: [
         { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
+    {
+      id: "api-mtls-x509-workload-identity-ga",
+      date: "2026-08-29",
+      type: "release",
+      channel: "API",
+      title: "API adds generally available mTLS and X.509 identity",
+      summary: "Mutual TLS and X.509 workload identity federation are now generally available for the OpenAI API. Organizations can configure certificates and X.509 identity providers in the Platform console under their existing role and permission controls.",
+      tags: ["mtls", "x.509", "workload identity", "authentication", "api security"],
+      links: [
+        { label: "API changelog", url: "https://developers.openai.com/api/docs/changelog" }
       ]
     },
     {
@@ -76,6 +160,30 @@ window.OPENAI_WATCH = {
       tags: ["education", "chatgpt for teachers", "districts", "privacy", "united states"],
       links: [
         { label: "Product announcement", url: "https://openai.com/index/bringing-chatgpt-for-teachers-to-more-us-school-districts/" }
+      ]
+    },
+    {
+      id: "api-transcription-models-deprecation-2027",
+      date: "2026-08-26",
+      type: "deprecation",
+      channel: "API",
+      title: "Legacy transcription models set for retirement",
+      summary: "OpenAI will shut down whisper-1, gpt-4o-transcribe, gpt-4o-mini-transcribe, and gpt-4o-transcribe-diarize on February 26, 2027. Developers are directed to migrate transcription workflows to GPT Live Transcribe or GPT Transcribe.",
+      tags: ["transcription", "whisper-1", "gpt-4o-transcribe", "deprecation", "audio api"],
+      links: [
+        { label: "API changelog", url: "https://developers.openai.com/api/docs/changelog" }
+      ]
+    },
+    {
+      id: "assistants-api-shutdown-2026",
+      date: "2026-08-26",
+      type: "deprecation",
+      channel: "API",
+      title: "Assistants API reaches shutdown",
+      summary: "The Assistants API shut down on August 26, 2026. OpenAI directs remaining integrations to migrate to the Responses API and Conversations API.",
+      tags: ["assistants api", "responses api", "conversations api", "shutdown", "migration"],
+      links: [
+        { label: "API changelog", url: "https://developers.openai.com/api/docs/changelog" }
       ]
     },
     {
