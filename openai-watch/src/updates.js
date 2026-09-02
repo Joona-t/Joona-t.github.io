@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-09-01",
+  verifiedAt: "2026-09-02",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -7,17 +7,42 @@ window.OPENAI_WATCH = {
     status: "https://status.openai.com/"
   },
   statusSnapshot: {
-    label: "Degraded performance",
+    label: "All systems operational",
     source: "https://status.openai.com/",
     window: "Live check",
     uptime: [
-      { name: "APIs", value: "Degraded performance" },
+      { name: "APIs", value: "Operational" },
       { name: "ChatGPT", value: "Operational" },
       { name: "Codex", value: "Operational" },
       { name: "FedRAMP", value: "Operational" }
     ]
   },
   updates: [
+    {
+      id: "astra-critical-cyber-designation-safeguards",
+      date: "2026-09-01",
+      type: "security",
+      channel: "News",
+      title: "OpenAI designates Astra at critical cyber capability",
+      summary: "OpenAI now assesses Astra as meeting its Critical cybersecurity capability threshold and says it delayed parts of development and release while strengthening safeguards. Initial advanced access will be limited, with added refusal training, abuse protections, alignment controls, and monitoring designed to stop unauthorized activity.",
+      tags: ["astra", "cybersecurity", "preparedness", "alignment", "monitoring"],
+      links: [
+        { label: "Security disclosure", url: "https://openai.com/index/path-to-astra/" }
+      ]
+    },
+    {
+      id: "chatgpt-healthcare-epic-public-data",
+      date: "2026-09-01",
+      type: "release",
+      channel: "ChatGPT",
+      title: "ChatGPT for Healthcare connects Epic and public data",
+      summary: "Eligible healthcare organizations can connect authorized Epic patient context to ChatGPT for Healthcare, while a new Healthcare Public Data plugin provides structured access to nine official public sources. Eligible U.S. ChatGPT for Clinicians users can use the read-only public-data tools without patient-chart access.",
+      tags: ["healthcare", "epic", "ehr", "public data", "plugins"],
+      links: [
+        { label: "Product announcement", url: "https://openai.com/index/chatgpt-connects-health-records-and-healthcare-sources/" },
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
     {
       id: "chatgpt-personalized-sticker-packs",
       date: "2026-08-31",
