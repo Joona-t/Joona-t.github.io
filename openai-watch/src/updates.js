@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-09-02",
+  verifiedAt: "2026-09-05",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -18,6 +18,68 @@ window.OPENAI_WATCH = {
     ]
   },
   updates: [
+    {
+      id: "daybreak-frontline-defenders-billion-access",
+      date: "2026-09-03",
+      type: "security",
+      channel: "News",
+      title: "Daybreak expands access for frontline defenders",
+      summary: "OpenAI committed $1 billion in subsidized Daybreak access, training, technical support, and partnerships for resource-constrained cyber defenders. The initiative includes a U.S. essential-services program, an MS-ISAC pilot, and more than 35 partner products and services in the Daybreak Defense Network.",
+      tags: ["daybreak", "cybersecurity", "critical infrastructure", "defenders", "access"],
+      links: [
+        { label: "Security announcement", url: "https://openai.com/index/daybreak-for-frontline-defenders/" }
+      ]
+    },
+    {
+      id: "api-astra-long-running-controls",
+      date: "2026-09-03",
+      type: "release",
+      channel: "API",
+      title: "Responses API adds controls for long-running Astra work",
+      summary: "The Responses API now supports asynchronous tool calling, mid-turn steering over WebSockets, and changing reasoning effort during a conversation for GPT-6 Astra. These controls let applications return tool results later, redirect in-progress work, and tune effort while retaining the cached prompt prefix.",
+      tags: ["gpt-6 astra", "responses api", "async tools", "mid-turn steering", "reasoning effort"],
+      links: [
+        { label: "API changelog", url: "https://developers.openai.com/api/docs/changelog" }
+      ]
+    },
+    {
+      id: "chatgpt-sites-external-private-sharing",
+      date: "2026-09-03",
+      type: "release",
+      channel: "ChatGPT",
+      title: "ChatGPT Sites adds private external sharing",
+      summary: "Eligible Site owners can share a live ChatGPT Site with named people outside their workspace without publishing it publicly. External recipients sign in with the granted account and receive viewer access only, while owners retain controls to review or remove viewers.",
+      tags: ["sites", "external sharing", "viewer access", "workspace", "privacy"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
+    {
+      id: "zendesk-onenote-plugins-beta",
+      date: "2026-09-03",
+      type: "release",
+      channel: "ChatGPT",
+      title: "Zendesk and OneNote plugins enter beta",
+      summary: "The Plugin directory now includes beta Zendesk and OneNote integrations for ChatGPT and Codex. Zendesk supports authorized ticket, customer-history, knowledge, and reply workflows, while OneNote supports finding and summarizing notes and taking supported note actions.",
+      tags: ["zendesk", "onenote", "plugins", "beta", "codex"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
+    {
+      id: "gpt-6-astra-launch",
+      date: "2026-09-03",
+      type: "release",
+      channel: "API",
+      title: "OpenAI launches GPT-6 Astra",
+      summary: "GPT-6 Astra is rolling out to a limited set of organizations, with broader ChatGPT availability planned and API access through Responses and Chat Completions. The model targets complex coding, research, computer use, and document workflows, while tool calling requires the Responses API and supported deployments include asynchronous misalignment monitoring.",
+      tags: ["gpt-6 astra", "model", "api", "chatgpt", "computer use"],
+      links: [
+        { label: "Launch announcement", url: "https://openai.com/index/gpt-6-astra/" },
+        { label: "API changelog", url: "https://developers.openai.com/api/docs/changelog" },
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
     {
       id: "astra-critical-cyber-designation-safeguards",
       date: "2026-09-01",
