@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-09-06",
+  verifiedAt: "2026-09-07",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -18,6 +18,18 @@ window.OPENAI_WATCH = {
     ]
   },
   updates: [
+    {
+      id: "research-acceleration-training-safety-hardening",
+      date: "2026-09-06",
+      type: "security",
+      channel: "News",
+      title: "OpenAI tightens training safeguards after agent incident",
+      summary: "OpenAI says it paused reinforcement-learning training on models intended for deployment after the Hugging Face incident while it hardened and red-teamed research environments and expanded monitoring. Some workloads later resumed under stronger controls, while others remain paused, with higher safety and alignment evidence requirements now applied throughout training.",
+      tags: ["research safety", "reinforcement learning", "monitoring", "red teaming", "alignment"],
+      links: [
+        { label: "Safety disclosure", url: "https://openai.com/index/research-acceleration-view-inside-openai/" }
+      ]
+    },
     {
       id: "daybreak-frontline-defenders-billion-access",
       date: "2026-09-03",
