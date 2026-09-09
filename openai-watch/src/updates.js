@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-09-08",
+  verifiedAt: "2026-09-09",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -18,6 +18,44 @@ window.OPENAI_WATCH = {
     ]
   },
   updates: [
+    {
+      id: "api-prompt-cache-diagnostics-ga",
+      date: "2026-09-08",
+      type: "release",
+      channel: "API",
+      title: "Prompt Cache Diagnostics reaches general availability",
+      summary: "The Responses API now offers generally available Prompt Cache Diagnostics for GPT-5.6 and later supported models. Developers can compare cache reuse with a previous response, identify why a cache missed, and use targeted troubleshooting guidance to improve reuse.",
+      tags: ["prompt caching", "responses api", "diagnostics", "gpt-5.6", "general availability"],
+      links: [
+        { label: "API changelog", url: "https://developers.openai.com/api/docs/changelog" }
+      ]
+    },
+    {
+      id: "gpt-image-2-5-api-models",
+      date: "2026-09-08",
+      type: "release",
+      channel: "API",
+      title: "GPT Image 2.5 models launch in the API",
+      summary: "OpenAI released GPT Image 2.5 Flare and Sunburst through the Image API and the Responses API image-generation tool. Flare targets fast, high-quality everyday generation and editing, while Sunburst prioritizes precision for detailed creative work; both support xhigh and max quality settings.",
+      tags: ["gpt image 2.5", "image api", "responses api", "flare", "sunburst"],
+      links: [
+        { label: "API changelog", url: "https://developers.openai.com/api/docs/changelog" },
+        { label: "Product announcement", url: "https://openai.com/index/introducing-chatgpt-images-2-5/" }
+      ]
+    },
+    {
+      id: "chatgpt-images-2-5-release",
+      date: "2026-09-08",
+      type: "release",
+      channel: "ChatGPT",
+      title: "ChatGPT Images 2.5 adds sharper creation and editing",
+      summary: "ChatGPT Images 2.5 improves detail, reference fidelity, multi-turn editing consistency, and generation speed. New creation controls include templates, mobile Sketch input, comments for focused edits, and shareable prompts, with availability rolling out across ChatGPT, Work, and Codex tiers on desktop, mobile, and web.",
+      tags: ["chatgpt images", "image generation", "editing", "sketch", "templates"],
+      links: [
+        { label: "Product announcement", url: "https://openai.com/index/introducing-chatgpt-images-2-5/" },
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
     {
       id: "research-acceleration-training-safety-hardening",
       date: "2026-09-06",
