@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-09-09",
+  verifiedAt: "2026-09-10",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -7,17 +7,65 @@ window.OPENAI_WATCH = {
     status: "https://status.openai.com/"
   },
   statusSnapshot: {
-    label: "All systems operational",
+    label: "ChatGPT issue under monitoring",
     source: "https://status.openai.com/",
     window: "Live check",
     uptime: [
       { name: "APIs", value: "Operational" },
-      { name: "ChatGPT", value: "Operational" },
+      { name: "ChatGPT", value: "Degraded" },
       { name: "Codex", value: "Operational" },
       { name: "FedRAMP", value: "Operational" }
     ]
   },
   updates: [
+    {
+      id: "astra-work-api-broader-availability",
+      date: "2026-09-09",
+      type: "release",
+      channel: "Codex",
+      title: "GPT-6 Astra expands across Work, Codex, and the API",
+      summary: "OpenAI says GPT-6 Astra is now available in ChatGPT Work, Codex, and the API. Enterprise administrators can enable it under their agreement, restrict approved websites and desktop apps, manage file transfers and browsing history, and use new Oracle Analytics, Power BI, Navan, and Avalara desktop plugins.",
+      tags: ["gpt-6 astra", "chatgpt work", "codex", "enterprise controls", "plugins"],
+      links: [
+        { label: "Product announcement", url: "https://openai.com/index/gpt-6-astra-next-generation-work/" }
+      ]
+    },
+    {
+      id: "deep-research-work-codex",
+      date: "2026-09-09",
+      type: "release",
+      channel: "Codex",
+      title: "Deep Research arrives in ChatGPT Work and Codex",
+      summary: "Deep Research is now available in ChatGPT Work and Codex for eligible Plus, Pro, Business, Enterprise, and Edu users. It can research across the web, files, and supported connected apps, accept steering while it runs, and produce cited editable artifacts using existing Work or Codex allowance or credits.",
+      tags: ["deep research", "chatgpt work", "codex", "connected apps", "citations"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
+    {
+      id: "chatgpt-library-sharing",
+      date: "2026-09-09",
+      type: "release",
+      channel: "ChatGPT",
+      title: "ChatGPT Library adds file and folder sharing",
+      summary: "ChatGPT Library now lets users share files and folders with specific people or a workspace, assign Viewer or Editor access, manage permissions, and use shared content in conversations. Files placed in a shared folder remain owned by the folder owner while retaining uploader attribution.",
+      tags: ["library", "file sharing", "folders", "permissions", "collaboration"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
+    {
+      id: "chatgpt-voice-model-limits-update",
+      date: "2026-09-09",
+      type: "patch",
+      channel: "ChatGPT",
+      title: "ChatGPT Voice updates models and daily limits",
+      summary: "ChatGPT Voice can now use GPT-5.6 or GPT-6 Astra for harder search and reasoning, with the same model and reasoning-effort controls as text chat. OpenAI also revised GPT-Live daily limits by plan, stopped Plus and Pro fallback to GPT-Live mini at the limit, and deprecated the separate Instant, Medium, and High Voice intelligence levels.",
+      tags: ["voice", "gpt-live", "gpt-5.6", "gpt-6 astra", "usage limits"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
     {
       id: "api-prompt-cache-diagnostics-ga",
       date: "2026-09-08",
