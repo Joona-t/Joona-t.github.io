@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-09-10",
+  verifiedAt: "2026-09-12",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -7,17 +7,92 @@ window.OPENAI_WATCH = {
     status: "https://status.openai.com/"
   },
   statusSnapshot: {
-    label: "ChatGPT issue under monitoring",
+    label: "All systems operational",
     source: "https://status.openai.com/",
     window: "Live check",
     uptime: [
       { name: "APIs", value: "Operational" },
-      { name: "ChatGPT", value: "Degraded" },
+      { name: "ChatGPT", value: "Operational" },
       { name: "Codex", value: "Operational" },
       { name: "FedRAMP", value: "Operational" }
     ]
   },
   updates: [
+    {
+      id: "chatgpt-data-plugin-launch",
+      date: "2026-09-10",
+      type: "release",
+      channel: "ChatGPT",
+      title: "Data plugin turns company data into analysis and dashboards",
+      summary: "OpenAI released the Data plugin for ChatGPT Work and Codex. It can investigate connected business data, apply an organization's metric definitions and context, and create interactive reports or dashboards while respecting existing source permissions and administrator controls.",
+      tags: ["data plugin", "chatgpt work", "codex", "analytics", "dashboards"],
+      links: [
+        { label: "Product announcement", url: "https://openai.com/index/put-data-to-work/" },
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
+    {
+      id: "chatgpt-library-cloud-storage-connectors",
+      date: "2026-09-10",
+      type: "release",
+      channel: "ChatGPT",
+      title: "Library adds Box, Dropbox, and SharePoint",
+      summary: "ChatGPT Library now connects to Box, Dropbox, and SharePoint alongside Google Drive. Eligible web users can browse connected files and folders, add them to conversations without re-uploading, keep supported files open beside a chat, and follow citations back to the source under existing permissions and workspace controls.",
+      tags: ["library", "box", "dropbox", "sharepoint", "connected files"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
+    {
+      id: "chatgpt-financial-services-launch",
+      date: "2026-09-10",
+      type: "release",
+      channel: "ChatGPT",
+      title: "OpenAI introduces ChatGPT for Financial Services",
+      summary: "ChatGPT for Financial Services is a tailored ChatGPT Work experience for research, financial models, and client materials. It combines GPT-6 Astra with built-in premium financial datasets, granular source citations, improved provider connections, and centralized enterprise access and data controls.",
+      tags: ["financial services", "chatgpt work", "gpt-6 astra", "premium data", "citations"],
+      links: [
+        { label: "Product announcement", url: "https://openai.com/index/introducing-chatgpt-financial-services/" }
+      ]
+    },
+    {
+      id: "api-project-key-expiration-controls",
+      date: "2026-09-10",
+      type: "security",
+      channel: "API",
+      title: "API project keys gain expiration controls",
+      summary: "Developers can set expiration dates when creating project API keys. Organization and project administrators can also enforce a maximum key lifetime in Platform settings so newly created keys must expire within the configured limit.",
+      tags: ["api keys", "expiration", "rotation", "administration", "security"],
+      links: [
+        { label: "API changelog", url: "https://developers.openai.com/api/docs/changelog" }
+      ]
+    },
+    {
+      id: "agents-api-public-beta",
+      date: "2026-09-10",
+      type: "release",
+      channel: "API",
+      title: "Agents API enters public beta",
+      summary: "The Agents API is now in public beta for all developers, providing a managed Codex harness for session orchestration, context compaction, recovery, tools, MCP servers, and multi-agent work. Durable sessions can run in OpenAI-hosted sandboxes or connected external environments and continue across turns.",
+      tags: ["agents api", "public beta", "codex harness", "durable sessions", "sandboxes"],
+      links: [
+        { label: "Product announcement", url: "https://openai.com/index/introducing-the-agents-api/" },
+        { label: "API changelog", url: "https://developers.openai.com/api/docs/changelog" }
+      ]
+    },
+    {
+      id: "gpt-live-1-api-general-availability",
+      date: "2026-09-10",
+      type: "release",
+      channel: "API",
+      title: "GPT-Live-1 reaches general availability in the API",
+      summary: "GPT-Live-1 is now generally available through live API sessions for full-duplex voice conversations. Applications can delegate reasoning and tool work to an OpenAI model through Responses or connect their own backend through client delegation.",
+      tags: ["gpt-live-1", "voice", "live api", "general availability", "delegation"],
+      links: [
+        { label: "Product announcement", url: "https://openai.com/index/introducing-gpt-live-1-in-the-api/" },
+        { label: "API changelog", url: "https://developers.openai.com/api/docs/changelog" }
+      ]
+    },
     {
       id: "astra-work-api-broader-availability",
       date: "2026-09-09",
