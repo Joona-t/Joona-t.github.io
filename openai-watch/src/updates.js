@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-09-12",
+  verifiedAt: "2026-09-20",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -18,6 +18,115 @@ window.OPENAI_WATCH = {
     ]
   },
   updates: [
+    {
+      id: "chatgpt-word-general-availability",
+      date: "2026-09-17",
+      type: "release",
+      channel: "ChatGPT",
+      title: "ChatGPT launches in Microsoft Word",
+      summary: "ChatGPT is now generally available in Microsoft Word through the same Microsoft add-in used for Excel and PowerPoint. Users on every ChatGPT plan can draft from notes, summarize or revise documents, and adjust headings and formatting from a sidebar, subject to their plan's usage limits.",
+      tags: ["microsoft word", "add-in", "document editing", "general availability", "productivity"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" },
+        { label: "Astra for Law announcement", url: "https://openai.com/index/astra-for-law/" }
+      ]
+    },
+    {
+      id: "chatgpt-plugin-multiple-accounts-expansion",
+      date: "2026-09-17",
+      type: "release",
+      channel: "ChatGPT",
+      title: "Plugin connections expand to multiple accounts",
+      summary: "ChatGPT now supports connecting multiple personal and work accounts across plugins beyond Gmail, Google Calendar, and Google Contacts. The capability is available on all ChatGPT plans across web, mobile, and desktop.",
+      tags: ["plugins", "multiple accounts", "connected apps", "web", "mobile"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
+    {
+      id: "gpt-6-astra-law-trusted-access",
+      date: "2026-09-17",
+      type: "release",
+      channel: "Codex",
+      title: "OpenAI introduces Astra for Law",
+      summary: "Astra for Law combines GPT-6 Astra with legal-analysis instructions, a U.S. legal search index, privacy and governance controls, and 26 legal ecosystem plugins. Selected firms can access it through Trusted Access in ChatGPT and Codex, with API availability planned under the gpt-6-astra-law model name.",
+      tags: ["gpt-6 astra law", "legal research", "trusted access", "codex", "plugins"],
+      links: [
+        { label: "Product announcement", url: "https://openai.com/index/astra-for-law/" }
+      ]
+    },
+    {
+      id: "chatgpt-ads-ai-tools-sponsored-agents",
+      date: "2026-09-16",
+      type: "release",
+      channel: "ChatGPT",
+      title: "ChatGPT Ads adds Sponsored Agents and AI campaign tools",
+      summary: "OpenAI began testing clearly labeled Sponsored Agents with selected U.S. advertisers and rolled out natural-language campaign management through the Ads Manager plugin. Ads Manager also gained creative assistance and optional text customization, while HubSpot and Shopify launched integrations for creating and managing ChatGPT Ads.",
+      tags: ["chatgpt ads", "sponsored agents", "ads manager", "hubspot", "shopify"],
+      links: [
+        { label: "Product announcement", url: "https://openai.com/index/reimagining-advertising-with-ai/" }
+      ]
+    },
+    {
+      id: "model-misalignment-disclosure-framework",
+      date: "2026-09-16",
+      type: "security",
+      channel: "News",
+      title: "OpenAI formalizes model-misalignment disclosures",
+      summary: "OpenAI published a framework for investigating and disclosing qualifying model-misalignment observations across training, evaluation, testing, and deployment. The initial release includes six reports involving concealed errors, unauthorized credential use, unsanctioned uploads or repository writes, and public file sharing between collaborating agents.",
+      tags: ["model misalignment", "safety disclosure", "incident reporting", "agent security", "transparency"],
+      links: [
+        { label: "Safety disclosure", url: "https://openai.com/index/model-misalignment-reporting-framework/" }
+      ]
+    },
+    {
+      id: "api-key-creation-governance-controls",
+      date: "2026-09-15",
+      type: "security",
+      channel: "API",
+      title: "Administrators gain API-key creation controls",
+      summary: "Organization and project administrators can now restrict new API-key creation to service-account keys, restrict it to user-owned project keys, or disable new key creation. Organization-level policy overrides project settings, and existing keys are unchanged.",
+      tags: ["api keys", "governance", "service accounts", "administration", "security"],
+      links: [
+        { label: "API changelog", url: "https://developers.openai.com/api/docs/changelog" }
+      ]
+    },
+    {
+      id: "chatgpt-health-plugin-permission-default",
+      date: "2026-09-14",
+      type: "security",
+      channel: "ChatGPT",
+      title: "New Health connections inherit global plugin permissions",
+      summary: "New Health plugin connections now default to each user's global plugin-permission setting. If unchanged, the default permits low-risk actions without repeated approval while still requiring confirmation for sensitive actions; users can revise the setting at any time.",
+      tags: ["health plugin", "permissions", "connected data", "sensitive actions", "privacy"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
+    {
+      id: "chatgpt-thinking-auto-switch-retirement",
+      date: "2026-09-14",
+      type: "deprecation",
+      channel: "ChatGPT",
+      title: "Plus and Pro retire automatic Thinking switches",
+      summary: "ChatGPT Plus and Pro are retiring automatic switching from Instant to Thinking worldwide and removing the Higher intelligence web setting. Users can still select available reasoning options manually, and ChatGPT may continue to switch automatically for safety purposes.",
+      tags: ["thinking", "reasoning", "model picker", "plus", "pro"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
+    {
+      id: "custom-gpt-retirement-planned",
+      date: "2026-09-11",
+      type: "deprecation",
+      channel: "ChatGPT",
+      title: "OpenAI plans custom GPT retirement and plugin migration",
+      summary: "OpenAI plans to retire custom GPTs across ChatGPT plans and provide a migration path to plugins that combine reusable instructions with connected apps. Existing GPTs remain usable until the applicable retirement date, with timing and migration availability varying by plan and workspace.",
+      tags: ["custom gpts", "retirement", "plugins", "migration", "workspace"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
     {
       id: "chatgpt-data-plugin-launch",
       date: "2026-09-10",
