@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-09-21",
+  verifiedAt: "2026-09-22",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -18,6 +18,32 @@ window.OPENAI_WATCH = {
     ]
   },
   updates: [
+    {
+      id: "chatgpt-finances-credit-score",
+      date: "2026-09-21",
+      type: "release",
+      channel: "ChatGPT",
+      title: "ChatGPT Finances adds credit scores and monitoring",
+      summary: "ChatGPT Finances can now connect separately to an Experian credit report and VantageScore 3.0 score, explain score factors, and surface monthly report updates and credit-monitoring alerts. The feature is rolling out to Plus and Pro users in the U.S. on web, iOS, and Android.",
+      tags: ["finances", "credit score", "experian", "credit monitoring", "personal finance"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" },
+        { label: "Finances guide", url: "https://help.openai.com/en/articles/20001222-finances-in-chatgpt" }
+      ]
+    },
+    {
+      id: "chatgpt-privacy-center",
+      date: "2026-09-21",
+      type: "release",
+      channel: "ChatGPT",
+      title: "ChatGPT introduces an in-product Privacy Center",
+      summary: "ChatGPT is rolling out a Privacy Center that brings together guidance and settings links for chat privacy, memory, personalization, data use, connected apps, and account security. It is available to signed-in Free, Go, Plus, and Pro users, subject to plan, region, and workspace settings.",
+      tags: ["privacy center", "data controls", "memory", "connected apps", "account security"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" },
+        { label: "Privacy Center guide", url: "https://help.openai.com/en/articles/20001488" }
+      ]
+    },
     {
       id: "chatgpt-word-general-availability",
       date: "2026-09-17",
