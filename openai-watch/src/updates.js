@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-09-22",
+  verifiedAt: "2026-09-23",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -18,6 +18,44 @@ window.OPENAI_WATCH = {
     ]
   },
   updates: [
+    {
+      id: "gpt-6-sol-luna-release",
+      date: "2026-09-22",
+      type: "release",
+      channel: "API",
+      title: "GPT-6 Sol and Luna launch across Work, Codex, and the API",
+      summary: "OpenAI released GPT-6 Sol and GPT-6 Luna in ChatGPT Work, Codex, the Responses API, and Chat Completions. Both reasoning models accept text and image inputs; Sol targets demanding professional work while Luna prioritizes faster, lower-cost workloads, with availability and reasoning options depending on plan and workspace settings.",
+      tags: ["gpt-6 sol", "gpt-6 luna", "api", "chatgpt work", "codex"],
+      links: [
+        { label: "Product announcement", url: "https://openai.com/index/introducing-gpt-6-sol-and-luna/" },
+        { label: "API changelog", url: "https://developers.openai.com/api/docs/changelog" },
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
+    {
+      id: "gpt-6-prompt-caching-upgrades",
+      date: "2026-09-22",
+      type: "release",
+      channel: "API",
+      title: "GPT-6 adds higher-hit prompt caching and new controls",
+      summary: "GPT-6 now applies cache discounts to eligible shared prefixes reused within 30 minutes and adds tools for monitoring and diagnosing cache behavior. Developers can use explicit cache breakpoints, adjust reasoning effort between responses without invalidating reusable context, and prewarm known context to reduce startup latency.",
+      tags: ["gpt-6", "prompt caching", "cache diagnostics", "reasoning effort", "latency"],
+      links: [
+        { label: "Product announcement", url: "https://openai.com/index/better-prompt-caching-for-gpt-6/" }
+      ]
+    },
+    {
+      id: "chatgpt-interactive-flashcards",
+      date: "2026-09-22",
+      type: "release",
+      channel: "ChatGPT",
+      title: "ChatGPT adds interactive flashcards",
+      summary: "ChatGPT can now create interactive flashcards from a topic or uploaded notes, let users flip, shuffle, and mark cards for later practice, and save generated decks to Library. The feature is available on mobile and web across all ChatGPT plans.",
+      tags: ["flashcards", "learning", "library", "mobile", "web"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
     {
       id: "chatgpt-finances-credit-score",
       date: "2026-09-21",
