@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-09-23",
+  verifiedAt: "2026-09-24",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -18,6 +18,30 @@ window.OPENAI_WATCH = {
     ]
   },
   updates: [
+    {
+      id: "chatgpt-voice-plugins-work-tasks",
+      date: "2026-09-23",
+      type: "release",
+      channel: "ChatGPT",
+      title: "Voice adds plugins and ChatGPT Work tasks",
+      summary: "ChatGPT Voice can now use eligible plugins and connected apps on web, iOS, and Android. Voice is also available in ChatGPT Work on web and mobile for creating artifacts, using connected apps, and browser work, with unfinished Work tasks able to continue in text after a call ends.",
+      tags: ["voice", "plugins", "chatgpt work", "connected apps", "mobile"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
+    {
+      id: "chatgpt-ads-southeast-asia-taiwan",
+      date: "2026-09-23",
+      type: "release",
+      channel: "ChatGPT",
+      title: "ChatGPT Ads expands across Southeast Asia and Taiwan",
+      summary: "ChatGPT Ads began rolling out in Indonesia, Malaysia, the Philippines, Singapore, Thailand, Vietnam, and Taiwan, bringing availability to more than 60 countries. Eligible advertisers can use direct, agency, technology-partner, or self-service access; ads remain limited to Free and Go users.",
+      tags: ["chatgpt ads", "southeast asia", "taiwan", "ads manager", "regional availability"],
+      links: [
+        { label: "Product announcement", url: "https://openai.com/index/chatgpt-ads-expands-southeast-asia-taiwan/" }
+      ]
+    },
     {
       id: "gpt-6-sol-luna-release",
       date: "2026-09-22",
