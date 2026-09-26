@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-09-25",
+  verifiedAt: "2026-09-26",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -18,6 +18,18 @@ window.OPENAI_WATCH = {
     ]
   },
   updates: [
+    {
+      id: "chatgpt-security-history",
+      date: "2026-09-25",
+      type: "security",
+      channel: "ChatGPT",
+      title: "ChatGPT adds account security history",
+      summary: "ChatGPT users can now review recent account-security events on the web, including sign-ins, sign-outs, and changes to multi-factor authentication, passkeys, and other security settings. Entries can include the event time, approximate location, and device details when available.",
+      tags: ["security history", "account security", "mfa", "passkeys", "sign-ins"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
     {
       id: "chatgpt-voice-plugins-work-tasks",
       date: "2026-09-23",
