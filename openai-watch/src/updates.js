@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-09-26",
+  verifiedAt: "2026-09-27",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -18,6 +18,18 @@ window.OPENAI_WATCH = {
     ]
   },
   updates: [
+    {
+      id: "gpt-6-image-encoding-fix",
+      date: "2026-09-25",
+      type: "patch",
+      channel: "API",
+      title: "GPT-6 Sol and Luna image understanding fix",
+      summary: "OpenAI fixed an image-encoding bug that reduced visual understanding quality in GPT-6 Sol and GPT-6 Luna across the API and Codex, including computer-use workflows. Developers using image inputs should rerun relevant evaluations and retry workflows affected by the issue.",
+      tags: ["gpt-6 sol", "gpt-6 luna", "image understanding", "computer use", "bug fix"],
+      links: [
+        { label: "API changelog", url: "https://developers.openai.com/api/docs/changelog" }
+      ]
+    },
     {
       id: "chatgpt-security-history",
       date: "2026-09-25",
