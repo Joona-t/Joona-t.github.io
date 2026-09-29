@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-09-28",
+  verifiedAt: "2026-09-29",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -18,6 +18,18 @@ window.OPENAI_WATCH = {
     ]
   },
   updates: [
+    {
+      id: "chatgpt-health-personalized-summaries",
+      date: "2026-09-28",
+      type: "release",
+      channel: "ChatGPT",
+      title: "ChatGPT Health adds personalized data summaries",
+      summary: "ChatGPT Health users can now select a chart, metric, or record in the Health tab to receive personalized explanations and insights based on their connected health information.",
+      tags: ["health", "personalized summaries", "connected health data", "charts", "insights"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
     {
       id: "gpt-6-image-encoding-fix",
       date: "2026-09-25",
