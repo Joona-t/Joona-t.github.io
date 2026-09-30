@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-09-29",
+  verifiedAt: "2026-09-30",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -7,17 +7,224 @@ window.OPENAI_WATCH = {
     status: "https://status.openai.com/"
   },
   statusSnapshot: {
-    label: "All systems operational",
+    label: "ChatGPT service disruption",
     source: "https://status.openai.com/",
     window: "Live check",
     uptime: [
       { name: "APIs", value: "Operational" },
-      { name: "ChatGPT", value: "Operational" },
+      { name: "ChatGPT", value: "Degraded performance" },
       { name: "Codex", value: "Operational" },
       { name: "FedRAMP", value: "Operational" }
     ]
   },
   updates: [
+    {
+      id: "agents-api-computer-use",
+      date: "2026-09-29",
+      type: "release",
+      channel: "API",
+      title: "Agents API adds hosted computer use",
+      summary: "The Agents API can now run computer-use tasks in an OpenAI-hosted browser, while the integrating application handles website-access approvals and sign-in.",
+      tags: ["agents api", "computer use", "hosted browser", "approvals", "authentication"],
+      links: [
+        { label: "API changelog", url: "https://developers.openai.com/api/docs/changelog" }
+      ]
+    },
+    {
+      id: "gpt-6-1-sol-release",
+      date: "2026-09-29",
+      type: "release",
+      channel: "API",
+      title: "GPT-6.1 Sol launches across the API, Work, and Codex",
+      summary: "OpenAI released GPT-6.1 Sol for complex coding and professional work through the Responses and Chat Completions APIs, with tool calling through Responses and multi-agent delegation in beta. It is also rolling out in ChatGPT Work and Codex, starting with Pro users.",
+      tags: ["gpt-6.1 sol", "api", "chatgpt work", "codex", "multi-agent"],
+      links: [
+        { label: "API changelog", url: "https://developers.openai.com/api/docs/changelog" },
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" },
+        { label: "Product announcement", url: "https://openai.com/index/introducing-gpt-6-1-sol/" }
+      ]
+    },
+    {
+      id: "gpt-6-astra-ultrafast-api",
+      date: "2026-09-29",
+      type: "release",
+      channel: "API",
+      title: "GPT-6 Astra gains Ultrafast API processing",
+      summary: "API customers can now request Ultrafast processing for GPT-6 Astra in the Responses API to reduce inter-token latency. The tier is rate-limited and supports global processing or U.S. data residency, but not EU or other regional inference residency.",
+      tags: ["gpt-6 astra", "ultrafast", "responses api", "latency", "data residency"],
+      links: [
+        { label: "API changelog", url: "https://developers.openai.com/api/docs/changelog" }
+      ]
+    },
+    {
+      id: "chatgpt-pro-500-astra-ultrafast",
+      date: "2026-09-29",
+      type: "release",
+      channel: "ChatGPT",
+      title: "Pro 500 adds Astra Ultrafast access",
+      summary: "OpenAI introduced a $500 monthly Pro plan with the highest included Pro usage and Astra Ultrafast in ChatGPT Work and Codex. The plan launches through ChatGPT on the web, and Ultrafast usage draws from its included allowance before purchased credits.",
+      tags: ["pro 500", "gpt-6 astra", "ultrafast", "chatgpt work", "codex"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
+    {
+      id: "codex-cloud-release",
+      date: "2026-09-29",
+      type: "release",
+      channel: "Codex",
+      title: "Codex Cloud adds persistent hosted coding tasks",
+      summary: "Codex Cloud lets users start and continue coding tasks from desktop, web, or mobile in reusable isolated environments configured with project repositories, tools, and dependencies. Tasks can keep running while the user's computer is asleep.",
+      tags: ["codex cloud", "hosted tasks", "reusable environments", "repositories", "mobile"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
+    {
+      id: "chatgpt-pages-collaboration",
+      date: "2026-09-29",
+      type: "release",
+      channel: "ChatGPT",
+      title: "ChatGPT Pages adds collaborative documents",
+      summary: "Users can create Pages from conversations, templates, or a blank canvas, then edit with ChatGPT, add charts or interactive content, and collaborate with comments. Page access follows its Space sharing settings without exposing private chats or memory.",
+      tags: ["pages", "space", "collaboration", "comments", "interactive content"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
+    {
+      id: "chatgpt-sites-editing-schedules",
+      date: "2026-09-29",
+      type: "release",
+      channel: "ChatGPT",
+      title: "Sites adds in-product editing and scheduled updates",
+      summary: "Eligible Plus and Pro Site owners and editors can continue editing a published Site in ChatGPT on desktop web, review changes, and republish. Site owners can also create recurring cloud schedules through Automations where Sites is supported.",
+      tags: ["sites", "editing", "publishing", "automations", "schedules"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
+    {
+      id: "chatgpt-dots-agents",
+      date: "2026-09-29",
+      type: "release",
+      channel: "ChatGPT",
+      title: "ChatGPT introduces always-on dots agents",
+      summary: "OpenAI began rolling out dots, GPT-6 Astra-powered agents with their own cloud computers that can pursue an ongoing goal between conversations using user-authorized apps and controls. Initial access is limited to eligible adult Pro and Business Premium users in supported markets, with Enterprise in opt-in beta.",
+      tags: ["dots", "always-on agents", "gpt-6 astra", "cloud computer", "automation"],
+      links: [
+        { label: "Product announcement", url: "https://openai.com/index/introducing-dots/" },
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
+    {
+      id: "chatgpt-meetings-plugin-beta",
+      date: "2026-09-29",
+      type: "release",
+      channel: "ChatGPT",
+      title: "Meetings plugin enters beta on macOS",
+      summary: "The Meetings plugin can take meeting notes and save personalized summaries with action items to ChatGPT Space, where users can keep them private or share them. Audio is deleted after notes are prepared; the beta starts in the macOS desktop app for Pro and Business users.",
+      tags: ["meetings plugin", "macos", "notes", "space", "beta"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
+    {
+      id: "chatgpt-space-release",
+      date: "2026-09-29",
+      type: "release",
+      channel: "ChatGPT",
+      title: "ChatGPT Space organizes shared project work",
+      summary: "Space brings Pages, files, and related work into a shareable project area in ChatGPT and replaces Library for accounts with access while leaving existing Projects separate. It is available to eligible Pro, Business, and Enterprise users on desktop and web, subject to workspace sharing controls.",
+      tags: ["space", "pages", "files", "collaboration", "projects"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
+    {
+      id: "codex-code-review-plugin",
+      date: "2026-09-29",
+      type: "release",
+      channel: "Codex",
+      title: "Codex adds pull-request review workflows",
+      summary: "The Code Review plugin lets Codex users inspect pull-request summaries and diffs, discuss changes, and get help understanding or addressing potential issues. Repository access follows the connected account and workspace permissions.",
+      tags: ["codex", "code review", "pull requests", "diffs", "plugin"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
+    {
+      id: "codex-security-cloud",
+      date: "2026-09-29",
+      type: "security",
+      channel: "Codex",
+      title: "Codex Security Cloud adds continuous repository scanning",
+      summary: "Codex Security Cloud can scan GitHub repositories on demand or on a schedule, monitor new commits, deduplicate findings, and prepare proposed fixes for review. Access requires applicable workspace permissions, repository setup, and billing configuration.",
+      tags: ["codex security cloud", "repository scanning", "github", "vulnerability findings", "proposed fixes"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
+    {
+      id: "chatgpt-shareable-profiles-sites",
+      date: "2026-09-29",
+      type: "release",
+      channel: "ChatGPT",
+      title: "ChatGPT adds shareable profiles and Sites showcases",
+      summary: "Personal profiles can now be made public to signed-in viewers and display selected Sites alongside a bio and activity, while remaining private by default. Shared profiles do not expose conversation titles or content, and Business administrators control workspace profile visibility.",
+      tags: ["profiles", "sites", "sharing", "privacy", "business"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
+    {
+      id: "sign-in-with-chatgpt",
+      date: "2026-09-29",
+      type: "release",
+      channel: "ChatGPT",
+      title: "ChatGPT accounts can sign in to participating products",
+      summary: "Participating products can now offer ChatGPT account sign-in without a separate password. Basic profile information is shared for sign-in, while conversations and memory remain private and any additional access requires separate approval.",
+      tags: ["sign in with chatgpt", "identity", "authentication", "privacy", "integrations"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
+    {
+      id: "chatgpt-mcp-event-automations",
+      date: "2026-09-29",
+      type: "release",
+      channel: "ChatGPT",
+      title: "Connected-app events can trigger automations",
+      summary: "Supported plugins can now use MCP events to start an automation when authorized information changes in a connected app. The connected account must have access to the triggering event and any data the task uses.",
+      tags: ["mcp events", "automations", "plugins", "connected apps", "event triggers"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
+    {
+      id: "chatgpt-allowance-partner-apps",
+      date: "2026-09-29",
+      type: "release",
+      channel: "ChatGPT",
+      title: "Participating apps can use ChatGPT plan allowance",
+      summary: "In a limited preview, eligible Plus and Pro users can authorize participating apps to use their ChatGPT model allowance without an API key and set an app-specific limit. Usage counts against the existing plan allowance; purchased credits require a separate opt-in.",
+      tags: ["plan allowance", "partner apps", "plus", "pro", "usage limits"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
+    {
+      id: "chatgpt-interactive-plugin-extensions",
+      date: "2026-09-29",
+      type: "release",
+      channel: "ChatGPT",
+      title: "Plugins gain interactive extensions",
+      summary: "Plugins can now provide interactive panels, sidebar views, and supported file viewers or editors inside ChatGPT. Users can work with an app beside a conversation, select context, or complete plugin-provided forms under existing connection and workspace permissions.",
+      tags: ["plugins", "interactive extensions", "sidebars", "file editors", "connected apps"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
     {
       id: "chatgpt-health-personalized-summaries",
       date: "2026-09-28",
