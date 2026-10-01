@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-09-30",
+  verifiedAt: "2026-10-01",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -7,7 +7,7 @@ window.OPENAI_WATCH = {
     status: "https://status.openai.com/"
   },
   statusSnapshot: {
-    label: "ChatGPT service disruption",
+    label: "ChatGPT Space Pages disruption",
     source: "https://status.openai.com/",
     window: "Live check",
     uptime: [
@@ -18,6 +18,18 @@ window.OPENAI_WATCH = {
     ]
   },
   updates: [
+    {
+      id: "coordinated-model-distillation-campaign-disrupted",
+      date: "2026-09-30",
+      type: "security",
+      channel: "News",
+      title: "OpenAI disrupts coordinated model-distillation campaign",
+      summary: "OpenAI disrupted a large-scale effort to extract protected model reasoning, restricted associated accounts, strengthened signup and infrastructure controls, and added protections against replay and streamed reasoning exposure. OpenAI said the campaign did not compromise encryption, databases, or stored user conversations, while related mitigation work continues.",
+      tags: ["adversarial distillation", "protected reasoning", "account enforcement", "security controls", "threat sharing"],
+      links: [
+        { label: "Security disclosure", url: "https://openai.com/index/disrupting-a-coordinated-model-distillation-campaign/" }
+      ]
+    },
     {
       id: "agents-api-computer-use",
       date: "2026-09-29",
