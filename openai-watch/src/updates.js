@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-10-01",
+  verifiedAt: "2026-10-02",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -7,17 +7,41 @@ window.OPENAI_WATCH = {
     status: "https://status.openai.com/"
   },
   statusSnapshot: {
-    label: "ChatGPT Space Pages disruption",
+    label: "All systems operational",
     source: "https://status.openai.com/",
     window: "Live check",
     uptime: [
       { name: "APIs", value: "Operational" },
-      { name: "ChatGPT", value: "Degraded performance" },
+      { name: "ChatGPT", value: "Operational" },
       { name: "Codex", value: "Operational" },
       { name: "FedRAMP", value: "Operational" }
     ]
   },
   updates: [
+    {
+      id: "chatgpt-shopping-virtual-try-on-favorites",
+      date: "2026-10-01",
+      type: "release",
+      channel: "ChatGPT",
+      title: "ChatGPT adds virtual try-on and shopping favorites",
+      summary: "ChatGPT can now generate virtual try-ons for clothing and accessories from a saved reference photo, and users can save products to Favorites or organize them in Library folders. The shopping features are available on mobile and web, with reference photos managed in personalization settings.",
+      tags: ["shopping", "virtual try-on", "chatgpt images", "favorites", "reference photos"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
+    {
+      id: "chatgpt-camera-multipage-document-scan",
+      date: "2026-10-01",
+      type: "release",
+      channel: "ChatGPT",
+      title: "ChatGPT camera adds multipage document scanning",
+      summary: "The ChatGPT mobile camera can now capture consecutive pages and combine them into one PDF for upload to a conversation. The scanner is rolling out on iOS.",
+      tags: ["camera", "document scanning", "pdf", "ios", "mobile"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
     {
       id: "coordinated-model-distillation-campaign-disrupted",
       date: "2026-09-30",
