@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-10-02",
+  verifiedAt: "2026-10-03",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -18,6 +18,18 @@ window.OPENAI_WATCH = {
     ]
   },
   updates: [
+    {
+      id: "chatgpt-finances-free-go-expansion",
+      date: "2026-10-02",
+      type: "release",
+      channel: "ChatGPT",
+      title: "ChatGPT Finances expands to Free and Go users",
+      summary: "Finances in ChatGPT is rolling out to Free and Go users in the U.S. across web, iOS, and Android, with connected financial accounts used to ground guidance on spending, saving, and investments.",
+      tags: ["finances", "free", "go", "connected accounts", "united states"],
+      links: [
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
     {
       id: "chatgpt-shopping-virtual-try-on-favorites",
       date: "2026-10-01",
