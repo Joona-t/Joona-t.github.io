@@ -105,28 +105,28 @@ Evidence and file:line references are in `research.md`. Branch: `feat/visual-upg
 
 ### Phase 2: Structure (sticky nav, hero, sections) (about 0.75 day)
 
-- [ ] Add the skip link and `<main id="main">`.
-- [ ] Build the sticky glass site bar:
-  - [ ] Content: Sparky (32px, square) + LoveSpark, then Suite · Peeks · Mission · Support, then the existing pills unchanged.
-  - [ ] Add a solid fallback when `backdrop-filter` isn't supported.
-  - [ ] Give the bar `view-transition-name: site-nav`.
-  - [ ] Check it at 320 and 360px: 8px gaps and 32px touch targets.
-- [ ] One `IntersectionObserver` sets `aria-current` on the active nav link. A 1px sentinel sets `data-stuck`. Add a `scroll-state` enhancement.
-- [ ] Hero: one primary CTA, "See the tools ✦", and one ghost CTA, "Sneak peeks".
-- [ ] Move the 7 external pills into a gallery.json "More from LoveSpark" category (Q4).
-- [ ] Move the socials to the footer.
-- [ ] Drop `target=_blank` on same-origin links.
-- [ ] Videos: add `poster` and `preload="metadata"`. Strip `src` in basalt and retro (check the Network panel first).
-- [ ] Generator (`build-gallery.py`):
-  - [ ] Open the first category by default.
-  - [ ] Use h4 inside the Chrome group.
-  - [ ] Make `.win-btn-close` a real `<button aria-label>`.
-  - [ ] Rerun with `--check`.
-- [ ] Notice and Mission: use real `<p>` paragraphs, give Notice an `<h2>`, and lay them out in 2 columns at ≥900px.
-- [ ] Merge Support and Contact into one card: Ko-fi as the primary button, email as the ghost. Keep the `#contact` anchor.
-- [ ] Remove the duplicate Sparky figcaption copy (index.html:759).
-- [ ] Footer: Sparky, socials and heart. Make the footer heart animate on hover only, so there's one ambient heart.
-- [ ] Run the gate, then commit.
+- [x] Add the skip link and `<main id="main">`.
+- [x] Build the sticky glass site bar:
+  - [x] Content: Sparky (32px, square) + LoveSpark, then Suite · Peeks · Mission · Support, then the existing pills unchanged.
+  - [x] Add a solid fallback when `backdrop-filter` isn't supported.
+  - [x] Give the bar `view-transition-name: site-nav`.
+  - [x] Check it at 320 and 360px: 8px gaps and 32px touch targets.
+- [x] One `IntersectionObserver` sets `aria-current` on the active nav link. A 1px sentinel sets `data-stuck`. Add a `scroll-state` enhancement.
+- [x] Hero: one primary CTA, "See the tools ✦", and one ghost CTA, "Sneak peeks".
+- [x] Move the 7 external pills into a gallery.json "More from LoveSpark" category (Q4). (6 cards: Glyph Grid already has its own card in Mac & iOS, so no duplicate.)
+- [x] Move the socials to the footer.
+- [x] Drop `target=_blank` on same-origin links.
+- [x] Videos: add `poster` and `preload="metadata"`. Strip `src` in basalt and retro (check the Network panel first). (markup ships `data-src`; JS attaches it only in candy/kawaii — verified no mp4 request in basalt.)
+- [x] Generator (`build-gallery.py`):
+  - [x] Open the first category by default.
+  - [x] Use h4 inside the Chrome group.
+  - [x] Make `.win-btn-close` a real `<button aria-label>`.
+  - [x] Rerun with `--check`.
+- [x] Notice and Mission: use real `<p>` paragraphs, give Notice an `<h2>`, and lay them out in 2 columns at ≥900px.
+- [x] Merge Support and Contact into one card: Ko-fi as the primary button, email as the ghost. Keep the `#contact` anchor.
+- [x] Remove the duplicate Sparky figcaption copy (index.html:759).
+- [x] Footer: Sparky, socials and heart. Make the footer heart animate on hover only, so there's one ambient heart.
+- [x] Run the gate, then commit. (partial gate: JS syntax, brace + tag balance, gallery `--check`, live preview of all 4 themes at 320/360/1280 with layout/colour/video-src checks, keyboard skip-link test; no reduced-motion emulation or Lighthouse run; `audit-contrast.py` n/a for this site — new pairs computed by WCAG formula instead)
 
 ### Phase 3: Motion layer (about 0.75 day)
 

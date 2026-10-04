@@ -1,5 +1,23 @@
 # Bugs & Iterations
 
+## 2026-10-04: ITER — Visual upgrade Phase 2: structure (sticky nav, hero, sections)
+
+**Change:** Page structure from plan.md Phase 2 (research.md D6, D9, D10, D12).
+- **Landmarks:** skip link → `<main id="main">` (hero through support); footer stays outside. In-page link handler now moves focus to the target (tabindex -1 when needed) and updates the hash; sticky offset via `scroll-padding-top`.
+- **Sticky glass site bar:** Sparky (new square `images/sparky-avatar.png`, 96px source shown at 32px) + LoveSpark, Suite · Peeks · Mission · Support, then the existing theme pills (only their fixed positioning removed). `color-mix` glass + backdrop blur, solid `--surface` fallback, `view-transition-name: site-nav`. One IntersectionObserver sets `aria-current` (colour + underline bar); a 1px sentinel sets `data-stuck` (shadow); `scroll-state(stuck: top)` does the same natively. Phones (<600px): pills on row 1, Sparky + links on row 2, wordmark visually hidden; 8px link gaps, 32px targets, no overflow at 320/360. Retro gets its own dark capsule + hot-pink current state because its `--surface` is the light card fill.
+- **Retro sticky bug:** `overflow-x: hidden` on both `html` and `body` made body a scroll container, so the sticky bar scrolled away in retro → `overflow-x: clip` (hidden kept as fallback).
+- **Hero:** one primary CTA "See the tools ✦" + one ghost CTA "Sneak peeks". The 7 external pills moved out: 6 become a generated "💫 More from LoveSpark" category in gallery.json (Glyph Grid already has a Mac & iOS card). Socials moved to the footer.
+- **Videos:** `poster` + `preload="metadata"`, markup carries `data-src` only; JS attaches `src` in candy/kawaii and strips it on a switch to basalt/retro (Network verified: no mp4 request in basalt). Reduced motion keeps the poster.
+- **Generator (`build-gallery.py`):** first top-level category renders `<details open>`; Chrome-group child titles are `h4`; `.win-btn-close` is a real `<button type="button" aria-label="Wobble this window">` (32px hit area, focus ring); same-origin URLs drop `target=_blank`.
+- **Notice + Mission:** real `<p>` paragraphs (no `<br><br>`), Notice gets `<h2>` "A note from the workshop", both sit in `.about-grid` (2 columns ≥900px).
+- **Support + Contact:** one card — Ko-fi primary, "✉ Say hi" mailto ghost carrying `id="contact"`.
+- **Sneak Peeks:** Sparky figcaption no longer repeats the Suite card copy.
+- **Footer:** Sparky, socials (32px targets), heart. Footer heart beats on footer hover only (no-preference), so the hero heart is the one ambient heart.
+- Cache strings bumped to `2026-10-04-p2`.
+**Verification:** `node --check script.js` OK; braces balanced (styles.css 444/444, styles-retro.css 142/142); HTML tag balance clean; `build-gallery.py --check` in sync (9 categories, 35 cards). Local preview: 4 themes × 320/360/1280 — bar 101px on phones / 63px desktop, no page overflow from the bar, theme switcher `position: static` in all themes, `aria-current` follows scroll, `data-stuck` toggles, skip link is first Tab stop and lands focus on `<main>`. New colour pairs (WCAG formula): kawaii accent-ink on bar 6.07, ink on bar 10.46, ghost on page 5.35; basalt 10.41; retro hot-pink on wine 7.43. Not done: reduced-motion emulation, Lighthouse.
+**Known, not this phase:** nested Chrome-group titles overflow their summary at 320px (`white-space: nowrap`, pre-existing); hero `.hero-cta--glyph/null/zara/forging/games` modifier CSS is now unused (Phase 4/5 cleanup); "More" card copy for Null Path / Zarathustra / Forging is from their page meta or generic — Joona may want to rewrite it in gallery.json.
+**Files:** index.html, styles.css, styles-retro.css, script.js, data/gallery.json, scripts/build-gallery.py, images/sparky-avatar.png, plan.md, BUGS_AND_ITERATIONS.md
+
 ## 2026-10-04: ITER — Visual upgrade Phase 1: tokens and dead CSS
 
 **Change:** Token foundation + CSS debt cleanup from research.md §3, no redesign yet.

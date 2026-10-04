@@ -31,6 +31,8 @@ html.theme-retro body {
   font-size: 14px;
   line-height: 1.7;
   overflow-x: hidden;
+  overflow-x: clip;   /* clip, not hidden: hidden on both html and body made body a
+                         scroll container and broke the sticky site bar (Phase 2) */
   cursor: crosshair;
 }
 html.theme-retro .grain-overlay {
@@ -605,7 +607,7 @@ html.theme-retro .footer-heart {
   color: var(--hot-pink);
   font-size: 1.4rem;
   text-shadow: 0 0 10px var(--hot-pink);
-  animation: heartPulse-retro 3s ease-in-out infinite;
+  /* heartPulse-retro runs on footer hover only (styles.css, Phase 2). */
 }
 @media (max-width: 600px) {
 html.theme-retro .tools-grid {

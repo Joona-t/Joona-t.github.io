@@ -34,6 +34,8 @@ const mqFine = window.matchMedia('(hover: hover) and (pointer: fine)');
       if (CLASS[theme]) root.classList.add(CLASS[theme]);  // pink (kawaii) = no class
       pills.forEach(p => p.setAttribute('aria-pressed', String(p.dataset.theme === theme)));
       try { localStorage.setItem(KEY, theme); } catch (_) {}
+      // Lets other modules (hero videos) react to a theme change.
+      document.dispatchEvent(new CustomEvent('lovespark:theme', { detail: theme }));
     }
 
     const current = root.classList.contains('theme-retro') ? 'retro'
@@ -260,33 +262,92 @@ const mqFine = window.matchMedia('(hover: hover) and (pointer: fine)');
 })();
 
 // ══════════════════════════════════════════════════════════════════════════════
-// SMOOTH SCROLL — hero CTA "See the tools ✦" anchors to the suite
+// IN-PAGE LINKS — skip link, site bar, hero CTAs. Smooth unless reduced motion;
+// the sticky bar offset comes from `scroll-padding-top` in CSS. Focus moves to
+// the target so keyboard and screen-reader users land where they jumped.
 // ══════════════════════════════════════════════════════════════════════════════
 document.querySelectorAll('a[href^="#"]').forEach(link => {
   link.addEventListener('click', e => {
-    const target = document.querySelector(link.getAttribute('href'));
-    if (target) {
-      e.preventDefault();
-      target.scrollIntoView({ behavior: mqReduce.matches ? 'auto' : 'smooth', block: 'start' });
+    const id = link.getAttribute('href').slice(1);
+    const target = id && document.getElementById(id);
+    if (!target) return;
+    e.preventDefault();
+    target.scrollIntoView({ behavior: mqReduce.matches ? 'auto' : 'smooth', block: 'start' });
+    if (!target.matches('a[href], button, input, select, textarea, summary, [tabindex]')) {
+      target.setAttribute('tabindex', '-1');
     }
+    target.focus({ preventScroll: true });
+    if (history.replaceState) history.replaceState(null, '', '#' + id);
   });
 });
 
 // ══════════════════════════════════════════════════════════════════════════════
-// HERO VIDEOS — reduced motion: stop autoplay and reset to the poster frame.
-// Re-plays if the user turns reduced motion back off.
+// SITE BAR — one IntersectionObserver marks the section in view with
+// aria-current on its nav link; a 1px sentinel above the bar flips
+// data-stuck once the page scrolls (CSS scroll-state queries do the same
+// natively where supported). No scroll listener.
+// ══════════════════════════════════════════════════════════════════════════════
+(function initSiteBar() {
+  if (!('IntersectionObserver' in window)) return;
+  const bar = document.querySelector('.site-bar');
+  const sentinel = document.querySelector('.site-bar-sentinel');
+  if (bar && sentinel) {
+    new IntersectionObserver(([entry]) => {
+      bar.toggleAttribute('data-stuck', !entry.isIntersecting);
+    }).observe(sentinel);
+  }
+
+  const links = new Map();
+  document.querySelectorAll('.site-nav-link[href^="#"]').forEach(a => {
+    const section = document.getElementById(a.getAttribute('href').slice(1));
+    if (section) links.set(section, a);
+  });
+  if (!links.size) return;
+
+  const visible = new Set();
+  const order = [...links.keys()];
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => (en.isIntersecting ? visible.add(en.target) : visible.delete(en.target)));
+    // The last section (document order) crossing the band wins.
+    const current = order.filter(sec => visible.has(sec)).pop();
+    links.forEach((a, sec) => {
+      if (sec === current) a.setAttribute('aria-current', 'true');
+      else a.removeAttribute('aria-current');
+    });
+  }, { rootMargin: '-35% 0px -60% 0px' });
+  order.forEach(sec => io.observe(sec));
+})();
+
+// ══════════════════════════════════════════════════════════════════════════════
+// HERO VIDEOS — the markup ships `data-src` + poster only, so nothing downloads
+// until this runs. Basalt and retro hide both videos, so they never get a src
+// (and lose it again on a switch to those themes). Reduced motion: src stays,
+// playback stops and the poster frame shows. Without JS: poster only.
 // ══════════════════════════════════════════════════════════════════════════════
 (function gateVideos() {
   const videos = document.querySelectorAll('video.heart-mark, video.hero-mark');
   if (!videos.length) return;
+  const root = document.documentElement;
+
+  function themeShowsVideo() {
+    return !root.classList.contains('theme-basalt') && !root.classList.contains('theme-retro');
+  }
 
   function sync() {
+    const show = themeShowsVideo();
     videos.forEach(v => {
+      if (!show) {
+        if (v.getAttribute('src')) {
+          v.pause();
+          v.removeAttribute('src');
+          v.load(); // drop the buffered media
+        }
+        return;
+      }
+      if (!v.getAttribute('src') && v.dataset.src) v.setAttribute('src', v.dataset.src);
       if (mqReduce.matches) {
         v.autoplay = false;
-        v.removeAttribute('autoplay');
-        v.pause();
-        v.load(); // back to the poster frame
+        if (!v.paused || v.currentTime > 0) { v.pause(); v.load(); } // back to the poster frame
       } else if (v.paused) {
         v.autoplay = true;
         const p = v.play();
@@ -295,12 +356,14 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
     });
   }
 
-  if (mqReduce.matches) sync();
+  sync();
+  document.addEventListener('lovespark:theme', sync);
   if (mqReduce.addEventListener) mqReduce.addEventListener('change', sync);
 })();
 
 // ══════════════════════════════════════════════════════════════════════════════
-// CARD CLOSE BUTTON — easter egg: card wobbles instead of closing
+// CARD CLOSE BUTTON — easter egg: card wobbles instead of closing. It's a real
+// <button> (generator output), so Enter/Space trigger it too.
 // ══════════════════════════════════════════════════════════════════════════════
 document.querySelectorAll('.win-btn-close').forEach(btn => {
   btn.addEventListener('click', () => {
