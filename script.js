@@ -2,10 +2,16 @@
 // Wavy rings, sparkle field, cursor trail, smooth scroll, card-close wobble.
 'use strict';
 
+// Motion / pointer gates. Reduced motion → no swarm, no sparkle field, no
+// cursor trail, instant scroll, videos paused on their poster. The cursor
+// trail additionally needs a real hover-capable fine pointer (no touch).
+const mqReduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+const mqFine = window.matchMedia('(hover: hover) and (pointer: fine)');
+
 // ══════════════════════════════════════════════════════════════════════════════
-// THEME SWITCHER — kawaii (default) ⇄ retro
-// The FOUC-prevention script in <head> already applied html.theme-retro if
-// the user previously chose retro. This wires the switcher buttons and
+// THEME SWITCHER — candy (default) · kawaii ('pink') · basalt · retro
+// The FOUC-prevention script in <head> already applied the saved theme class
+// (theme-candy when nothing is saved; kawaii = no class). This wires the switcher buttons and
 // syncs across tabs via the storage event.
 // ══════════════════════════════════════════════════════════════════════════════
 (function setupThemeSwitcher() {
@@ -23,9 +29,9 @@
     const VALID = ['pink', 'candy', 'basalt', 'retro'];
 
     function apply(theme) {
-      if (!VALID.includes(theme)) theme = 'pink';
+      if (!VALID.includes(theme)) theme = 'candy';
       root.classList.remove('theme-retro', 'theme-candy', 'theme-basalt');
-      if (CLASS[theme]) root.classList.add(CLASS[theme]);  // pink = no class (default)
+      if (CLASS[theme]) root.classList.add(CLASS[theme]);  // pink (kawaii) = no class
       pills.forEach(p => p.setAttribute('aria-pressed', String(p.dataset.theme === theme)));
       try { localStorage.setItem(KEY, theme); } catch (_) {}
     }
@@ -95,10 +101,10 @@
 })();
 
 // ══════════════════════════════════════════════════════════════════════════════
-// DYSON SWARM — kawaii only. Concentric orbital shells of very fine pink dust
-// around the heart. Replaces the older sparkle-field glyphs + wavy orb-rings
-// for the kawaii theme. CSS in styles.css gates visibility via
-// html:not(.theme-retro), so retro is untouched.
+// DYSON SWARM — candy + kawaii. Concentric orbital shells of very fine pink
+// dust around the heart. CSS hides it in retro (styles-retro.css) and basalt
+// (styles.css, html.theme-basalt .dyson-swarm), and in every theme under
+// prefers-reduced-motion. Not built at all when reduced motion is on.
 //
 // Design notes:
 //   - 7 shells, ~60–130 particles each → ~600 total. Static dots inside an
@@ -109,6 +115,7 @@
 //     structure, not enough to fight the heart or wordmark.
 // ══════════════════════════════════════════════════════════════════════════════
 (function initDysonSwarm() {
+  if (mqReduce.matches) return;
   const host = document.querySelector('.heart-orb');
   if (!host) return;
   // Avoid double-injection if this script ever runs twice.
@@ -176,6 +183,7 @@
 // hidden in kawaii via CSS — the Dyson swarm above is the kawaii equivalent).
 // ══════════════════════════════════════════════════════════════════════════════
 (function initSparkleField() {
+  if (mqReduce.matches) return;
   const field = document.getElementById('sparkle-field');
   if (!field) return;
 
@@ -251,11 +259,12 @@
   }
 
   document.addEventListener('mousemove', (e) => {
+    if (mqReduce.matches || !mqFine.matches) return;
     const now = Date.now();
     if (now - lastTime < THROTTLE) return;
     lastTime = now;
     spawnSpark(e.clientX, e.clientY);
-  });
+  }, { passive: true });
 
   // Inject the fly keyframe — uses CSS custom props for direction
   const style = document.createElement('style');
@@ -276,10 +285,37 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
     const target = document.querySelector(link.getAttribute('href'));
     if (target) {
       e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      target.scrollIntoView({ behavior: mqReduce.matches ? 'auto' : 'smooth', block: 'start' });
     }
   });
 });
+
+// ══════════════════════════════════════════════════════════════════════════════
+// HERO VIDEOS — reduced motion: stop autoplay and reset to the poster frame.
+// Re-plays if the user turns reduced motion back off.
+// ══════════════════════════════════════════════════════════════════════════════
+(function gateVideos() {
+  const videos = document.querySelectorAll('video.heart-mark, video.hero-mark');
+  if (!videos.length) return;
+
+  function sync() {
+    videos.forEach(v => {
+      if (mqReduce.matches) {
+        v.autoplay = false;
+        v.removeAttribute('autoplay');
+        v.pause();
+        v.load(); // back to the poster frame
+      } else if (v.paused) {
+        v.autoplay = true;
+        const p = v.play();
+        if (p && p.catch) p.catch(() => {});
+      }
+    });
+  }
+
+  if (mqReduce.matches) sync();
+  if (mqReduce.addEventListener) mqReduce.addEventListener('change', sync);
+})();
 
 // ══════════════════════════════════════════════════════════════════════════════
 // CARD CLOSE BUTTON — easter egg: card wobbles instead of closing

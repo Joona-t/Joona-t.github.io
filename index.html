@@ -11,13 +11,19 @@
   <meta property="og:image" content="og.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=2026-07-01-extgroup">
-  <link rel="stylesheet" href="styles-retro.css?v=2026-06-25-themes2">
+  <!-- OpenDyslexic (body font, vendored) — preload the regular face so body copy doesn't swap late -->
+  <link rel="preload" href="assets/fonts/OpenDyslexic-Regular.otf" as="font" type="font/otf" crossorigin>
+  <!-- Critical fonts (all themes): body fallback, mono, candy/kawaii wordmark -->
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Pacifico&display=swap" rel="stylesheet">
+  <!-- Theme-specific fonts (retro pixel, basalt/hero-CTA serif) — non-blocking -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet"></noscript>
+  <link rel="stylesheet" href="styles.css?v=2026-10-04-p0">
+  <link rel="stylesheet" href="styles-retro.css?v=2026-10-04-p0">
 </head>
 <body>
 
-  <!-- Theme switcher (kawaii ⇄ retro) -->
+  <!-- Theme switcher (candy default · kawaii · basalt · retro) -->
   <div class="theme-switcher" role="group" aria-label="Site theme">
     <button class="theme-pill" data-theme="candy"  type="button" aria-pressed="true">candy</button>
     <button class="theme-pill" data-theme="pink"   type="button" aria-pressed="false">kawaii</button>
@@ -70,7 +76,7 @@
              src="assets/hero-pastel.mp4"
              poster="assets/hero-pastel.jpg"
              autoplay loop muted playsinline
-             aria-label="LoveSpark"></video>
+             aria-hidden="true"></video>
       <h1 class="logo-text">LoveSpark</h1>
       <p class="tagline">Retro pink tools for a calmer,<br>more beautiful internet.</p>
       <p class="sub-tagline">Free&nbsp;&nbsp;·&nbsp;&nbsp;Open source&nbsp;&nbsp;·&nbsp;&nbsp;No ads. Ever.</p>
@@ -862,6 +868,6 @@
     <p class="footer-heart" aria-hidden="true">♡</p>
   </footer>
 
-  <script src="script.js?v=2026-06-25-themes2"></script>
+  <script src="script.js?v=2026-10-04-p0"></script>
 </body>
 </html>

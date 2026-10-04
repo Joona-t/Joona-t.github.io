@@ -882,5 +882,32 @@ html.theme-retro .hero-cta:focus-visible { outline: 2px solid var(--ember-hot); 
 }
 
 /* prefers-reduced-motion: base .hero-cta hover-transform suppression
-   (styles.css:844-846) still applies; the re-pinned hover above only changes
+   (global reduced-motion block at the end of styles.css) still applies; the re-pinned hover above only changes
    color/background/shadow (already transition-gated), no new motion introduced. */
+
+/* ═══════════════════════ PHASE 0 — DEFECT FLOOR (2026-10-04) ═══════════════════════
+   Retro contrast + focus fixes. Lives here (not styles.css) because this sheet
+   loads last and wins ties. */
+html.theme-retro .card-badge { background: #b3185c; color: #fff; }
+html.theme-retro .card-link:not(.card-link--soon),
+html.theme-retro .kofi-btn {
+  background: linear-gradient(180deg, #d81b73 0%, #a51259 100%);
+  color: #fff;
+}
+/* Aaron memorial card keeps its green button identity (see .win98-card--aaron above). */
+html.theme-retro .win98-card--aaron .card-link:not(.card-link--soon) {
+  background: linear-gradient(180deg, #4ade80 0%, #16a34a 100%);
+}
+html.theme-retro .sub-tagline { color: var(--bubblegum); }   /* 11.6:1 on the dark page */
+
+/* Focus rings */
+html.theme-retro .kofi-btn:focus-visible,
+html.theme-retro .notice-link:focus-visible,
+html.theme-retro .hero-social-link:focus-visible {
+  outline: 2px solid #ff6eb4;               /* 7.4:1 on the dark page */
+  outline-offset: 3px;
+}
+html.theme-retro .card-link:focus-visible {
+  outline: 2px solid #b3185c;               /* 5.8:1 on the cream card */
+  outline-offset: 3px;
+}

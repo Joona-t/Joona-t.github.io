@@ -1,5 +1,18 @@
 # Bugs & Iterations
 
+## 2026-10-04: ITER — Visual upgrade Phase 0: defect floor (no visual redesign)
+
+**Change:** Fixed the a11y/perf defect floor from research.md (D2, D3, D4, D8, D11) before any visual work.
+- **a11y:** `<h1 class="logo-text">` is now visually hidden (sr-only) in candy/kawaii instead of `display:none`, so the page has a real h1; `video.hero-mark` is `aria-hidden` (dropped its `aria-label`).
+- **Fonts:** body font = brand stack (OpenDyslexic → Atkinson Hyperlegible → system) instead of never-loaded Quicksand; Pacifico + Atkinson added to the critical font link; Press Start 2P / Cinzel / Cormorant load non-blocking (`media=print onload` + `<noscript>`); OpenDyslexic Regular preloaded.
+- **Motion:** 6 scattered reduced-motion blocks replaced by ONE global block at the end of styles.css with `!important` (beats the inline `animation` script.js sets), `scroll-behavior:auto`, and hides `.dyson-swarm`/`#cursor-sparks`/`#sparkle-field`. JS gets `mqReduce`/`mqFine`: swarm + sparkle field not built under reduced motion; cursor trail needs fine pointer + motion allowed (passive listener); anchor scroll uses `auto` when reduced; hero videos pause and reset to poster (and resume if the preference flips back).
+- **Theme fallback:** `apply()` falls back to `candy` (was `pink`); stale kawaii-default comments fixed (script.js, index.html).
+- **Contrast:** kawaii small pink text → `#b3185c`, white-on-pink buttons (card-link, kofi, active pill) → `#d81b73→#a51259`; candy sub-tagline + badge → `#b3185c`; retro badge bg `#b3185c`, card-link/kofi gradient, sub-tagline → bubblegum (11.6:1 on the dark page). Retro fixes live at the end of styles-retro.css because that sheet loads last and wins equal-specificity ties. Aaron memorial card keeps its green retro button; `--soon` pills excluded.
+- **Focus:** themed `:focus-visible` rings on `.card-link`, `.kofi-btn`, `.notice-link`, `.hero-social-link` (kawaii `#7a1540`, candy `--ls-focus`, retro hot-pink / `#b3185c` on cream cards; basalt keeps its ember rings).
+- **Misc:** `.gallery-mascot` gets `object-fit:contain`; the two 404 refs removed (`assets/icon-ankh.png` → `hero-ankh.png`, `ankh-basalt.gif` declaration dropped). Cache strings bumped to `2026-10-04-p0`.
+**Verification:** `node --check script.js` OK; CSS braces balanced (styles.css, styles-retro.css); `build-gallery.py --check` in sync (8 categories, 29 cards). Local preview: computed styles confirmed per theme (h1 1px sr-only in candy/kawaii, visible in retro/basalt; badge/sub-tagline/button colours as above; body font = OpenDyslexic stack), zero console errors. Contrast ratios computed by hand (WCAG formula); `audit-contrast.py` targets the extension token sheet, not this site, so not used. Baseline 4-theme × 3-width screenshots NOT taken.
+**Files:** index.html, script.js, styles.css, styles-retro.css, plan.md, research.md, BUGS_AND_ITERATIONS.md
+
 ## 2026-09-02: Sparky Habits screenshot added to Sneak Peeks
 
 **Change:** Added the supplied Sparky Habits dashboard screenshot as the third image in the `🧠 Sparky` Sneak Peeks gallery. Converted the 3016×1698, 3.6 MB source PNG to a 1600×900, 157 KB JPEG at quality 86, added descriptive alt text and a concise caption, and updated the visible gallery count from 2 to 3.
