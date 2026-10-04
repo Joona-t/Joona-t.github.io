@@ -1,5 +1,15 @@
 # Bugs & Iterations
 
+## 2026-10-04: ITER — Visual upgrade Phase 5: polish and wrap-up
+
+**Change:** Final phase of plan.md.
+- **Cross-document view transitions:** `@view-transition { navigation: auto; }` added to the root `styles.css` and to all 3 subpage sheets (`ai-signal/style.css`, `openai-watch/styles.css`, `bambu-a1/css/site.css`). Each one sits inside `@media (prefers-reduced-motion: no-preference)`, so reduced-motion users get plain navigation. Same-origin links between root and subpages now crossfade in supporting browsers; other browsers ignore the rule. The Phase 3 `.is-theme-wipe` scoping keeps the theme wipe separate. `ai-signal/scripts/render.py` only writes HTML, so the style.css edit will not be overwritten.
+- Cache strings bumped to `2026-10-04-p5` (styles.css, styles-retro.css, script.js).
+- **Note:** `bambu-a1/` is a deployment mirror of `Joona-t/bambu-a1-explainer@720e455`. The one-rule addition makes it diverge from upstream, so port it there or re-apply it after the next sync. Its `?v=720e455` cache string was left alone.
+**Verification:** `node --check script.js` OK. Braces balanced in all 4 edited sheets. In local Chromium the at-rule parses (`CSSViewTransitionRule` present, rule in the CSSOM), and the page loads with no console errors.
+**Not done (left for Joona):** full QA across Chrome, Safari and Firefox × 4 themes × reduced motion, the VoiceOver pass on the h1 and summary headings, push and PR. The workflow rules say commit locally only and never push.
+**Files:** styles.css, ai-signal/style.css, openai-watch/styles.css, bambu-a1/css/site.css, index.html, plan.md, BUGS_AND_ITERATIONS.md
+
 ## 2026-10-04: ITER — Phase 4 fix: drop `contain` from `.heart-orb`
 
 **Problem:** Phase 4 added `contain: layout style` to `.heart-orb`. Layout containment makes the element a stacking context, which is an isolated blend group. The candy heart video's `mix-blend-mode: darken` then blended against the orb's transparent backdrop instead of the page gradient, so its pale MP4 panel could show again.

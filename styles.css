@@ -2580,3 +2580,9 @@ html.is-theme-wipe::view-transition-new(root) {
   mix-blend-mode: normal;
 }
 html.is-theme-wipe .site-bar { view-transition-name: none; }   /* wipe the bar with the page */
+
+/* Phase 5: cross-document view transitions (same-origin page navigations crossfade).
+   Opt-in only when motion is welcome; unsupported browsers ignore the at-rule. */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition { navigation: auto; }
+}

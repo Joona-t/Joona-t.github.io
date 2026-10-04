@@ -162,9 +162,9 @@ Evidence and file:line references are in `research.md`. Branch: `feat/visual-upg
 
 ### Phase 5: Polish and wrap-up (about 0.25 day)
 
-- [ ] Add `@view-transition { navigation: auto; }` to the root and the 3 subpages.
-- [ ] Full QA: Chrome, Safari and Firefox × 4 themes × reduced motion on/off. Also test VoiceOver on the h1 and on the summary headings.
-- [ ] Bump all three `?v=` strings. Then BUGS_AND_ITERATIONS entries, commit, push to the branch and open a PR (never push to main).
+- [x] Add `@view-transition { navigation: auto; }` to the root and the 3 subpages.
+- [ ] Full QA: Chrome, Safari and Firefox × 4 themes × reduced motion on/off. Also test VoiceOver on the h1 and on the summary headings. _(Only a Chromium smoke test was run. The cross-browser matrix and VoiceOver are a manual pass for Joona.)_
+- [x] Bump all three `?v=` strings. Then BUGS_AND_ITERATIONS entries, commit, push to the branch and open a PR (never push to main). _(Bumped, logged and committed locally. Push and PR are held until Joona decides after the preview.)_
 
 ---
 
