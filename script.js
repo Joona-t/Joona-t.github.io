@@ -43,8 +43,39 @@ const mqFine = window.matchMedia('(hover: hover) and (pointer: fine)');
       : root.classList.contains('theme-basalt') ? 'basalt' : 'pink';
     pills.forEach(p => p.setAttribute('aria-pressed', String(p.dataset.theme === current)));
 
+    // Theme wipe: a clip-path circle grows from the clicked pill over a View
+    // Transition. Falls back to a plain swap without the API or under reduced
+    // motion. Cross-tab sync (storage event below) keeps using plain apply().
+    function switchTheme(theme, pill) {
+      if (!document.startViewTransition || mqReduce.matches || !pill) {
+        apply(theme);
+        return;
+      }
+      const r = pill.getBoundingClientRect();
+      const x = r.left + r.width / 2;
+      const y = r.top + r.height / 2;
+      const radius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+      root.classList.add('is-theme-wipe');
+      let vt;
+      try {
+        vt = document.startViewTransition(() => apply(theme));
+      } catch (_) {
+        root.classList.remove('is-theme-wipe');
+        apply(theme);
+        return;
+      }
+      vt.ready.then(() => {
+        const easing = getComputedStyle(root).getPropertyValue('--wipe-ease').trim() || 'ease-out';
+        root.animate(
+          { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`] },
+          { duration: 560, easing, pseudoElement: '::view-transition-new(root)' }
+        );
+      }).catch(() => {});
+      vt.finished.finally(() => root.classList.remove('is-theme-wipe'));
+    }
+
     pills.forEach(p => {
-      p.addEventListener('click', () => apply(p.dataset.theme));
+      p.addEventListener('click', () => switchTheme(p.dataset.theme, p));
     });
 
     window.addEventListener('storage', (e) => {
@@ -259,6 +290,50 @@ const mqFine = window.matchMedia('(hover: hover) and (pointer: fine)');
     spawnSpark(e.clientX, e.clientY);
   }, { passive: true });
   // @keyframes cursorSparkFly lives in styles.css (uses --dx/--dy).
+})();
+
+// ══════════════════════════════════════════════════════════════════════════════
+// CARD SPOTLIGHT + TILT — one delegated, passive pointermove, throttled to one
+// rAF. Sets --mx/--my (spotlight position on .card-body) and --rx/--ry (-1..1,
+// scaled by the theme's --tilt-max in CSS) on the hovered card. Only for a
+// hover-capable fine pointer with motion allowed; touch never tilts.
+// ══════════════════════════════════════════════════════════════════════════════
+(function initCardSpotlight() {
+  let pending = null;
+  let active = null;
+
+  function reset(card) {
+    if (!card) return;
+    ['--mx', '--my', '--rx', '--ry'].forEach(k => card.style.removeProperty(k));
+  }
+
+  function frame() {
+    const e = pending;
+    pending = null;
+    const card = e.target instanceof Element ? e.target.closest('.win98-card') : null;
+    if (card !== active) { reset(active); active = card; }
+    if (!card) return;
+    const box = card.getBoundingClientRect();
+    const body = card.querySelector('.card-body');
+    const bb = body ? body.getBoundingClientRect() : box;
+    const nx = (e.clientX - box.left) / box.width;   // 0..1
+    const ny = (e.clientY - box.top) / box.height;
+    card.style.setProperty('--rx', ((nx - 0.5) * 2).toFixed(3));
+    card.style.setProperty('--ry', ((ny - 0.5) * 2).toFixed(3));
+    card.style.setProperty('--mx', (e.clientX - bb.left).toFixed(0) + 'px');
+    card.style.setProperty('--my', (e.clientY - bb.top).toFixed(0) + 'px');
+  }
+
+  document.addEventListener('pointermove', (e) => {
+    if (e.pointerType === 'touch' || mqReduce.matches || !mqFine.matches) {
+      if (active) { reset(active); active = null; }
+      return;
+    }
+    if (!pending) requestAnimationFrame(frame);
+    pending = e;
+  }, { passive: true });
+
+  document.documentElement.addEventListener('pointerleave', () => { reset(active); active = null; }, { passive: true });
 })();
 
 // ══════════════════════════════════════════════════════════════════════════════

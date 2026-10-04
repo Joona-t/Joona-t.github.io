@@ -1,5 +1,20 @@
 # Bugs & Iterations
 
+## 2026-10-04: ITER — Visual upgrade Phase 3: motion layer
+
+**Change:** Motion that answers people, from plan.md Phase 3 (research.md §4 motion ceiling, §5 support table). All new CSS is unlayered at the end of styles.css; per-theme flavour is tokens only (`--tilt-max`, `--spot`, `--lift-*`, `--reveal-*`, `--ring-*`, `--wipe-ease`).
+- **Springs + press:** pills, hero CTAs, card links, Ko-fi share one transition list on `--ease-pop` (candy spring, kawaii soft spring, basalt damped, retro `steps(4)`); chevron springs on open; `:active { scale: .97 }` (individual `scale`, so it never fights `transform`).
+- **Theme wipe:** `switchTheme(theme, pill)` runs `startViewTransition` and grows a `clip-path` circle on `::view-transition-new(root)` from the clicked pill (retro: `steps(8)`). Skipped without the API or under reduced motion; cross-tab `storage` sync still calls plain `apply()`. `.is-theme-wipe` scopes the `animation:none` so Phase 5 page transitions keep their crossfade, and drops the bar's `view-transition-name` so the bar is wiped with the page.
+- **Scroll reveals:** `animation-timeline: view()` on cards, section headers, gallery shots, notice/mission/support blocks — opacity + `translate`/`scale` only, inside `@supports` + no-preference (basalt fade only, retro stepped rise). Firefox: content simply visible.
+- **Card spotlight + tilt:** one passive, rAF-throttled `pointermove` sets `--mx/--my/--rx/--ry` on the hovered card (fine hover pointer + motion allowed only). Spotlight is `.card-body::after` (isolated, under the text); hover transform rewritten as one `perspective · translate(lift) · rotate · rotateX/Y(tilt)` chain. Candy ±4° white gloss, kawaii ±3° pink, basalt ember glow no tilt, retro neither.
+- **Conic CTA ring:** `@property --ls-angle`; primary hero CTA + Ko-fi repaint their own fill on `padding-box` over a conic `border-box` (no pseudo-element). Sweeps once on load, rotates only on hover/focus; static ring under reduced motion.
+- **Hero entrance:** `@starting-style` one-shot, `--i` stagger: orb → wordmark → tagline → CTAs (opacity + translate).
+- **Accordions:** `::details-content` + `interpolate-size` block-size transition inside `@supports`; `overflow: clip` + clip margin so reveals and focus rings survive.
+- **Progress bar:** 2px `.site-bar::after`, `animation-timeline: scroll(root)`.
+- Cache strings bumped to `2026-10-04-p3`.
+**Verification:** `node --check script.js` OK; styles.css braces 501/501; `build-gallery.py --check` in sync (9 categories, 35 cards). Local preview (Chromium): ring, wipe (class cleaned up after), tilt matrix + spotlight opacity on hover, reveal/progress animations attached, accordion open, all 4 themes, zero console errors. No new text/background colour pairs (ring is decorative border; button fills unchanged). Not done: reduced-motion emulation, 360/768 captures, Safari/Firefox, Lighthouse.
+**Files:** styles.css, script.js, index.html, plan.md, BUGS_AND_ITERATIONS.md
+
 ## 2026-10-04: ITER — Visual upgrade Phase 2: structure (sticky nav, hero, sections)
 
 **Change:** Page structure from plan.md Phase 2 (research.md D6, D9, D10, D12).

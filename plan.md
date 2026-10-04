@@ -130,24 +130,24 @@ Evidence and file:line references are in `research.md`. Branch: `feat/visual-upg
 
 ### Phase 3: Motion layer (about 0.75 day)
 
-- [ ] **Springs.** Apply `--ease-pop` to card hover (:557), pills, CTAs and the chevron. Add a `:active { scale:.97 }` press.
-- [ ] **Theme wipe.** Add `switchTheme(theme, pill)` with `startViewTransition` and a `clip-path` circle from the pill.
-  - [ ] Cross-tab sync keeps using plain `apply()`.
-  - [ ] Skip the wipe under reduced motion.
-- [ ] **Scroll reveals.** Use `animation-timeline: view()` on cards, section headers, gallery shots and the mission/support blocks.
-  - [ ] Animate `translate`/`scale` only, so they don't fight the hover `transform`.
-  - [ ] Wrap it in `@supports`.
-- [ ] **Card spotlight and tilt.** One delegated pointermove, throttled with rAF, sets `--mx`/`--my`/`--rx`/`--ry`.
-  - [ ] Put the spotlight on `.card-body::after`, which is free; `.card-body` needs `position:relative`.
-  - [ ] Rewrite the hover at :550-565 onto the same transform.
-  - [ ] Only for `(hover:hover) and (pointer:fine)` with motion allowed.
-- [ ] **Conic CTA ring.** Use `@property --ls-angle` with a `padding-box`/`border-box` gradient (no pseudo-element).
-  - [ ] It sweeps once on load and rotates only on hover or focus.
-  - [ ] Use it on the primary CTA and Ko-fi only.
-- [ ] **Hero entrance.** One-shot, with `@starting-style` and a `--i` stagger: orb, then wordmark, then tagline, then CTAs.
-- [ ] **Accordions.** Animate them with `::details-content` + `interpolate-size`, inside `@supports`.
-- [ ] **Progress bar.** A 2px top bar driven by `animation-timeline: scroll(root)`, placed inside the site bar.
-- [ ] Run the gate, then commit.
+- [x] **Springs.** Apply `--ease-pop` to card hover (:557), pills, CTAs and the chevron. Add a `:active { scale:.97 }` press.
+- [x] **Theme wipe.** Add `switchTheme(theme, pill)` with `startViewTransition` and a `clip-path` circle from the pill.
+  - [x] Cross-tab sync keeps using plain `apply()`.
+  - [x] Skip the wipe under reduced motion.
+- [x] **Scroll reveals.** Use `animation-timeline: view()` on cards, section headers, gallery shots and the mission/support blocks.
+  - [x] Animate `translate`/`scale` only, so they don't fight the hover `transform`.
+  - [x] Wrap it in `@supports`.
+- [x] **Card spotlight and tilt.** One delegated pointermove, throttled with rAF, sets `--mx`/`--my`/`--rx`/`--ry`.
+  - [x] Put the spotlight on `.card-body::after`, which is free; `.card-body` needs `position:relative`.
+  - [x] Rewrite the hover at :550-565 onto the same transform.
+  - [x] Only for `(hover:hover) and (pointer:fine)` with motion allowed.
+- [x] **Conic CTA ring.** Use `@property --ls-angle` with a `padding-box`/`border-box` gradient (no pseudo-element).
+  - [x] It sweeps once on load and rotates only on hover or focus.
+  - [x] Use it on the primary CTA and Ko-fi only.
+- [x] **Hero entrance.** One-shot, with `@starting-style` and a `--i` stagger: orb, then wordmark, then tagline, then CTAs.
+- [x] **Accordions.** Animate them with `::details-content` + `interpolate-size`, inside `@supports`.
+- [x] **Progress bar.** A 2px top bar driven by `animation-timeline: scroll(root)`, placed inside the site bar.
+- [x] Run the gate, then commit. (partial gate: `node --check`, brace balance, gallery `--check`, live preview of all 4 themes at desktop width — ring, wipe, tilt/spotlight, reveals, progress bar, accordion, zero console errors; no reduced-motion emulation, 360/768 captures or Lighthouse run; no new text/background pairs so contrast unchanged)
 
 ### Phase 4: Performance diet (about 0.5 day)
 

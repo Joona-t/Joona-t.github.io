@@ -2325,3 +2325,259 @@ html.theme-retro:root .hero-cta-group a.hero-cta.hero-cta--ghost,
 html.theme-retro:root .hero-cta-group a.hero-cta.hero-cta--ghost:hover,
 html.theme-retro:root .hero-cta-group a.hero-cta.hero-cta--ghost:focus-visible,
 html.theme-retro:root .support-actions a.kofi-btn.kofi-btn--ghost { color: var(--hot-pink); }
+
+/* ═══════════════════════ PHASE 3 — MOTION LAYER (2026-10-04) ═══════════════════════
+   Motion that answers people: springs, press, theme wipe, scroll reveals, card
+   spotlight + tilt, conic CTA ring, hero entrance, accordions, progress bar.
+   Unlayered (plan.md ground rules). `html:root body …` out-ranks every theme rule
+   (incl. the later retro sheet). Every animation sits inside
+   (prefers-reduced-motion: no-preference); newer features also sit in @supports.
+   Per-theme flavour = tokens only. */
+
+/* ── Motion tokens (kawaii = :root default) ── */
+:root {
+  --tilt-max: 3;                                   /* degrees at the card edge */
+  --spot: rgba(255, 79, 179, 0.14);                /* hot-pink glow */
+  --lift-x: 0px; --lift-y: -4px; --lift-rot: -0.4deg;
+  --reveal-y: 22px; --reveal-s: 0.97; --reveal-ease: var(--ease-out);
+  --ring-a: #ff4fb3; --ring-b: #ffd1e8; --ring-c: #b3185c;
+  --wipe-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+html.theme-candy {
+  --tilt-max: 4;
+  --spot: rgba(255, 255, 255, 0.55);               /* white gloss glow */
+  --lift-y: -2px; --lift-rot: -0.3deg;
+  --ring-a: #ff49a6; --ring-b: #ffffff; --ring-c: #e91e8c;
+}
+html.theme-basalt {
+  --tilt-max: 0;                                   /* stone doesn't wobble */
+  --spot: rgba(217, 162, 59, 0.10);                /* ember gold */
+  --lift-y: -3px; --lift-rot: 0deg;
+  --reveal-y: 0px; --reveal-s: 1;                  /* fade only */
+  --ring-a: #d9a23b; --ring-b: #f4c46a; --ring-c: #5a3d12;
+}
+html.theme-retro {
+  --tilt-max: 0;
+  --spot: transparent;                             /* no spotlight */
+  --lift-x: -3px; --lift-y: -4px; --lift-rot: 0deg;
+  --reveal-y: 24px; --reveal-s: 1; --reveal-ease: steps(4, end);  /* stepped rise */
+  --ring-a: #ff6eb4; --ring-b: #c084fc; --ring-c: #fff5f9;
+  --wipe-ease: steps(8, end);
+}
+
+/* ── Springs: one transition list for every pressable thing ── */
+html:root body .theme-pill,
+html:root body .hero-cta,
+html:root body .card-link,
+html:root body .kofi-btn {
+  transition:
+    transform var(--dur-2) var(--ease-pop),
+    scale var(--dur-1) var(--ease-pop),
+    box-shadow var(--dur-2) var(--ease-out),
+    background-color var(--dur-2) ease,
+    color var(--dur-2) ease,
+    border-color var(--dur-2) ease,
+    filter var(--dur-2) ease,
+    text-shadow var(--dur-2) ease;
+}
+html:root body .category-chevron { transition: transform var(--dur-3) var(--ease-pop); }
+
+/* ── Cards: one transform carries lift + tilt (JS sets --rx/--ry in -1..1) ── */
+html:root body .win98-card {
+  transition:
+    transform var(--dur-2) var(--ease-pop),
+    box-shadow var(--dur-2) var(--ease-out),
+    border-color var(--dur-2) ease;
+}
+html:root body .win98-card:hover {
+  transform:
+    perspective(900px)
+    translate(var(--lift-x), var(--lift-y))
+    rotate(var(--lift-rot))
+    rotateX(calc(var(--ry, 0) * var(--tilt-max) * -1deg))
+    rotateY(calc(var(--rx, 0) * var(--tilt-max) * 1deg));
+}
+/* Spotlight lives on the free .card-body::after (candy owns the card's pseudos).
+   isolation keeps it under the card text, above the card fill. */
+html:root body .card-body { position: relative; isolation: isolate; }
+html:root body .card-body::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(220px circle at var(--mx, 50%) var(--my, 0%), var(--spot), transparent 70%);
+  opacity: 0;
+  transition: opacity var(--dur-2) var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  html:root body .win98-card:hover .card-body::after { opacity: 1; }
+}
+html.theme-retro:root body .card-body::after { content: none; }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Press */
+  html:root body .theme-pill:active,
+  html:root body .hero-cta:active,
+  html:root body .card-link:not(.card-link--soon):active,
+  html:root body .kofi-btn:active { scale: 0.97; }
+}
+
+/* ── Conic CTA ring — primary hero CTA + Ko-fi only. No pseudo-element: the fill
+   is repainted on padding-box over a conic border-box. Sweeps once on load,
+   rotates only while hovered/focused. Static ring under reduced motion. ── */
+@property --ls-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+@keyframes lsRingSweep { from { --ls-angle: 0deg; } to { --ls-angle: 360deg; } }
+
+html:root .hero-cta-group a.hero-cta.hero-cta--primary {
+  --ring-fill: linear-gradient(180deg, #f2c7da 0%, #e8aecb 52%, #dd9bbe 100%);
+  --ring-fill-hover: linear-gradient(180deg, #f7d4e3 0%, #edb6d1 52%, #e2a3c4 100%);
+}
+html.theme-candy:root .hero-cta-group a.hero-cta.hero-cta--primary {
+  --ring-fill: var(--ls-glass);
+  --ring-fill-hover: linear-gradient(var(--ls-glass-strong), var(--ls-glass-strong));
+}
+html.theme-basalt:root .hero-cta-group a.hero-cta.hero-cta--primary,
+html.theme-retro:root .hero-cta-group a.hero-cta.hero-cta--primary {
+  --ring-fill: linear-gradient(180deg, #282b30 0%, #1f2125 52%, #16171a 100%);
+  --ring-fill-hover: linear-gradient(180deg, #2b2e33 0%, #1f2125 52%, #16171a 100%);
+}
+html:root .support-actions a.kofi-btn:not(.kofi-btn--ghost) {
+  --ring-fill: linear-gradient(135deg, #d81b73 0%, #a51259 100%);
+  --ring-fill-hover: var(--ring-fill);
+}
+html.theme-candy:root .support-actions a.kofi-btn:not(.kofi-btn--ghost) {
+  --ring-fill: var(--ls-grad-btn);
+}
+html.theme-basalt:root .support-actions a.kofi-btn:not(.kofi-btn--ghost) {
+  --ring-fill: linear-gradient(180deg, #2c2f35 0%, #1f2125 100%);
+  --ring-fill-hover: linear-gradient(180deg, #34373d 0%, #24262b 100%);
+}
+html.theme-retro:root .support-actions a.kofi-btn:not(.kofi-btn--ghost) {
+  --ring-fill: linear-gradient(180deg, #d81b73 0%, #a51259 100%);
+}
+html:root .hero-cta-group a.hero-cta.hero-cta--primary,
+html:root .support-actions a.kofi-btn:not(.kofi-btn--ghost) {
+  border: 2px solid transparent;
+  background:
+    var(--ring-fill) padding-box,
+    conic-gradient(from var(--ls-angle), var(--ring-a), var(--ring-b), var(--ring-a), var(--ring-c), var(--ring-a)) border-box;
+}
+html:root .hero-cta-group a.hero-cta.hero-cta--primary:hover,
+html:root .hero-cta-group a.hero-cta.hero-cta--primary:focus-visible,
+html:root .support-actions a.kofi-btn:not(.kofi-btn--ghost):hover,
+html:root .support-actions a.kofi-btn:not(.kofi-btn--ghost):focus-visible {
+  background:
+    var(--ring-fill-hover) padding-box,
+    conic-gradient(from var(--ls-angle), var(--ring-a), var(--ring-b), var(--ring-a), var(--ring-c), var(--ring-a)) border-box;
+}
+@media (prefers-reduced-motion: no-preference) {
+  html:root .hero-cta-group a.hero-cta.hero-cta--primary,
+  html:root .support-actions a.kofi-btn:not(.kofi-btn--ghost) {
+    animation: lsRingSweep 1.6s var(--ease-out) 0.9s 1 both;
+  }
+  html:root .hero-cta-group a.hero-cta.hero-cta--primary:hover,
+  html:root .hero-cta-group a.hero-cta.hero-cta--primary:focus-visible,
+  html:root .support-actions a.kofi-btn:not(.kofi-btn--ghost):hover,
+  html:root .support-actions a.kofi-btn:not(.kofi-btn--ghost):focus-visible {
+    animation: lsRingSweep 2.4s linear infinite;
+  }
+}
+
+/* ── Hero entrance — one shot: orb → wordmark → tagline → CTAs.
+   Uses translate/opacity only (the heart's own scale animation is untouched).
+   Without @starting-style support it simply appears. ── */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-inner > .heart-orb { --i: 0; }
+  .hero-inner > .hero-mark,
+  .hero-inner > .logo-text { --i: 1; }
+  .hero-inner > .tagline,
+  .hero-inner > .sub-tagline { --i: 2; }
+  .hero-inner > .hero-cta-group { --i: 3; }
+  .hero-inner > :is(.heart-orb, .hero-mark, .logo-text, .tagline, .sub-tagline, .hero-cta-group) {
+    transition:
+      opacity 560ms var(--ease-out) calc(var(--i) * 120ms),
+      translate 680ms var(--ease-pop) calc(var(--i) * 120ms);
+  }
+  @starting-style {
+    .hero-inner > :is(.heart-orb, .hero-mark, .logo-text, .tagline, .sub-tagline, .hero-cta-group) {
+      opacity: 0;
+      translate: 0 14px;
+    }
+  }
+}
+
+/* ── Scroll reveals — translate/scale/opacity only, so the hover `transform`
+   never fights them. Content is fully visible where view() is unsupported. ── */
+@keyframes lsReveal {
+  from { opacity: 0; translate: 0 var(--reveal-y); scale: var(--reveal-s); }
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .win98-card,
+    .section-header,
+    .gallery-shot,
+    .notice-inner,
+    .mission-inner,
+    .support-inner {
+      animation: lsReveal linear both;
+      animation-timing-function: var(--reveal-ease);
+      animation-timeline: view();
+      animation-range: entry 0% entry 80%;
+    }
+  }
+}
+
+/* ── Accordions — animate open/close where ::details-content + interpolate-size
+   exist (Chromium). Elsewhere native instant open. overflow:clip (not hidden)
+   keeps view() reveals working; the clip margin keeps rings + shadows visible. ── */
+@supports selector(::details-content) and (interpolate-size: allow-keywords) {
+  @media (prefers-reduced-motion: no-preference) {
+    :root { interpolate-size: allow-keywords; }
+    details.category::details-content {
+      block-size: 0;
+      overflow: clip;
+      overflow-clip-margin: 24px;
+      transition:
+        block-size var(--dur-3) var(--ease-out),
+        content-visibility var(--dur-3) allow-discrete;
+    }
+    details.category[open]::details-content { block-size: auto; }
+    html.theme-retro details.category::details-content { transition-timing-function: steps(4, end), steps(4, end); }
+  }
+}
+
+/* ── Scroll progress — 2px bar on the bottom edge of the sticky site bar ── */
+@keyframes lsProgress { to { scale: 1 1; } }
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .site-bar::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 2px;
+      background: var(--accent);
+      transform-origin: 0 50%;
+      scale: 0 1;
+      pointer-events: none;
+      animation: lsProgress linear both;
+      animation-timeline: scroll(root);
+    }
+  }
+}
+
+/* ── Theme wipe — script.js runs startViewTransition and animates the new
+   snapshot's clip-path from the clicked pill. Scoped to .is-theme-wipe so the
+   default view transitions (Phase 5 page navigations) keep their crossfade. ── */
+html.is-theme-wipe::view-transition-old(root),
+html.is-theme-wipe::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+html.is-theme-wipe .site-bar { view-transition-name: none; }   /* wipe the bar with the page */
