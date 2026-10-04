@@ -260,9 +260,9 @@ html:not(.theme-retro) #cursor-sparks { display: none; }
    proportional to the wordmark below (which is ~720px wide). */
 .heart-orb {
   position: relative;
-  /* layout (not paint) containment: the swarm and rings overflow the 240px
-     box on purpose, and paint containment would clip them. */
-  contain: layout style;
+  /* No `contain` here: layout containment makes this a stacking context,
+     which isolates the candy heart video's `mix-blend-mode: darken` and
+     brings back its pale MP4 panel. Paint containment would clip the swarm. */
   width: 240px;
   height: 240px;
   margin: 0 0 var(--gap-lg);

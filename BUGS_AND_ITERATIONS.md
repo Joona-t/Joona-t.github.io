@@ -1,5 +1,11 @@
 # Bugs & Iterations
 
+## 2026-10-04: ITER — Phase 4 fix: drop `contain` from `.heart-orb`
+
+**Problem:** Phase 4 added `contain: layout style` to `.heart-orb`. Layout containment makes the element a stacking context, which is an isolated blend group. The candy heart video's `mix-blend-mode: darken` then blended against the orb's transparent backdrop instead of the page gradient, so its pale MP4 panel could show again.
+**Root cause:** Containment was added for performance without checking the blend dependency inside the orb.
+**Fix:** Removed the `contain` line and left a comment explaining why. The saving was negligible for a fixed 240px box.
+
 ## 2026-10-04: ITER — Visual upgrade Phase 4: performance diet
 
 **Change:** Continuous-motion budget cut, from plan.md Phase 4 (research.md D4, D7; motion ceiling SKILL.md:136-139).
