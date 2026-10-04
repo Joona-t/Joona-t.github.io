@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-10-03",
+  verifiedAt: "2026-10-04",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -14,7 +14,8 @@ window.OPENAI_WATCH = {
       { name: "APIs", value: "Operational" },
       { name: "ChatGPT", value: "Operational" },
       { name: "Codex", value: "Operational" },
-      { name: "FedRAMP", value: "Operational" }
+      { name: "FedRAMP", value: "Operational" },
+      { name: "Ads Platform", value: "Operational" }
     ]
   },
   updates: [
