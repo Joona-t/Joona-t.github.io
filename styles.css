@@ -2027,6 +2027,10 @@ html.theme-candy .hero-social-link:focus-visible {
 
 /* Sticky bar offset for every in-page jump (hash links + scrollIntoView). */
 html { scroll-padding-top: 84px; }
+/* The Dyson swarm's orbit spans reach ~340px past the orb on phones; mobile
+   browsers then widen the layout viewport to ~700px and zoom the whole page
+   out (live site too). clip (not hidden) = no scroll container, sticky-safe. */
+.hero { overflow-x: clip; }
 @media (max-width: 899px) { html { scroll-padding-top: 116px; } }
 @media (max-width: 599px) { html { scroll-padding-top: 100px; } }
 
@@ -2063,6 +2067,13 @@ html { scroll-padding-top: 84px; }
   top: 0;
   z-index: 100;                          /* over content (z 2), under the grain (999) */
   view-transition-name: site-nav;
+  /* Glass lives HERE, not on .site-bar-inner: view-transition-name makes this
+     element a backdrop root, so a child's backdrop-filter would blur nothing. */
+  background: var(--surface);           /* solid fallback when color-mix is unknown */
+  background: color-mix(in oklch, var(--surface) 84%, transparent);
+  border-bottom: 1px solid color-mix(in oklch, var(--accent) 24%, transparent);
+  -webkit-backdrop-filter: blur(14px) saturate(1.3);
+  backdrop-filter: blur(14px) saturate(1.3);
 }
 .site-bar-inner {
   display: flex;
@@ -2071,15 +2082,10 @@ html { scroll-padding-top: 84px; }
   justify-content: space-between;
   gap: 8px 16px;
   padding: 8px max(var(--sp-4), calc((100% - var(--w-wide)) / 2));
-  background: var(--surface);           /* solid fallback when color-mix is unknown */
-  background: color-mix(in oklch, var(--surface) 74%, transparent);
-  border-bottom: 1px solid color-mix(in oklch, var(--accent) 24%, transparent);
-  -webkit-backdrop-filter: blur(14px) saturate(1.3);
-  backdrop-filter: blur(14px) saturate(1.3);
   transition: box-shadow var(--dur-2) var(--ease-out);
 }
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .site-bar-inner { background: var(--surface); }   /* no blur → no see-through */
+  .site-bar { background: var(--surface); }   /* no blur → no see-through */
 }
 .site-bar[data-stuck] .site-bar-inner {
   box-shadow: 0 6px 22px color-mix(in oklch, var(--ink) 16%, transparent);
@@ -2307,12 +2313,12 @@ html .site-footer .footer-socials .hero-social-link {
 /* Retro's semantic --surface is its LIGHT card fill and --accent-ink is tuned for
    that card, but the bar, skip link and ghost buttons sit on the dark wine
    ground — repaint them with retro's own dark capsule + hot pink (7.4:1). */
-html.theme-retro:root .site-bar-inner {
+html.theme-retro:root .site-bar {
   background: rgba(26, 10, 18, 0.82);
   border-bottom-color: rgba(255, 110, 180, 0.3);
 }
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  html.theme-retro:root .site-bar-inner { background: var(--bg); }
+  html.theme-retro:root .site-bar { background: var(--bg); }
 }
 html.theme-retro:root .site-brand { font-family: var(--font-pixel); font-size: 0.75rem; }
 html.theme-retro:root .site-nav-link[aria-current] {

@@ -1,5 +1,15 @@
 # Bugs & Iterations
 
+## 2026-10-04: BUG — Sticky bar not frosted; phone layout zoomed out
+
+**Problem 1:** When scrolled, page text showed sharply through the new sticky site bar.
+**Root cause:** `.site-bar` has `view-transition-name`, which makes it a *backdrop root*. The child `.site-bar-inner` therefore had its `backdrop-filter` blur only its parent's empty layer.
+**Fix:** The glass (background, border, backdrop-filter) moved onto `.site-bar` itself, with opacity 74%→84%. The retro overrides were retargeted.
+**Problem 2 (also on the live site):** At 375px the layout viewport was ~700px, so phones zoomed the whole page out.
+**Root cause:** The Dyson swarm orbit spans overflow the hero horizontally.
+**Fix:** `.hero { overflow-x: clip; }`. clip creates no scroll container, so sticky still works. Verified innerWidth 375 = scrollWidth 375.
+**Files:** styles.css
+
 ## 2026-10-04: ITER — Visual upgrade Phase 5: polish and wrap-up
 
 **Change:** Final phase of plan.md.
