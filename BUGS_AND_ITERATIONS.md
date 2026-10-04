@@ -1,5 +1,18 @@
 # Bugs & Iterations
 
+## 2026-10-04: ITER — Visual upgrade Phase 1: tokens and dead CSS
+
+**Change:** Token foundation + CSS debt cleanup from research.md §3, no redesign yet.
+- **Tokens:** semantic layer `--surface/--ink/--accent/--accent-ink/--focus/--radius` in `:root` (kawaii) and each theme block (candy, basalt in styles.css; retro in styles-retro.css). Motion tokens `--ease-pop` (per theme: kawaii soft spring, candy springy `linear()`, basalt damped cubic-bezier, retro `steps(4)`), `--ease-out`, `--dur-1..3`. Fluid scales `--fs-xs..--fs-logo`, `--sp-1..--sp-section`; widths `--w-wide` (1180px) and `--w-prose` (68ch).
+- **Applied:** 6 section paddings (tools, notice, mission, support, footer, gallery) and 12 one-off font sizes now use tokens; the 3 `1180px` widths use `--w-wide`, mission/notice use `--w-prose`. The `-8px` margin hack on `.gallery-intro` is gone (gallery `.section-header` gets a 24px bottom margin instead; retro keeps its 40px gap). Category hover tint and group rail use `color-mix(in oklch, var(--accent) N%, transparent)` with an rgba fallback first. `text-wrap: balance` on headings, `pretty` on body copy.
+- **Dead CSS removed:** the first, fully shadowed `.hero-cta` block (Basalt Monolith skin that the kawaii block overrode); `.glow-blob-keep`, `.glow-blob-2/-3` base rules and `blobDrift` (base `.glow-blob-1` geometry folded into basalt's single ember pool); keyframes `sparkleFloat`, `sparkFade`, `starburstSpin`, `ankhEmber`; retro `.spark`, `.cursor-spark` and `sparkRise-retro` (classes never set; `twinkle-retro` kept because `.section-deco` and mission sparkles use it).
+- **JS keyframes → CSS:** `sparkleTwinkle`, `cursorSparkFly`, `cardWobble` now live in styles.css; script.js no longer injects `<style>` tags.
+- **Patch pile merged:** basalt `.ankh-glyph` was defined 5 times with stacked `!important`s → one rule with the final computed values (200px, cover, sepia relic frame, no animation, no `!important`); ember pool `::after` 300px. Basalt CTA rest/hover/focus/per-button embers consolidated into the basalt HERO CTA section. Basalt gold wordmark and soon-chip colour folded into their rules. Candy: 3 stacked video blend rules → exactly one `mix-blend-mode: darken` (no `!important`) + the wordmark feather mask. Candy a11y colours now close the candy block; kawaii CTA focus ring uses `--focus` (#7a1540).
+- **No more `background-attachment: fixed` (×3):** page ground is a fixed `body::before` layer (z-index -1) repainted per theme; retro turns it off.
+- Cache strings bumped to `2026-10-04-p1`.
+**Verification:** `node --check script.js` OK; braces balanced (styles.css 371/371, styles-retro.css); `build-gallery.py --check` in sync (8 categories, 29 cards). Local preview (python http.server): all 4 themes render, basalt ankh computed 200×200 / sepia filter / animation none (visual check: framed cream relic, gold Cinzel wordmark), candy videos blend with no MP4 box, `body::before` fixed in candy/kawaii/basalt and `display:none` in retro, zero console errors. New `--accent-ink` pairs AA by WCAG formula (kawaii 6.35, candy 6.07, basalt 10.4, retro 5.09 on `--surface`). Not done: 3-width × reduced-motion screenshot matrix; `audit-contrast.py` targets the extension token sheet, not this site.
+**Files:** styles.css, styles-retro.css, script.js, index.html, plan.md, BUGS_AND_ITERATIONS.md
+
 ## 2026-10-04: ITER — Visual upgrade Phase 0: defect floor (no visual redesign)
 
 **Change:** Fixed the a11y/perf defect floor from research.md (D2, D3, D4, D8, D11) before any visual work.

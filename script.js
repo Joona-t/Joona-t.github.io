@@ -212,16 +212,7 @@ const mqFine = window.matchMedia('(hover: hover) and (pointer: fine)');
     `;
     field.appendChild(el);
   }
-
-  // Inject the twinkle keyframe (kept here so styles.css stays component-focused)
-  const style = document.createElement('style');
-  style.textContent = `
-    @keyframes sparkleTwinkle {
-      0%, 100% { opacity: 0.15; transform: scale(0.7); }
-      50%      { opacity: 1;    transform: scale(1.15); }
-    }
-  `;
-  document.head.appendChild(style);
+  // @keyframes sparkleTwinkle lives in styles.css.
 })();
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -265,16 +256,7 @@ const mqFine = window.matchMedia('(hover: hover) and (pointer: fine)');
     lastTime = now;
     spawnSpark(e.clientX, e.clientY);
   }, { passive: true });
-
-  // Inject the fly keyframe — uses CSS custom props for direction
-  const style = document.createElement('style');
-  style.textContent = `
-    @keyframes cursorSparkFly {
-      0%   { transform: translate(0, 0) scale(0.6); opacity: 1; }
-      100% { transform: translate(var(--dx, 0), var(--dy, -30px)) scale(1.4); opacity: 0; }
-    }
-  `;
-  document.head.appendChild(style);
+  // @keyframes cursorSparkFly lives in styles.css (uses --dx/--dy).
 })();
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -330,14 +312,4 @@ document.querySelectorAll('.win-btn-close').forEach(btn => {
     card.addEventListener('animationend', () => { card.style.animation = ''; }, { once: true });
   });
 });
-const wobbleStyle = document.createElement('style');
-wobbleStyle.textContent = `
-  @keyframes cardWobble {
-    0%   { transform: translateY(-4px) rotate(-0.4deg); }
-    25%  { transform: translateY(-4px) rotate(2deg); }
-    50%  { transform: translateY(-4px) rotate(-2deg); }
-    75%  { transform: translateY(-4px) rotate(1deg); }
-    100% { transform: translateY(-4px) rotate(-0.4deg); }
-  }
-`;
-document.head.appendChild(wobbleStyle);
+// @keyframes cardWobble lives in styles.css.

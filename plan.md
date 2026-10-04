@@ -90,18 +90,18 @@ Evidence and file:line references are in `research.md`. Branch: `feat/visual-upg
 
 ### Phase 1: Tokens and dead CSS (about 0.5 day)
 
-- [ ] Add semantic tokens to `:root` and each theme block: `--surface`, `--ink`, `--accent`, `--accent-ink`, `--focus` and `--radius`.
-- [ ] Add `--ease-pop` and `--ease-out`, plus `--dur-1`, `--dur-2` and `--dur-3`.
-- [ ] Add fluid scales: `--fs-xs` to `--fs-logo`, and `--sp-1` to `--sp-section`.
-- [ ] Add two content widths: `--w-wide` (1180) and `--w-prose` (68ch).
-- [ ] Replace the 6 hardcoded section paddings and the 10 one-off font sizes with tokens, and drop the `-8px` margin hack (:1036).
-- [ ] Replace hardcoded `rgba` tints with `color-mix(in oklch, var(--accent) N%, transparent)` (:928, :961).
-- [ ] Add `text-wrap: balance` to headings and `pretty` to body copy.
-- [ ] Delete the dead first `.hero-cta` block (:422-501), the dead keyframes and the dead base `.glow-blob` rules.
-- [ ] Move the 3 keyframes that JS injects into the CSS.
-- [ ] Merge the patch pile (:1952-2042) into the theme blocks. Keep **one** candy `darken` video rule, and screenshot basalt's ankh to check it.
-- [ ] Replace `background-attachment: fixed` ×3 with a fixed `body::before`.
-- [ ] Run the gate, then commit.
+- [x] Add semantic tokens to `:root` and each theme block: `--surface`, `--ink`, `--accent`, `--accent-ink`, `--focus` and `--radius`.
+- [x] Add `--ease-pop` and `--ease-out`, plus `--dur-1`, `--dur-2` and `--dur-3`.
+- [x] Add fluid scales: `--fs-xs` to `--fs-logo`, and `--sp-1` to `--sp-section`.
+- [x] Add two content widths: `--w-wide` (1180) and `--w-prose` (68ch).
+- [x] Replace the 6 hardcoded section paddings and the 10 one-off font sizes with tokens, and drop the `-8px` margin hack (:1036).
+- [x] Replace hardcoded `rgba` tints with `color-mix(in oklch, var(--accent) N%, transparent)` (:928, :961).
+- [x] Add `text-wrap: balance` to headings and `pretty` to body copy.
+- [x] Delete the dead first `.hero-cta` block (:422-501), the dead keyframes and the dead base `.glow-blob` rules.
+- [x] Move the 3 keyframes that JS injects into the CSS.
+- [x] Merge the patch pile (:1952-2042) into the theme blocks. Keep **one** candy `darken` video rule, and screenshot basalt's ankh to check it.
+- [x] Replace `background-attachment: fixed` ×3 with a fixed `body::before`.
+- [x] Run the gate, then commit. (partial gate: JS syntax, brace balance, gallery `--check`, live preview of all 4 themes at desktop width with computed-style checks; no 3-width × reduced-motion screenshot matrix; `audit-contrast.py` n/a for this site)
 
 ### Phase 2: Structure (sticky nav, hero, sections) (about 0.75 day)
 

@@ -13,6 +13,14 @@ html.theme-retro {
 
   --font-pixel: 'Press Start 2P', monospace;
   --font-mono:  'DM Mono', 'Courier New', monospace;
+  /* semantic layer (Phase 1) */
+  --surface:    var(--bg-card);
+  --ink:        var(--cream);
+  --accent:     var(--hot-pink);
+  --accent-ink: var(--muted-pink);
+  --focus:      var(--hot-pink);
+  --radius:     0px;
+  --ease-pop:   steps(4, end);
 }
 html.theme-retro,
 html.theme-retro body {
@@ -85,15 +93,6 @@ html.theme-retro #sparkle-field {
   inset: 0;
   z-index: 1;
 }
-html.theme-retro #sparkle-field .spark {
-  position: absolute;
-  color: var(--hot-pink);
-  font-size: 12px;
-  animation: twinkle-retro var(--dur, 3s) ease-in-out infinite;
-  animation-delay: var(--delay, 0s);
-  opacity: 0;
-  will-change: opacity, transform;
-}
 @keyframes twinkle-retro {
   0%, 100% { opacity: 0;    transform: scale(0.6) rotate(0deg); }
   50%       { opacity: 0.8; transform: scale(1.2) rotate(20deg); }
@@ -103,19 +102,6 @@ html.theme-retro #cursor-sparks {
   position: fixed;
   inset: 0;
   z-index: 1000;
-}
-html.theme-retro .cursor-spark {
-  position: absolute;
-  pointer-events: none;
-  font-size: 11px;
-  color: var(--hot-pink);
-  animation: sparkRise-retro 0.8s ease-out forwards;
-  will-change: transform, opacity;
-  user-select: none;
-}
-@keyframes sparkRise-retro {
-  0%   { opacity: 1; transform: translate(0, 0)         scale(1); }
-  100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(0.3); }
 }
 html.theme-retro .hero {
   position: relative;
@@ -728,8 +714,7 @@ html.theme-retro ::selection {
   html.theme-retro .glow-blob,
   html.theme-retro .starburst,
   html.theme-retro .section-deco,
-  html.theme-retro #sparkle-field span,
-  html.theme-retro #sparkle-field .spark {
+  html.theme-retro #sparkle-field span {
     animation: none;
   }
 }
@@ -911,3 +896,6 @@ html.theme-retro .card-link:focus-visible {
   outline: 2px solid #b3185c;               /* 5.8:1 on the cream card */
   outline-offset: 3px;
 }
+
+/* Phase 1: .gallery-intro lost its -8px pull; keep retro's header→intro gap at 40px. */
+html.theme-retro .gallery-section .section-header { margin-bottom: 2.5rem; }
