@@ -151,14 +151,14 @@ Evidence and file:line references are in `research.md`. Branch: `feat/visual-upg
 
 ### Phase 4: Performance diet (about 0.5 day)
 
-- [ ] **Swarm.** Go from 5 shells (1,074 spans) to 3 shells (about 180).
-  - [ ] Build it only for candy/kawaii with motion allowed, and tear it down when the theme changes.
-  - [ ] Add `contain: layout paint` on `.heart-orb`.
-  - [ ] Pause it with IO and `visibilitychange`, and pause the videos the same way.
-- [ ] **Cursor trail.** Delete it in candy, kawaii and basalt. Keep a pooled 12-node, passive, gated version in retro only.
-- [ ] Remove `#spiral-canvas` and the dead retro `.spark`/`.cursor-spark` rules.
-- [ ] Trim the always-on mission sparkles to 3 spans.
-- [ ] Run the gate, then commit.
+- [x] **Swarm.** Go from 5 shells (1,074 spans) to 3 shells (about 180).
+  - [x] Build it only for candy/kawaii with motion allowed, and tear it down when the theme changes.
+  - [x] Add `contain: layout paint` on `.heart-orb`. (shipped as `contain: layout style`: paint containment would clip the swarm/rings, which overflow the 240px box by design)
+  - [x] Pause it with IO and `visibilitychange`, and pause the videos the same way.
+- [x] **Cursor trail.** Delete it in candy, kawaii and basalt. Keep a pooled 12-node, passive, gated version in retro only.
+- [x] Remove `#spiral-canvas` and the dead retro `.spark`/`.cursor-spark` rules. (no `.spark`/`.cursor-spark` rules remained; removed `#spiral-canvas` markup + both CSS rules and the now-unused `cursorSparkFly` keyframes)
+- [x] Trim the always-on mission sparkles to 3 spans.
+- [x] Run the gate, then commit. (partial gate: `node --check`, brace balance, gallery `--check`, live preview: 180 swarm spans in candy, 0 in retro/basalt, 12-span retro trail pool, swarm + both videos pause off-screen and resume at top, swarm not clipped; no reduced-motion emulation or Lighthouse run; no new text/background pairs)
 
 ### Phase 5: Polish and wrap-up (about 0.25 day)
 

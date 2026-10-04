@@ -4,7 +4,7 @@
 
 // Motion / pointer gates. Reduced motion → no swarm, no sparkle field, no
 // cursor trail, instant scroll, videos paused on their poster. The cursor
-// trail additionally needs a real hover-capable fine pointer (no touch).
+// trail is retro-only and additionally needs a hover-capable fine pointer.
 const mqReduce = window.matchMedia('(prefers-reduced-motion: reduce)');
 const mqFine = window.matchMedia('(hover: hover) and (pointer: fine)');
 
@@ -134,43 +134,52 @@ const mqFine = window.matchMedia('(hover: hover) and (pointer: fine)');
 })();
 
 // ══════════════════════════════════════════════════════════════════════════════
-// DYSON SWARM — candy + kawaii. Concentric orbital shells of very fine pink
-// dust around the heart. CSS hides it in retro (styles-retro.css) and basalt
-// (styles.css, html.theme-basalt .dyson-swarm), and in every theme under
-// prefers-reduced-motion. Not built at all when reduced motion is on.
-//
-// Design notes:
-//   - 7 shells, ~60–130 particles each → ~600 total. Static dots inside an
-//     animated parent (only the 7 shells animate), so this is cheap.
-//   - Per-dot jitter (angle, radial offset, size, opacity, hue) keeps the
-//     "swarm" reading natural instead of clinical concentric circles.
-//   - Particles are 0.7–2.1 px and 0.12–0.45 alpha — visible enough to suggest
-//     structure, not enough to fight the heart or wordmark.
+// HERO VISIBILITY — one shared IntersectionObserver on the hero plus the page
+// visibilitychange. Continuous hero motion (swarm, videos) subscribes and
+// pauses while the hero is off-screen or the tab is hidden.
+// ══════════════════════════════════════════════════════════════════════════════
+const heroActivity = (function () {
+  const subs = [];
+  let inView = true;
+  const hero = document.querySelector('.hero');
+  const active = () => inView && !document.hidden;
+  const notify = () => subs.forEach(fn => fn(active()));
+  if (hero && 'IntersectionObserver' in window) {
+    new IntersectionObserver(([entry]) => { inView = entry.isIntersecting; notify(); })
+      .observe(hero);
+  }
+  document.addEventListener('visibilitychange', notify);
+  return {
+    active,
+    subscribe(fn) { subs.push(fn); },
+  };
+})();
+
+const isMotionTheme = () => {
+  const c = document.documentElement.classList;
+  return !c.contains('theme-retro') && !c.contains('theme-basalt');
+};
+
+// ══════════════════════════════════════════════════════════════════════════════
+// DYSON SWARM — candy + kawaii only, motion allowed. Three sparse orbital shells
+// of fine dust around the heart (~180 spans; was 5 shells / 1,074). Built when
+// the theme + motion gate passes, torn down (DOM removed) on a switch to
+// retro/basalt or when reduced motion turns on. Paused via the shared hero
+// visibility gate. CSS still hides it in retro/basalt/reduced motion as a
+// belt-and-braces fallback.
 // ══════════════════════════════════════════════════════════════════════════════
 (function initDysonSwarm() {
-  if (mqReduce.matches) return;
   const host = document.querySelector('.heart-orb');
   if (!host) return;
-  // Avoid double-injection if this script ever runs twice.
-  if (host.querySelector('.dyson-swarm')) return;
 
-  const swarm = document.createElement('div');
-  swarm.className = 'dyson-swarm';
-  swarm.setAttribute('aria-hidden', 'true');
-
-  // Tuned via Dyson Swarm Studio (Apps & Tools/dyson-swarm-studio/). 5 sparse
-  // shells from r=165 → r=480, slow orbits (300–593 s), big bright dots.
   // [radius px, particle count, orbit duration s, direction]
   const SHELLS = [
-    [165, 138, 300, 'normal'],
-    [244, 176, 373, 'reverse'],
-    [323, 215, 447, 'normal'],
-    [401, 253, 520, 'reverse'],
-    [480, 292, 593, 'normal'],
+    [165, 50, 300, 'normal'],
+    [323, 60, 447, 'reverse'],
+    [480, 70, 593, 'normal'],
   ];
 
-  // Deep mauve palette — gives the swarm enough contrast against the pink page
-  // background to actually read as a Dyson swarm rather than disappear.
+  // Deep mauve palette — enough contrast against the pink page to read.
   const COLORS = [
     'rgba( 90,  42,  71, 0.55)',
     'rgba(140,  56,  98, 0.50)',
@@ -183,32 +192,44 @@ const mqFine = window.matchMedia('(hover: hover) and (pointer: fine)');
   const DOT_OPACITY = 0.74; // base, multiplied by per-dot 0.4..1.9 jitter
   const RADIAL_JITTER = 33; // px, breaks hard wire-frame look
 
-  for (const [radius, count, duration, direction] of SHELLS) {
-    const shell = document.createElement('div');
-    shell.className = 'dyson-shell';
-    shell.style.animation =
-      `dysonOrbit ${duration}s linear infinite ${direction}`;
+  let swarm = null;
 
-    for (let i = 0; i < count; i++) {
-      // Even angular spread + small jitter so the ring doesn't pulse visibly
-      const angle = (i / count) * 360 + (Math.random() - 0.5) * 4;
-      const r = radius + (Math.random() - 0.5) * RADIAL_JITTER;
-      const size = Math.max(0.3, DOT_SIZE * (0.55 + Math.random() * 0.95)).toFixed(2);
-      const opacity = Math.min(1, DOT_OPACITY * (0.4 + Math.random() * 1.5)).toFixed(2);
-      const color = COLORS[Math.floor(Math.random() * COLORS.length)];
-
-      const dust = document.createElement('span');
-      dust.style.cssText =
-        `--a:${angle.toFixed(2)}deg;` +
-        `--r:${r.toFixed(1)}px;` +
-        `width:${size}px;height:${size}px;` +
-        `background:${color};opacity:${opacity};`;
-      shell.appendChild(dust);
+  function build() {
+    swarm = document.createElement('div');
+    swarm.className = 'dyson-swarm';
+    swarm.setAttribute('aria-hidden', 'true');
+    for (const [radius, count, duration, direction] of SHELLS) {
+      const shell = document.createElement('div');
+      shell.className = 'dyson-shell';
+      shell.style.animation = `dysonOrbit ${duration}s linear infinite ${direction}`;
+      for (let i = 0; i < count; i++) {
+        const angle = (i / count) * 360 + (Math.random() - 0.5) * 4;
+        const r = radius + (Math.random() - 0.5) * RADIAL_JITTER;
+        const size = Math.max(0.3, DOT_SIZE * (0.55 + Math.random() * 0.95)).toFixed(2);
+        const opacity = Math.min(1, DOT_OPACITY * (0.4 + Math.random() * 1.5)).toFixed(2);
+        const color = COLORS[Math.floor(Math.random() * COLORS.length)];
+        const dust = document.createElement('span');
+        dust.style.cssText =
+          `--a:${angle.toFixed(2)}deg;--r:${r.toFixed(1)}px;` +
+          `width:${size}px;height:${size}px;background:${color};opacity:${opacity};`;
+        shell.appendChild(dust);
+      }
+      swarm.appendChild(shell);
     }
-    swarm.appendChild(shell);
+    host.appendChild(swarm);
   }
 
-  host.appendChild(swarm);
+  function sync() {
+    const want = isMotionTheme() && !mqReduce.matches;
+    if (want && !swarm) build();
+    if (!want && swarm) { swarm.remove(); swarm = null; }
+    if (swarm) swarm.classList.toggle('is-paused', !heroActivity.active());
+  }
+
+  sync();
+  document.addEventListener('lovespark:theme', sync);
+  if (mqReduce.addEventListener) mqReduce.addEventListener('change', sync);
+  heroActivity.subscribe(sync);
 })();
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -249,47 +270,72 @@ const mqFine = window.matchMedia('(hover: hover) and (pointer: fine)');
 })();
 
 // ══════════════════════════════════════════════════════════════════════════════
-// CURSOR SPARK TRAIL — small glyphs burst from cursor, drift up, fade
+// CURSOR SPARK TRAIL — retro only. A fixed pool of 12 spans is reused round-
+// robin (no per-move DOM churn) and animated with WAAPI. The passive listener
+// only exists while the gate passes: retro + motion allowed + hover-capable
+// fine pointer. Candy, kawaii and basalt have no trail at all.
 // ══════════════════════════════════════════════════════════════════════════════
 (function initCursorTrail() {
   const container = document.getElementById('cursor-sparks');
-  if (!container) return;
+  if (!container || !Element.prototype.animate) return;
 
   const GLYPHS = ['✦', '★', '♡', '⋆', '✧'];
   const COLORS = ['#FF4FB3', '#FFB3D9', '#FFF5B5', '#C5E1FF'];
+  const POOL = 12;
   const THROTTLE = 60;
+  const pool = [];
+  let next = 0;
   let lastTime = 0;
+  let listening = false;
 
-  function spawnSpark(x, y) {
-    const el = document.createElement('span');
-    el.textContent = GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
-    const dx = (Math.random() - 0.5) * 50;
-    const dy = -(20 + Math.random() * 40);
+  function spark(x, y) {
+    if (!pool.length) {
+      for (let i = 0; i < POOL; i++) {
+        const el = document.createElement('span');
+        container.appendChild(el);
+        pool.push(el);
+      }
+    }
+    const el = pool[next];
+    next = (next + 1) % POOL;
+    const dx = ((Math.random() - 0.5) * 50).toFixed(0);
+    const dy = (-(20 + Math.random() * 40)).toFixed(0);
     const color = COLORS[Math.floor(Math.random() * COLORS.length)];
-    const size = 9 + Math.random() * 7;
-
-    el.style.cssText = `
-      left: ${x}px;
-      top: ${y}px;
-      font-size: ${size}px;
-      color: ${color};
-      text-shadow: 0 0 6px ${color};
-      --dx: ${dx.toFixed(0)}px;
-      --dy: ${dy.toFixed(0)}px;
-      animation: cursorSparkFly 800ms ease-out forwards;
-    `;
-    container.appendChild(el);
-    el.addEventListener('animationend', () => el.remove());
+    el.textContent = GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
+    el.style.cssText =
+      `left:${x}px;top:${y}px;font-size:${(9 + Math.random() * 7).toFixed(1)}px;` +
+      `color:${color};text-shadow:0 0 6px ${color};`;
+    el.getAnimations().forEach(a => a.cancel());
+    el.animate([
+      { transform: 'translate(0, 0) scale(0.6)', opacity: 1 },
+      { transform: `translate(${dx}px, ${dy}px) scale(1.4)`, opacity: 0 },
+    ], { duration: 800, easing: 'ease-out', fill: 'forwards' });
   }
 
-  document.addEventListener('mousemove', (e) => {
-    if (mqReduce.matches || !mqFine.matches) return;
-    const now = Date.now();
+  function onMove(e) {
+    const now = e.timeStamp;
     if (now - lastTime < THROTTLE) return;
     lastTime = now;
-    spawnSpark(e.clientX, e.clientY);
-  }, { passive: true });
-  // @keyframes cursorSparkFly lives in styles.css (uses --dx/--dy).
+    spark(e.clientX, e.clientY);
+  }
+
+  function sync() {
+    const want = document.documentElement.classList.contains('theme-retro')
+      && !mqReduce.matches && mqFine.matches;
+    if (want && !listening) {
+      document.addEventListener('pointermove', onMove, { passive: true });
+      listening = true;
+    } else if (!want && listening) {
+      document.removeEventListener('pointermove', onMove);
+      listening = false;
+      pool.forEach(el => el.getAnimations().forEach(a => a.cancel()));
+    }
+  }
+
+  sync();
+  document.addEventListener('lovespark:theme', sync);
+  if (mqReduce.addEventListener) mqReduce.addEventListener('change', sync);
+  if (mqFine.addEventListener) mqFine.addEventListener('change', sync);
 })();
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -423,6 +469,9 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
       if (mqReduce.matches) {
         v.autoplay = false;
         if (!v.paused || v.currentTime > 0) { v.pause(); v.load(); } // back to the poster frame
+      } else if (!heroActivity.active()) {
+        v.autoplay = false;
+        if (!v.paused) v.pause(); // off-screen or tab hidden: hold the current frame
       } else if (v.paused) {
         v.autoplay = true;
         const p = v.play();
@@ -434,6 +483,7 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
   sync();
   document.addEventListener('lovespark:theme', sync);
   if (mqReduce.addEventListener) mqReduce.addEventListener('change', sync);
+  heroActivity.subscribe(sync);
 })();
 
 // ══════════════════════════════════════════════════════════════════════════════

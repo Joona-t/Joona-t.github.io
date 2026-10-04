@@ -1,5 +1,18 @@
 # Bugs & Iterations
 
+## 2026-10-04: ITER — Visual upgrade Phase 4: performance diet
+
+**Change:** Continuous-motion budget cut, from plan.md Phase 4 (research.md D4, D7; motion ceiling SKILL.md:136-139).
+- **Swarm:** 5 shells / 1,074 spans → 3 shells / 180 spans. Built only in candy/kawaii with motion allowed; torn down (DOM removed) on a switch to retro/basalt or when reduced motion turns on, rebuilt on the way back.
+- **Hero visibility gate:** new shared `heroActivity` (one IntersectionObserver on `.hero` + `visibilitychange`). The swarm gets `.is-paused` (`animation-play-state: paused`) and both hero videos pause while the hero is off-screen or the tab is hidden, then resume.
+- **`.heart-orb` containment:** `contain: layout style`, not the planned `layout paint` — paint containment clips to the 240px box and would cut off the swarm (r up to 480px) and the rings.
+- **Cursor trail:** gone in candy, kawaii and basalt (CSS `display:none` + no listener). Retro keeps a pooled 12-span trail animated with WAAPI (no per-move create/remove), passive `pointermove` attached only while retro + motion allowed + fine hover pointer; re-gated on theme/media changes. `cursorSparkFly` keyframes removed.
+- **Dead code:** `#spiral-canvas` markup and both CSS rules removed. No `.spark`/`.cursor-spark` rules were left to delete.
+- **Mission sparkles:** 5 → 3 spans (✦ ♡ ✿); nth-child colours/delays remapped in kawaii, candy and retro.
+- Cache strings bumped to `2026-10-04-p4`.
+**Verification:** `node --check script.js` OK; braces balanced (styles.css 497/497, styles-retro.css 139/139); HTML tag balance unchanged from baseline; `build-gallery.py --check` in sync (9 categories, 35 cards). Local preview (Chromium): candy 180 swarm spans, retro/basalt 0; retro trail pool stays at 12 spans after 30 moves; basalt `#cursor-sparks` display none; scrolled down → swarm paused + both videos paused, back to top → both resume; swarm visually unclipped. No new colour pairs. Not done: reduced-motion emulation, Lighthouse, Safari/Firefox.
+**Files:** script.js, styles.css, styles-retro.css, index.html, plan.md, BUGS_AND_ITERATIONS.md
+
 ## 2026-10-04: ITER — Visual upgrade Phase 3: motion layer
 
 **Change:** Motion that answers people, from plan.md Phase 3 (research.md §4 motion ceiling, §5 support table). All new CSS is unlayered at the end of styles.css; per-theme flavour is tokens only (`--tilt-max`, `--spot`, `--lift-*`, `--reveal-*`, `--ring-*`, `--wipe-ease`).
