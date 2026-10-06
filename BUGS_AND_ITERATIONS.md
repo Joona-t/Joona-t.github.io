@@ -8,6 +8,14 @@
 **Verification:** HTML parse clean (no mismatched/unclosed tags); rendered in browser at desktop + 375px mobile (no horizontal scroll, mascot loads, zero console errors); contrast ratios computed for every text pair (min 5.33:1); `ls-check .` 7 pass / 0 fail.
 **Files:** privacy/med-tracker.html (new)
 
+## 2026-10-07: ITER-003 — Un-stage the Sparky Slug + CourseKit gallery cards (ITER-002 reverted)
+
+**Problem:** PR #5 bundled the Med Tracker privacy page ("merge ASAP") with two gallery cards whose links point at `github.com/Joona-t/lovespark-sparky-slug` and `github.com/Joona-t/lovespark-coursekit`. Both repos are still private on 2026-10-07 (`gh repo view <repo> --json visibility` → PRIVATE), so merging the PR as-is would ship two 404 cards to lovespark.love. Sparky Slug is also parked per NOW.md.
+**Root cause:** The PR relied on the owner cherry-picking one commit; a plain merge would carry the staged cards along.
+**Fix:** `git revert dcdada9` on the PR branch (normal revert commit, no history rewrite) — removes the two cards from `data/gallery.json` and the regenerated card HTML from `index.html`, leaving only the privacy page. Re-stage from the ITER-002 commit (`git cherry-pick dcdada9`, then `python3 scripts/build-gallery.py`) once the repos flip public and the cards have working URLs.
+**Check:** `python3 scripts/build-gallery.py --check` → in sync · `grep -c "lovespark-sparky-slug\|lovespark-coursekit" data/gallery.json index.html` → 0 / 0 · `curl -s -o /dev/null -w '%{http_code}' https://github.com/Joona-t/lovespark-sparky-slug` → 404 (anonymous), same for lovespark-coursekit — the reason the cards cannot ship yet.
+**Files:** data/gallery.json, index.html, BUGS_AND_ITERATIONS.md
+
 ## 2026-07-01: Love Kana "Sneak Peeks" image landed
 
 **Change:** Screenshot arrived (`~/Documents/screenshots/Love Kana.png`, 1956×1424 PNG, 1.9 MB). Optimized to `images/gallery/love-kana/love-kana-01.jpg` via `sips -Z 1600 -s format jpeg -s formatOptions 86` → **1600×1165, 137 KB** (matches the other gallery shots' weight; a 1.9 MB PNG would've bloated the page). Re-added the deferred `🌸 Love Kana` gallery-project panel after `gal-tongue`, pointing at the JPG, with intrinsic dims set to avoid CLS.
