@@ -1,5 +1,11 @@
 # Bugs & Iterations
 
+## 2026-09-02: Sparky Habits screenshot added to Sneak Peeks
+
+**Change:** Added the supplied Sparky Habits dashboard screenshot as the third image in the `🧠 Sparky` Sneak Peeks gallery. Converted the 3016×1698, 3.6 MB source PNG to a 1600×900, 157 KB JPEG at quality 86, added descriptive alt text and a concise caption, and updated the visible gallery count from 2 to 3.
+**Verification:** Confirmed the optimized image dimensions and file size locally; the rendered gallery and live deployment were checked after publishing.
+**Files:** index.html, images/gallery/sparky/sparky-03.jpg (new)
+
 ## 2026-07-09: ITER-001 — Site-hosted privacy policy for Med Tracker (unblocks CWS)
 
 **Problem:** The lovespark-med-tracker extension repo is private, so its `PRIVACY.md` GitHub link 404s for the public — but the Chrome Web Store requires a publicly reachable privacy-policy URL before the extension can be submitted. The privacy URL must therefore be site-hosted.
