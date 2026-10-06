@@ -11,19 +11,47 @@
   <meta property="og:image" content="og.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=2026-07-01-extgroup">
-  <link rel="stylesheet" href="styles-retro.css?v=2026-06-25-themes2">
+  <!-- OpenDyslexic (body font, vendored) — preload the regular face so body copy doesn't swap late -->
+  <link rel="preload" href="assets/fonts/OpenDyslexic-Regular.otf" as="font" type="font/otf" crossorigin>
+  <!-- Critical fonts (all themes): body fallback, mono, candy/kawaii wordmark -->
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Pacifico&display=swap" rel="stylesheet">
+  <!-- Theme-specific fonts (retro pixel, basalt/hero-CTA serif) — non-blocking -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet"></noscript>
+  <link rel="stylesheet" href="styles.css?v=2026-10-04-p5">
+  <link rel="stylesheet" href="styles-retro.css?v=2026-10-04-p5">
 </head>
 <body>
 
-  <!-- Theme switcher (kawaii ⇄ retro) -->
-  <div class="theme-switcher" role="group" aria-label="Site theme">
-    <button class="theme-pill" data-theme="candy"  type="button" aria-pressed="true">candy</button>
-    <button class="theme-pill" data-theme="pink"   type="button" aria-pressed="false">kawaii</button>
-    <button class="theme-pill" data-theme="basalt" type="button" aria-pressed="false">basalt</button>
-    <button class="theme-pill" data-theme="retro"  type="button" aria-pressed="false">retro</button>
-  </div>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- 1px sentinel: when it scrolls out of view, the bar below is "stuck" (script.js sets data-stuck) -->
+  <div class="site-bar-sentinel" aria-hidden="true"></div>
+
+  <!-- ═══════════════════════════════ SITE BAR (sticky) ═══════════════════════════════ -->
+  <header class="site-bar">
+    <div class="site-bar-inner">
+      <a class="site-brand" href="#top">
+        <img class="site-brand-mark" src="images/sparky-avatar.png" width="32" height="32" alt="">
+        <span class="site-brand-name">LoveSpark</span>
+      </a>
+      <nav class="site-nav" aria-label="Sections">
+        <ul class="site-nav-list">
+          <li><a class="site-nav-link" href="#tools">Suite</a></li>
+          <li><a class="site-nav-link" href="#gallery">Peeks</a></li>
+          <li><a class="site-nav-link" href="#mission">Mission</a></li>
+          <li><a class="site-nav-link" href="#support">Support</a></li>
+        </ul>
+      </nav>
+      <!-- Theme switcher (candy default · kawaii · basalt · retro) -->
+      <div class="theme-switcher" role="group" aria-label="Site theme">
+        <button class="theme-pill" data-theme="candy"  type="button" aria-pressed="true">candy</button>
+        <button class="theme-pill" data-theme="pink"   type="button" aria-pressed="false">kawaii</button>
+        <button class="theme-pill" data-theme="basalt" type="button" aria-pressed="false">basalt</button>
+        <button class="theme-pill" data-theme="retro"  type="button" aria-pressed="false">retro</button>
+      </div>
+    </div>
+  </header>
 
   <!-- Grain overlay -->
   <div class="grain-overlay" aria-hidden="true"></div>
@@ -33,14 +61,13 @@
   <div class="glow-blob glow-blob-2" aria-hidden="true"></div>
   <div class="glow-blob glow-blob-3" aria-hidden="true"></div>
 
-  <!-- Binary spiral canvas -->
-  <canvas id="spiral-canvas" aria-hidden="true"></canvas>
-
   <!-- Static sparkle field (JS populates) -->
   <div id="sparkle-field" aria-hidden="true"></div>
 
   <!-- Mouse trail container -->
   <div id="cursor-sparks" aria-hidden="true"></div>
+
+  <main id="main">
 
   <!-- ═══════════════════════════════════ HERO ═══════════════════════════════════ -->
   <header class="hero" id="top">
@@ -53,9 +80,10 @@
 
       <div class="heart-orb" aria-hidden="true">
         <video class="heart-mark"
-               src="assets/heart-pulse.mp4"
+               data-src="assets/heart-pulse.mp4"
                poster="assets/heart-pulse.jpg"
-               autoplay loop muted playsinline></video>
+               preload="metadata"
+               loop muted playsinline></video>
         <svg class="orb-ring orb-ring-1" viewBox="0 0 200 200"><path fill="none" stroke="#FF1493" stroke-width="2" stroke-linejoin="round"/></svg>
         <svg class="orb-ring orb-ring-2" viewBox="0 0 200 200"><path fill="none" stroke="#FF1493" stroke-width="2" stroke-linejoin="round"/></svg>
         <svg class="orb-ring orb-ring-3" viewBox="0 0 200 200"><path fill="none" stroke="#FF79C6" stroke-width="1.5" stroke-linejoin="round"/></svg>
@@ -67,33 +95,19 @@
       </div>
 
       <video class="hero-mark"
-             src="assets/hero-pastel.mp4"
+             data-src="assets/hero-pastel.mp4"
              poster="assets/hero-pastel.jpg"
-             autoplay loop muted playsinline
-             aria-label="LoveSpark"></video>
+             preload="metadata"
+             loop muted playsinline
+             aria-hidden="true"></video>
       <h1 class="logo-text">LoveSpark</h1>
       <p class="tagline">Retro pink tools for a calmer,<br>more beautiful internet.</p>
       <p class="sub-tagline">Free&nbsp;&nbsp;·&nbsp;&nbsp;Open source&nbsp;&nbsp;·&nbsp;&nbsp;No ads. Ever.</p>
 
-      <div class="hero-socials">
-        <a href="https://github.com/Joona-t" target="_blank" rel="noopener" class="hero-social-link">GitHub</a>
-        <span class="footer-sep" aria-hidden="true">✦</span>
-        <a href="https://x.com/the_null_path" target="_blank" rel="noopener" class="hero-social-link">X / Twitter</a>
-        <span class="footer-sep" aria-hidden="true">✦</span>
-        <a href="https://thenullpath.substack.com/" target="_blank" rel="noopener" class="hero-social-link">Substack</a>
-        <span class="footer-sep" aria-hidden="true">✦</span>
-        <a href="https://www.goodreads.com/user/show/193189842-joona-tyrninoksa" target="_blank" rel="noopener" class="hero-social-link">Goodreads</a>
-      </div>
 
       <div class="hero-cta-group">
-        <a href="#tools" class="hero-cta"><span class="cta-glyph" aria-hidden="true">𓂀</span>See the tools</a>
-        <a href="https://lovespark.love/glyph-grid-studio/" target="_blank" rel="noopener" class="hero-cta hero-cta--glyph"><span class="cta-glyph" aria-hidden="true">☥</span>Glyph Grid</a>
-        <a href="https://lovespark.love/bambu-a1/" target="_blank" rel="noopener" class="hero-cta"><span class="cta-glyph" aria-hidden="true">⎙</span>Bambu A1 Guide</a>
-        <a href="https://lovespark.love/openai-watch/" target="_blank" rel="noopener" class="hero-cta"><span class="cta-glyph" aria-hidden="true">◉</span>OpenAI Watch</a>
-        <a href="https://joona-t.github.io/darkfire-null/" target="_blank" rel="noopener" class="hero-cta hero-cta--null"><span class="cta-glyph" aria-hidden="true">⊙</span>The Null Path</a>
-        <a href="https://joona-t.github.io/zarathustra/" target="_blank" rel="noopener" class="hero-cta hero-cta--zara"><span class="cta-glyph" aria-hidden="true">☉</span>Zarathustra</a>
-        <a href="https://joona-t.github.io/forging/" target="_blank" rel="noopener" class="hero-cta hero-cta--forging"><span class="cta-glyph" aria-hidden="true">△</span>Forging</a>
-        <a href="https://joona-t.github.io/lovespark-games/" target="_blank" rel="noopener" class="hero-cta hero-cta--games"><span class="cta-glyph" aria-hidden="true">✦</span>Games</a>
+        <a href="#tools" class="hero-cta hero-cta--primary"><span class="cta-glyph" aria-hidden="true">𓂀</span>See the tools ✦</a>
+        <a href="#gallery" class="hero-cta hero-cta--ghost">Sneak peeks</a>
       </div>
 
     </div>
@@ -108,7 +122,7 @@
     </div>
 
     <!-- GALLERY:START - generated from data/gallery.json by scripts/build-gallery.py - do not hand-edit between these markers -->
-    <details class="category" id="cat-mac-ios">
+    <details class="category" id="cat-mac-ios" open>
     <summary class="category-header">
       <h3 class="category-title">🍎 Mac &amp; iOS</h3>
       <span class="category-count">7</span>
@@ -124,13 +138,13 @@
           <div class="win-buttons">
             <span class="win-btn" aria-hidden="true">─</span>
             <span class="win-btn" aria-hidden="true">□</span>
-            <span class="win-btn win-btn-close" aria-hidden="true">✕</span>
+            <button type="button" class="win-btn win-btn-close" aria-label="Wobble this window">✕</button>
           </div>
         </div>
         <div class="card-body">
           <div class="card-badge">Mac App · Free</div>
           <p class="card-desc">Generative glyph-grid art studio — ASCII portraits, flow fields, character-density shading. Live parameter exploration with seeded randomness for reproducible pieces. <strong>Now live</strong> — free, open source, universal macOS.</p>
-          <a href="https://lovespark.love/glyph-grid-studio/" target="_blank" rel="noopener" class="card-link">Download ✦</a>
+          <a href="https://lovespark.love/glyph-grid-studio/" class="card-link">Download ✦</a>
         </div>
       </div>
 
@@ -140,7 +154,7 @@
           <div class="win-buttons">
             <span class="win-btn" aria-hidden="true">─</span>
             <span class="win-btn" aria-hidden="true">□</span>
-            <span class="win-btn win-btn-close" aria-hidden="true">✕</span>
+            <button type="button" class="win-btn win-btn-close" aria-label="Wobble this window">✕</button>
           </div>
         </div>
         <div class="card-body">
@@ -156,7 +170,7 @@
           <div class="win-buttons">
             <span class="win-btn" aria-hidden="true">─</span>
             <span class="win-btn" aria-hidden="true">□</span>
-            <span class="win-btn win-btn-close" aria-hidden="true">✕</span>
+            <button type="button" class="win-btn win-btn-close" aria-label="Wobble this window">✕</button>
           </div>
         </div>
         <div class="card-body">
@@ -172,7 +186,7 @@
           <div class="win-buttons">
             <span class="win-btn" aria-hidden="true">─</span>
             <span class="win-btn" aria-hidden="true">□</span>
-            <span class="win-btn win-btn-close" aria-hidden="true">✕</span>
+            <button type="button" class="win-btn win-btn-close" aria-label="Wobble this window">✕</button>
           </div>
         </div>
         <div class="card-body">
@@ -188,7 +202,7 @@
           <div class="win-buttons">
             <span class="win-btn" aria-hidden="true">─</span>
             <span class="win-btn" aria-hidden="true">□</span>
-            <span class="win-btn win-btn-close" aria-hidden="true">✕</span>
+            <button type="button" class="win-btn win-btn-close" aria-label="Wobble this window">✕</button>
           </div>
         </div>
         <div class="card-body">
@@ -204,7 +218,7 @@
           <div class="win-buttons">
             <span class="win-btn" aria-hidden="true">─</span>
             <span class="win-btn" aria-hidden="true">□</span>
-            <span class="win-btn win-btn-close" aria-hidden="true">✕</span>
+            <button type="button" class="win-btn win-btn-close" aria-label="Wobble this window">✕</button>
           </div>
         </div>
         <div class="card-body">
@@ -220,7 +234,7 @@
           <div class="win-buttons">
             <span class="win-btn" aria-hidden="true">─</span>
             <span class="win-btn" aria-hidden="true">□</span>
-            <span class="win-btn win-btn-close" aria-hidden="true">✕</span>
+            <button type="button" class="win-btn win-btn-close" aria-label="Wobble this window">✕</button>
           </div>
         </div>
         <div class="card-body">
@@ -249,13 +263,13 @@
           <div class="win-buttons">
             <span class="win-btn" aria-hidden="true">─</span>
             <span class="win-btn" aria-hidden="true">□</span>
-            <span class="win-btn win-btn-close" aria-hidden="true">✕</span>
+            <button type="button" class="win-btn win-btn-close" aria-label="Wobble this window">✕</button>
           </div>
         </div>
         <div class="card-body">
           <div class="card-badge">Daily Intelligence Feed</div>
           <p class="card-desc">A source-linked ledger of OpenAI releases, patches, retirements, and security signals. Checked once a day by an agent against official ChatGPT notes, the API changelog, OpenAI news, and live system status.</p>
-          <a href="https://lovespark.love/openai-watch/" target="_blank" rel="noopener" class="card-link">Open tracker ✦</a>
+          <a href="https://lovespark.love/openai-watch/" class="card-link">Open tracker ✦</a>
         </div>
       </div>
 
@@ -265,13 +279,13 @@
           <div class="win-buttons">
             <span class="win-btn" aria-hidden="true">─</span>
             <span class="win-btn" aria-hidden="true">□</span>
-            <span class="win-btn win-btn-close" aria-hidden="true">✕</span>
+            <button type="button" class="win-btn win-btn-close" aria-label="Wobble this window">✕</button>
           </div>
         </div>
         <div class="card-body">
           <div class="card-badge">Interactive Tutorial</div>
           <p class="card-desc">A sourced, chapter-by-chapter guide to the A1 3D printer — with a safe first-print route, symptom diagnosis, maintenance boundaries, and 18 hands-on simulations. Unofficial and independent.</p>
-          <a href="https://lovespark.love/bambu-a1/" target="_blank" rel="noopener" class="card-link">Start tutorial ✦</a>
+          <a href="https://lovespark.love/bambu-a1/" class="card-link">Start tutorial ✦</a>
         </div>
       </div>
 
@@ -281,7 +295,7 @@
           <div class="win-buttons">
             <span class="win-btn" aria-hidden="true">─</span>
             <span class="win-btn" aria-hidden="true">□</span>
-            <span class="win-btn win-btn-close" aria-hidden="true">✕</span>
+            <button type="button" class="win-btn win-btn-close" aria-label="Wobble this window">✕</button>
           </div>
         </div>
         <div class="card-body">
@@ -297,7 +311,7 @@
           <div class="win-buttons">
             <span class="win-btn" aria-hidden="true">─</span>
             <span class="win-btn" aria-hidden="true">□</span>
-            <span class="win-btn win-btn-close" aria-hidden="true">✕</span>
+            <button type="button" class="win-btn win-btn-close" aria-label="Wobble this window">✕</button>
           </div>
         </div>
         <div class="card-body">
@@ -326,7 +340,7 @@
           <div class="win-buttons">
             <span class="win-btn" aria-hidden="true">─</span>
             <span class="win-btn" aria-hidden="true">□</span>
-            <span class="win-btn win-btn-close" aria-hidden="true">✕</span>
+            <button type="button" class="win-btn win-btn-close" aria-label="Wobble this window">✕</button>
           </div>
         </div>
         <div class="card-body">
@@ -352,7 +366,7 @@
 
     <details class="category" id="cat-focus">
     <summary class="category-header">
-      <h3 class="category-title">🧠 Focus &amp; Neurodivergent</h3>
+      <h4 class="category-title">🧠 Focus &amp; Neurodivergent</h4>
       <span class="category-count">6</span>
       <span class="category-rule" aria-hidden="true"></span>
       <span class="category-chevron" aria-hidden="true">▸</span>
@@ -366,7 +380,7 @@
           <div class="win-buttons">
             <span class="win-btn" aria-hidden="true">─</span>
             <span class="win-btn" aria-hidden="true">□</span>
-            <span class="win-btn win-btn-close" aria-hidden="true">✕</span>
+            <button type="button" class="win-btn win-btn-close" aria-label="Wobble this window">✕</button>
           </div>
         </div>
         <div class="card-body">
@@ -382,7 +396,7 @@
           <div class="win-buttons">
             <span class="win-btn" aria-hidden="true">─</span>
             <span class="win-btn" aria-hidden="true">□</span>
-            <span class="win-btn win-btn-close" aria-hidden="true">✕</span>
+            <button type="button" class="win-btn win-btn-close" aria-label="Wobble this window">✕</button>
           </div>
         </div>
         <div class="card-body">
@@ -398,7 +412,7 @@
           <div class="win-buttons">
             <span class="win-btn" aria-hidden="true">─</span>
             <span class="win-btn" aria-hidden="true">□</span>
-            <span class="win-btn win-btn-close" aria-hidden="true">✕</span>
+            <button type="button" class="win-btn win-btn-close" aria-label="Wobble this window">✕</button>
           </div>
         </div>
         <div class="card-body">
@@ -414,7 +428,7 @@
           <div class="win-buttons">
             <span class="win-btn" aria-hidden="true">─</span>
             <span class="win-btn" aria-hidden="true">□</span>
-            <span class="win-btn win-btn-close" aria-hidden="true">✕</span>
+            <button type="button" class="win-btn win-btn-close" aria-label="Wobble this window">✕</button>
           </div>
         </div>
         <div class="card-body">
@@ -430,7 +444,7 @@
           <div class="win-buttons">
             <span class="win-btn" aria-hidden="true">─</span>
             <span class="win-btn" aria-hidden="true">□</span>
-            <span class="win-btn win-btn-close" aria-hidden="true">✕</span>
+            <button type="button" class="win-btn win-btn-close" aria-label="Wobble this window">✕</button>
           </div>
         </div>
         <div class="card-body">
@@ -446,7 +460,7 @@
           <div class="win-buttons">
             <span class="win-btn" aria-hidden="true">─</span>
             <span class="win-btn" aria-hidden="true">□</span>
-            <span class="win-btn win-btn-close" aria-hidden="true">✕</span>
+            <button type="button" class="win-btn win-btn-close" aria-label="Wobble this window">✕</button>
           </div>
         </div>
         <div class="card-body">
@@ -461,7 +475,7 @@
 
     <details class="category" id="cat-reading">
     <summary class="category-header">
-      <h3 class="category-title">📖 Reading &amp; Accessibility</h3>
+      <h4 class="category-title">📖 Reading &amp; Accessibility</h4>
       <span class="category-count">2</span>
       <span class="category-rule" aria-hidden="true"></span>
       <span class="category-chevron" aria-hidden="true">▸</span>
@@ -475,7 +489,7 @@
           <div class="win-buttons">
             <span class="win-btn" aria-hidden="true">─</span>
             <span class="win-btn" aria-hidden="true">□</span>
-            <span class="win-btn win-btn-close" aria-hidden="true">✕</span>
+            <button type="button" class="win-btn win-btn-close" aria-label="Wobble this window">✕</button>
           </div>
         </div>
         <div class="card-body">
@@ -491,7 +505,7 @@
           <div class="win-buttons">
             <span class="win-btn" aria-hidden="true">─</span>
             <span class="win-btn" aria-hidden="true">□</span>
-            <span class="win-btn win-btn-close" aria-hidden="true">✕</span>
+            <button type="button" class="win-btn win-btn-close" aria-label="Wobble this window">✕</button>
           </div>
         </div>
         <div class="card-body">
@@ -506,7 +520,7 @@
 
     <details class="category" id="cat-privacy">
     <summary class="category-header">
-      <h3 class="category-title">🛡️ Privacy</h3>
+      <h4 class="category-title">🛡️ Privacy</h4>
       <span class="category-count">5</span>
       <span class="category-rule" aria-hidden="true"></span>
       <span class="category-chevron" aria-hidden="true">▸</span>
@@ -520,7 +534,7 @@
           <div class="win-buttons">
             <span class="win-btn" aria-hidden="true">─</span>
             <span class="win-btn" aria-hidden="true">□</span>
-            <span class="win-btn win-btn-close" aria-hidden="true">✕</span>
+            <button type="button" class="win-btn win-btn-close" aria-label="Wobble this window">✕</button>
           </div>
         </div>
         <div class="card-body">
@@ -536,7 +550,7 @@
           <div class="win-buttons">
             <span class="win-btn" aria-hidden="true">─</span>
             <span class="win-btn" aria-hidden="true">□</span>
-            <span class="win-btn win-btn-close" aria-hidden="true">✕</span>
+            <button type="button" class="win-btn win-btn-close" aria-label="Wobble this window">✕</button>
           </div>
         </div>
         <div class="card-body">
@@ -552,7 +566,7 @@
           <div class="win-buttons">
             <span class="win-btn" aria-hidden="true">─</span>
             <span class="win-btn" aria-hidden="true">□</span>
-            <span class="win-btn win-btn-close" aria-hidden="true">✕</span>
+            <button type="button" class="win-btn win-btn-close" aria-label="Wobble this window">✕</button>
           </div>
         </div>
         <div class="card-body">
@@ -568,7 +582,7 @@
           <div class="win-buttons">
             <span class="win-btn" aria-hidden="true">─</span>
             <span class="win-btn" aria-hidden="true">□</span>
-            <span class="win-btn win-btn-close" aria-hidden="true">✕</span>
+            <button type="button" class="win-btn win-btn-close" aria-label="Wobble this window">✕</button>
           </div>
         </div>
         <div class="card-body">
@@ -584,7 +598,7 @@
           <div class="win-buttons">
             <span class="win-btn" aria-hidden="true">─</span>
             <span class="win-btn" aria-hidden="true">□</span>
-            <span class="win-btn win-btn-close" aria-hidden="true">✕</span>
+            <button type="button" class="win-btn win-btn-close" aria-label="Wobble this window">✕</button>
           </div>
         </div>
         <div class="card-body">
@@ -599,7 +613,7 @@
 
     <details class="category" id="cat-themes">
     <summary class="category-header">
-      <h3 class="category-title">🎀 Themes &amp; Visuals</h3>
+      <h4 class="category-title">🎀 Themes &amp; Visuals</h4>
       <span class="category-count">3</span>
       <span class="category-rule" aria-hidden="true"></span>
       <span class="category-chevron" aria-hidden="true">▸</span>
@@ -613,7 +627,7 @@
           <div class="win-buttons">
             <span class="win-btn" aria-hidden="true">─</span>
             <span class="win-btn" aria-hidden="true">□</span>
-            <span class="win-btn win-btn-close" aria-hidden="true">✕</span>
+            <button type="button" class="win-btn win-btn-close" aria-label="Wobble this window">✕</button>
           </div>
         </div>
         <div class="card-body">
@@ -629,7 +643,7 @@
           <div class="win-buttons">
             <span class="win-btn" aria-hidden="true">─</span>
             <span class="win-btn" aria-hidden="true">□</span>
-            <span class="win-btn win-btn-close" aria-hidden="true">✕</span>
+            <button type="button" class="win-btn win-btn-close" aria-label="Wobble this window">✕</button>
           </div>
         </div>
         <div class="card-body">
@@ -645,7 +659,7 @@
           <div class="win-buttons">
             <span class="win-btn" aria-hidden="true">─</span>
             <span class="win-btn" aria-hidden="true">□</span>
-            <span class="win-btn win-btn-close" aria-hidden="true">✕</span>
+            <button type="button" class="win-btn win-btn-close" aria-label="Wobble this window">✕</button>
           </div>
         </div>
         <div class="card-body">
@@ -660,7 +674,7 @@
 
     <details class="category" id="cat-knowledge">
     <summary class="category-header">
-      <h3 class="category-title">◆ Open Knowledge</h3>
+      <h4 class="category-title">◆ Open Knowledge</h4>
       <span class="category-count">1</span>
       <span class="category-rule" aria-hidden="true"></span>
       <span class="category-chevron" aria-hidden="true">▸</span>
@@ -674,7 +688,7 @@
           <div class="win-buttons">
             <span class="win-btn" aria-hidden="true">─</span>
             <span class="win-btn" aria-hidden="true">□</span>
-            <span class="win-btn win-btn-close" aria-hidden="true">✕</span>
+            <button type="button" class="win-btn win-btn-close" aria-label="Wobble this window">✕</button>
           </div>
         </div>
         <div class="card-body">
@@ -687,6 +701,115 @@
 
     </div>
     </details>
+
+    </div>
+    </details>
+
+    <details class="category" id="cat-more">
+    <summary class="category-header">
+      <h3 class="category-title">💫 More from LoveSpark</h3>
+      <span class="category-count">6</span>
+      <span class="category-rule" aria-hidden="true"></span>
+      <span class="category-chevron" aria-hidden="true">▸</span>
+    </summary>
+
+    <div class="tools-grid">
+
+      <div class="win98-card">
+        <div class="titlebar">
+          <span class="win-title">Bambu A1 Guide ⎙</span>
+          <div class="win-buttons">
+            <span class="win-btn" aria-hidden="true">─</span>
+            <span class="win-btn" aria-hidden="true">□</span>
+            <button type="button" class="win-btn win-btn-close" aria-label="Wobble this window">✕</button>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-badge">Interactive guide</div>
+          <p class="card-desc">A chapter-by-chapter interactive explainer of how the Bambu Lab A1 3D printer works — motion, extrusion, auto-calibration, AMS lite, slicing and a full print, with hands-on simulations.</p>
+          <a href="https://lovespark.love/bambu-a1/" class="card-link">Open guide ✦</a>
+        </div>
+      </div>
+
+      <div class="win98-card">
+        <div class="titlebar">
+          <span class="win-title">OpenAI Watch ◉</span>
+          <div class="win-buttons">
+            <span class="win-btn" aria-hidden="true">─</span>
+            <span class="win-btn" aria-hidden="true">□</span>
+            <button type="button" class="win-btn win-btn-close" aria-label="Wobble this window">✕</button>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-badge">Daily feed</div>
+          <p class="card-desc">A daily intelligence feed for OpenAI releases, patches, deprecations, security notes and platform signals.</p>
+          <a href="https://lovespark.love/openai-watch/" class="card-link">Open feed ✦</a>
+        </div>
+      </div>
+
+      <div class="win98-card">
+        <div class="titlebar">
+          <span class="win-title">The Null Path ⊙</span>
+          <div class="win-buttons">
+            <span class="win-btn" aria-hidden="true">─</span>
+            <span class="win-btn" aria-hidden="true">□</span>
+            <button type="button" class="win-btn win-btn-close" aria-label="Wobble this window">✕</button>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-badge">Writing</div>
+          <p class="card-desc">Beyond the veil, the path is forged 𓂀 — my writing corner, companion to the Substack.</p>
+          <a href="https://joona-t.github.io/darkfire-null/" target="_blank" rel="noopener" class="card-link">Visit ✦</a>
+        </div>
+      </div>
+
+      <div class="win98-card">
+        <div class="titlebar">
+          <span class="win-title">Zarathustra ☉</span>
+          <div class="win-buttons">
+            <span class="win-btn" aria-hidden="true">─</span>
+            <span class="win-btn" aria-hidden="true">□</span>
+            <button type="button" class="win-btn win-btn-close" aria-label="Wobble this window">✕</button>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-badge">Archive</div>
+          <p class="card-desc">A quiet archive. Make knowledge compounding, not caged.</p>
+          <a href="https://joona-t.github.io/zarathustra/" target="_blank" rel="noopener" class="card-link">Visit ✦</a>
+        </div>
+      </div>
+
+      <div class="win98-card">
+        <div class="titlebar">
+          <span class="win-title">Forging △</span>
+          <div class="win-buttons">
+            <span class="win-btn" aria-hidden="true">─</span>
+            <span class="win-btn" aria-hidden="true">□</span>
+            <button type="button" class="win-btn win-btn-close" aria-label="Wobble this window">✕</button>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-badge">Side project</div>
+          <p class="card-desc">Forging — a companion site from the LoveSpark workshop.</p>
+          <a href="https://joona-t.github.io/forging/" target="_blank" rel="noopener" class="card-link">Visit ✦</a>
+        </div>
+      </div>
+
+      <div class="win98-card">
+        <div class="titlebar">
+          <span class="win-title">LoveSpark Games ✦</span>
+          <div class="win-buttons">
+            <span class="win-btn" aria-hidden="true">─</span>
+            <span class="win-btn" aria-hidden="true">□</span>
+            <button type="button" class="win-btn win-btn-close" aria-label="Wobble this window">✕</button>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-badge">Kawaii arcade</div>
+          <p class="card-desc">A little kawaii arcade of free browser games — no ads, no accounts.</p>
+          <a href="https://joona-t.github.io/lovespark-games/" target="_blank" rel="noopener" class="card-link">Play ✦</a>
+        </div>
+      </div>
 
     </div>
     </details>
@@ -756,7 +879,7 @@
         <img class="gallery-img" src="images/gallery/sparky/sparky-01.jpg"
              width="1600" height="1039" loading="lazy" decoding="async"
              alt="Sparky knowledge-OS app on macOS — the Command Center with a task list, a 59:15 focus timer, and a left sidebar (Knowledge, Notes, Habits, Medications) over a warm sunset gradient">
-        <figcaption class="gallery-caption">A local knowledge brain for you and your AI agents. Sparky captures what matters into a private, typed knowledge graph with hybrid retrieval, then serves it back as memory — to your agents or to you. Focus timer, habits, study, notes, and a medication logger built in. No accounts, bring your own AI. Inspired by Garry Tan's Gbrain.</figcaption>
+        <figcaption class="gallery-caption">The Command Center — today's tasks, a focus timer, and the knowledge sidebar. Inspired by Garry Tan's Gbrain.</figcaption>
       </figure>
       <figure class="gallery-shot">
         <img class="gallery-img" src="images/gallery/sparky/sparky-02.jpg"
@@ -792,76 +915,95 @@
 
   </section>
 
+  <div class="about-grid">
   <!-- ═════════════════════════════════ NOTICE ═════════════════════════════════ -->
-  <section class="notice-section">
+  <section class="notice-section" aria-labelledby="notice-title">
     <div class="notice-inner">
+      <h2 class="notice-title" id="notice-title">A note from the workshop</h2>
       <p class="notice-text">
         Everything here is something I needed and built.
         Each tool is a knowledge gap I'm filling out loud —
         small experiments in the calmer, kinder internet I
         want to use. If they're useful to you too, that's a
-        quiet bonus.<br><br>
+        quiet bonus.
+      </p>
+      <p class="notice-text">
         I'm experimenting with a handful of apps and tools,
         and I picture them all converging on Sparky — a local
         brain for AI agents and any LLM provider you choose.
         Local only; nothing leaves your machine. I'm using,
-        learning from, and testing each one as I build it out.<br><br>
+        learning from, and testing each one as I build it out.
+      </p>
+      <p class="notice-text">
         Right now my focus is deeper work that isn't listed
         here yet — I'm choosing depth and learning. Think of
-        this as a living snapshot, not a finished shelf.<br><br>
+        this as a living snapshot, not a finished shelf.
+      </p>
+      <p class="notice-text">
         Full source and the unrestricted builds live on
         <a href="https://github.com/Joona-t" target="_blank" rel="noopener" class="notice-link">my GitHub</a>
-        if you want to install, modify, or learn along with me.<br><br>
-        <em>Good vibes only ♡</em>
+        if you want to install, modify, or learn along with me.
       </p>
+      <p class="notice-text"><em>Good vibes only ♡</em></p>
     </div>
   </section>
 
   <!-- ═════════════════════════════════ MISSION ═════════════════════════════════ -->
-  <section class="mission-section" id="mission">
+  <section class="mission-section" id="mission" aria-labelledby="mission-title">
     <div class="section-header">
       <span class="section-deco" aria-hidden="true">✿</span>
-      <h2 class="section-title">Mission</h2>
+      <h2 class="section-title" id="mission-title">Mission</h2>
       <span class="section-deco" aria-hidden="true">✿</span>
     </div>
     <div class="mission-inner">
+      <p class="mission-text">Built with love, not algorithms.</p>
       <p class="mission-text">
-        Built with love, not algorithms.<br><br>
         LoveSpark exists to make your corner of the internet
         feel like yours again — unhurried, untracked,
-        and a little more beautiful.<br><br>
+        and a little more beautiful.
+      </p>
+      <p class="mission-text">
         A passion project dedicated to building free, open source
         tools that give the internet back to the people who use it.
       </p>
       <div class="mission-sparkles" aria-hidden="true">
-        <span>✦</span><span>★</span><span>♡</span><span>✦</span><span>✿</span>
+        <span>✦</span><span>♡</span><span>✿</span>
       </div>
     </div>
   </section>
+  </div>
 
-  <!-- ══════════════════════════════════ SUPPORT ════════════════════════════════ -->
-  <section class="support-section" id="support">
+  <!-- ══════════════════════════════════ SUPPORT + CONTACT ══════════════════════ -->
+  <section class="support-section" id="support" aria-label="Support and contact">
     <div class="support-inner">
       <p class="support-text">If LoveSpark brings you joy,<br>consider buying me a coffee&nbsp;♡</p>
-      <a href="https://ko-fi.com/joonat" target="_blank" rel="noopener" class="kofi-btn">☕ Buy me a coffee</a>
-      <p class="support-sub">Sponsor my caffeine addiction xD</p>
+      <div class="support-actions">
+        <a href="https://ko-fi.com/joonat" target="_blank" rel="noopener" class="kofi-btn">☕ Buy me a coffee</a>
+        <a href="mailto:joona@lovespark.love" class="kofi-btn kofi-btn--ghost" id="contact">✉ Say hi</a>
+      </div>
+      <p class="support-sub">Sponsor my caffeine addiction xD · or just drop me a line</p>
     </div>
   </section>
 
-  <!-- ══════════════════════════════════ CONTACT ═══════════════════════════════ -->
-  <section class="support-section" id="contact">
-    <div class="support-inner">
-      <p class="support-text">Contact me ♡</p>
-      <a href="mailto:joona@lovespark.love" class="kofi-btn">✉ Contact me</a>
-    </div>
-  </section>
+  </main>
 
   <!-- ══════════════════════════════════ FOOTER ════════════════════════════════ -->
   <footer class="site-footer">
+    <img class="footer-sparky" src="images/sparky-avatar.png" width="48" height="48"
+         alt="Sparky, the LoveSpark mascot, giving a thumbs up">
+    <nav class="hero-socials footer-socials" aria-label="Elsewhere">
+      <a href="https://github.com/Joona-t" target="_blank" rel="noopener" class="hero-social-link">GitHub</a>
+      <span class="footer-sep" aria-hidden="true">✦</span>
+      <a href="https://x.com/the_null_path" target="_blank" rel="noopener" class="hero-social-link">X / Twitter</a>
+      <span class="footer-sep" aria-hidden="true">✦</span>
+      <a href="https://thenullpath.substack.com/" target="_blank" rel="noopener" class="hero-social-link">Substack</a>
+      <span class="footer-sep" aria-hidden="true">✦</span>
+      <a href="https://www.goodreads.com/user/show/193189842-joona-tyrninoksa" target="_blank" rel="noopener" class="hero-social-link">Goodreads</a>
+    </nav>
     <p class="footer-copy">© LoveSpark. Built with intent.</p>
     <p class="footer-heart" aria-hidden="true">♡</p>
   </footer>
 
-  <script src="script.js?v=2026-06-25-themes2"></script>
+  <script src="script.js?v=2026-10-04-p5"></script>
 </body>
 </html>

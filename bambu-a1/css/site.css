@@ -766,3 +766,9 @@ html[data-theme="light"] .ic-moon { display: none; }
   .retrieval-item { padding: 14px; }
   .source-label { white-space: normal; }
 }
+
+/* Phase 5: cross-document view transitions (same-origin page navigations crossfade).
+   Opt-in only when motion is welcome; unsupported browsers ignore the at-rule. */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition { navigation: auto; }
+}

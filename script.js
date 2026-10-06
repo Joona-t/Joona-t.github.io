@@ -2,10 +2,16 @@
 // Wavy rings, sparkle field, cursor trail, smooth scroll, card-close wobble.
 'use strict';
 
+// Motion / pointer gates. Reduced motion → no swarm, no sparkle field, no
+// cursor trail, instant scroll, videos paused on their poster. The cursor
+// trail is retro-only and additionally needs a hover-capable fine pointer.
+const mqReduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+const mqFine = window.matchMedia('(hover: hover) and (pointer: fine)');
+
 // ══════════════════════════════════════════════════════════════════════════════
-// THEME SWITCHER — kawaii (default) ⇄ retro
-// The FOUC-prevention script in <head> already applied html.theme-retro if
-// the user previously chose retro. This wires the switcher buttons and
+// THEME SWITCHER — candy (default) · kawaii ('pink') · basalt · retro
+// The FOUC-prevention script in <head> already applied the saved theme class
+// (theme-candy when nothing is saved; kawaii = no class). This wires the switcher buttons and
 // syncs across tabs via the storage event.
 // ══════════════════════════════════════════════════════════════════════════════
 (function setupThemeSwitcher() {
@@ -23,11 +29,13 @@
     const VALID = ['pink', 'candy', 'basalt', 'retro'];
 
     function apply(theme) {
-      if (!VALID.includes(theme)) theme = 'pink';
+      if (!VALID.includes(theme)) theme = 'candy';
       root.classList.remove('theme-retro', 'theme-candy', 'theme-basalt');
-      if (CLASS[theme]) root.classList.add(CLASS[theme]);  // pink = no class (default)
+      if (CLASS[theme]) root.classList.add(CLASS[theme]);  // pink (kawaii) = no class
       pills.forEach(p => p.setAttribute('aria-pressed', String(p.dataset.theme === theme)));
       try { localStorage.setItem(KEY, theme); } catch (_) {}
+      // Lets other modules (hero videos) react to a theme change.
+      document.dispatchEvent(new CustomEvent('lovespark:theme', { detail: theme }));
     }
 
     const current = root.classList.contains('theme-retro') ? 'retro'
@@ -35,8 +43,39 @@
       : root.classList.contains('theme-basalt') ? 'basalt' : 'pink';
     pills.forEach(p => p.setAttribute('aria-pressed', String(p.dataset.theme === current)));
 
+    // Theme wipe: a clip-path circle grows from the clicked pill over a View
+    // Transition. Falls back to a plain swap without the API or under reduced
+    // motion. Cross-tab sync (storage event below) keeps using plain apply().
+    function switchTheme(theme, pill) {
+      if (!document.startViewTransition || mqReduce.matches || !pill) {
+        apply(theme);
+        return;
+      }
+      const r = pill.getBoundingClientRect();
+      const x = r.left + r.width / 2;
+      const y = r.top + r.height / 2;
+      const radius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+      root.classList.add('is-theme-wipe');
+      let vt;
+      try {
+        vt = document.startViewTransition(() => apply(theme));
+      } catch (_) {
+        root.classList.remove('is-theme-wipe');
+        apply(theme);
+        return;
+      }
+      vt.ready.then(() => {
+        const easing = getComputedStyle(root).getPropertyValue('--wipe-ease').trim() || 'ease-out';
+        root.animate(
+          { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`] },
+          { duration: 560, easing, pseudoElement: '::view-transition-new(root)' }
+        );
+      }).catch(() => {});
+      vt.finished.finally(() => root.classList.remove('is-theme-wipe'));
+    }
+
     pills.forEach(p => {
-      p.addEventListener('click', () => apply(p.dataset.theme));
+      p.addEventListener('click', () => switchTheme(p.dataset.theme, p));
     });
 
     window.addEventListener('storage', (e) => {
@@ -95,42 +134,52 @@
 })();
 
 // ══════════════════════════════════════════════════════════════════════════════
-// DYSON SWARM — kawaii only. Concentric orbital shells of very fine pink dust
-// around the heart. Replaces the older sparkle-field glyphs + wavy orb-rings
-// for the kawaii theme. CSS in styles.css gates visibility via
-// html:not(.theme-retro), so retro is untouched.
-//
-// Design notes:
-//   - 7 shells, ~60–130 particles each → ~600 total. Static dots inside an
-//     animated parent (only the 7 shells animate), so this is cheap.
-//   - Per-dot jitter (angle, radial offset, size, opacity, hue) keeps the
-//     "swarm" reading natural instead of clinical concentric circles.
-//   - Particles are 0.7–2.1 px and 0.12–0.45 alpha — visible enough to suggest
-//     structure, not enough to fight the heart or wordmark.
+// HERO VISIBILITY — one shared IntersectionObserver on the hero plus the page
+// visibilitychange. Continuous hero motion (swarm, videos) subscribes and
+// pauses while the hero is off-screen or the tab is hidden.
+// ══════════════════════════════════════════════════════════════════════════════
+const heroActivity = (function () {
+  const subs = [];
+  let inView = true;
+  const hero = document.querySelector('.hero');
+  const active = () => inView && !document.hidden;
+  const notify = () => subs.forEach(fn => fn(active()));
+  if (hero && 'IntersectionObserver' in window) {
+    new IntersectionObserver(([entry]) => { inView = entry.isIntersecting; notify(); })
+      .observe(hero);
+  }
+  document.addEventListener('visibilitychange', notify);
+  return {
+    active,
+    subscribe(fn) { subs.push(fn); },
+  };
+})();
+
+const isMotionTheme = () => {
+  const c = document.documentElement.classList;
+  return !c.contains('theme-retro') && !c.contains('theme-basalt');
+};
+
+// ══════════════════════════════════════════════════════════════════════════════
+// DYSON SWARM — candy + kawaii only, motion allowed. Three sparse orbital shells
+// of fine dust around the heart (~180 spans; was 5 shells / 1,074). Built when
+// the theme + motion gate passes, torn down (DOM removed) on a switch to
+// retro/basalt or when reduced motion turns on. Paused via the shared hero
+// visibility gate. CSS still hides it in retro/basalt/reduced motion as a
+// belt-and-braces fallback.
 // ══════════════════════════════════════════════════════════════════════════════
 (function initDysonSwarm() {
   const host = document.querySelector('.heart-orb');
   if (!host) return;
-  // Avoid double-injection if this script ever runs twice.
-  if (host.querySelector('.dyson-swarm')) return;
 
-  const swarm = document.createElement('div');
-  swarm.className = 'dyson-swarm';
-  swarm.setAttribute('aria-hidden', 'true');
-
-  // Tuned via Dyson Swarm Studio (Apps & Tools/dyson-swarm-studio/). 5 sparse
-  // shells from r=165 → r=480, slow orbits (300–593 s), big bright dots.
   // [radius px, particle count, orbit duration s, direction]
   const SHELLS = [
-    [165, 138, 300, 'normal'],
-    [244, 176, 373, 'reverse'],
-    [323, 215, 447, 'normal'],
-    [401, 253, 520, 'reverse'],
-    [480, 292, 593, 'normal'],
+    [165, 50, 300, 'normal'],
+    [323, 60, 447, 'reverse'],
+    [480, 70, 593, 'normal'],
   ];
 
-  // Deep mauve palette — gives the swarm enough contrast against the pink page
-  // background to actually read as a Dyson swarm rather than disappear.
+  // Deep mauve palette — enough contrast against the pink page to read.
   const COLORS = [
     'rgba( 90,  42,  71, 0.55)',
     'rgba(140,  56,  98, 0.50)',
@@ -143,32 +192,44 @@
   const DOT_OPACITY = 0.74; // base, multiplied by per-dot 0.4..1.9 jitter
   const RADIAL_JITTER = 33; // px, breaks hard wire-frame look
 
-  for (const [radius, count, duration, direction] of SHELLS) {
-    const shell = document.createElement('div');
-    shell.className = 'dyson-shell';
-    shell.style.animation =
-      `dysonOrbit ${duration}s linear infinite ${direction}`;
+  let swarm = null;
 
-    for (let i = 0; i < count; i++) {
-      // Even angular spread + small jitter so the ring doesn't pulse visibly
-      const angle = (i / count) * 360 + (Math.random() - 0.5) * 4;
-      const r = radius + (Math.random() - 0.5) * RADIAL_JITTER;
-      const size = Math.max(0.3, DOT_SIZE * (0.55 + Math.random() * 0.95)).toFixed(2);
-      const opacity = Math.min(1, DOT_OPACITY * (0.4 + Math.random() * 1.5)).toFixed(2);
-      const color = COLORS[Math.floor(Math.random() * COLORS.length)];
-
-      const dust = document.createElement('span');
-      dust.style.cssText =
-        `--a:${angle.toFixed(2)}deg;` +
-        `--r:${r.toFixed(1)}px;` +
-        `width:${size}px;height:${size}px;` +
-        `background:${color};opacity:${opacity};`;
-      shell.appendChild(dust);
+  function build() {
+    swarm = document.createElement('div');
+    swarm.className = 'dyson-swarm';
+    swarm.setAttribute('aria-hidden', 'true');
+    for (const [radius, count, duration, direction] of SHELLS) {
+      const shell = document.createElement('div');
+      shell.className = 'dyson-shell';
+      shell.style.animation = `dysonOrbit ${duration}s linear infinite ${direction}`;
+      for (let i = 0; i < count; i++) {
+        const angle = (i / count) * 360 + (Math.random() - 0.5) * 4;
+        const r = radius + (Math.random() - 0.5) * RADIAL_JITTER;
+        const size = Math.max(0.3, DOT_SIZE * (0.55 + Math.random() * 0.95)).toFixed(2);
+        const opacity = Math.min(1, DOT_OPACITY * (0.4 + Math.random() * 1.5)).toFixed(2);
+        const color = COLORS[Math.floor(Math.random() * COLORS.length)];
+        const dust = document.createElement('span');
+        dust.style.cssText =
+          `--a:${angle.toFixed(2)}deg;--r:${r.toFixed(1)}px;` +
+          `width:${size}px;height:${size}px;background:${color};opacity:${opacity};`;
+        shell.appendChild(dust);
+      }
+      swarm.appendChild(shell);
     }
-    swarm.appendChild(shell);
+    host.appendChild(swarm);
   }
 
-  host.appendChild(swarm);
+  function sync() {
+    const want = isMotionTheme() && !mqReduce.matches;
+    if (want && !swarm) build();
+    if (!want && swarm) { swarm.remove(); swarm = null; }
+    if (swarm) swarm.classList.toggle('is-paused', !heroActivity.active());
+  }
+
+  sync();
+  document.addEventListener('lovespark:theme', sync);
+  if (mqReduce.addEventListener) mqReduce.addEventListener('change', sync);
+  heroActivity.subscribe(sync);
 })();
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -176,6 +237,7 @@
 // hidden in kawaii via CSS — the Dyson swarm above is the kawaii equivalent).
 // ══════════════════════════════════════════════════════════════════════════════
 (function initSparkleField() {
+  if (mqReduce.matches) return;
   const field = document.getElementById('sparkle-field');
   if (!field) return;
 
@@ -204,85 +266,229 @@
     `;
     field.appendChild(el);
   }
-
-  // Inject the twinkle keyframe (kept here so styles.css stays component-focused)
-  const style = document.createElement('style');
-  style.textContent = `
-    @keyframes sparkleTwinkle {
-      0%, 100% { opacity: 0.15; transform: scale(0.7); }
-      50%      { opacity: 1;    transform: scale(1.15); }
-    }
-  `;
-  document.head.appendChild(style);
+  // @keyframes sparkleTwinkle lives in styles.css.
 })();
 
 // ══════════════════════════════════════════════════════════════════════════════
-// CURSOR SPARK TRAIL — small glyphs burst from cursor, drift up, fade
+// CURSOR SPARK TRAIL — retro only. A fixed pool of 12 spans is reused round-
+// robin (no per-move DOM churn) and animated with WAAPI. The passive listener
+// only exists while the gate passes: retro + motion allowed + hover-capable
+// fine pointer. Candy, kawaii and basalt have no trail at all.
 // ══════════════════════════════════════════════════════════════════════════════
 (function initCursorTrail() {
   const container = document.getElementById('cursor-sparks');
-  if (!container) return;
+  if (!container || !Element.prototype.animate) return;
 
   const GLYPHS = ['✦', '★', '♡', '⋆', '✧'];
   const COLORS = ['#FF4FB3', '#FFB3D9', '#FFF5B5', '#C5E1FF'];
+  const POOL = 12;
   const THROTTLE = 60;
+  const pool = [];
+  let next = 0;
   let lastTime = 0;
+  let listening = false;
 
-  function spawnSpark(x, y) {
-    const el = document.createElement('span');
-    el.textContent = GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
-    const dx = (Math.random() - 0.5) * 50;
-    const dy = -(20 + Math.random() * 40);
+  function spark(x, y) {
+    if (!pool.length) {
+      for (let i = 0; i < POOL; i++) {
+        const el = document.createElement('span');
+        container.appendChild(el);
+        pool.push(el);
+      }
+    }
+    const el = pool[next];
+    next = (next + 1) % POOL;
+    const dx = ((Math.random() - 0.5) * 50).toFixed(0);
+    const dy = (-(20 + Math.random() * 40)).toFixed(0);
     const color = COLORS[Math.floor(Math.random() * COLORS.length)];
-    const size = 9 + Math.random() * 7;
-
-    el.style.cssText = `
-      left: ${x}px;
-      top: ${y}px;
-      font-size: ${size}px;
-      color: ${color};
-      text-shadow: 0 0 6px ${color};
-      --dx: ${dx.toFixed(0)}px;
-      --dy: ${dy.toFixed(0)}px;
-      animation: cursorSparkFly 800ms ease-out forwards;
-    `;
-    container.appendChild(el);
-    el.addEventListener('animationend', () => el.remove());
+    el.textContent = GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
+    el.style.cssText =
+      `left:${x}px;top:${y}px;font-size:${(9 + Math.random() * 7).toFixed(1)}px;` +
+      `color:${color};text-shadow:0 0 6px ${color};`;
+    el.getAnimations().forEach(a => a.cancel());
+    el.animate([
+      { transform: 'translate(0, 0) scale(0.6)', opacity: 1 },
+      { transform: `translate(${dx}px, ${dy}px) scale(1.4)`, opacity: 0 },
+    ], { duration: 800, easing: 'ease-out', fill: 'forwards' });
   }
 
-  document.addEventListener('mousemove', (e) => {
-    const now = Date.now();
+  function onMove(e) {
+    const now = e.timeStamp;
     if (now - lastTime < THROTTLE) return;
     lastTime = now;
-    spawnSpark(e.clientX, e.clientY);
-  });
+    spark(e.clientX, e.clientY);
+  }
 
-  // Inject the fly keyframe — uses CSS custom props for direction
-  const style = document.createElement('style');
-  style.textContent = `
-    @keyframes cursorSparkFly {
-      0%   { transform: translate(0, 0) scale(0.6); opacity: 1; }
-      100% { transform: translate(var(--dx, 0), var(--dy, -30px)) scale(1.4); opacity: 0; }
+  function sync() {
+    const want = document.documentElement.classList.contains('theme-retro')
+      && !mqReduce.matches && mqFine.matches;
+    if (want && !listening) {
+      document.addEventListener('pointermove', onMove, { passive: true });
+      listening = true;
+    } else if (!want && listening) {
+      document.removeEventListener('pointermove', onMove);
+      listening = false;
+      pool.forEach(el => el.getAnimations().forEach(a => a.cancel()));
     }
-  `;
-  document.head.appendChild(style);
+  }
+
+  sync();
+  document.addEventListener('lovespark:theme', sync);
+  if (mqReduce.addEventListener) mqReduce.addEventListener('change', sync);
+  if (mqFine.addEventListener) mqFine.addEventListener('change', sync);
 })();
 
 // ══════════════════════════════════════════════════════════════════════════════
-// SMOOTH SCROLL — hero CTA "See the tools ✦" anchors to the suite
+// CARD SPOTLIGHT + TILT — one delegated, passive pointermove, throttled to one
+// rAF. Sets --mx/--my (spotlight position on .card-body) and --rx/--ry (-1..1,
+// scaled by the theme's --tilt-max in CSS) on the hovered card. Only for a
+// hover-capable fine pointer with motion allowed; touch never tilts.
+// ══════════════════════════════════════════════════════════════════════════════
+(function initCardSpotlight() {
+  let pending = null;
+  let active = null;
+
+  function reset(card) {
+    if (!card) return;
+    ['--mx', '--my', '--rx', '--ry'].forEach(k => card.style.removeProperty(k));
+  }
+
+  function frame() {
+    const e = pending;
+    pending = null;
+    const card = e.target instanceof Element ? e.target.closest('.win98-card') : null;
+    if (card !== active) { reset(active); active = card; }
+    if (!card) return;
+    const box = card.getBoundingClientRect();
+    const body = card.querySelector('.card-body');
+    const bb = body ? body.getBoundingClientRect() : box;
+    const nx = (e.clientX - box.left) / box.width;   // 0..1
+    const ny = (e.clientY - box.top) / box.height;
+    card.style.setProperty('--rx', ((nx - 0.5) * 2).toFixed(3));
+    card.style.setProperty('--ry', ((ny - 0.5) * 2).toFixed(3));
+    card.style.setProperty('--mx', (e.clientX - bb.left).toFixed(0) + 'px');
+    card.style.setProperty('--my', (e.clientY - bb.top).toFixed(0) + 'px');
+  }
+
+  document.addEventListener('pointermove', (e) => {
+    if (e.pointerType === 'touch' || mqReduce.matches || !mqFine.matches) {
+      if (active) { reset(active); active = null; }
+      return;
+    }
+    if (!pending) requestAnimationFrame(frame);
+    pending = e;
+  }, { passive: true });
+
+  document.documentElement.addEventListener('pointerleave', () => { reset(active); active = null; }, { passive: true });
+})();
+
+// ══════════════════════════════════════════════════════════════════════════════
+// IN-PAGE LINKS — skip link, site bar, hero CTAs. Smooth unless reduced motion;
+// the sticky bar offset comes from `scroll-padding-top` in CSS. Focus moves to
+// the target so keyboard and screen-reader users land where they jumped.
 // ══════════════════════════════════════════════════════════════════════════════
 document.querySelectorAll('a[href^="#"]').forEach(link => {
   link.addEventListener('click', e => {
-    const target = document.querySelector(link.getAttribute('href'));
-    if (target) {
-      e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const id = link.getAttribute('href').slice(1);
+    const target = id && document.getElementById(id);
+    if (!target) return;
+    e.preventDefault();
+    target.scrollIntoView({ behavior: mqReduce.matches ? 'auto' : 'smooth', block: 'start' });
+    if (!target.matches('a[href], button, input, select, textarea, summary, [tabindex]')) {
+      target.setAttribute('tabindex', '-1');
     }
+    target.focus({ preventScroll: true });
+    if (history.replaceState) history.replaceState(null, '', '#' + id);
   });
 });
 
 // ══════════════════════════════════════════════════════════════════════════════
-// CARD CLOSE BUTTON — easter egg: card wobbles instead of closing
+// SITE BAR — one IntersectionObserver marks the section in view with
+// aria-current on its nav link; a 1px sentinel above the bar flips
+// data-stuck once the page scrolls (CSS scroll-state queries do the same
+// natively where supported). No scroll listener.
+// ══════════════════════════════════════════════════════════════════════════════
+(function initSiteBar() {
+  if (!('IntersectionObserver' in window)) return;
+  const bar = document.querySelector('.site-bar');
+  const sentinel = document.querySelector('.site-bar-sentinel');
+  if (bar && sentinel) {
+    new IntersectionObserver(([entry]) => {
+      bar.toggleAttribute('data-stuck', !entry.isIntersecting);
+    }).observe(sentinel);
+  }
+
+  const links = new Map();
+  document.querySelectorAll('.site-nav-link[href^="#"]').forEach(a => {
+    const section = document.getElementById(a.getAttribute('href').slice(1));
+    if (section) links.set(section, a);
+  });
+  if (!links.size) return;
+
+  const visible = new Set();
+  const order = [...links.keys()];
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => (en.isIntersecting ? visible.add(en.target) : visible.delete(en.target)));
+    // The last section (document order) crossing the band wins.
+    const current = order.filter(sec => visible.has(sec)).pop();
+    links.forEach((a, sec) => {
+      if (sec === current) a.setAttribute('aria-current', 'true');
+      else a.removeAttribute('aria-current');
+    });
+  }, { rootMargin: '-35% 0px -60% 0px' });
+  order.forEach(sec => io.observe(sec));
+})();
+
+// ══════════════════════════════════════════════════════════════════════════════
+// HERO VIDEOS — the markup ships `data-src` + poster only, so nothing downloads
+// until this runs. Basalt and retro hide both videos, so they never get a src
+// (and lose it again on a switch to those themes). Reduced motion: src stays,
+// playback stops and the poster frame shows. Without JS: poster only.
+// ══════════════════════════════════════════════════════════════════════════════
+(function gateVideos() {
+  const videos = document.querySelectorAll('video.heart-mark, video.hero-mark');
+  if (!videos.length) return;
+  const root = document.documentElement;
+
+  function themeShowsVideo() {
+    return !root.classList.contains('theme-basalt') && !root.classList.contains('theme-retro');
+  }
+
+  function sync() {
+    const show = themeShowsVideo();
+    videos.forEach(v => {
+      if (!show) {
+        if (v.getAttribute('src')) {
+          v.pause();
+          v.removeAttribute('src');
+          v.load(); // drop the buffered media
+        }
+        return;
+      }
+      if (!v.getAttribute('src') && v.dataset.src) v.setAttribute('src', v.dataset.src);
+      if (mqReduce.matches) {
+        v.autoplay = false;
+        if (!v.paused || v.currentTime > 0) { v.pause(); v.load(); } // back to the poster frame
+      } else if (!heroActivity.active()) {
+        v.autoplay = false;
+        if (!v.paused) v.pause(); // off-screen or tab hidden: hold the current frame
+      } else if (v.paused) {
+        v.autoplay = true;
+        const p = v.play();
+        if (p && p.catch) p.catch(() => {});
+      }
+    });
+  }
+
+  sync();
+  document.addEventListener('lovespark:theme', sync);
+  if (mqReduce.addEventListener) mqReduce.addEventListener('change', sync);
+  heroActivity.subscribe(sync);
+})();
+
+// ══════════════════════════════════════════════════════════════════════════════
+// CARD CLOSE BUTTON — easter egg: card wobbles instead of closing. It's a real
+// <button> (generator output), so Enter/Space trigger it too.
 // ══════════════════════════════════════════════════════════════════════════════
 document.querySelectorAll('.win-btn-close').forEach(btn => {
   btn.addEventListener('click', () => {
@@ -294,14 +500,4 @@ document.querySelectorAll('.win-btn-close').forEach(btn => {
     card.addEventListener('animationend', () => { card.style.animation = ''; }, { once: true });
   });
 });
-const wobbleStyle = document.createElement('style');
-wobbleStyle.textContent = `
-  @keyframes cardWobble {
-    0%   { transform: translateY(-4px) rotate(-0.4deg); }
-    25%  { transform: translateY(-4px) rotate(2deg); }
-    50%  { transform: translateY(-4px) rotate(-2deg); }
-    75%  { transform: translateY(-4px) rotate(1deg); }
-    100% { transform: translateY(-4px) rotate(-0.4deg); }
-  }
-`;
-document.head.appendChild(wobbleStyle);
+// @keyframes cardWobble lives in styles.css.

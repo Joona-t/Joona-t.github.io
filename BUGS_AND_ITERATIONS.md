@@ -1,5 +1,103 @@
 # Bugs & Iterations
 
+## 2026-10-04: BUG — Sticky bar not frosted; phone layout zoomed out
+
+**Problem 1:** When scrolled, page text showed sharply through the new sticky site bar.
+**Root cause:** `.site-bar` has `view-transition-name`, which makes it a *backdrop root*. The child `.site-bar-inner` therefore had its `backdrop-filter` blur only its parent's empty layer.
+**Fix:** The glass (background, border, backdrop-filter) moved onto `.site-bar` itself, with opacity 74%→84%. The retro overrides were retargeted.
+**Problem 2 (also on the live site):** At 375px the layout viewport was ~700px, so phones zoomed the whole page out.
+**Root cause:** The Dyson swarm orbit spans overflow the hero horizontally.
+**Fix:** `.hero { overflow-x: clip; }`. clip creates no scroll container, so sticky still works. Verified innerWidth 375 = scrollWidth 375.
+**Files:** styles.css
+
+## 2026-10-04: ITER — Visual upgrade Phase 5: polish and wrap-up
+
+**Change:** Final phase of plan.md.
+- **Cross-document view transitions:** `@view-transition { navigation: auto; }` added to the root `styles.css` and to all 3 subpage sheets (`ai-signal/style.css`, `openai-watch/styles.css`, `bambu-a1/css/site.css`). Each one sits inside `@media (prefers-reduced-motion: no-preference)`, so reduced-motion users get plain navigation. Same-origin links between root and subpages now crossfade in supporting browsers; other browsers ignore the rule. The Phase 3 `.is-theme-wipe` scoping keeps the theme wipe separate. `ai-signal/scripts/render.py` only writes HTML, so the style.css edit will not be overwritten.
+- Cache strings bumped to `2026-10-04-p5` (styles.css, styles-retro.css, script.js).
+- **Note:** `bambu-a1/` is a deployment mirror of `Joona-t/bambu-a1-explainer@720e455`. The one-rule addition makes it diverge from upstream, so port it there or re-apply it after the next sync. Its `?v=720e455` cache string was left alone.
+**Verification:** `node --check script.js` OK. Braces balanced in all 4 edited sheets. In local Chromium the at-rule parses (`CSSViewTransitionRule` present, rule in the CSSOM), and the page loads with no console errors.
+**Not done (left for Joona):** full QA across Chrome, Safari and Firefox × 4 themes × reduced motion, the VoiceOver pass on the h1 and summary headings, push and PR. The workflow rules say commit locally only and never push.
+**Files:** styles.css, ai-signal/style.css, openai-watch/styles.css, bambu-a1/css/site.css, index.html, plan.md, BUGS_AND_ITERATIONS.md
+
+## 2026-10-04: ITER — Phase 4 fix: drop `contain` from `.heart-orb`
+
+**Problem:** Phase 4 added `contain: layout style` to `.heart-orb`. Layout containment makes the element a stacking context, which is an isolated blend group. The candy heart video's `mix-blend-mode: darken` then blended against the orb's transparent backdrop instead of the page gradient, so its pale MP4 panel could show again.
+**Root cause:** Containment was added for performance without checking the blend dependency inside the orb.
+**Fix:** Removed the `contain` line and left a comment explaining why. The saving was negligible for a fixed 240px box.
+
+## 2026-10-04: ITER — Visual upgrade Phase 4: performance diet
+
+**Change:** Continuous-motion budget cut, from plan.md Phase 4 (research.md D4, D7; motion ceiling SKILL.md:136-139).
+- **Swarm:** 5 shells / 1,074 spans → 3 shells / 180 spans. Built only in candy/kawaii with motion allowed; torn down (DOM removed) on a switch to retro/basalt or when reduced motion turns on, rebuilt on the way back.
+- **Hero visibility gate:** new shared `heroActivity` (one IntersectionObserver on `.hero` + `visibilitychange`). The swarm gets `.is-paused` (`animation-play-state: paused`) and both hero videos pause while the hero is off-screen or the tab is hidden, then resume.
+- **`.heart-orb` containment:** `contain: layout style`, not the planned `layout paint` — paint containment clips to the 240px box and would cut off the swarm (r up to 480px) and the rings.
+- **Cursor trail:** gone in candy, kawaii and basalt (CSS `display:none` + no listener). Retro keeps a pooled 12-span trail animated with WAAPI (no per-move create/remove), passive `pointermove` attached only while retro + motion allowed + fine hover pointer; re-gated on theme/media changes. `cursorSparkFly` keyframes removed.
+- **Dead code:** `#spiral-canvas` markup and both CSS rules removed. No `.spark`/`.cursor-spark` rules were left to delete.
+- **Mission sparkles:** 5 → 3 spans (✦ ♡ ✿); nth-child colours/delays remapped in kawaii, candy and retro.
+- Cache strings bumped to `2026-10-04-p4`.
+**Verification:** `node --check script.js` OK; braces balanced (styles.css 497/497, styles-retro.css 139/139); HTML tag balance unchanged from baseline; `build-gallery.py --check` in sync (9 categories, 35 cards). Local preview (Chromium): candy 180 swarm spans, retro/basalt 0; retro trail pool stays at 12 spans after 30 moves; basalt `#cursor-sparks` display none; scrolled down → swarm paused + both videos paused, back to top → both resume; swarm visually unclipped. No new colour pairs. Not done: reduced-motion emulation, Lighthouse, Safari/Firefox.
+**Files:** script.js, styles.css, styles-retro.css, index.html, plan.md, BUGS_AND_ITERATIONS.md
+
+## 2026-10-04: ITER — Visual upgrade Phase 3: motion layer
+
+**Change:** Motion that answers people, from plan.md Phase 3 (research.md §4 motion ceiling, §5 support table). All new CSS is unlayered at the end of styles.css; per-theme flavour is tokens only (`--tilt-max`, `--spot`, `--lift-*`, `--reveal-*`, `--ring-*`, `--wipe-ease`).
+- **Springs + press:** pills, hero CTAs, card links, Ko-fi share one transition list on `--ease-pop` (candy spring, kawaii soft spring, basalt damped, retro `steps(4)`); chevron springs on open; `:active { scale: .97 }` (individual `scale`, so it never fights `transform`).
+- **Theme wipe:** `switchTheme(theme, pill)` runs `startViewTransition` and grows a `clip-path` circle on `::view-transition-new(root)` from the clicked pill (retro: `steps(8)`). Skipped without the API or under reduced motion; cross-tab `storage` sync still calls plain `apply()`. `.is-theme-wipe` scopes the `animation:none` so Phase 5 page transitions keep their crossfade, and drops the bar's `view-transition-name` so the bar is wiped with the page.
+- **Scroll reveals:** `animation-timeline: view()` on cards, section headers, gallery shots, notice/mission/support blocks — opacity + `translate`/`scale` only, inside `@supports` + no-preference (basalt fade only, retro stepped rise). Firefox: content simply visible.
+- **Card spotlight + tilt:** one passive, rAF-throttled `pointermove` sets `--mx/--my/--rx/--ry` on the hovered card (fine hover pointer + motion allowed only). Spotlight is `.card-body::after` (isolated, under the text); hover transform rewritten as one `perspective · translate(lift) · rotate · rotateX/Y(tilt)` chain. Candy ±4° white gloss, kawaii ±3° pink, basalt ember glow no tilt, retro neither.
+- **Conic CTA ring:** `@property --ls-angle`; primary hero CTA + Ko-fi repaint their own fill on `padding-box` over a conic `border-box` (no pseudo-element). Sweeps once on load, rotates only on hover/focus; static ring under reduced motion.
+- **Hero entrance:** `@starting-style` one-shot, `--i` stagger: orb → wordmark → tagline → CTAs (opacity + translate).
+- **Accordions:** `::details-content` + `interpolate-size` block-size transition inside `@supports`; `overflow: clip` + clip margin so reveals and focus rings survive.
+- **Progress bar:** 2px `.site-bar::after`, `animation-timeline: scroll(root)`.
+- Cache strings bumped to `2026-10-04-p3`.
+**Verification:** `node --check script.js` OK; styles.css braces 501/501; `build-gallery.py --check` in sync (9 categories, 35 cards). Local preview (Chromium): ring, wipe (class cleaned up after), tilt matrix + spotlight opacity on hover, reveal/progress animations attached, accordion open, all 4 themes, zero console errors. No new text/background colour pairs (ring is decorative border; button fills unchanged). Not done: reduced-motion emulation, 360/768 captures, Safari/Firefox, Lighthouse.
+**Files:** styles.css, script.js, index.html, plan.md, BUGS_AND_ITERATIONS.md
+
+## 2026-10-04: ITER — Visual upgrade Phase 2: structure (sticky nav, hero, sections)
+
+**Change:** Page structure from plan.md Phase 2 (research.md D6, D9, D10, D12).
+- **Landmarks:** skip link → `<main id="main">` (hero through support); footer stays outside. In-page link handler now moves focus to the target (tabindex -1 when needed) and updates the hash; sticky offset via `scroll-padding-top`.
+- **Sticky glass site bar:** Sparky (new square `images/sparky-avatar.png`, 96px source shown at 32px) + LoveSpark, Suite · Peeks · Mission · Support, then the existing theme pills (only their fixed positioning removed). `color-mix` glass + backdrop blur, solid `--surface` fallback, `view-transition-name: site-nav`. One IntersectionObserver sets `aria-current` (colour + underline bar); a 1px sentinel sets `data-stuck` (shadow); `scroll-state(stuck: top)` does the same natively. Phones (<600px): pills on row 1, Sparky + links on row 2, wordmark visually hidden; 8px link gaps, 32px targets, no overflow at 320/360. Retro gets its own dark capsule + hot-pink current state because its `--surface` is the light card fill.
+- **Retro sticky bug:** `overflow-x: hidden` on both `html` and `body` made body a scroll container, so the sticky bar scrolled away in retro → `overflow-x: clip` (hidden kept as fallback).
+- **Hero:** one primary CTA "See the tools ✦" + one ghost CTA "Sneak peeks". The 7 external pills moved out: 6 become a generated "💫 More from LoveSpark" category in gallery.json (Glyph Grid already has a Mac & iOS card). Socials moved to the footer.
+- **Videos:** `poster` + `preload="metadata"`, markup carries `data-src` only; JS attaches `src` in candy/kawaii and strips it on a switch to basalt/retro (Network verified: no mp4 request in basalt). Reduced motion keeps the poster.
+- **Generator (`build-gallery.py`):** first top-level category renders `<details open>`; Chrome-group child titles are `h4`; `.win-btn-close` is a real `<button type="button" aria-label="Wobble this window">` (32px hit area, focus ring); same-origin URLs drop `target=_blank`.
+- **Notice + Mission:** real `<p>` paragraphs (no `<br><br>`), Notice gets `<h2>` "A note from the workshop", both sit in `.about-grid` (2 columns ≥900px).
+- **Support + Contact:** one card — Ko-fi primary, "✉ Say hi" mailto ghost carrying `id="contact"`.
+- **Sneak Peeks:** Sparky figcaption no longer repeats the Suite card copy.
+- **Footer:** Sparky, socials (32px targets), heart. Footer heart beats on footer hover only (no-preference), so the hero heart is the one ambient heart.
+- Cache strings bumped to `2026-10-04-p2`.
+**Verification:** `node --check script.js` OK; braces balanced (styles.css 444/444, styles-retro.css 142/142); HTML tag balance clean; `build-gallery.py --check` in sync (9 categories, 35 cards). Local preview: 4 themes × 320/360/1280 — bar 101px on phones / 63px desktop, no page overflow from the bar, theme switcher `position: static` in all themes, `aria-current` follows scroll, `data-stuck` toggles, skip link is first Tab stop and lands focus on `<main>`. New colour pairs (WCAG formula): kawaii accent-ink on bar 6.07, ink on bar 10.46, ghost on page 5.35; basalt 10.41; retro hot-pink on wine 7.43. Not done: reduced-motion emulation, Lighthouse.
+**Known, not this phase:** nested Chrome-group titles overflow their summary at 320px (`white-space: nowrap`, pre-existing); hero `.hero-cta--glyph/null/zara/forging/games` modifier CSS is now unused (Phase 4/5 cleanup); "More" card copy for Null Path / Zarathustra / Forging is from their page meta or generic — Joona may want to rewrite it in gallery.json.
+**Files:** index.html, styles.css, styles-retro.css, script.js, data/gallery.json, scripts/build-gallery.py, images/sparky-avatar.png, plan.md, BUGS_AND_ITERATIONS.md
+
+## 2026-10-04: ITER — Visual upgrade Phase 1: tokens and dead CSS
+
+**Change:** Token foundation + CSS debt cleanup from research.md §3, no redesign yet.
+- **Tokens:** semantic layer `--surface/--ink/--accent/--accent-ink/--focus/--radius` in `:root` (kawaii) and each theme block (candy, basalt in styles.css; retro in styles-retro.css). Motion tokens `--ease-pop` (per theme: kawaii soft spring, candy springy `linear()`, basalt damped cubic-bezier, retro `steps(4)`), `--ease-out`, `--dur-1..3`. Fluid scales `--fs-xs..--fs-logo`, `--sp-1..--sp-section`; widths `--w-wide` (1180px) and `--w-prose` (68ch).
+- **Applied:** 6 section paddings (tools, notice, mission, support, footer, gallery) and 12 one-off font sizes now use tokens; the 3 `1180px` widths use `--w-wide`, mission/notice use `--w-prose`. The `-8px` margin hack on `.gallery-intro` is gone (gallery `.section-header` gets a 24px bottom margin instead; retro keeps its 40px gap). Category hover tint and group rail use `color-mix(in oklch, var(--accent) N%, transparent)` with an rgba fallback first. `text-wrap: balance` on headings, `pretty` on body copy.
+- **Dead CSS removed:** the first, fully shadowed `.hero-cta` block (Basalt Monolith skin that the kawaii block overrode); `.glow-blob-keep`, `.glow-blob-2/-3` base rules and `blobDrift` (base `.glow-blob-1` geometry folded into basalt's single ember pool); keyframes `sparkleFloat`, `sparkFade`, `starburstSpin`, `ankhEmber`; retro `.spark`, `.cursor-spark` and `sparkRise-retro` (classes never set; `twinkle-retro` kept because `.section-deco` and mission sparkles use it).
+- **JS keyframes → CSS:** `sparkleTwinkle`, `cursorSparkFly`, `cardWobble` now live in styles.css; script.js no longer injects `<style>` tags.
+- **Patch pile merged:** basalt `.ankh-glyph` was defined 5 times with stacked `!important`s → one rule with the final computed values (200px, cover, sepia relic frame, no animation, no `!important`); ember pool `::after` 300px. Basalt CTA rest/hover/focus/per-button embers consolidated into the basalt HERO CTA section. Basalt gold wordmark and soon-chip colour folded into their rules. Candy: 3 stacked video blend rules → exactly one `mix-blend-mode: darken` (no `!important`) + the wordmark feather mask. Candy a11y colours now close the candy block; kawaii CTA focus ring uses `--focus` (#7a1540).
+- **No more `background-attachment: fixed` (×3):** page ground is a fixed `body::before` layer (z-index -1) repainted per theme; retro turns it off.
+- Cache strings bumped to `2026-10-04-p1`.
+**Verification:** `node --check script.js` OK; braces balanced (styles.css 371/371, styles-retro.css); `build-gallery.py --check` in sync (8 categories, 29 cards). Local preview (python http.server): all 4 themes render, basalt ankh computed 200×200 / sepia filter / animation none (visual check: framed cream relic, gold Cinzel wordmark), candy videos blend with no MP4 box, `body::before` fixed in candy/kawaii/basalt and `display:none` in retro, zero console errors. New `--accent-ink` pairs AA by WCAG formula (kawaii 6.35, candy 6.07, basalt 10.4, retro 5.09 on `--surface`). Not done: 3-width × reduced-motion screenshot matrix; `audit-contrast.py` targets the extension token sheet, not this site.
+**Files:** styles.css, styles-retro.css, script.js, index.html, plan.md, BUGS_AND_ITERATIONS.md
+
+## 2026-10-04: ITER — Visual upgrade Phase 0: defect floor (no visual redesign)
+
+**Change:** Fixed the a11y/perf defect floor from research.md (D2, D3, D4, D8, D11) before any visual work.
+- **a11y:** `<h1 class="logo-text">` is now visually hidden (sr-only) in candy/kawaii instead of `display:none`, so the page has a real h1; `video.hero-mark` is `aria-hidden` (dropped its `aria-label`).
+- **Fonts:** body font = brand stack (OpenDyslexic → Atkinson Hyperlegible → system) instead of never-loaded Quicksand; Pacifico + Atkinson added to the critical font link; Press Start 2P / Cinzel / Cormorant load non-blocking (`media=print onload` + `<noscript>`); OpenDyslexic Regular preloaded.
+- **Motion:** 6 scattered reduced-motion blocks replaced by ONE global block at the end of styles.css with `!important` (beats the inline `animation` script.js sets), `scroll-behavior:auto`, and hides `.dyson-swarm`/`#cursor-sparks`/`#sparkle-field`. JS gets `mqReduce`/`mqFine`: swarm + sparkle field not built under reduced motion; cursor trail needs fine pointer + motion allowed (passive listener); anchor scroll uses `auto` when reduced; hero videos pause and reset to poster (and resume if the preference flips back).
+- **Theme fallback:** `apply()` falls back to `candy` (was `pink`); stale kawaii-default comments fixed (script.js, index.html).
+- **Contrast:** kawaii small pink text → `#b3185c`, white-on-pink buttons (card-link, kofi, active pill) → `#d81b73→#a51259`; candy sub-tagline + badge → `#b3185c`; retro badge bg `#b3185c`, card-link/kofi gradient, sub-tagline → bubblegum (11.6:1 on the dark page). Retro fixes live at the end of styles-retro.css because that sheet loads last and wins equal-specificity ties. Aaron memorial card keeps its green retro button; `--soon` pills excluded.
+- **Focus:** themed `:focus-visible` rings on `.card-link`, `.kofi-btn`, `.notice-link`, `.hero-social-link` (kawaii `#7a1540`, candy `--ls-focus`, retro hot-pink / `#b3185c` on cream cards; basalt keeps its ember rings).
+- **Misc:** `.gallery-mascot` gets `object-fit:contain`; the two 404 refs removed (`assets/icon-ankh.png` → `hero-ankh.png`, `ankh-basalt.gif` declaration dropped). Cache strings bumped to `2026-10-04-p0`.
+**Verification:** `node --check script.js` OK; CSS braces balanced (styles.css, styles-retro.css); `build-gallery.py --check` in sync (8 categories, 29 cards). Local preview: computed styles confirmed per theme (h1 1px sr-only in candy/kawaii, visible in retro/basalt; badge/sub-tagline/button colours as above; body font = OpenDyslexic stack), zero console errors. Contrast ratios computed by hand (WCAG formula); `audit-contrast.py` targets the extension token sheet, not this site, so not used. Baseline 4-theme × 3-width screenshots NOT taken.
+**Files:** index.html, script.js, styles.css, styles-retro.css, plan.md, research.md, BUGS_AND_ITERATIONS.md
+
 ## 2026-09-02: Sparky Habits screenshot added to Sneak Peeks
 
 **Change:** Added the supplied Sparky Habits dashboard screenshot as the third image in the `🧠 Sparky` Sneak Peeks gallery. Converted the 3016×1698, 3.6 MB source PNG to a 1600×900, 157 KB JPEG at quality 86, added descriptive alt text and a concise caption, and updated the visible gallery count from 2 to 3.
