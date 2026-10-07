@@ -22,6 +22,14 @@
 **Check:** `python3 scripts/build-gallery.py --check` → in sync · `grep -c "lovespark-sparky-slug\|lovespark-coursekit" data/gallery.json index.html` → 0 / 0 · `curl -s -o /dev/null -w '%{http_code}' https://github.com/Joona-t/lovespark-sparky-slug` → 404 (anonymous), same for lovespark-coursekit — the reason the cards cannot ship yet.
 **Files:** data/gallery.json, index.html, BUGS_AND_ITERATIONS.md
 
+## 2026-10-07: ITER-004 — Med Tracker privacy page: contact + source links pointed at a private repo
+
+**Problem:** `privacy/med-tracker.html` used `github.com/Joona-t/lovespark-med-tracker/issues` as its only contact channel and linked the same repo as the "Source & verification" pointer, saying the complete code could be read there. That repo is PRIVATE, so for the public both links 404 and the verification claim is false. This is the same 404 class ITER-003 removed from the gallery, and it breaks CLAUDE.md rule 14 (the policy needs working contact info and an honest verification pointer).
+**Root cause:** The policy text was copied verbatim from the extension repo's own PRIVACY.md, which assumes the repo is public. The site-hosted path (ITER-001) exists precisely because it is not.
+**Fix:** Contact now points at `github.com/Joona-t/Joona-t.github.io/issues`, the public repo that hosts this policy (issues enabled). The Source section now says plainly that the source is not public yet, that it will be linked here when it opens up, and how to check network activity in the meantime with the browser's extension devtools. Once med-tracker flips public, restore the repo link here.
+**Check:** `for u in $(grep -hoE 'https://github\.com/[^"]+' privacy/*.html | sort -u); do echo "$(curl -s -o /dev/null -w '%{http_code}' "$u") $u"; done`, where every line must be 200 · `grep -c lovespark-med-tracker privacy/med-tracker.html` → 0.
+**Files:** privacy/med-tracker.html, BUGS_AND_ITERATIONS.md
+
 ## 2026-07-01: Love Kana "Sneak Peeks" image landed
 
 **Change:** Screenshot arrived (`~/Documents/screenshots/Love Kana.png`, 1956×1424 PNG, 1.9 MB). Optimized to `images/gallery/love-kana/love-kana-01.jpg` via `sips -Z 1600 -s format jpeg -s formatOptions 86` → **1600×1165, 137 KB** (matches the other gallery shots' weight; a 1.9 MB PNG would've bloated the page). Re-added the deferred `🌸 Love Kana` gallery-project panel after `gal-tongue`, pointing at the JPG, with intrinsic dims set to avoid CLS.
