@@ -6,6 +6,30 @@
 **Verification:** Confirmed the optimized image dimensions and file size locally; the rendered gallery and live deployment were checked after publishing.
 **Files:** index.html, images/gallery/sparky/sparky-03.jpg (new)
 
+## 2026-07-09: ITER-001 — Site-hosted privacy policy for Med Tracker (unblocks CWS)
+
+**Problem:** The lovespark-med-tracker extension repo is private, so its `PRIVACY.md` GitHub link 404s for the public — but the Chrome Web Store requires a publicly reachable privacy-policy URL before the extension can be submitted. The privacy URL must therefore be site-hosted.
+**Root cause:** LoveSpark's default privacy-URL convention (link the file on GitHub) assumes a public repo; med-tracker ships to CWS before its repo flips public.
+**Fix:** New standing path for extension privacy policies: `privacy/<ext>.html` on lovespark.love. First page `privacy/med-tracker.html` — content adapted verbatim from the repo's PRIVACY.md (effective 2026-07-08, v1.0.35+), self-contained single-file page (inline CSS mirroring the styles.css candy palette, DM Mono/Press Start 2P, Sparky mascot header, back link home). Deliberately independent of the homepage's animation-heavy stylesheet so it stays stable and loads instantly for CWS reviewers. WCAG note: the site's `--hot-pink`/`--deep-mauve` fail 4.5:1 as small text on `--paper` (2.90:1 / 4.08:1), so the page adds darkened text variants `--pink-strong #C2185B` (5.69:1) and `--mauve-dark #A8336B` (6.07:1) for headings/links/focus ring. Public URL once merged: `https://lovespark.love/privacy/med-tracker.html`.
+**Verification:** HTML parse clean (no mismatched/unclosed tags); rendered in browser at desktop + 375px mobile (no horizontal scroll, mascot loads, zero console errors); contrast ratios computed for every text pair (min 5.33:1); `ls-check .` 7 pass / 0 fail.
+**Files:** privacy/med-tracker.html (new)
+
+## 2026-10-07: ITER-003 — Un-stage the Sparky Slug + CourseKit gallery cards (ITER-002 reverted)
+
+**Problem:** PR #5 bundled the Med Tracker privacy page ("merge ASAP") with two gallery cards whose links point at `github.com/Joona-t/lovespark-sparky-slug` and `github.com/Joona-t/lovespark-coursekit`. Both repos are still private on 2026-10-07 (`gh repo view <repo> --json visibility` → PRIVATE), so merging the PR as-is would ship two 404 cards to lovespark.love. Sparky Slug is also parked per NOW.md.
+**Root cause:** The PR relied on the owner cherry-picking one commit; a plain merge would carry the staged cards along.
+**Fix:** `git revert dcdada9` on the PR branch (normal revert commit, no history rewrite) — removes the two cards from `data/gallery.json` and the regenerated card HTML from `index.html`, leaving only the privacy page. Re-stage from the ITER-002 commit (`git cherry-pick dcdada9`, then `python3 scripts/build-gallery.py`) once the repos flip public and the cards have working URLs.
+**Check:** `python3 scripts/build-gallery.py --check` → in sync · `grep -c "lovespark-sparky-slug\|lovespark-coursekit" data/gallery.json index.html` → 0 / 0 · `curl -s -o /dev/null -w '%{http_code}' https://github.com/Joona-t/lovespark-sparky-slug` → 404 (anonymous), same for lovespark-coursekit — the reason the cards cannot ship yet.
+**Files:** data/gallery.json, index.html, BUGS_AND_ITERATIONS.md
+
+## 2026-10-07: ITER-004 — Med Tracker privacy page: contact + source links pointed at a private repo
+
+**Problem:** `privacy/med-tracker.html` used `github.com/Joona-t/lovespark-med-tracker/issues` as its only contact channel and linked the same repo as the "Source & verification" pointer, saying the complete code could be read there. That repo is PRIVATE, so for the public both links 404 and the verification claim is false. This is the same 404 class ITER-003 removed from the gallery, and it breaks CLAUDE.md rule 14 (the policy needs working contact info and an honest verification pointer).
+**Root cause:** The policy text was copied verbatim from the extension repo's own PRIVACY.md, which assumes the repo is public. The site-hosted path (ITER-001) exists precisely because it is not.
+**Fix:** Contact now points at `github.com/Joona-t/Joona-t.github.io/issues`, the public repo that hosts this policy (issues enabled). The Source section now says plainly that the source is not public yet, that it will be linked here when it opens up, and how to check network activity in the meantime with the browser's extension devtools. Once med-tracker flips public, restore the repo link here.
+**Check:** `for u in $(grep -hoE 'https://github\.com/[^"]+' privacy/*.html | sort -u); do echo "$(curl -s -o /dev/null -w '%{http_code}' "$u") $u"; done`, where every line must be 200 · `grep -c lovespark-med-tracker privacy/med-tracker.html` → 0.
+**Files:** privacy/med-tracker.html, BUGS_AND_ITERATIONS.md
+
 ## 2026-07-01: Love Kana "Sneak Peeks" image landed
 
 **Change:** Screenshot arrived (`~/Documents/screenshots/Love Kana.png`, 1956×1424 PNG, 1.9 MB). Optimized to `images/gallery/love-kana/love-kana-01.jpg` via `sips -Z 1600 -s format jpeg -s formatOptions 86` → **1600×1165, 137 KB** (matches the other gallery shots' weight; a 1.9 MB PNG would've bloated the page). Re-added the deferred `🌸 Love Kana` gallery-project panel after `gal-tongue`, pointing at the JPG, with intrinsic dims set to avoid CLS.
