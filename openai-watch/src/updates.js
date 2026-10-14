@@ -114,6 +114,26 @@ window.OPENAI_WATCH = {
       ]
     },
     {
+      "id": "chatgpt-teens-learning-college-planner-announcement",
+      "date": "2026-10-07",
+      "type": "release",
+      "channel": "ChatGPT",
+      "title": "ChatGPT expands teen study tools and announces College Planner",
+      "summary": "Teens gain flashcard practice and improved quiz creation from notes. OpenAI also announced a forthcoming College Planner for US students in grades 10–12, organizing applications, deadlines, and financial-aid tasks; no launch date was given.",
+      "tags": [
+        "teens",
+        "study tools",
+        "college planner",
+        "announced"
+      ],
+      "links": [
+        {
+          "label": "Product announcement",
+          "url": "https://openai.com/index/teens-learn-and-plan/"
+        }
+      ]
+    },
+    {
       "id": "chatgpt-audio-uploads",
       "date": "2026-10-06",
       "type": "release",
