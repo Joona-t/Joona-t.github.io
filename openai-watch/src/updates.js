@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-10-04",
+  verifiedAt: "2026-10-14",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -19,6 +19,193 @@ window.OPENAI_WATCH = {
     ]
   },
   updates: [
+    {
+      "id": "codex-composer-predictions-beta",
+      "date": "2026-10-09",
+      "type": "release",
+      "channel": "Codex",
+      "title": "Codex introduces composer predictions in beta",
+      "summary": "Eligible adult Pro users can accept and edit suggested follow-up messages in local or SSH threads with Astra and Sol 6.1. Suggestions require manual sending.",
+      "tags": [
+        "composer",
+        "beta",
+        "pro"
+      ],
+      "links": [
+        {
+          "label": "Feature details",
+          "url": "https://help.openai.com/en/articles/20001601-composer-predictions-in-codex"
+        }
+      ]
+    },
+    {
+      "id": "gpt-6-1-sol-ultrafast-api",
+      "date": "2026-10-08",
+      "type": "release",
+      "channel": "API",
+      "title": "GPT-6.1 Sol adds Ultrafast processing",
+      "summary": "Responses requests can select Ultrafast for lower token latency, subject to rate limits. Global processing and US or EU residency are supported.",
+      "tags": [
+        "ultrafast",
+        "latency",
+        "residency"
+      ],
+      "links": [
+        {
+          "label": "API changelog",
+          "url": "https://developers.openai.com/api/docs/changelog"
+        }
+      ]
+    },
+    {
+      "id": "false-front-influence-operations-disrupted",
+      "date": "2026-10-08",
+      "type": "security",
+      "channel": "News",
+      "title": "OpenAI discloses disruption of false-front influence operations",
+      "summary": "OpenAI banned Russian and Iranian influence operations that used its models for fabricated personas, content, and internal reporting. The disclosure describes attempts to place messaging through front organizations and media outlets.",
+      "tags": [
+        "influence operations",
+        "account enforcement",
+        "threat disclosure"
+      ],
+      "links": [
+        {
+          "label": "Security disclosure",
+          "url": "https://openai.com/index/disrupting-ai-enabled-false-front-operations/"
+        }
+      ]
+    },
+    {
+      "id": "chatgpt-gpt-6-intelligent-ui",
+      "date": "2026-10-07",
+      "type": "release",
+      "channel": "ChatGPT",
+      "title": "GPT-6 and Intelligent UI roll out in ChatGPT",
+      "summary": "ChatGPT adds interactive answers and can share progress while reasoning continues. Paid-plan rollout began October 7, followed by Free and Go. Chat uses Sol or Luna by plan; Pro reasoning retains Astra without Intelligent UI.",
+      "tags": [
+        "gpt-6",
+        "intelligent ui",
+        "interactive answers"
+      ],
+      "links": [
+        {
+          "label": "Product announcement",
+          "url": "https://openai.com/index/gpt-6-for-everyone/"
+        }
+      ]
+    },
+    {
+      "id": "chat-latest-october-7-snapshot",
+      "date": "2026-10-07",
+      "type": "patch",
+      "channel": "API",
+      "title": "chat-latest receives a new snapshot",
+      "summary": "The alias now tracks the updated ChatGPT model for paid and business plans. OpenAI recommends the GPT-6 family for production API use.",
+      "tags": [
+        "chat-latest",
+        "snapshot"
+      ],
+      "links": [
+        {
+          "label": "API changelog",
+          "url": "https://developers.openai.com/api/docs/changelog"
+        }
+      ]
+    },
+    {
+      "id": "chatgpt-audio-uploads",
+      "date": "2026-10-06",
+      "type": "release",
+      "channel": "ChatGPT",
+      "title": "ChatGPT adds audio file uploads",
+      "summary": "Paid subscriptions and workspaces can upload recordings for transcription, summaries, and questions. Access depends on workspace settings, region, client, and model; transcription accuracy varies.",
+      "tags": [
+        "audio",
+        "uploads",
+        "transcription"
+      ],
+      "links": [
+        {
+          "label": "Release notes",
+          "url": "https://help.openai.com/en/articles/6825453-chatgpt-release-notes"
+        }
+      ]
+    },
+    {
+      "id": "decisions-api-beta",
+      "date": "2026-10-06",
+      "type": "release",
+      "channel": "API",
+      "title": "Decisions API enters beta",
+      "summary": "The new endpoint uses GPT-6 Luna to produce typed answers from text and images.",
+      "tags": [
+        "decisions",
+        "beta",
+        "gpt-6-luna"
+      ],
+      "links": [
+        {
+          "label": "API changelog",
+          "url": "https://developers.openai.com/api/docs/changelog"
+        }
+      ]
+    },
+    {
+      "id": "api-build-launch-grow-tiers",
+      "date": "2026-10-06",
+      "type": "patch",
+      "channel": "API",
+      "title": "API usage moves to three tiers",
+      "summary": "Build, Launch, and Grow replace five tiers. Cumulative credit purchases determine automatic upgrades.",
+      "tags": [
+        "usage tiers",
+        "credits"
+      ],
+      "links": [
+        {
+          "label": "API changelog",
+          "url": "https://developers.openai.com/api/docs/changelog"
+        }
+      ]
+    },
+    {
+      "id": "api-hipaa-support-self-service",
+      "date": "2026-10-05",
+      "type": "release",
+      "channel": "API",
+      "title": "API adds HIPAA support setup flow",
+      "summary": "Eligible organization administrators can accept the standard BAA and enable support in settings. Eligibility and service configuration requirements still apply.",
+      "tags": [
+        "organization settings",
+        "baa"
+      ],
+      "links": [
+        {
+          "label": "API changelog",
+          "url": "https://developers.openai.com/api/docs/changelog"
+        }
+      ]
+    },
+    {
+      "id": "chatgpt-ads-measurement-visual-format",
+      "date": "2026-10-05",
+      "type": "release",
+      "channel": "News",
+      "title": "ChatGPT Ads expands measurement and announces visual-format testing",
+      "summary": "OpenAI expanded conversion and attribution integrations. A separate visual ad format is scheduled for US testing later in October during image generation for Free and Go users; the announcement does not establish that testing is already live.",
+      "tags": [
+        "ads",
+        "measurement",
+        "announced test"
+      ],
+      "links": [
+        {
+          "label": "Product announcement",
+          "url": "https://openai.com/index/new-chatgpt-ads-format-and-measurement/"
+        }
+      ]
+    },
     {
       id: "chatgpt-finances-free-go-expansion",
       date: "2026-10-02",
