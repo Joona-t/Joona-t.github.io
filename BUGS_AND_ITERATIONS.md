@@ -1,5 +1,12 @@
 # Bugs & Iterations
 
+## 2026-10-15: Qwen Fine-Tuning Guide hero button
+
+**Change:** Added a "Qwen Fine-Tuning Guide" hero button as the second button, right after "Aaron Swartz · Raw Thought". It links to `lovespark.love/qwen-fine-tuning-guide/`, the new public `Joona-t/qwen-fine-tuning-guide` repo served by GitHub Pages under the site's custom domain, like `raw-thought-reader`.
+**Verification:** Local preview showed the button second in the group, styled like its neighbours, with no console errors.
+**Note:** Open PR #9 (visual upgrade) replaces the whole hero button group and already conflicts with Raw Thought on main. If it merges, re-add both buttons.
+**Files:** index.html
+
 ## 2026-09-02: Sparky Habits screenshot added to Sneak Peeks
 
 **Change:** Added the supplied Sparky Habits dashboard screenshot as the third image in the `🧠 Sparky` Sneak Peeks gallery. Converted the 3016×1698, 3.6 MB source PNG to a 1600×900, 157 KB JPEG at quality 86, added descriptive alt text and a concise caption, and updated the visible gallery count from 2 to 3.
