@@ -224,22 +224,6 @@ html.theme-retro .heart-glyph {
   0%, 100% { transform: translate(-50%, -50%) scale(1);    filter: brightness(1); }
   50%      { transform: translate(-50%, -50%) scale(1.18); filter: brightness(1.25); }
 }
-html.theme-retro .orb-ring-css {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  border-radius: 50%;
-  border: 1px solid;
-  transform: translate(-50%, -50%);
-  animation: ringExpand-retro 7s ease-out infinite;
-}
-html.theme-retro .orb-ring-css-1 { width: 80px; height: 80px; border-color: rgba(255,110,180,0.6);  animation-delay: 0s;    }
-html.theme-retro .orb-ring-css-2 { width: 80px; height: 80px; border-color: rgba(255,110,180,0.35); animation-delay: 2.33s; }
-html.theme-retro .orb-ring-css-3 { width: 80px; height: 80px; border-color: rgba(192,132,252,0.25); animation-delay: 4.67s; }
-@keyframes ringExpand-retro {
-  0%   { transform: translate(-50%, -50%) scale(1);   opacity: 0.8; }
-  100% { transform: translate(-50%, -50%) scale(2.0); opacity: 0;   }
-}
 html.theme-retro .logo-text {
   font-family: var(--font-pixel);
   font-size: clamp(1.6rem, 5vw, 3rem);
@@ -723,7 +707,6 @@ html.theme-retro ::selection {
 /* ════════════════════════════ RETRO REDUCED MOTION ══════════════════════════ */
 @media (prefers-reduced-motion: reduce) {
   html.theme-retro .heart-glyph,
-  html.theme-retro .orb-ring-css,
   html.theme-retro .footer-heart,
   html.theme-retro .glow-blob,
   html.theme-retro .starburst,
@@ -736,8 +719,7 @@ html.theme-retro ::selection {
 
 /* ════════════════════════════ KAWAII ELEMENTS HIDDEN IN RETRO ═══════════════ */
 html.theme-retro .heart-mark,
-html.theme-retro .hero-mark,
-html.theme-retro svg.orb-ring {
+html.theme-retro .hero-mark {
   display: none;
 }
 /* The kawaii sheet's grain-overlay uses a pink-tinted gradient; retro
