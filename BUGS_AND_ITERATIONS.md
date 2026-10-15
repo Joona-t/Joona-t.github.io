@@ -1,5 +1,10 @@
 # Bugs & Iterations
 
+## 2026-10-15: Qwen Guide button renamed and re-pointed
+
+**Change:** The second hero button is now "Qwen Guide" and links to `lovespark.love/qwen-guide/`. The guide grew from a fine-tuning guide into a three-part local Qwen guide (run, fine-tune, abliteration) and its repo was renamed from `qwen-fine-tuning-guide` to `qwen-guide`, which moved its Pages path.
+**Files:** index.html
+
 ## 2026-10-15: Qwen Fine-Tuning Guide hero button
 
 **Change:** Added a "Qwen Fine-Tuning Guide" hero button as the second button, right after "Aaron Swartz · Raw Thought". It links to `lovespark.love/qwen-fine-tuning-guide/`, the new public `Joona-t/qwen-fine-tuning-guide` repo served by GitHub Pages under the site's custom domain, like `raw-thought-reader`.
