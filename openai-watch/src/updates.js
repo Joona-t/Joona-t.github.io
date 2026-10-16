@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-10-15",
+  verifiedAt: "2026-10-16",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -19,6 +19,82 @@ window.OPENAI_WATCH = {
     ]
   },
   updates: [
+    {
+      "id": "gpt-live-native-decisions-integration",
+      "date": "2026-10-15",
+      "type": "release",
+      "channel": "API",
+      "title": "GPT-Live adds native Decisions integration",
+      "summary": "Voice apps can delegate directly from GPT-Live to Decisions or trigger decisions from input and output transcript deltas, enabling actions during a conversation.",
+      "tags": [
+        "gpt-live",
+        "decisions",
+        "voice"
+      ],
+      "links": [
+        {
+          "label": "Integration guide",
+          "url": "https://developers.openai.com/api/docs/guides/decisions-voice"
+        }
+      ]
+    },
+    {
+      "id": "chatgpt-gpt-live-1-1-new-voices",
+      "date": "2026-10-15",
+      "type": "release",
+      "channel": "ChatGPT",
+      "title": "ChatGPT Voice begins rolling out GPT-Live-1.1 and new voices",
+      "summary": "ChatGPT Voice is rolling out GPT-Live-1.1 and its smaller Quip variant, with more natural multilingual accents, broader search-status phrasing, and additional regional voice options. Availability varies by account and region.",
+      "tags": [
+        "voice",
+        "gpt-live-1.1",
+        "rollout"
+      ],
+      "links": [
+        {
+          "label": "Release notes",
+          "url": "https://help.openai.com/en/articles/6825453-chatgpt-release-notes"
+        }
+      ]
+    },
+    {
+      "id": "chatgpt-sites-fixed-count-limit-removed",
+      "date": "2026-10-15",
+      "type": "patch",
+      "channel": "ChatGPT",
+      "title": "ChatGPT removes the fixed Sites count limit",
+      "summary": "Plus and Pro users no longer have a fixed cap on how many Sites they can create, although usage and storage limits still apply.",
+      "tags": [
+        "sites",
+        "limits",
+        "plus and pro"
+      ],
+      "links": [
+        {
+          "label": "Sites guide",
+          "url": "https://help.openai.com/en/articles/20001339-creating-and-using-chatgpt-sites"
+        }
+      ]
+    },
+    {
+      "id": "rosalind-academic-plan-applications-open",
+      "date": "2026-10-15",
+      "type": "release",
+      "channel": "ChatGPT",
+      "title": "Applications open for the Rosalind Academic Plan",
+      "summary": "Eligible U.S. university life-sciences labs can apply for up to 30 ChatGPT Business Standard seats at no cost for up to 12 months. GPT-Rosalind access requires separate trusted-access approval.",
+      "tags": [
+        "life sciences",
+        "academic plan",
+        "applications"
+      ],
+      "links": [
+        {
+          "label": "Plan details",
+          "url": "https://help.openai.com/en/articles/20001602-rosalind-academic-plan"
+        }
+      ]
+    },
     {
       "id": "codex-composer-predictions-beta",
       "date": "2026-10-09",
