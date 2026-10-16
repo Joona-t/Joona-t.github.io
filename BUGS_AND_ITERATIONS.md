@@ -3,7 +3,7 @@
 ## 2026-10-16: "Taking a break" card under the hero buttons
 
 **Change:** Added a card under the hero buttons saying Joona is stepping back from the listed software, including finished ones like Sparky and Sparky Reads, to focus on local models, hardware and eventually robotics. It says he'll update them from time to time. It reuses the existing `.notice-inner` card styles, plus a small `.hiatus-note` spacing rule.
-**Verification:** Local preview in the candy theme showed the card centred under the Games button with readable spacing.
+**Verification:** Local preview in the candy theme showed the card centred under the Games button with readable spacing. Text bumped to 16px (title 22px) so it reads easily.
 **Files:** index.html, styles.css
 
 ## 2026-10-15: Qwen Guide button renamed and re-pointed

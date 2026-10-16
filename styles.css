@@ -2016,3 +2016,5 @@ html.theme-candy .hero-mark{ mix-blend-mode: darken !important; }
 .hiatus-note { padding: 28px 0 0; max-width: 640px; text-align: left; }
 .hiatus-note .notice-title { margin: 0 0 10px; }
 .hiatus-note .notice-text + .notice-text { margin-top: 10px; }
+.hiatus-note .notice-title { font-size: 22px; }
+.hiatus-note .notice-text { font-size: 16px; }
