@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-10-16",
+  verifiedAt: "2026-10-17",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -7,18 +7,81 @@ window.OPENAI_WATCH = {
     status: "https://status.openai.com/"
   },
   statusSnapshot: {
-    label: "Some systems degraded",
+    label: "All systems operational",
     source: "https://status.openai.com/",
     window: "Live check",
     uptime: [
       { name: "APIs", value: "Operational" },
-      { name: "ChatGPT", value: "Degraded" },
+      { name: "ChatGPT", value: "Operational" },
       { name: "Codex", value: "Operational" },
       { name: "FedRAMP", value: "Operational" },
       { name: "Ads Platform", value: "Operational" }
     ]
   },
   updates: [
+    {
+      "id": "chatgpt-slides-collaboration-rollout",
+      "date": "2026-10-16",
+      "type": "release",
+      "channel": "ChatGPT",
+      "title": "ChatGPT Slides begins rolling out",
+      "summary": "Eligible Pro, Business, and Enterprise users with Space access can create, edit, present, and collaborate on slide decks in ChatGPT, with web exports to PowerPoint, PDF, and Google Slides.",
+      "tags": [
+        "slides",
+        "space",
+        "collaboration",
+        "rollout"
+      ],
+      "links": [
+        {
+          "label": "Release notes",
+          "url": "https://help.openai.com/en/articles/6825453-chatgpt-release-notes"
+        }
+      ]
+    },
+    {
+      "id": "chatgpt-gpt-6-pro-speed-tools-multi-agent-update",
+      "date": "2026-10-16",
+      "type": "patch",
+      "channel": "ChatGPT",
+      "title": "GPT-6 Pro adds faster responses and multi-agent work",
+      "summary": "GPT-6 Pro in ChatGPT now responds faster, improves plugin and tool use, and can delegate parts of a task to multiple agents. The update is rolling out to eligible Pro users.",
+      "tags": [
+        "gpt-6 pro",
+        "multi-agent",
+        "tools",
+        "rollout"
+      ],
+      "links": [
+        {
+          "label": "Release notes",
+          "url": "https://help.openai.com/en/articles/6825453-chatgpt-release-notes"
+        }
+      ]
+    },
+    {
+      "id": "gpt-live-prompt-to-voice-natural-voices",
+      "date": "2026-10-16",
+      "type": "release",
+      "channel": "API",
+      "title": "GPT-Live adds prompt-generated and natural voices",
+      "summary": "All API customers can create reusable voices from text descriptions through the API or Voice Playground. GPT-Live also adds nine natural German, French, Hindi, Japanese, and Korean voices.",
+      "tags": [
+        "gpt-live",
+        "custom voices",
+        "audio"
+      ],
+      "links": [
+        {
+          "label": "Custom voices guide",
+          "url": "https://developers.openai.com/api/docs/guides/custom-voices"
+        },
+        {
+          "label": "API changelog",
+          "url": "https://developers.openai.com/api/docs/changelog"
+        }
+      ]
+    },
     {
       "id": "gpt-live-native-decisions-integration",
       "date": "2026-10-15",
