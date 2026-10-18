@@ -272,8 +272,8 @@ html.theme-retro .hero-social-link:hover {
     0 0 30px rgba(255, 77, 166, 0.5),
     0 0 50px rgba(255, 77, 166, 0.25);
 }
-/* Buttons use the shared Basalt Monolith .hero-cta in every theme (styles.css).
-   Retro keeps only the row layout; per-button ember accents come from the base. */
+/* Row layout only; the retro button skin lives in RETRO HERO BUTTONS below.
+   Per-button --ember accents come from the base (styles.css). */
 html.theme-retro .hero-cta-group {
   display: flex;
   flex-wrap: wrap;
@@ -809,49 +809,85 @@ html.theme-retro .dyson-swarm { display: none; }
 
 
 
-/* ===================== 4-THEME FORGE: retro re-pin --- */
-/* ═══════════════════════ RETRO ALIGNMENT — 4-THEME SYSTEM ═══════════════════════
-   Append to styles-retro.css (after the existing .hero-cta-group block, ~line 301).
-   PURPOSE: retro currently inherits the dark "Basalt Monolith" look from the BASE
-   .hero-cta (styles.css). The re-theme reassigns the base default to PINK carved-stone
-   and relocates the dark stone skin into html.theme-basalt. To keep retro's existing
-   appearance (dark stone buttons on the wine-dark cosmic bg) DECOUPLED from whatever
-   the new base default becomes, retro re-pins the dark Basalt Monolith skin explicitly.
-   This is ALIGNMENT only — visually identical to retro today. No redesign. ============ */
-
-/* Re-assert the dark carved-stone skin so retro no longer depends on the base default.
-   Skeleton (layout/sizing/glyph/::before grain/::after ember vein/hover-active-focus)
-   stays inherited from base .hero-cta — only the SKIN props are re-pinned here. */
+/* ═══════════════════════ RETRO HERO BUTTONS — ARCADE PIXEL ═══════════════════════
+   Retro used to re-pin the dark Basalt stone skin here, which clashed with the
+   neon-pink pixel wordmark. Now the buttons speak the wordmark's language:
+   - 3px hot-pink pixel frame with notched corners (box-shadow, no radius)
+   - the wordmark's own hard drop: deep-wine 2-step + faint lilac (logo-text)
+   - plum fill, cream DM Mono label; per-button pastel --ember tints the glyph
+   Contrast (vs fill #2a0f1e): label #fff5f9 16.6:1, on hover #3d0c22 15.5:1;
+   frame #ff6eb4 vs page #1a0a12 7.4:1; focus ring #fff5f9 dashed 18.0:1.
+   Retro-only: kawaii/candy/basalt keep their own .hero-cta skins. */
+html.theme-retro .hero-cta-group { gap: 18px 20px; }   /* ≥8px visual gap outside frame + drop */
 html.theme-retro .hero-cta {
-  color: #b4b8be;
-  background: linear-gradient(180deg, #282b30 0%, #1f2125 52%, #16171a 100%);
-  border: 1px solid #0a0b0d;
+  --px: var(--hot-pink);
+  color: var(--cream);
+  background: #2a0f1e;
+  border: 0;
+  border-radius: 0;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-variant: normal;
+  letter-spacing: 0.12em;
+  padding: 12px 20px;
+  margin: 3px 6px 6px 3px;           /* room for the frame + drop so rows never touch */
   box-shadow:
-    inset 0 1px 0 rgba(140,146,156,0.16),
-    inset 0 -1px 2px rgba(0,0,0,0.7),
-    inset 0 0 0 1px rgba(0,0,0,0.4),
-    0 1px 0 rgba(0,0,0,0.8),
-    0 6px 16px rgba(0,0,0,0.45);
-  text-shadow: 0 1px 0 rgba(0,0,0,0.85);
+    0 -3px 0 0 var(--px), 0 3px 0 0 var(--px), -3px 0 0 0 var(--px), 3px 0 0 0 var(--px),
+    3px 6px 0 0 var(--deep-wine), 6px 3px 0 0 var(--deep-wine), 6px 6px 0 0 rgba(192,132,252,0.35),
+    0 0 18px 2px rgba(255,110,180,0.22);
+  text-shadow: 0 0 6px rgba(255,110,180,0.35);
+  overflow: visible;
+  transition: transform 0.12s steps(2), box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
 }
-/* Hover/focus ember wake — re-pinned so it survives regardless of base default skin.
-   Per-button --ember/--ember-hot accents are inherited from base (styles.css:497-501). */
+html.theme-retro .hero-cta::before,
+html.theme-retro .hero-cta::after { display: none; }   /* no stone grain / ember vein */
+html.theme-retro .hero-cta .cta-glyph {
+  color: var(--ember-hot);
+  opacity: 1;
+  text-shadow: 0 0 8px var(--ember);
+}
 html.theme-retro .hero-cta:hover,
 html.theme-retro .hero-cta:focus-visible {
-  color: var(--ember-hot);
-  background:
-    radial-gradient(120% 160% at 50% 120%, rgba(122,78,22,0.42) 0%, rgba(122,78,22,0) 60%),
-    linear-gradient(180deg, #2b2e33 0%, #1f2125 52%, #16171a 100%);
+  --px: var(--bubblegum);
+  color: var(--cream);
+  background: var(--deep-wine);
+  transform: translate(-1px, -1px);
   box-shadow:
-    inset 0 1px 0 rgba(160,166,176,0.2),
-    inset 0 -1px 2px rgba(0,0,0,0.7),
-    inset 0 0 14px rgba(217,162,59,0.16),
-    0 1px 0 rgba(0,0,0,0.8),
-    0 0 0 1px var(--ember),
-    0 6px 18px rgba(0,0,0,0.5);
-  text-shadow: 0 0 8px var(--ember-hot), 0 1px 0 rgba(0,0,0,0.85);
+    0 -3px 0 0 var(--px), 0 3px 0 0 var(--px), -3px 0 0 0 var(--px), 3px 0 0 0 var(--px),
+    4px 7px 0 0 var(--deep-wine), 7px 4px 0 0 var(--deep-wine), 7px 7px 0 0 rgba(192,132,252,0.45),
+    0 0 26px 4px rgba(255,110,180,0.4);
+  text-shadow: 0 0 8px rgba(255,110,180,0.6);
 }
-html.theme-retro .hero-cta:focus-visible { outline: 2px solid var(--ember-hot); outline-offset: 3px; }
+html.theme-retro .hero-cta:hover .cta-glyph,
+html.theme-retro .hero-cta:focus-visible .cta-glyph { color: var(--cream); text-shadow: 0 0 10px var(--ember-hot); }
+html.theme-retro .hero-cta:active {   /* arcade press: sink into the drop */
+  transform: translate(3px, 3px);
+  box-shadow:
+    0 -3px 0 0 var(--px), 0 3px 0 0 var(--px), -3px 0 0 0 var(--px), 3px 0 0 0 var(--px),
+    0 0 14px rgba(255,110,180,0.3);
+}
+html.theme-retro .hero-cta:focus-visible { outline: 2px dashed var(--cream); outline-offset: 8px; }
+
+@media (max-width: 760px) {
+  html.theme-retro .hero-cta-group { gap: 14px 14px; padding: 0 4px; }
+  html.theme-retro .hero-cta {
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    padding: 10px 14px;
+    max-width: calc(100% - 9px);
+    white-space: normal;
+    text-align: center;
+  }
+}
+@media (max-width: 480px) {   /* phones: one tidy full-width column instead of ragged widths */
+  html.theme-retro .hero-cta { flex: 1 1 100%; justify-content: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html.theme-retro .hero-cta { transition: none; }
+  html.theme-retro .hero-cta:hover,
+  html.theme-retro .hero-cta:focus-visible,
+  html.theme-retro .hero-cta:active { transform: none; }
+}
 
 /* ── 4-PILL SWITCHER: existing html.theme-retro .theme-switcher already uses
    inline-flex + flex-wrap + gap:4px and 32px pills, so the two NEW pills
