@@ -1,5 +1,16 @@
 # Bugs & Iterations
 
+## 2026-10-19: ITER — Basalt wordmark: charcoal glyph letters on a cream glyph slab
+
+**Change:** Basalt's gold Cinzel `<h1>` wordmark is replaced by a glyph-rendered "LoveSpark": charcoal ink on cream glyph paper, framed like the ankh relic above it (ember hairline, glow and drop shadow).
+- **New asset:** `assets/hero-basalt.mp4` (723 KB) and the poster `hero-basalt.jpg`. Both come from `hero-pastel.mp4` via ffmpeg: crop to 960×240, grey, a luma curve (paper ≈234 → cream `#ece3cc`, ink 150–210 → charcoal `#232220`), then a vignette to match the ankh's aged paper. It keeps the kawaii wordmark's breathing loop.
+- **Markup:** a second `<video class="hero-mark hero-mark--basalt">`, hidden by default and shown only in basalt.
+- **JS:** `gateVideos` decides per video. Basalt loads only `.hero-mark--basalt`, kawaii and candy load everything except it, and retro loads nothing. A video unloads again when you switch away.
+- **A11y:** the `<h1>` is now visually hidden in basalt (it stays in the accessibility tree), the same as in kawaii.
+- Cache strings bumped to `2026-10-19-basalt`.
+**Verification:** In local Chromium, basalt plays the new video with no src on the kawaii one, and switching to kawaii reverses that. At 375px, scrollWidth = innerWidth = 375 and the slab is 343px wide. No console errors. `node --check script.js` OK.
+**Files:** index.html, script.js, styles.css, assets/hero-basalt.{mp4,jpg}
+
 ## 2026-10-04: BUG — Sticky bar not frosted; phone layout zoomed out
 
 **Problem 1:** When scrolled, page text showed sharply through the new sticky site bar.

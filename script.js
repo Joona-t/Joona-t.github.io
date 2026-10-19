@@ -441,23 +441,26 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 
 // ══════════════════════════════════════════════════════════════════════════════
 // HERO VIDEOS — the markup ships `data-src` + poster only, so nothing downloads
-// until this runs. Basalt and retro hide both videos, so they never get a src
-// (and lose it again on a switch to those themes). Reduced motion: src stays,
-// playback stops and the poster frame shows. Without JS: poster only.
+// until this runs. A video only gets a src in the theme that shows it (and
+// loses it again on a switch away): basalt shows only its charcoal-glyph
+// wordmark (.hero-mark--basalt), retro shows none, kawaii/candy show the rest.
+// Reduced motion: src stays, playback stops and the poster frame shows.
+// Without JS: poster only.
 // ══════════════════════════════════════════════════════════════════════════════
 (function gateVideos() {
   const videos = document.querySelectorAll('video.heart-mark, video.hero-mark');
   if (!videos.length) return;
   const root = document.documentElement;
 
-  function themeShowsVideo() {
-    return !root.classList.contains('theme-basalt') && !root.classList.contains('theme-retro');
+  function themeShowsVideo(v) {
+    if (root.classList.contains('theme-retro')) return false;
+    const basaltOnly = v.classList.contains('hero-mark--basalt');
+    return root.classList.contains('theme-basalt') ? basaltOnly : !basaltOnly;
   }
 
   function sync() {
-    const show = themeShowsVideo();
     videos.forEach(v => {
-      if (!show) {
+      if (!themeShowsVideo(v)) {
         if (v.getAttribute('src')) {
           v.pause();
           v.removeAttribute('src');
