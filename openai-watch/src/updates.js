@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-10-20",
+  verifiedAt: "2026-10-21",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -19,6 +19,86 @@ window.OPENAI_WATCH = {
     ]
   },
   updates: [
+    {
+      "id": "openai-models-codex-google-cloud-announced",
+      "date": "2026-10-21",
+      "type": "release",
+      "channel": "News",
+      "title": "OpenAI models and Codex announced for Google Cloud",
+      "summary": "OpenAI plans to offer frontier models and Codex through Google Cloud's model garden and Marketplace, with broader availability expected in the coming weeks. OpenAI models are also planned for Google Antigravity and the Gemini Agent.",
+      "tags": [
+        "google cloud",
+        "codex",
+        "forthcoming"
+      ],
+      "links": [
+        {
+          "label": "Announcement",
+          "url": "https://openai.com/index/openai-models-google-cloud/"
+        }
+      ]
+    },
+    {
+      "id": "chatgpt-locked-chats-rollout",
+      "date": "2026-10-20",
+      "type": "release",
+      "channel": "ChatGPT",
+      "title": "Locked chats begin rolling out in ChatGPT",
+      "summary": "ChatGPT is gradually adding PIN- or device-authenticated locked chats that stay out of regular history, pinned chats, and search. The rollout covers Free, Go, Plus, and Pro accounts across web, mobile, and the new desktop app.",
+      "tags": [
+        "locked chats",
+        "privacy",
+        "rollout"
+      ],
+      "links": [
+        {
+          "label": "Locked chats guide",
+          "url": "https://help.openai.com/en/articles/20001411-using-locked-chats-in-chatgpt"
+        },
+        {
+          "label": "Release notes",
+          "url": "https://help.openai.com/en/articles/6825453-chatgpt-release-notes"
+        }
+      ]
+    },
+    {
+      "id": "api-12-hour-prompt-caching",
+      "date": "2026-10-20",
+      "type": "release",
+      "channel": "API",
+      "title": "API adds 12-hour prompt caching",
+      "summary": "Responses API requests can retain shared instructions, tools, and context in the prompt cache for 12 hours. Cache writes cost 2.5 times the model's input-token price, while subsequent hits receive cached-input pricing.",
+      "tags": [
+        "prompt caching",
+        "responses api",
+        "pricing"
+      ],
+      "links": [
+        {
+          "label": "API changelog",
+          "url": "https://developers.openai.com/api/docs/changelog"
+        }
+      ]
+    },
+    {
+      "id": "agents-api-artifact-skills-ultrafast",
+      "date": "2026-10-16",
+      "type": "release",
+      "channel": "API",
+      "title": "Agents API adds artifact skills and Ultrafast mode",
+      "summary": "OpenAI-hosted Agents API sandboxes now include the Artifact SDK and skills for spreadsheets, presentations, and Word documents. Supported models can also use the Ultrafast service tier to reduce token latency.",
+      "tags": [
+        "agents api",
+        "artifact sdk",
+        "ultrafast"
+      ],
+      "links": [
+        {
+          "label": "API changelog",
+          "url": "https://developers.openai.com/api/docs/changelog"
+        }
+      ]
+    },
     {
       "id": "chatgpt-slides-collaboration-rollout",
       "date": "2026-10-16",
