@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-10-21",
+  verifiedAt: "2026-10-22",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -7,18 +7,75 @@ window.OPENAI_WATCH = {
     status: "https://status.openai.com/"
   },
   statusSnapshot: {
-    label: "All systems operational",
+    label: "Service disruption under monitoring",
     source: "https://status.openai.com/",
     window: "Live check",
     uptime: [
-      { name: "APIs", value: "Operational" },
-      { name: "ChatGPT", value: "Operational" },
+      { name: "APIs", value: "Degraded" },
+      { name: "ChatGPT", value: "Degraded" },
       { name: "Codex", value: "Operational" },
       { name: "FedRAMP", value: "Operational" },
       { name: "Ads Platform", value: "Operational" }
     ]
   },
   updates: [
+    {
+      "id": "api-project-service-tier-governance",
+      "date": "2026-10-21",
+      "type": "release",
+      "channel": "API",
+      "title": "API adds project service-tier governance",
+      "summary": "Platform administrators can now control which processing service tiers each project may use, with organization-wide restrictions available across all projects.",
+      "tags": [
+        "service tiers",
+        "governance",
+        "projects"
+      ],
+      "links": [
+        {
+          "label": "API changelog",
+          "url": "https://developers.openai.com/api/docs/changelog"
+        }
+      ]
+    },
+    {
+      "id": "chatgpt-ads-26-country-expansion",
+      "date": "2026-10-21",
+      "type": "release",
+      "channel": "ChatGPT",
+      "title": "ChatGPT Ads expands to 26 more countries",
+      "summary": "OpenAI has extended ChatGPT Ads to 26 additional countries, bringing advertiser availability to 89 markets. Ads remain limited to Free and Go plans.",
+      "tags": [
+        "ads",
+        "international expansion",
+        "free and go"
+      ],
+      "links": [
+        {
+          "label": "Product announcement",
+          "url": "https://openai.com/index/chatgpt-ads-expands-26-new-countries/"
+        }
+      ]
+    },
+    {
+      "id": "patch-the-planet-php-vulnerability-disclosure",
+      "date": "2026-10-21",
+      "type": "security",
+      "channel": "News",
+      "title": "OpenAI discloses coordinated fixes for critical PHP flaws",
+      "summary": "OpenAI says frontier models helped identify critical PHP vulnerabilities before known exploitation. PHP maintainers released fixes after coordinated preparation with security and infrastructure partners, and OpenAI published a Codex version-checking skill for operators.",
+      "tags": [
+        "php",
+        "vulnerability disclosure",
+        "patch the planet"
+      ],
+      "links": [
+        {
+          "label": "Security disclosure",
+          "url": "https://openai.com/index/coordinated-disclosure-of-critical-vulnerabilities/"
+        }
+      ]
+    },
     {
       "id": "openai-models-codex-google-cloud-announced",
       "date": "2026-10-21",
