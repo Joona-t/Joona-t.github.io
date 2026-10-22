@@ -1,5 +1,12 @@
 # Bugs & Iterations
 
+## 2026-10-18: Retro hero buttons redesigned as arcade pixel frames
+
+**Problem:** In the retro theme the ten hero buttons kept the grey Basalt stone skin (Cinzel serif on charcoal), which clashed with the neon-pink pixel wordmark, the pink mono tagline and the twinkling stars.
+**Change:** Replaced retro's stone re-pin in `styles-retro.css` with an arcade pixel skin, scoped to `html.theme-retro` only. It has a 3px hot-pink pixel frame with notched corners, the wordmark's own deep-wine and lilac hard drop shadow, a plum fill and a cream DM Mono label. The per-button pastel `--ember` now tints the glyph. Hover lifts the button 1px and brightens the frame, and pressing sinks it into the drop. Keyboard focus shows a dashed cream ring. Phones (≤480px) get a full-width stack. Reduced motion turns off the transforms and transitions. Three directions were mocked first (neon pill, arcade pixel, cream cartridge), and arcade pixel won because it is the most native to the wordmark while staying legible. The `styles-retro.css` cache-bust query was bumped.
+**Verification:** Contrast: label 16.6:1 (15.5:1 on hover), frame 7.4:1 against the page, focus ring 18.0:1. At 320 and 360px there is no horizontal scroll, buttons are at least 44px tall and every frame-plus-shadow box keeps an 8px gap or more. Kawaii and basalt are pixel-identical before and after in the button area, and candy differs only by animated sparkles.
+**Files:** styles-retro.css, index.html
+
 ## 2026-10-16: "Taking a break" card under the hero buttons
 
 **Change:** Added a card under the hero buttons saying Joona is stepping back from the listed software, including finished ones like Sparky and Sparky Reads, to focus on local models, hardware and eventually robotics. It says he'll update them from time to time. It reuses the existing `.notice-inner` card styles, plus a small `.hiatus-note` spacing rule.
