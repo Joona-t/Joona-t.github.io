@@ -1,5 +1,13 @@
 # Bugs & Iterations
 
+## 2026-10-23: BUG — Hero heart barely moved and its rhythm felt uneven
+
+**Problem:** Joona wanted the kawaii/candy heart to expand more and breathe with a smoother rhythm.
+**Root cause:** Two cycles fighting. `heart-pulse.mp4` loops every 6s (108 frames @ 18fps) and has its own internal pulse, while the CSS `heartBeatGentle` pulse and the `orbRadiate` rings ran on 4.5s. They drifted in and out of phase (realigning only every 18s), so the breath looked irregular. On top of that the CSS swell was only 1 → 1.035.
+**Fix:** `heartBeatGentle` and `orbRadiate` are now 6s, matching the video loop exactly. Swell raised to 1.12 with a breath-shaped curve: swell to the peak by 40%, soft hold to 52%, long release. Cache strings bumped to `2026-10-23-heart`.
+**Verification:** Local Chromium, kawaii theme — heart animation, ring animation and `video.duration` all 6s. Sampled scale at 0/1.2/2.4/3.12/3.6/4.8/6s: 1.00 / 1.06 / 1.12 / 1.11 / 1.10 / 1.04 / 1.00.
+**Files:** styles.css, index.html
+
 ## 2026-10-19: ITER — Basalt wordmark: charcoal glyph letters on a cream glyph slab
 
 **Change:** Basalt's gold Cinzel `<h1>` wordmark is replaced by a glyph-rendered "LoveSpark": charcoal ink on cream glyph paper, framed like the ankh relic above it (ember hairline, glow and drop shadow).

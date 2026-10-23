@@ -287,14 +287,18 @@ html:not(.theme-retro) #cursor-sparks { display: none; }
   filter:
     drop-shadow(0 0 18px var(--shadow-hot))
     drop-shadow(0 8px 22px rgba(196, 84, 138, 0.35));
-  animation: heartBeatGentle 4.5s ease-in-out infinite;
+  animation: heartBeatGentle 6s ease-in-out infinite;
 }
-/* Subtle CSS pulse layered on top of the video's internal animation —
-   ensures the heart "breathes" even if autoplay is blocked or the tab
-   is throttled. Slow + low-amplitude so it doesn't fight the video. */
+/* CSS breath layered on top of the video's internal animation — also keeps
+   the heart "breathing" if autoplay is blocked or the tab is throttled.
+   6s = the exact loop length of heart-pulse.mp4 (108 frames @ 18fps). The
+   old 4.5s cycle drifted against the video's own 6s pulse, so the two beat
+   in and out of phase and the rhythm felt uneven. Breath shape: swell to
+   the peak by 40%, soft hold, long release. */
 @keyframes heartBeatGentle {
-  0%, 100% { transform: scale(1);     }
-  50%      { transform: scale(1.035); }
+  0%, 100% { transform: scale(1);    animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1); }
+  40%      { transform: scale(1.12); animation-timing-function: ease-in-out; }
+  52%      { transform: scale(1.11); animation-timing-function: cubic-bezier(0.33, 0, 0.67, 1); }
 }
 /* Legacy .heart-glyph kept as a fallback if the video fails to load */
 .heart-glyph {
@@ -369,9 +373,9 @@ html:not(.theme-retro) #cursor-sparks { display: none; }
   pointer-events: none;
   overflow: visible;
   transform-origin: center;
-  /* Synced to .heart-mark heartBeatGentle 4.5s cycle — one ripple per breath.
+  /* Synced to .heart-mark heartBeatGentle 6s cycle — one ripple per breath.
      Triplet stagger (0 / 150 / 300 ms) gives layered depth without breaking sync. */
-  animation: orbRadiate 4.5s ease-out infinite;
+  animation: orbRadiate 6s ease-out infinite;
 }
 .orb-ring-1 { animation-delay: 0s;    }
 .orb-ring-2 { animation-delay: 0.15s; }
