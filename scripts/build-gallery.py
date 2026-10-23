@@ -16,12 +16,15 @@ and you may embed <em>/<strong>):
     badge       (optional)  e.g. "Chrome Extension"; omit -> no badge row
     desc        (required)  string, or list of strings -> one <p class="card-desc"> each
     memorial    (optional)  -> <p class="aaron-memorial"> (the Aaron card)
-    url         (optional)  install/download link; omit -> a "coming soon" pill
+    url         (optional)  install/download link; omit -> a "coming soon" pill.
+                            Off-site URLs open in a new tab; https://lovespark.love/
+                            and relative URLs open in place.
     link_label  (optional)  link text when url is set; default "Install ✦"
     soon_label  (optional)  pill text when url is omitted; default "Coming soon ♡"
     class       (optional)  extra class on the card div, e.g. "win98-card--aaron"
 
 Per-category: { "id": "cat-...", "title": "...", "cards": [ ... ] }
+The first top-level category (or group) renders <details open>.
 The category count badge is COMPUTED from len(cards) — never hand-maintain it.
 
 Grouping (optional): give consecutive categories the SAME "group" string (a
@@ -44,6 +47,7 @@ END = '    <!-- GALLERY:END -->'
 
 DEFAULT_LINK_LABEL = "Install ✦"
 DEFAULT_SOON_LABEL = "Coming soon ♡"
+SITE_ORIGIN = "https://lovespark.love/"
 
 
 def render_card(c):
@@ -57,7 +61,7 @@ def render_card(c):
         '          <div class="win-buttons">',
         '            <span class="win-btn" aria-hidden="true">─</span>',
         '            <span class="win-btn" aria-hidden="true">□</span>',
-        '            <span class="win-btn win-btn-close" aria-hidden="true">✕</span>',
+        '            <button type="button" class="win-btn win-btn-close" aria-label="Wobble this window">✕</button>',
         '          </div>',
         '        </div>',
         '        <div class="card-body">',
@@ -73,8 +77,10 @@ def render_card(c):
         out.append(f'          <p class="aaron-memorial">{c["memorial"]}</p>')
     if c.get("url"):
         label = c.get("link_label", DEFAULT_LINK_LABEL)
+        # Same-origin links open in place; only off-site links get a new tab.
+        target = "" if is_same_origin(c["url"]) else ' target="_blank" rel="noopener"'
         out.append(
-            f'          <a href="{c["url"]}" target="_blank" rel="noopener" class="card-link">{label}</a>'
+            f'          <a href="{c["url"]}"{target} class="card-link">{label}</a>'
         )
     else:
         label = c.get("soon_label", DEFAULT_SOON_LABEL)
@@ -83,12 +89,20 @@ def render_card(c):
     return "\n".join(out)
 
 
-def render_category(cat):
+def is_same_origin(url):
+    return url.startswith(SITE_ORIGIN) or not re.match(r"^[a-z][a-z0-9+.-]*:", url, re.I)
+
+
+def details_open(is_open):
+    return " open" if is_open else ""
+
+
+def render_category(cat, level=3, is_open=False):
     cards = "\n\n".join(render_card(c) for c in cat["cards"])
     return (
-        f'    <details class="category" id="{cat["id"]}">\n'
+        f'    <details class="category" id="{cat["id"]}"{details_open(is_open)}>\n'
         f'    <summary class="category-header">\n'
-        f'      <h3 class="category-title">{cat["title"]}</h3>\n'
+        f'      <h{level} class="category-title">{cat["title"]}</h{level}>\n'
         f'      <span class="category-count">{len(cat["cards"])}</span>\n'
         f'      <span class="category-rule" aria-hidden="true"></span>\n'
         f'      <span class="category-chevron" aria-hidden="true">▸</span>\n'
@@ -109,11 +123,12 @@ def group_id(title):
     return "grp-" + (slug or "group")
 
 
-def render_group(title, cats):
+def render_group(title, cats, is_open=False):
     n_cards = sum(len(c["cards"]) for c in cats)
-    children = "\n\n".join(render_category(c) for c in cats)
+    # Child categories sit one heading level below the group's h3.
+    children = "\n\n".join(render_category(c, level=4) for c in cats)
     return (
-        f'    <details class="category category-group" id="{group_id(title)}">\n'
+        f'    <details class="category category-group" id="{group_id(title)}"{details_open(is_open)}>\n'
         f'    <summary class="category-header">\n'
         f'      <h3 class="category-title">{title}</h3>\n'
         f'      <span class="category-count">{n_cards}</span>\n'
@@ -141,9 +156,11 @@ def render_gallery(data):
             while i < len(cats) and cats[i].get("group") == grp:
                 run.append(cats[i])
                 i += 1
-            blocks.append(render_group(grp, run))
+            blocks.append(render_group(grp, run, is_open=not blocks))
         else:
-            blocks.append(render_category(cats[i]))
+            # The first top-level block renders open so the suite isn't a wall
+            # of closed accordions on first load.
+            blocks.append(render_category(cats[i], is_open=not blocks))
             i += 1
     return "\n\n".join(blocks)
 

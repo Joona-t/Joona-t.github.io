@@ -226,6 +226,54 @@
         }
       ],
       "group": "🧩 Chrome Extensions"
+    },
+    {
+      "id": "cat-more",
+      "title": "💫 More from LoveSpark",
+      "cards": [
+        {
+          "title": "Bambu A1 Guide ⎙",
+          "badge": "Interactive guide",
+          "desc": "A chapter-by-chapter interactive explainer of how the Bambu Lab A1 3D printer works — motion, extrusion, auto-calibration, AMS lite, slicing and a full print, with hands-on simulations.",
+          "url": "https://lovespark.love/bambu-a1/",
+          "link_label": "Open guide ✦"
+        },
+        {
+          "title": "OpenAI Watch ◉",
+          "badge": "Daily feed",
+          "desc": "A daily intelligence feed for OpenAI releases, patches, deprecations, security notes and platform signals.",
+          "url": "https://lovespark.love/openai-watch/",
+          "link_label": "Open feed ✦"
+        },
+        {
+          "title": "The Null Path ⊙",
+          "badge": "Writing",
+          "desc": "Beyond the veil, the path is forged 𓂀 — my writing corner, companion to the Substack.",
+          "url": "https://joona-t.github.io/darkfire-null/",
+          "link_label": "Visit ✦"
+        },
+        {
+          "title": "Zarathustra ☉",
+          "badge": "Archive",
+          "desc": "A quiet archive. Make knowledge compounding, not caged.",
+          "url": "https://joona-t.github.io/zarathustra/",
+          "link_label": "Visit ✦"
+        },
+        {
+          "title": "Forging △",
+          "badge": "Side project",
+          "desc": "Forging — a companion site from the LoveSpark workshop.",
+          "url": "https://joona-t.github.io/forging/",
+          "link_label": "Visit ✦"
+        },
+        {
+          "title": "LoveSpark Games ✦",
+          "badge": "Kawaii arcade",
+          "desc": "A little kawaii arcade of free browser games — no ads, no accounts.",
+          "url": "https://joona-t.github.io/lovespark-games/",
+          "link_label": "Play ✦"
+        }
+      ]
     }
   ]
 }
