@@ -1,5 +1,11 @@
 # Bugs & Iterations
 
+## 2026-10-23: ITER — Remove the radiating rings from the hero heart
+
+**Change:** The three wavy SVG rings (`.orb-ring`) that rippled outward from the heart on every breath are gone: markup, the `initWavyRings` path generator in `script.js`, and their CSS (`.orb-ring`, `orbRadiate`, the 480px size rule, and the basalt/retro hide rules). Joona asked for the heart to breathe without the lines. Retro's own CSS rings (`.orb-ring-css`) are untouched. Cache strings bumped to `2026-10-23-heart2`.
+**Verification:** Local Chromium, kawaii — 0 `.orb-ring` elements, heart still on the 6s `heartBeatGentle` breath, no console errors. `node --check script.js` OK.
+**Files:** index.html, script.js, styles.css, styles-retro.css
+
 ## 2026-10-23: BUG — Hero heart barely moved and its rhythm felt uneven
 
 **Problem:** Joona wanted the kawaii/candy heart to expand more and breathe with a smoother rhythm.

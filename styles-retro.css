@@ -712,8 +712,7 @@ html.theme-retro ::selection {
 
 /* ════════════════════════════ KAWAII ELEMENTS HIDDEN IN RETRO ═══════════════ */
 html.theme-retro .heart-mark,
-html.theme-retro .hero-mark,
-html.theme-retro svg.orb-ring {
+html.theme-retro .hero-mark {
   display: none;
 }
 /* The kawaii sheet's grain-overlay uses a pink-tinted gradient; retro
