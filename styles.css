@@ -770,8 +770,7 @@ html:not(.theme-retro) #cursor-sparks { display: none; }
 /* The retro markup (heart glyph, CSS rings, raw <h1> wordmark) lives in the
    DOM alongside the kawaii video markup so theme swap is instant. In kawaii
    (default, no html.theme-retro class) we hide it. */
-html:not(.theme-retro):not(.theme-basalt) .heart-glyph,
-html:not(.theme-retro):not(.theme-basalt) .orb-ring-css {
+html:not(.theme-retro):not(.theme-basalt) .heart-glyph {
   display: none;
 }
 /* The <h1> stays in the accessibility tree (the wordmark video is aria-hidden):
@@ -1140,6 +1139,7 @@ details.gallery-project[open] > .gallery-body {
 
 /* Per-button ember — signature hues kept, but remapped to pink-coordinated
    tones so the set still reads as "ours" in the kawaii pink skin. */
+.hero-cta--raw     { --ember:#e7b3a0; --ember-hot:#ffd1c2; }  /* paper-and-ink peach */
 .hero-cta--glyph   { --ember:#e8a9c7; --ember-hot:#ffc4e0; }  /* warm rose */
 .hero-cta--null    { --ember:#c79be0; --ember-hot:#e4cbf5; }  /* lilac-pink */
 .hero-cta--zara    { --ember:#e89ab0; --ember-hot:#ffbcd0; }  /* coral-rose */
@@ -1667,7 +1667,6 @@ html.theme-basalt .starburst-slow { display: none; }
    show the studio-rendered ankh relic instead. The kawaii JS Dyson swarm also
    injects .dyson-swarm into .heart-orb — hide it too. */
 html.theme-basalt .heart-mark,
-html.theme-basalt .orb-ring-css,
 html.theme-basalt .heart-glyph,
 html.theme-basalt .dyson-swarm { display: none !important; }
 
@@ -1797,6 +1796,7 @@ html.theme-basalt .hero-cta {
 }
 html.theme-basalt .hero-cta::before { mix-blend-mode: overlay; opacity: 0.55; }
 /* per-button embers = warm ember/copper */
+html.theme-basalt .hero-cta--raw     { --ember:#d9a066; --ember-hot:#f3c28e; }
 html.theme-basalt .hero-cta--glyph   { --ember:#d9a23b; --ember-hot:#f4c46a; }
 html.theme-basalt .hero-cta--null    { --ember:#c2933f; --ember-hot:#e6c277; }
 html.theme-basalt .hero-cta--zara    { --ember:#c98a3a; --ember-hot:#f0b15e; }
@@ -2572,3 +2572,10 @@ html.is-theme-wipe .site-bar { view-transition-name: none; }   /* wipe the bar w
 @media (prefers-reduced-motion: no-preference) {
   @view-transition { navigation: auto; }
 }
+
+/* Hiatus note card under the hero buttons */
+.hiatus-note { padding: 28px 0 0; max-width: 640px; text-align: left; }
+.hiatus-note .notice-title { margin: 0 0 10px; }
+.hiatus-note .notice-text + .notice-text { margin-top: 10px; }
+.hiatus-note .notice-title { font-size: 22px; }
+.hiatus-note .notice-text { font-size: 16px; }

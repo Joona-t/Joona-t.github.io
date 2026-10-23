@@ -25,6 +25,24 @@
 **Verification:** In local Chromium, basalt plays the new video with no src on the kawaii one, and switching to kawaii reverses that. At 375px, scrollWidth = innerWidth = 375 and the slab is 343px wide. No console errors. `node --check script.js` OK.
 **Files:** index.html, script.js, styles.css, assets/hero-basalt.{mp4,jpg}
 
+## 2026-10-16: "Taking a break" card under the hero buttons
+
+**Change:** Added a card under the hero buttons saying Joona is stepping back from the listed software, including finished ones like Sparky and Sparky Reads, to focus on local models, hardware and eventually robotics. It says he'll update them from time to time. It reuses the existing `.notice-inner` card styles, plus a small `.hiatus-note` spacing rule.
+**Verification:** Local preview in the candy theme showed the card centred under the Games button with readable spacing. Text bumped to 16px (title 22px) so it reads easily.
+**Files:** index.html, styles.css
+
+## 2026-10-15: Qwen Guide button renamed and re-pointed
+
+**Change:** The second hero button is now "Qwen Guide" and links to `lovespark.love/qwen-guide/`. The guide grew from a fine-tuning guide into a three-part local Qwen guide (run, fine-tune, abliteration) and its repo was renamed from `qwen-fine-tuning-guide` to `qwen-guide`, which moved its Pages path.
+**Files:** index.html
+
+## 2026-10-15: Qwen Fine-Tuning Guide hero button
+
+**Change:** Added a "Qwen Fine-Tuning Guide" hero button as the second button, right after "Aaron Swartz · Raw Thought". It links to `lovespark.love/qwen-fine-tuning-guide/`, the new public `Joona-t/qwen-fine-tuning-guide` repo served by GitHub Pages under the site's custom domain, like `raw-thought-reader`.
+**Verification:** Local preview showed the button second in the group, styled like its neighbours, with no console errors.
+**Note:** Open PR #9 (visual upgrade) replaces the whole hero button group and already conflicts with Raw Thought on main. If it merges, re-add both buttons.
+**Files:** index.html
+
 ## 2026-10-04: BUG — Sticky bar not frosted; phone layout zoomed out
 
 **Problem 1:** When scrolled, page text showed sharply through the new sticky site bar.

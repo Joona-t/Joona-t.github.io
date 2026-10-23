@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-10-04",
+  verifiedAt: "2026-10-22",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -7,18 +7,501 @@ window.OPENAI_WATCH = {
     status: "https://status.openai.com/"
   },
   statusSnapshot: {
-    label: "All systems operational",
+    label: "Service disruption under monitoring",
     source: "https://status.openai.com/",
     window: "Live check",
     uptime: [
-      { name: "APIs", value: "Operational" },
-      { name: "ChatGPT", value: "Operational" },
+      { name: "APIs", value: "Degraded" },
+      { name: "ChatGPT", value: "Degraded" },
       { name: "Codex", value: "Operational" },
       { name: "FedRAMP", value: "Operational" },
       { name: "Ads Platform", value: "Operational" }
     ]
   },
   updates: [
+    {
+      "id": "api-project-service-tier-governance",
+      "date": "2026-10-21",
+      "type": "release",
+      "channel": "API",
+      "title": "API adds project service-tier governance",
+      "summary": "Platform administrators can now control which processing service tiers each project may use, with organization-wide restrictions available across all projects.",
+      "tags": [
+        "service tiers",
+        "governance",
+        "projects"
+      ],
+      "links": [
+        {
+          "label": "API changelog",
+          "url": "https://developers.openai.com/api/docs/changelog"
+        }
+      ]
+    },
+    {
+      "id": "chatgpt-ads-26-country-expansion",
+      "date": "2026-10-21",
+      "type": "release",
+      "channel": "ChatGPT",
+      "title": "ChatGPT Ads expands to 26 more countries",
+      "summary": "OpenAI has extended ChatGPT Ads to 26 additional countries, bringing advertiser availability to 89 markets. Ads remain limited to Free and Go plans.",
+      "tags": [
+        "ads",
+        "international expansion",
+        "free and go"
+      ],
+      "links": [
+        {
+          "label": "Product announcement",
+          "url": "https://openai.com/index/chatgpt-ads-expands-26-new-countries/"
+        }
+      ]
+    },
+    {
+      "id": "patch-the-planet-php-vulnerability-disclosure",
+      "date": "2026-10-21",
+      "type": "security",
+      "channel": "News",
+      "title": "OpenAI discloses coordinated fixes for critical PHP flaws",
+      "summary": "OpenAI says frontier models helped identify critical PHP vulnerabilities before known exploitation. PHP maintainers released fixes after coordinated preparation with security and infrastructure partners, and OpenAI published a Codex version-checking skill for operators.",
+      "tags": [
+        "php",
+        "vulnerability disclosure",
+        "patch the planet"
+      ],
+      "links": [
+        {
+          "label": "Security disclosure",
+          "url": "https://openai.com/index/coordinated-disclosure-of-critical-vulnerabilities/"
+        }
+      ]
+    },
+    {
+      "id": "openai-models-codex-google-cloud-announced",
+      "date": "2026-10-21",
+      "type": "release",
+      "channel": "News",
+      "title": "OpenAI models and Codex announced for Google Cloud",
+      "summary": "OpenAI plans to offer frontier models and Codex through Google Cloud's model garden and Marketplace, with broader availability expected in the coming weeks. OpenAI models are also planned for Google Antigravity and the Gemini Agent.",
+      "tags": [
+        "google cloud",
+        "codex",
+        "forthcoming"
+      ],
+      "links": [
+        {
+          "label": "Announcement",
+          "url": "https://openai.com/index/openai-models-google-cloud/"
+        }
+      ]
+    },
+    {
+      "id": "chatgpt-locked-chats-rollout",
+      "date": "2026-10-20",
+      "type": "release",
+      "channel": "ChatGPT",
+      "title": "Locked chats begin rolling out in ChatGPT",
+      "summary": "ChatGPT is gradually adding PIN- or device-authenticated locked chats that stay out of regular history, pinned chats, and search. The rollout covers Free, Go, Plus, and Pro accounts across web, mobile, and the new desktop app.",
+      "tags": [
+        "locked chats",
+        "privacy",
+        "rollout"
+      ],
+      "links": [
+        {
+          "label": "Locked chats guide",
+          "url": "https://help.openai.com/en/articles/20001411-using-locked-chats-in-chatgpt"
+        },
+        {
+          "label": "Release notes",
+          "url": "https://help.openai.com/en/articles/6825453-chatgpt-release-notes"
+        }
+      ]
+    },
+    {
+      "id": "api-12-hour-prompt-caching",
+      "date": "2026-10-20",
+      "type": "release",
+      "channel": "API",
+      "title": "API adds 12-hour prompt caching",
+      "summary": "Responses API requests can retain shared instructions, tools, and context in the prompt cache for 12 hours. Cache writes cost 2.5 times the model's input-token price, while subsequent hits receive cached-input pricing.",
+      "tags": [
+        "prompt caching",
+        "responses api",
+        "pricing"
+      ],
+      "links": [
+        {
+          "label": "API changelog",
+          "url": "https://developers.openai.com/api/docs/changelog"
+        }
+      ]
+    },
+    {
+      "id": "agents-api-artifact-skills-ultrafast",
+      "date": "2026-10-16",
+      "type": "release",
+      "channel": "API",
+      "title": "Agents API adds artifact skills and Ultrafast mode",
+      "summary": "OpenAI-hosted Agents API sandboxes now include the Artifact SDK and skills for spreadsheets, presentations, and Word documents. Supported models can also use the Ultrafast service tier to reduce token latency.",
+      "tags": [
+        "agents api",
+        "artifact sdk",
+        "ultrafast"
+      ],
+      "links": [
+        {
+          "label": "API changelog",
+          "url": "https://developers.openai.com/api/docs/changelog"
+        }
+      ]
+    },
+    {
+      "id": "chatgpt-slides-collaboration-rollout",
+      "date": "2026-10-16",
+      "type": "release",
+      "channel": "ChatGPT",
+      "title": "ChatGPT Slides begins rolling out",
+      "summary": "Eligible Pro, Business, and Enterprise users with Space access can create, edit, present, and collaborate on slide decks in ChatGPT, with web exports to PowerPoint, PDF, and Google Slides.",
+      "tags": [
+        "slides",
+        "space",
+        "collaboration",
+        "rollout"
+      ],
+      "links": [
+        {
+          "label": "Release notes",
+          "url": "https://help.openai.com/en/articles/6825453-chatgpt-release-notes"
+        }
+      ]
+    },
+    {
+      "id": "chatgpt-gpt-6-pro-speed-tools-multi-agent-update",
+      "date": "2026-10-16",
+      "type": "patch",
+      "channel": "ChatGPT",
+      "title": "GPT-6 Pro adds faster responses and multi-agent work",
+      "summary": "GPT-6 Pro in ChatGPT now responds faster, improves plugin and tool use, and can delegate parts of a task to multiple agents. The update is rolling out to eligible Pro users.",
+      "tags": [
+        "gpt-6 pro",
+        "multi-agent",
+        "tools",
+        "rollout"
+      ],
+      "links": [
+        {
+          "label": "Release notes",
+          "url": "https://help.openai.com/en/articles/6825453-chatgpt-release-notes"
+        }
+      ]
+    },
+    {
+      "id": "gpt-live-prompt-to-voice-natural-voices",
+      "date": "2026-10-16",
+      "type": "release",
+      "channel": "API",
+      "title": "GPT-Live adds prompt-generated and natural voices",
+      "summary": "All API customers can create reusable voices from text descriptions through the API or Voice Playground. GPT-Live also adds nine natural German, French, Hindi, Japanese, and Korean voices.",
+      "tags": [
+        "gpt-live",
+        "custom voices",
+        "audio"
+      ],
+      "links": [
+        {
+          "label": "Custom voices guide",
+          "url": "https://developers.openai.com/api/docs/guides/custom-voices"
+        },
+        {
+          "label": "API changelog",
+          "url": "https://developers.openai.com/api/docs/changelog"
+        }
+      ]
+    },
+    {
+      "id": "gpt-live-native-decisions-integration",
+      "date": "2026-10-15",
+      "type": "release",
+      "channel": "API",
+      "title": "GPT-Live adds native Decisions integration",
+      "summary": "Voice apps can delegate directly from GPT-Live to Decisions or trigger decisions from input and output transcript deltas, enabling actions during a conversation.",
+      "tags": [
+        "gpt-live",
+        "decisions",
+        "voice"
+      ],
+      "links": [
+        {
+          "label": "Integration guide",
+          "url": "https://developers.openai.com/api/docs/guides/decisions-voice"
+        }
+      ]
+    },
+    {
+      "id": "chatgpt-gpt-live-1-1-new-voices",
+      "date": "2026-10-15",
+      "type": "release",
+      "channel": "ChatGPT",
+      "title": "ChatGPT Voice begins rolling out GPT-Live-1.1 and new voices",
+      "summary": "ChatGPT Voice is rolling out GPT-Live-1.1 and its smaller Quip variant, with more natural multilingual accents, broader search-status phrasing, and additional regional voice options. Availability varies by account and region.",
+      "tags": [
+        "voice",
+        "gpt-live-1.1",
+        "rollout"
+      ],
+      "links": [
+        {
+          "label": "Release notes",
+          "url": "https://help.openai.com/en/articles/6825453-chatgpt-release-notes"
+        }
+      ]
+    },
+    {
+      "id": "chatgpt-sites-fixed-count-limit-removed",
+      "date": "2026-10-15",
+      "type": "patch",
+      "channel": "ChatGPT",
+      "title": "ChatGPT removes the fixed Sites count limit",
+      "summary": "Plus and Pro users no longer have a fixed cap on how many Sites they can create, although usage and storage limits still apply.",
+      "tags": [
+        "sites",
+        "limits",
+        "plus and pro"
+      ],
+      "links": [
+        {
+          "label": "Sites guide",
+          "url": "https://help.openai.com/en/articles/20001339-creating-and-using-chatgpt-sites"
+        }
+      ]
+    },
+    {
+      "id": "rosalind-academic-plan-applications-open",
+      "date": "2026-10-15",
+      "type": "release",
+      "channel": "ChatGPT",
+      "title": "Applications open for the Rosalind Academic Plan",
+      "summary": "Eligible U.S. university life-sciences labs can apply for up to 30 ChatGPT Business Standard seats at no cost for up to 12 months. GPT-Rosalind access requires separate trusted-access approval.",
+      "tags": [
+        "life sciences",
+        "academic plan",
+        "applications"
+      ],
+      "links": [
+        {
+          "label": "Plan details",
+          "url": "https://help.openai.com/en/articles/20001602-rosalind-academic-plan"
+        }
+      ]
+    },
+    {
+      "id": "codex-composer-predictions-beta",
+      "date": "2026-10-09",
+      "type": "release",
+      "channel": "Codex",
+      "title": "Codex introduces composer predictions in beta",
+      "summary": "Eligible adult Pro users can accept and edit suggested follow-up messages in local or SSH threads with Astra and Sol 6.1. Suggestions require manual sending.",
+      "tags": [
+        "composer",
+        "beta",
+        "pro"
+      ],
+      "links": [
+        {
+          "label": "Feature details",
+          "url": "https://help.openai.com/en/articles/20001601-composer-predictions-in-codex"
+        }
+      ]
+    },
+    {
+      "id": "gpt-6-1-sol-ultrafast-api",
+      "date": "2026-10-08",
+      "type": "release",
+      "channel": "API",
+      "title": "GPT-6.1 Sol adds Ultrafast processing",
+      "summary": "Responses requests can select Ultrafast for lower token latency, subject to rate limits. Global processing and US or EU residency are supported.",
+      "tags": [
+        "ultrafast",
+        "latency",
+        "residency"
+      ],
+      "links": [
+        {
+          "label": "API changelog",
+          "url": "https://developers.openai.com/api/docs/changelog"
+        }
+      ]
+    },
+    {
+      "id": "false-front-influence-operations-disrupted",
+      "date": "2026-10-08",
+      "type": "security",
+      "channel": "News",
+      "title": "OpenAI discloses disruption of false-front influence operations",
+      "summary": "OpenAI banned Russian and Iranian influence operations that used its models for fabricated personas, content, and internal reporting. The disclosure describes attempts to place messaging through front organizations and media outlets.",
+      "tags": [
+        "influence operations",
+        "account enforcement",
+        "threat disclosure"
+      ],
+      "links": [
+        {
+          "label": "Security disclosure",
+          "url": "https://openai.com/index/disrupting-ai-enabled-false-front-operations/"
+        }
+      ]
+    },
+    {
+      "id": "chatgpt-gpt-6-intelligent-ui",
+      "date": "2026-10-07",
+      "type": "release",
+      "channel": "ChatGPT",
+      "title": "GPT-6 and Intelligent UI roll out in ChatGPT",
+      "summary": "ChatGPT adds interactive answers and can share progress while reasoning continues. Paid-plan rollout began October 7, followed by Free and Go. Chat uses Sol or Luna by plan; Pro reasoning retains Astra without Intelligent UI.",
+      "tags": [
+        "gpt-6",
+        "intelligent ui",
+        "interactive answers"
+      ],
+      "links": [
+        {
+          "label": "Product announcement",
+          "url": "https://openai.com/index/gpt-6-for-everyone/"
+        }
+      ]
+    },
+    {
+      "id": "chat-latest-october-7-snapshot",
+      "date": "2026-10-07",
+      "type": "patch",
+      "channel": "API",
+      "title": "chat-latest receives a new snapshot",
+      "summary": "The alias now tracks the updated ChatGPT model for paid and business plans. OpenAI recommends the GPT-6 family for production API use.",
+      "tags": [
+        "chat-latest",
+        "snapshot"
+      ],
+      "links": [
+        {
+          "label": "API changelog",
+          "url": "https://developers.openai.com/api/docs/changelog"
+        }
+      ]
+    },
+    {
+      "id": "chatgpt-teens-learning-college-planner-announcement",
+      "date": "2026-10-07",
+      "type": "release",
+      "channel": "ChatGPT",
+      "title": "ChatGPT expands teen study tools and announces College Planner",
+      "summary": "Teens gain flashcard practice and improved quiz creation from notes. OpenAI also announced a forthcoming College Planner for US students in grades 10–12, organizing applications, deadlines, and financial-aid tasks; no launch date was given.",
+      "tags": [
+        "teens",
+        "study tools",
+        "college planner",
+        "announced"
+      ],
+      "links": [
+        {
+          "label": "Product announcement",
+          "url": "https://openai.com/index/teens-learn-and-plan/"
+        }
+      ]
+    },
+    {
+      "id": "chatgpt-audio-uploads",
+      "date": "2026-10-06",
+      "type": "release",
+      "channel": "ChatGPT",
+      "title": "ChatGPT adds audio file uploads",
+      "summary": "Paid subscriptions and workspaces can upload recordings for transcription, summaries, and questions. Access depends on workspace settings, region, client, and model; transcription accuracy varies.",
+      "tags": [
+        "audio",
+        "uploads",
+        "transcription"
+      ],
+      "links": [
+        {
+          "label": "Release notes",
+          "url": "https://help.openai.com/en/articles/6825453-chatgpt-release-notes"
+        }
+      ]
+    },
+    {
+      "id": "decisions-api-beta",
+      "date": "2026-10-06",
+      "type": "release",
+      "channel": "API",
+      "title": "Decisions API enters beta",
+      "summary": "The new endpoint uses GPT-6 Luna to produce typed answers from text and images.",
+      "tags": [
+        "decisions",
+        "beta",
+        "gpt-6-luna"
+      ],
+      "links": [
+        {
+          "label": "API changelog",
+          "url": "https://developers.openai.com/api/docs/changelog"
+        }
+      ]
+    },
+    {
+      "id": "api-build-launch-grow-tiers",
+      "date": "2026-10-06",
+      "type": "patch",
+      "channel": "API",
+      "title": "API usage moves to three tiers",
+      "summary": "Build, Launch, and Grow replace five tiers. Cumulative credit purchases determine automatic upgrades.",
+      "tags": [
+        "usage tiers",
+        "credits"
+      ],
+      "links": [
+        {
+          "label": "API changelog",
+          "url": "https://developers.openai.com/api/docs/changelog"
+        }
+      ]
+    },
+    {
+      "id": "api-hipaa-support-self-service",
+      "date": "2026-10-05",
+      "type": "release",
+      "channel": "API",
+      "title": "API adds HIPAA support setup flow",
+      "summary": "Eligible organization administrators can accept the standard BAA and enable support in settings. Eligibility and service configuration requirements still apply.",
+      "tags": [
+        "organization settings",
+        "baa"
+      ],
+      "links": [
+        {
+          "label": "API changelog",
+          "url": "https://developers.openai.com/api/docs/changelog"
+        }
+      ]
+    },
+    {
+      "id": "chatgpt-ads-measurement-visual-format",
+      "date": "2026-10-05",
+      "type": "release",
+      "channel": "News",
+      "title": "ChatGPT Ads expands measurement and announces visual-format testing",
+      "summary": "OpenAI expanded conversion and attribution integrations. A separate visual ad format is scheduled for US testing later in October during image generation for Free and Go users; the announcement does not establish that testing is already live.",
+      "tags": [
+        "ads",
+        "measurement",
+        "announced test"
+      ],
+      "links": [
+        {
+          "label": "Product announcement",
+          "url": "https://openai.com/index/new-chatgpt-ads-format-and-measurement/"
+        }
+      ]
+    },
     {
       id: "chatgpt-finances-free-go-expansion",
       date: "2026-10-02",
