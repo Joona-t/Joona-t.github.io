@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-10-22",
+  verifiedAt: "2026-10-23",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -7,18 +7,41 @@ window.OPENAI_WATCH = {
     status: "https://status.openai.com/"
   },
   statusSnapshot: {
-    label: "Service disruption under monitoring",
+    label: "All systems operational",
     source: "https://status.openai.com/",
     window: "Live check",
     uptime: [
-      { name: "APIs", value: "Degraded" },
-      { name: "ChatGPT", value: "Degraded" },
+      { name: "APIs", value: "Operational" },
+      { name: "ChatGPT", value: "Operational" },
       { name: "Codex", value: "Operational" },
       { name: "FedRAMP", value: "Operational" },
       { name: "Ads Platform", value: "Operational" }
     ]
   },
   updates: [
+    {
+      "id": "decisions-api-general-availability",
+      "date": "2026-10-22",
+      "type": "release",
+      "channel": "API",
+      "title": "Decisions API reaches general availability",
+      "summary": "The Decisions API is now generally available with GPT-6 Luna, supporting up to 400 questions per request, image-specific instructions, structured JSON input, and prompt-cache discounts.",
+      "tags": [
+        "decisions api",
+        "general availability",
+        "gpt-6 luna"
+      ],
+      "links": [
+        {
+          "label": "Product announcement",
+          "url": "https://openai.com/index/decisions-api/"
+        },
+        {
+          "label": "API changelog",
+          "url": "https://developers.openai.com/api/docs/changelog"
+        }
+      ]
+    },
     {
       "id": "api-project-service-tier-governance",
       "date": "2026-10-21",
