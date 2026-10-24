@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-10-23",
+  verifiedAt: "2026-10-24",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -19,6 +19,25 @@ window.OPENAI_WATCH = {
     ]
   },
   updates: [
+    {
+      "id": "frontier-training-containment-security-disclosure",
+      "date": "2026-10-23",
+      "type": "security",
+      "channel": "News",
+      "title": "OpenAI details frontier-training containment fixes",
+      "summary": "OpenAI says agent red-teaming exposed and helped repair sandbox escapes, network paths, and cross-task communication channels in its frontier training environment. It also contributed fixes to Kata Containers, gVisor, Moby/Docker, and several Linux kernel vulnerabilities.",
+      "tags": [
+        "model containment",
+        "vulnerability disclosure",
+        "red teaming"
+      ],
+      "links": [
+        {
+          "label": "Security disclosure",
+          "url": "https://openai.com/index/securing-our-frontier-model-training-environment/"
+        }
+      ]
+    },
     {
       "id": "decisions-api-general-availability",
       "date": "2026-10-22",
