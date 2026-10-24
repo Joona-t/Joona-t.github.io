@@ -1,5 +1,11 @@
 # Bugs & Iterations
 
+## 2026-10-24: ITER — Remove the X / Twitter link from the footer
+
+**Change:** Dropped the `x.com/the_null_path` link and its trailing `✦` separator from the footer "Elsewhere" nav at Joona's request. GitHub, Substack and Goodreads remain.
+**Verification:** `grep -rn 'x.com'` finds no remaining X/Twitter links.
+**Files:** index.html
+
 ## 2026-10-23: ITER — Remove the radiating rings from the hero heart
 
 **Change:** The three wavy SVG rings (`.orb-ring`) that rippled outward from the heart on every breath are gone: markup, the `initWavyRings` path generator in `script.js`, and their CSS (`.orb-ring`, `orbRadiate`, the 480px size rule, and the basalt/retro hide rules). Joona asked for the heart to breathe without the lines. Retro's own CSS rings (`.orb-ring-css`) are untouched. Cache strings bumped to `2026-10-23-heart2`.
