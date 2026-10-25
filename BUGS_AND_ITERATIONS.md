@@ -1,5 +1,12 @@
 # Bugs & Iterations
 
+## 2026-10-25: ITER + BUG: Glyph Grid Studio card says "Visit"; basalt card buttons lose the pink glow
+
+**Change:** The Glyph Grid Studio card's button now reads "Visit" instead of "Download", because it links to the studio's site, not a file. Changed in `data/gallery.json` and rebuilt with `scripts/build-gallery.py`, which touched only that line.
+**Bug:** In basalt, every card button showed a pink drop-glow under it. **Root cause:** the base `.card-link` 3D lip is `0 3px 0 var(--deep-mauve), 0 6px 14px var(--shadow-hot)` (kawaii pink), and basalt's card-link rule overrode colour, background and border but not `box-shadow`. **Fix:** basalt now casts a bronze lip with a soot shadow (`#5a3d12` + black), with matching hover and active states.
+**Verification:** Local Chromium, basalt: the button text is "Visit 🜂" and the computed box-shadow is `rgb(90,61,18) 0 3px 0, rgba(0,0,0,.45) 0 6px 14px`. Screenshot checked. Cache strings bumped to `2026-10-25-visit`.
+**Files:** data/gallery.json, index.html, styles.css
+
 ## 2026-10-25: ITER: Retro theme archived
 
 **Change:** Joona archived the retro theme.
