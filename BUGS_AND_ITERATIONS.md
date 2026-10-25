@@ -1,5 +1,18 @@
 # Bugs & Iterations
 
+## 2026-10-25: ITER: Retro theme archived
+
+**Change:** Joona archived the retro theme.
+- The pill is gone, so the site offers basalt · bubblegum · parchment · kawaii.
+- `styles-retro.css` moved to `archive/` (`git mv`, history kept) and is no longer loaded.
+- The retro-only code is deleted: the sparkle field and the cursor spark trail (their JS modules and container divs), the starburst markup, and the Press Start 2P font request.
+- `retro` is out of the switcher's class map and valid list, and the remaining retro checks in the motion and video gates are gone.
+- A visitor who saved `'retro'` now opens on basalt, migrated in the head script.
+
+`styles.css` still holds 34 `html.theme-retro` selectors, many sharing rule lists with basalt. They can't match any more, so they were left alone rather than split apart. Cache strings bumped to `2026-10-25-retro-archived`.
+**Verification:** Local Chromium at 375px. A saved `'retro'` reloads as `theme-basalt` with storage rewritten. No retro stylesheet is loaded and `#sparkle-field` is gone. A real click on each pill switches theme (a scripted `.click()` while the pane is hidden waits on the View Transition's next frame, which is a harness artifact). scrollWidth = 375. No console errors. `node --check` passes.
+**Files:** index.html, script.js, archive/styles-retro.css
+
 ## 2026-10-25: ITER: Basalt is the default theme; candy renamed to bubblegum
 
 **Change:** A first visit now opens on basalt instead of candy. The candy theme is renamed bubblegum throughout: the class `theme-candy` → `theme-bubblegum` (115 selectors), the storage key `'candy'` → `'bubblegum'`, and the theme-name comments. Colour adjectives such as "candy pink" and the `--candy-mint` token stay. The pills now read basalt · bubblegum · parchment · kawaii · retro. A visitor who saved `'candy'` is migrated to `'bubblegum'` in the head script, so nobody loses their choice. Cache strings bumped to `2026-10-25-basalt-default`.

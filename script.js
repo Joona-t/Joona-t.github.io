@@ -1,15 +1,15 @@
 // LoveSpark — bubble gum Y2K script.
-// Wavy rings, sparkle field, cursor trail, smooth scroll, card-close wobble.
+// Theme switcher, hero videos, Dyson swarm, smooth scroll, card-close wobble.
 'use strict';
 
-// Motion / pointer gates. Reduced motion → no swarm, no sparkle field, no
-// cursor trail, instant scroll, videos paused on their poster. The cursor
-// trail is retro-only and additionally needs a hover-capable fine pointer.
+// Motion / pointer gates. Reduced motion → no swarm, instant scroll, videos
+// paused on their poster.
 const mqReduce = window.matchMedia('(prefers-reduced-motion: reduce)');
 const mqFine = window.matchMedia('(hover: hover) and (pointer: fine)');
 
 // ══════════════════════════════════════════════════════════════════════════════
-// THEME SWITCHER — basalt (default) · bubblegum (was 'candy') · parchment · kawaii ('pink') · retro
+// THEME SWITCHER — basalt (default) · bubblegum (was 'candy') · parchment · kawaii ('pink').
+// Retro was archived 2026-10-25 (archive/styles-retro.css); a saved 'retro' opens basalt.
 // The FOUC-prevention script in <head> already applied the saved theme class
 // (theme-basalt when nothing is saved, a saved 'candy' becomes 'bubblegum'; kawaii = no class). This wires the switcher buttons and
 // syncs across tabs via the storage event.
@@ -25,12 +25,12 @@ const mqFine = window.matchMedia('(hover: hover) and (pointer: fine)');
       return;
     }
 
-    const CLASS = { retro: 'theme-retro', bubblegum: 'theme-bubblegum', basalt: 'theme-basalt', parchment: 'theme-parchment' };
-    const VALID = ['pink', 'bubblegum', 'basalt', 'parchment', 'retro'];
+    const CLASS = { bubblegum: 'theme-bubblegum', basalt: 'theme-basalt', parchment: 'theme-parchment' };
+    const VALID = ['pink', 'bubblegum', 'basalt', 'parchment'];
 
     function apply(theme) {
       if (!VALID.includes(theme)) theme = 'basalt';
-      root.classList.remove('theme-retro', 'theme-bubblegum', 'theme-basalt', 'theme-parchment');
+      root.classList.remove('theme-bubblegum', 'theme-basalt', 'theme-parchment');
       if (CLASS[theme]) root.classList.add(CLASS[theme]);  // pink (kawaii) = no class
       pills.forEach(p => p.setAttribute('aria-pressed', String(p.dataset.theme === theme)));
       try { localStorage.setItem(KEY, theme); } catch (_) {}
@@ -38,8 +38,7 @@ const mqFine = window.matchMedia('(hover: hover) and (pointer: fine)');
       document.dispatchEvent(new CustomEvent('lovespark:theme', { detail: theme }));
     }
 
-    const current = root.classList.contains('theme-retro') ? 'retro'
-      : root.classList.contains('theme-bubblegum') ? 'bubblegum'
+    const current = root.classList.contains('theme-bubblegum') ? 'bubblegum'
       : root.classList.contains('theme-basalt') ? 'basalt'
       : root.classList.contains('theme-parchment') ? 'parchment' : 'pink';
     pills.forEach(p => p.setAttribute('aria-pressed', String(p.dataset.theme === current)));
@@ -117,15 +116,15 @@ const heroActivity = (function () {
 
 const isMotionTheme = () => {
   const c = document.documentElement.classList;
-  return !c.contains('theme-retro') && !c.contains('theme-basalt') && !c.contains('theme-parchment');
+  return !c.contains('theme-basalt') && !c.contains('theme-parchment');
 };
 
 // ══════════════════════════════════════════════════════════════════════════════
 // DYSON SWARM — bubblegum + kawaii only, motion allowed. Three sparse orbital shells
 // of fine dust around the heart (~180 spans; was 5 shells / 1,074). Built when
 // the theme + motion gate passes, torn down (DOM removed) on a switch to
-// retro/basalt or when reduced motion turns on. Paused via the shared hero
-// visibility gate. CSS still hides it in retro/basalt/reduced motion as a
+// basalt/parchment or when reduced motion turns on. Paused via the shared hero
+// visibility gate. CSS still hides it in basalt/parchment/reduced motion as a
 // belt-and-braces fallback.
 // ══════════════════════════════════════════════════════════════════════════════
 (function initDysonSwarm() {
@@ -190,112 +189,6 @@ const isMotionTheme = () => {
   document.addEventListener('lovespark:theme', sync);
   if (mqReduce.addEventListener) mqReduce.addEventListener('change', sync);
   heroActivity.subscribe(sync);
-})();
-
-// ══════════════════════════════════════════════════════════════════════════════
-// STATIC SPARKLE FIELD — twinkles scattered across the page (retro only;
-// hidden in kawaii via CSS — the Dyson swarm above is the kawaii equivalent).
-// ══════════════════════════════════════════════════════════════════════════════
-(function initSparkleField() {
-  if (mqReduce.matches) return;
-  const field = document.getElementById('sparkle-field');
-  if (!field) return;
-
-  const GLYPHS = ['✦', '★', '♡', '✿', '⋆', '✧'];
-  const COLORS = ['#FF4FB3', '#FF79C6', '#FFF5B5', '#C5E1FF', '#B5F0E2'];
-  const COUNT = 48;
-
-  for (let i = 0; i < COUNT; i++) {
-    const el = document.createElement('span');
-    el.textContent = GLYPHS[i % GLYPHS.length];
-    const x = Math.random() * 100;
-    const y = Math.random() * 100;
-    const dur = (3 + Math.random() * 4).toFixed(2);
-    const del = (Math.random() * 6).toFixed(2);
-    const size = 9 + Math.random() * 12;
-    const color = COLORS[Math.floor(Math.random() * COLORS.length)];
-
-    el.style.cssText = `
-      left: ${x}%;
-      top: ${y}%;
-      font-size: ${size}px;
-      color: ${color};
-      text-shadow: 0 0 8px ${color};
-      animation: sparkleTwinkle ${dur}s ease-in-out infinite;
-      animation-delay: -${del}s;
-    `;
-    field.appendChild(el);
-  }
-  // @keyframes sparkleTwinkle lives in styles.css.
-})();
-
-// ══════════════════════════════════════════════════════════════════════════════
-// CURSOR SPARK TRAIL — retro only. A fixed pool of 12 spans is reused round-
-// robin (no per-move DOM churn) and animated with WAAPI. The passive listener
-// only exists while the gate passes: retro + motion allowed + hover-capable
-// fine pointer. Candy, kawaii and basalt have no trail at all.
-// ══════════════════════════════════════════════════════════════════════════════
-(function initCursorTrail() {
-  const container = document.getElementById('cursor-sparks');
-  if (!container || !Element.prototype.animate) return;
-
-  const GLYPHS = ['✦', '★', '♡', '⋆', '✧'];
-  const COLORS = ['#FF4FB3', '#FFB3D9', '#FFF5B5', '#C5E1FF'];
-  const POOL = 12;
-  const THROTTLE = 60;
-  const pool = [];
-  let next = 0;
-  let lastTime = 0;
-  let listening = false;
-
-  function spark(x, y) {
-    if (!pool.length) {
-      for (let i = 0; i < POOL; i++) {
-        const el = document.createElement('span');
-        container.appendChild(el);
-        pool.push(el);
-      }
-    }
-    const el = pool[next];
-    next = (next + 1) % POOL;
-    const dx = ((Math.random() - 0.5) * 50).toFixed(0);
-    const dy = (-(20 + Math.random() * 40)).toFixed(0);
-    const color = COLORS[Math.floor(Math.random() * COLORS.length)];
-    el.textContent = GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
-    el.style.cssText =
-      `left:${x}px;top:${y}px;font-size:${(9 + Math.random() * 7).toFixed(1)}px;` +
-      `color:${color};text-shadow:0 0 6px ${color};`;
-    el.getAnimations().forEach(a => a.cancel());
-    el.animate([
-      { transform: 'translate(0, 0) scale(0.6)', opacity: 1 },
-      { transform: `translate(${dx}px, ${dy}px) scale(1.4)`, opacity: 0 },
-    ], { duration: 800, easing: 'ease-out', fill: 'forwards' });
-  }
-
-  function onMove(e) {
-    const now = e.timeStamp;
-    if (now - lastTime < THROTTLE) return;
-    lastTime = now;
-    spark(e.clientX, e.clientY);
-  }
-
-  function sync() {
-    const want = document.documentElement.classList.contains('theme-retro')
-      && !mqReduce.matches && mqFine.matches;
-    if (want && !listening) {
-      document.addEventListener('pointermove', onMove, { passive: true });
-      listening = true;
-    } else if (!want && listening) {
-      document.removeEventListener('pointermove', onMove);
-      listening = false;
-      pool.forEach(el => el.getAnimations().forEach(a => a.cancel()));
-    }
-  }
-
-  sync();
-  document.addEventListener('lovespark:theme', sync);
-  if (mqReduce.addEventListener) mqReduce.addEventListener('change', sync);
-  if (mqFine.addEventListener) mqFine.addEventListener('change', sync);
 })();
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -403,7 +296,7 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 // HERO VIDEOS — the markup ships `data-src` + poster only, so nothing downloads
 // until this runs. A video only gets a src in the theme that shows it (and
 // loses it again on a switch away): basalt shows only its charcoal-glyph
-// wordmark (.hero-mark--basalt), retro shows none, kawaii/bubblegum show the rest.
+// wordmark (.hero-mark--basalt), parchment only its own, kawaii/bubblegum the rest.
 // Reduced motion: src stays, playback stops and the poster frame shows.
 // Without JS: poster only.
 // ══════════════════════════════════════════════════════════════════════════════
@@ -413,7 +306,6 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
   const root = document.documentElement;
 
   function themeShowsVideo(v) {
-    if (root.classList.contains('theme-retro')) return false;
     const own = v.classList.contains('hero-mark--basalt') ? 'theme-basalt'
       : v.classList.contains('hero-mark--parchment') ? 'theme-parchment' : null;
     const active = ['theme-basalt', 'theme-parchment'].find(c => root.classList.contains(c));
