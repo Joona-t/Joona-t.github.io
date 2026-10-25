@@ -398,6 +398,7 @@ document.querySelectorAll('.win-btn-close').forEach(btn => {
     '🚫': '𓂜',                                    // popup blocker → negation arms D035
     '🖱': '𓂧',                                    // cursor → hand D046
     '☕': '𓏊',                                    // coffee → jar W022
+    '😎': '𓈗',                                    // cool → water N035 (the tagline's sign-off)
     '⏲': '𓇳',                                    // timer → sun disc N005
     '⏭': '𓂻',                                    // skip → walking legs D054
   };
