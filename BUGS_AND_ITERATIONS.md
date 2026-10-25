@@ -1,5 +1,15 @@
 # Bugs & Iterations
 
+## 2026-10-25: BUG + ITER: Basalt loses its beige panels; new esoteric Parchment theme
+
+**Problem:** Joona found basalt's charcoal-on-cream wordmark panel (and its ember frame) off-putting on the dark stone.
+**Root cause:** `hero-basalt.mp4` baked a cream paper ground into the video, and CSS framed it with a gold hairline and glow, so it read as a beige slab. The ankh relic had the same cream panel and frame.
+**Fix (basalt):** The wordmark is re-graded from `hero-pastel.mp4` to beige glyphs (`#ece3cc`) on pure black, and shown with `mix-blend-mode: lighten`, so only the letters sit on the stone. The frame is gone. The ankh now uses `hero-ankh-beige.png`: the glyphs on a transparent ground, after the PNG's vignette is flattened with a blur-divide so it does not turn into a grey disc. `.hero` drops its `z-index` in basalt and parchment, because that stacking context made the video blend against nothing.
+**New (parchment):** A fifth theme (`theme-parchment`, pill between basalt and retro). The whole page is aged parchment with charcoal ink. Joona asked for esoteric rather than cute, so Cinzel replaces the Pacifico script, corners are square, the accents are oxblood rubrication and sepia, the window buttons are hidden, and the mascot is sepia-toned. The hero has the ankh in iron-gall ink (`hero-ankh-ink.png`) and a charcoal wordmark (`hero-parchment.mp4`, multiplied onto the paper). The kawaii-only `html:not(...)` contrast rules now also exclude parchment. `gateVideos` loads only the active theme's own wordmark video.
+**Also:** On phones the five pills wrap onto two rows, and `scroll-padding-top` is raised to 145px to clear the taller bar. Cache strings bumped to `2026-10-25-parchment`.
+**Verification:** Local Chromium at 1280×1000 and 375×812. Basalt shows beige glyphs on the stone with no panel. Parchment shows ink straight on the paper. scrollWidth = 375 in all five themes. Each theme loads only its own videos (retro none). No console errors. `node --check script.js` passes. Parchment contrast: lowest pair 5.05:1 (`#6a6354` on the card), body ink 12.4:1.
+**Files:** index.html, script.js, styles.css, assets/hero-{basalt,parchment}.{mp4,jpg}, assets/hero-ankh-{beige,ink}.png
+
 ## 2026-10-24: ITER — Remove the X / Twitter link from the footer
 
 **Change:** Dropped the `x.com/the_null_path` link and its trailing `✦` separator from the footer "Elsewhere" nav at Joona's request. GitHub, Substack and Goodreads remain.

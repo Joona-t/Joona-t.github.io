@@ -164,8 +164,8 @@ p, .tagline, .sub-tagline, .card-desc, .notice-text, .mission-text, .gallery-sub
    .starburst ray fans behind the heart with the heart-centred Dyson swarm
    (see initDysonSwarm in script.js). Retro keeps both originals; its
    styling is below. */
-html:not(.theme-retro):not(.theme-basalt) #sparkle-field { display: none; }
-html:not(.theme-retro):not(.theme-basalt) .starburst { display: none; }
+html:not(.theme-retro):not(.theme-basalt):not(.theme-parchment) #sparkle-field { display: none; }
+html:not(.theme-retro):not(.theme-basalt):not(.theme-parchment) .starburst { display: none; }
 
 #sparkle-field {
   position: fixed;
@@ -382,7 +382,7 @@ html:not(.theme-retro) #cursor-sparks { display: none; }
   margin: 0 0 var(--gap-md);
 }
 /* Basalt's charcoal-on-cream wordmark — only basalt shows it (see its block). */
-.hero-mark--basalt { display: none; }
+.hero-mark--basalt, .hero-mark--parchment { display: none; }
 
 .tagline {
   font-family: 'OpenDyslexic', var(--font-body);
@@ -770,12 +770,12 @@ html:not(.theme-retro) #cursor-sparks { display: none; }
 /* The retro markup (heart glyph, CSS rings, raw <h1> wordmark) lives in the
    DOM alongside the kawaii video markup so theme swap is instant. In kawaii
    (default, no html.theme-retro class) we hide it. */
-html:not(.theme-retro):not(.theme-basalt) .heart-glyph {
+html:not(.theme-retro):not(.theme-basalt):not(.theme-parchment) .heart-glyph {
   display: none;
 }
 /* The <h1> stays in the accessibility tree (the wordmark video is aria-hidden):
    visually hidden, not display:none. */
-html:not(.theme-retro):not(.theme-basalt) .logo-text {
+html:not(.theme-retro):not(.theme-basalt):not(.theme-parchment) .logo-text {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -1588,8 +1588,8 @@ html.theme-candy .mission-sparkles { color: #b3185c; }
 
    PREREQUISITE LEAK FIX (do this too — see notes): the kawaii-only rules at
    styles.css:142-143 and 853-857 use html:not(.theme-retro) and WILL leak into
-   basalt. Re-scope them to add :not(.theme-candy):not(.theme-basalt), e.g.
-     html:not(.theme-retro):not(.theme-candy):not(.theme-basalt) #sparkle-field {…}
+   basalt. Re-scope them to add :not(.theme-candy):not(.theme-basalt):not(.theme-parchment), e.g.
+     html:not(.theme-retro):not(.theme-candy):not(.theme-basalt):not(.theme-parchment) #sparkle-field {…}
    (same for .starburst, .heart-glyph, .orb-ring-css, .logo-text). Without this,
    basalt inherits the kawaii hide of .heart-glyph/.logo-text and the basalt
    wordmark/ankh swap below partially fails.
@@ -1687,15 +1687,10 @@ html.theme-basalt .ankh-glyph {
   z-index: 2;
   width: 200px;
   height: 200px;
-  /* glyph-grid studio cream-paper ankh, aged + framed as a lit relic */
-  background: url("assets/hero-ankh.png") center / cover no-repeat;
-  mix-blend-mode: normal;
-  filter: sepia(0.30) brightness(0.93) contrast(1.05);
-  border-radius: 3px;
-  box-shadow:
-    0 0 0 1px rgba(217,162,59,.5),
-    0 0 26px rgba(217,162,59,.30),
-    0 12px 34px rgba(0,0,0,.62);
+  /* the glyph-grid ankh as beige glyphs on a transparent ground: no panel */
+  background: url("assets/hero-ankh-beige.png") center / cover no-repeat;
+  -webkit-mask-image: radial-gradient(circle, #000 60%, transparent 74%);
+          mask-image: radial-gradient(circle, #000 60%, transparent 74%);
 }
 /* Ember pool glow ring behind the ankh, carved into the stone */
 html.theme-basalt .heart-orb::after {
@@ -1717,19 +1712,15 @@ html.theme-basalt .heart-orb::after {
 }
 
 /* ── WORDMARK ──────────────────────────────────────────────────────────────────
-   Charcoal glyph letters on a cream glyph-paper slab, framed like the ankh
-   relic above it. assets/hero-basalt.mp4 is hero-pastel.mp4 regraded
-   (luma curve → charcoal ink #232220 on cream paper #ece3cc), so it breathes
+   Beige glyph letters (#ece3cc) straight on the stone, no panel or frame.
+   assets/hero-basalt.mp4 is hero-pastel.mp4 regraded (luma curve → beige ink
+   on black, blended with lighten so the black vanishes), so it breathes
    on the same loop. The kawaii wordmark video stays hidden; the <h1> stays in
    the accessibility tree but is visually hidden, as in kawaii. */
 html.theme-basalt .hero-mark { display: none; }
 html.theme-basalt .hero-mark--basalt {
   display: block;
-  border-radius: 3px;
-  box-shadow:
-    0 0 0 1px rgba(217,162,59,.5),
-    0 0 26px rgba(217,162,59,.22),
-    0 12px 34px rgba(0,0,0,.62);
+  mix-blend-mode: lighten;   /* video paper is pure black: only the beige glyphs show on the stone */
 }
 html.theme-basalt .logo-text {
   position: absolute;
@@ -1941,19 +1932,19 @@ html.theme-basalt summary:focus-visible {
 /* ── Contrast: KAWAII (no theme class) ─────────────────────────────────────────
    Small pink text → #b3185c (5.1–6.4:1 on the pink paper). White-on-pink
    buttons → #d81b73→#a51259 (white 4.86–7.42:1). */
-html:not(.theme-retro):not(.theme-candy):not(.theme-basalt) .card-badge,
-html:not(.theme-retro):not(.theme-candy):not(.theme-basalt) .category-count,
-html:not(.theme-retro):not(.theme-candy):not(.theme-basalt) .notice-link {
+html:not(.theme-retro):not(.theme-candy):not(.theme-basalt):not(.theme-parchment) .card-badge,
+html:not(.theme-retro):not(.theme-candy):not(.theme-basalt):not(.theme-parchment) .category-count,
+html:not(.theme-retro):not(.theme-candy):not(.theme-basalt):not(.theme-parchment) .notice-link {
   color: #b3185c;
 }
-html:not(.theme-retro):not(.theme-candy):not(.theme-basalt) .notice-link { border-bottom-color: #b3185c; }
-html:not(.theme-retro):not(.theme-candy):not(.theme-basalt) .sub-tagline {
+html:not(.theme-retro):not(.theme-candy):not(.theme-basalt):not(.theme-parchment) .notice-link { border-bottom-color: #b3185c; }
+html:not(.theme-retro):not(.theme-candy):not(.theme-basalt):not(.theme-parchment) .sub-tagline {
   color: #b3185c;
   text-shadow: 0 0 6px rgba(255, 79, 179, 0.30);
 }
-html:not(.theme-retro):not(.theme-candy):not(.theme-basalt) .card-link:not(.card-link--soon),
-html:not(.theme-retro):not(.theme-candy):not(.theme-basalt) .kofi-btn,
-html:not(.theme-retro):not(.theme-candy):not(.theme-basalt) .theme-pill[aria-pressed="true"] {
+html:not(.theme-retro):not(.theme-candy):not(.theme-basalt):not(.theme-parchment) .card-link:not(.card-link--soon),
+html:not(.theme-retro):not(.theme-candy):not(.theme-basalt):not(.theme-parchment) .kofi-btn,
+html:not(.theme-retro):not(.theme-candy):not(.theme-basalt):not(.theme-parchment) .theme-pill[aria-pressed="true"] {
   background: linear-gradient(135deg, #d81b73 0%, #a51259 100%);
   color: #fff;
 }
@@ -2012,7 +2003,7 @@ html { scroll-padding-top: 84px; }
    out (live site too). clip (not hidden) = no scroll container, sticky-safe. */
 .hero { overflow-x: clip; }
 @media (max-width: 899px) { html { scroll-padding-top: 116px; } }
-@media (max-width: 599px) { html { scroll-padding-top: 100px; } }
+@media (max-width: 599px) { html { scroll-padding-top: 145px; } }   /* bar is two pill rows + nav */
 
 /* ── Skip link ── */
 .skip-link {
@@ -2155,7 +2146,7 @@ html body .site-bar .theme-switcher {
    wordmark goes visually hidden (still the link's accessible name). */
 @media (max-width: 599px) {
   .site-bar-inner { padding: 6px 12px; gap: 6px 8px; }
-  html body .site-bar .theme-switcher { order: 1; flex: 1 1 100%; justify-content: center; margin-left: 0; }
+  html body .site-bar .theme-switcher { order: 1; flex: 1 1 100%; justify-content: center; margin-left: 0; flex-wrap: wrap; row-gap: 4px; }
   .site-brand { order: 2; padding-right: 0; }
   .site-brand-name {
     position: absolute;
@@ -2178,7 +2169,7 @@ html body .site-bar .theme-switcher {
   .site-nav-link { padding: 6px 8px; font-size: 13px; white-space: nowrap; }
 }
 @media (max-width: 400px) {
-  html body .site-bar .theme-pill { padding: 6px 9px; font-size: 12px; }
+  html body .site-bar .theme-pill { padding: 6px 7px; font-size: 12px; letter-spacing: 0; }
   .site-nav-link { padding: 6px 7px; font-size: 12px; letter-spacing: 0; }
   .site-bar-inner { padding-inline: 8px; }
 }
@@ -2579,3 +2570,250 @@ html.is-theme-wipe .site-bar { view-transition-name: none; }   /* wipe the bar w
 .hiatus-note .notice-text + .notice-text { margin-top: 10px; }
 .hiatus-note .notice-title { font-size: 22px; }
 .hiatus-note .notice-text { font-size: 16px; }
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   PARCHMENT THEME  —  html.theme-parchment
+   The whole page is aged parchment with charcoal ink. Built on the kawaii base
+   (layout, cards, buttons keep their skeleton); this block re-pins the colour
+   tokens and repaints the ground. assets/hero-parchment.mp4 is the wordmark
+   regraded to charcoal on white and multiplied onto the paper.
+   ══════════════════════════════════════════════════════════════════════════════ */
+html.theme-parchment {
+  --pc-paper:   #ece3cc;
+  --pc-paper-2: #e2d6b8;
+  --pc-card:    #f3ecd8;
+  --pc-edge:    #b9a77c;
+  --pc-ink:     #232220;
+  --pc-ink-soft:#4b463b;
+  --pc-sepia:   #7a4b1e;
+  --surface:    var(--pc-card);
+  --ink:        var(--pc-ink);
+  --accent:     #8a5a24;
+  --accent-ink: #6b4216;
+  --focus:      #3b2a12;
+  --radius:     6px;
+  --ease-pop:   cubic-bezier(0.22, 1, 0.36, 1);
+}
+html.theme-parchment body { color: var(--pc-ink); background-color: var(--pc-paper); }
+html.theme-parchment body::before {
+  background-color: var(--pc-paper);
+  background-image:
+    radial-gradient(120% 90% at 50% 30%, rgba(255,250,235,.55) 0%, rgba(236,227,204,0) 55%),
+    radial-gradient(140% 110% at 50% 50%, rgba(0,0,0,0) 55%, rgba(122,84,34,.28) 100%);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+html.theme-parchment .grain-overlay {
+  background-image: var(--pc-noise, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"));
+  background-size: 160px 160px;
+  mix-blend-mode: multiply;
+  opacity: 0.18;
+}
+html.theme-parchment .glow-blob,
+html.theme-parchment #sparkle-field,
+html.theme-parchment #cursor-sparks,
+html.theme-parchment .starburst,
+html.theme-parchment .starburst-slow,
+html.theme-parchment .heart-mark,
+html.theme-parchment .heart-glyph,
+html.theme-parchment .dyson-swarm { display: none !important; }
+
+html.theme-parchment .hero-mark { display: none; }
+html.theme-parchment .hero-mark--parchment { display: block; mix-blend-mode: multiply; }
+html.theme-parchment .logo-text {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+html.theme-parchment .tagline { color: var(--pc-ink); }
+html.theme-parchment .sub-tagline { color: var(--pc-sepia); }
+html.theme-parchment a:focus-visible,
+html.theme-parchment button:focus-visible,
+html.theme-parchment summary:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+
+/* Theme switcher */
+html.theme-parchment .theme-switcher {
+  background: rgba(243,236,216,.9);
+  border: 1px solid var(--pc-edge);
+  box-shadow: 0 3px 10px rgba(90,60,20,.25);
+}
+html.theme-parchment .theme-pill { color: var(--pc-ink-soft); }
+html.theme-parchment .theme-pill:hover { color: var(--pc-sepia); }
+html.theme-parchment .theme-pill[aria-pressed="true"] {
+  background: var(--pc-ink); color: var(--pc-paper); box-shadow: none;
+}
+
+/* The hero's z-index:2 makes it its own stacking context, so a blended video
+   inside it would blend against nothing. Flatten it in the two themes whose
+   wordmark relies on blending onto the page ground. */
+html.theme-basalt .hero,
+html.theme-parchment .hero { z-index: auto; }
+
+/* ── PARCHMENT COMPONENT SKIN (mirrors the basalt component list) ──────────── */
+html.theme-parchment .section-title {
+  background: none;
+  -webkit-text-fill-color: var(--pc-ink);
+  color: var(--pc-ink);
+  text-shadow: none;
+}
+html.theme-parchment .section-deco { color: var(--pc-sepia); }
+html.theme-parchment .hero-social-link { color: var(--pc-ink); border-bottom-color: var(--pc-sepia); }
+html.theme-parchment .hero-social-link:hover,
+html.theme-parchment .hero-social-link:focus-visible { color: var(--pc-sepia); border-bottom-color: var(--pc-sepia); }
+html.theme-parchment .footer-sep { color: var(--pc-sepia); }
+
+html.theme-parchment .hero-cta {
+  --ember: #8a5a24; --ember-hot: #6b4216;
+  color: var(--pc-ink);
+  background: linear-gradient(180deg, #f3ecd8 0%, #e6dbbd 100%);
+  border: 1px solid var(--pc-edge);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.55), 0 4px 10px rgba(90,60,20,.25);
+  text-shadow: none;
+}
+html.theme-parchment .hero-cta::before,
+html.theme-parchment .hero-cta::after { display: none; }
+html.theme-parchment .hero-cta .cta-glyph { color: var(--pc-sepia); }
+html.theme-parchment .hero-cta:hover,
+html.theme-parchment .hero-cta:focus-visible {
+  color: var(--pc-paper);
+  background: linear-gradient(180deg, #3a362f 0%, var(--pc-ink) 100%);
+  border-color: var(--pc-ink);
+  box-shadow: 0 6px 14px rgba(60,40,10,.35);
+  text-shadow: none;
+}
+html.theme-parchment .hero-cta:hover .cta-glyph,
+html.theme-parchment .hero-cta:focus-visible .cta-glyph { color: #e7c98a; text-shadow: none; }
+
+html.theme-parchment .win98-card {
+  background: var(--pc-card);
+  border: 1px solid var(--pc-edge);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.6), 0 4px 12px rgba(90,60,20,.22);
+}
+html.theme-parchment .titlebar {
+  background: linear-gradient(180deg, #e6dbbd 0%, #d9ccaa 100%);
+  border-bottom: 1px solid var(--pc-edge);
+}
+html.theme-parchment .win-title { color: var(--pc-ink); background: rgba(243,236,216,.7); }
+html.theme-parchment .card-body,
+html.theme-parchment .card-desc { color: var(--pc-ink-soft); }
+html.theme-parchment .card-badge {
+  background: rgba(138,90,36,.12); color: var(--pc-sepia); border: 1px solid rgba(138,90,36,.35);
+}
+html.theme-parchment .card-link {
+  color: var(--pc-sepia); background: rgba(138,90,36,.08); border: 1px solid rgba(138,90,36,.4);
+}
+html.theme-parchment .card-link:hover,
+html.theme-parchment .card-link:focus-visible {
+  color: var(--pc-paper); background: var(--pc-ink); border-color: var(--pc-ink);
+}
+html.theme-parchment .card-link--soon {
+  color: #6a6354; background: rgba(0,0,0,.04); border: 1px dashed var(--pc-edge);
+}
+html.theme-parchment .win-buttons .win-btn { background: #b9a77c; }
+html.theme-parchment .win-btn-close { background: var(--pc-sepia) !important; color: var(--pc-paper) !important; }
+
+html.theme-parchment .category-header,
+html.theme-parchment .category-title { color: var(--pc-ink); }
+html.theme-parchment .category-count,
+html.theme-parchment .category-chevron { color: var(--pc-sepia); }
+html.theme-parchment .category-rule { border-color: var(--pc-edge); background: var(--pc-edge); }
+
+html.theme-parchment .gallery-project {
+  background: var(--pc-card); border: 1px solid var(--pc-edge);
+}
+html.theme-parchment .gallery-intro,
+html.theme-parchment .gallery-caption { color: var(--pc-ink-soft); }
+html.theme-parchment .gallery-shot { border: 1px solid var(--pc-edge); }
+
+html.theme-parchment .notice-inner,
+html.theme-parchment .mission-inner,
+html.theme-parchment .support-inner {
+  background: var(--pc-card); border: 1px solid var(--pc-edge);
+  border-left: 4px solid var(--pc-sepia);
+  box-shadow: 0 4px 12px rgba(90,60,20,.18);
+}
+html.theme-parchment .notice-title { color: var(--pc-ink); }
+html.theme-parchment .notice-text,
+html.theme-parchment .mission-text,
+html.theme-parchment .support-text,
+html.theme-parchment .support-sub { color: var(--pc-ink-soft); }
+html.theme-parchment .notice-link,
+html.theme-parchment .mission-text a { color: var(--accent-ink); }
+html.theme-parchment .kofi-btn {
+  background: var(--pc-ink); color: var(--pc-paper); border: 1px solid var(--pc-ink); box-shadow: none;
+}
+html.theme-parchment .kofi-btn:hover,
+html.theme-parchment .kofi-btn:focus-visible { background: #3a362f; color: #fff; }
+html.theme-parchment .site-footer,
+html.theme-parchment .footer-copy { color: var(--pc-ink-soft); }
+html.theme-parchment .footer-heart { color: var(--pc-sepia); }
+html.theme-parchment .card-link { box-shadow: none; }
+html.theme-parchment .sub-tagline { text-shadow: none; }
+html.theme-parchment:root .hero-cta-group a.hero-cta.hero-cta--primary {
+  --ring-fill: linear-gradient(180deg, #f3ecd8 0%, #e6dbbd 100%);
+  --ring-fill-hover: linear-gradient(180deg, #3a362f 0%, #232220 100%);
+  --ring-a: #b9a77c; --ring-b: #7a4b1e; --ring-c: #232220;
+}
+html.theme-parchment:root .support-actions a.kofi-btn:not(.kofi-btn--ghost) {
+  --ring-fill: linear-gradient(180deg, #3a362f 0%, #232220 100%);
+  --ring-fill-hover: linear-gradient(180deg, #4a453c 0%, #2c2a27 100%);
+  --ring-a: #b9a77c; --ring-b: #7a4b1e; --ring-c: #232220;
+}
+
+/* ── PARCHMENT: ESOTERIC REGISTER ──────────────────────────────────────────────
+   Not cute: a grimoire leaf. Cinzel replaces the Pacifico script everywhere,
+   corners go square, accents are oxblood rubrication and iron-gall sepia, and
+   the hero shows the ankh inked straight onto the page (transparent PNG, no frame). */
+html.theme-parchment {
+  --font-display: 'Cinzel', 'Cormorant Garamond', Georgia, serif;
+  --pc-rubric: #7a1f1a;   /* oxblood rubrication, 8.9:1 on --pc-paper */
+  --radius: 2px;
+}
+html.theme-parchment .section-title {
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+html.theme-parchment .section-deco { color: var(--pc-rubric); }
+html.theme-parchment .sub-tagline { color: var(--pc-rubric); letter-spacing: 0.18em; text-transform: uppercase; }
+html.theme-parchment .site-brand-name { font-family: var(--font-display); font-weight: 600; color: var(--pc-ink); }
+html.theme-parchment .tagline { font-style: normal; }
+
+/* Square, ruled surfaces instead of soft pastel bubbles */
+html.theme-parchment .win98-card,
+html.theme-parchment .titlebar,
+html.theme-parchment .win-title,
+html.theme-parchment .card-badge,
+html.theme-parchment .card-link,
+html.theme-parchment .gallery-project,
+html.theme-parchment .gallery-shot,
+html.theme-parchment .notice-inner,
+html.theme-parchment .mission-inner,
+html.theme-parchment .support-inner,
+html.theme-parchment .kofi-btn,
+html.theme-parchment .hero-cta,
+html.theme-parchment .theme-switcher,
+html.theme-parchment .theme-pill { border-radius: 2px; }
+html.theme-parchment .win98-card { outline: 1px solid rgba(122,84,34,.25); outline-offset: 3px; }
+html.theme-parchment .win-title { background: none; font-family: var(--font-display); letter-spacing: 0.06em; }
+html.theme-parchment .win-buttons { display: none; }
+html.theme-parchment .card-badge { background: none; border: 0; border-bottom: 1px solid var(--pc-rubric); color: var(--pc-rubric); padding-left: 0; }
+html.theme-parchment .notice-inner,
+html.theme-parchment .mission-inner,
+html.theme-parchment .support-inner { border-left: 3px double var(--pc-rubric); }
+html.theme-parchment .category-count,
+html.theme-parchment .category-chevron { color: var(--pc-rubric); }
+html.theme-parchment .footer-heart { color: var(--pc-rubric); }
+
+/* The ankh, inked onto the leaf */
+html.theme-parchment .heart-orb { width: 260px; height: 260px; }
+html.theme-parchment .ankh-glyph {
+  display: block;
+  position: relative;
+  z-index: 2;
+  width: 200px;
+  height: 200px;
+  /* hero-ankh.png's glyphs as iron-gall ink on a transparent ground */
+  background: url("assets/hero-ankh-ink.png") center / cover no-repeat;
+  -webkit-mask-image: radial-gradient(circle, #000 60%, transparent 74%);
+          mask-image: radial-gradient(circle, #000 60%, transparent 74%);
+}
+html.theme-parchment .site-brand-mark { filter: sepia(0.85) saturate(0.7) contrast(1.05); }
