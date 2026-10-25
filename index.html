@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script>(()=>{try{const t=localStorage.getItem('lovespark-theme')||'candy';const m={retro:'theme-retro',candy:'theme-candy',basalt:'theme-basalt',parchment:'theme-parchment'};if(m[t])document.documentElement.classList.add(m[t]);}catch(_){document.documentElement.classList.add('theme-candy');}})();</script>
+  <script>(()=>{try{let t=localStorage.getItem('lovespark-theme')||'basalt';if(t==='candy'){t='bubblegum';localStorage.setItem('lovespark-theme',t);}const m={retro:'theme-retro',bubblegum:'theme-bubblegum',basalt:'theme-basalt',parchment:'theme-parchment'};if(m[t])document.documentElement.classList.add(m[t]);}catch(_){document.documentElement.classList.add('theme-basalt');}})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LoveSpark — Retro pink tools for the internet</title>
@@ -13,13 +13,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <!-- OpenDyslexic (body font, vendored) — preload the regular face so body copy doesn't swap late -->
   <link rel="preload" href="assets/fonts/OpenDyslexic-Regular.otf" as="font" type="font/otf" crossorigin>
-  <!-- Critical fonts (all themes): body fallback, mono, candy/kawaii wordmark -->
+  <!-- Critical fonts (all themes): body fallback, mono, bubblegum/kawaii wordmark -->
   <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Pacifico&display=swap" rel="stylesheet">
   <!-- Theme-specific fonts (retro pixel, basalt/hero-CTA serif) — non-blocking -->
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet"></noscript>
-  <link rel="stylesheet" href="styles.css?v=2026-10-25-glyphs">
-  <link rel="stylesheet" href="styles-retro.css?v=2026-10-25-glyphs">
+  <link rel="stylesheet" href="styles.css?v=2026-10-25-basalt-default">
+  <link rel="stylesheet" href="styles-retro.css?v=2026-10-25-basalt-default">
 </head>
 <body>
 
@@ -43,12 +43,13 @@
           <li><a class="site-nav-link" href="#support">Support</a></li>
         </ul>
       </nav>
-      <!-- Theme switcher (candy default · kawaii · basalt · retro) -->
+      <!-- Theme switcher (basalt default · bubblegum · parchment · kawaii · retro).
+           Bubblegum was called "candy" until 2026-10-25; a saved 'candy' is migrated below. -->
       <div class="theme-switcher" role="group" aria-label="Site theme">
-        <button class="theme-pill" data-theme="candy"  type="button" aria-pressed="true">candy</button>
-        <button class="theme-pill" data-theme="pink"   type="button" aria-pressed="false">kawaii</button>
-        <button class="theme-pill" data-theme="basalt" type="button" aria-pressed="false">basalt</button>
+        <button class="theme-pill" data-theme="basalt" type="button" aria-pressed="true">basalt</button>
+        <button class="theme-pill" data-theme="bubblegum"  type="button" aria-pressed="false">bubblegum</button>
         <button class="theme-pill" data-theme="parchment" type="button" aria-pressed="false">parchment</button>
+        <button class="theme-pill" data-theme="pink"   type="button" aria-pressed="false">kawaii</button>
         <button class="theme-pill" data-theme="retro"  type="button" aria-pressed="false">retro</button>
       </div>
     </div>
@@ -1049,6 +1050,6 @@
     <p class="footer-heart" aria-hidden="true">♡</p>
   </footer>
 
-  <script src="script.js?v=2026-10-25-glyphs"></script>
+  <script src="script.js?v=2026-10-25-basalt-default"></script>
 </body>
 </html>

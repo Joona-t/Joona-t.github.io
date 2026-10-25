@@ -9,9 +9,9 @@ const mqReduce = window.matchMedia('(prefers-reduced-motion: reduce)');
 const mqFine = window.matchMedia('(hover: hover) and (pointer: fine)');
 
 // ══════════════════════════════════════════════════════════════════════════════
-// THEME SWITCHER — candy (default) · kawaii ('pink') · basalt · parchment · retro
+// THEME SWITCHER — basalt (default) · bubblegum (was 'candy') · parchment · kawaii ('pink') · retro
 // The FOUC-prevention script in <head> already applied the saved theme class
-// (theme-candy when nothing is saved; kawaii = no class). This wires the switcher buttons and
+// (theme-basalt when nothing is saved, a saved 'candy' becomes 'bubblegum'; kawaii = no class). This wires the switcher buttons and
 // syncs across tabs via the storage event.
 // ══════════════════════════════════════════════════════════════════════════════
 (function setupThemeSwitcher() {
@@ -25,12 +25,12 @@ const mqFine = window.matchMedia('(hover: hover) and (pointer: fine)');
       return;
     }
 
-    const CLASS = { retro: 'theme-retro', candy: 'theme-candy', basalt: 'theme-basalt', parchment: 'theme-parchment' };
-    const VALID = ['pink', 'candy', 'basalt', 'parchment', 'retro'];
+    const CLASS = { retro: 'theme-retro', bubblegum: 'theme-bubblegum', basalt: 'theme-basalt', parchment: 'theme-parchment' };
+    const VALID = ['pink', 'bubblegum', 'basalt', 'parchment', 'retro'];
 
     function apply(theme) {
-      if (!VALID.includes(theme)) theme = 'candy';
-      root.classList.remove('theme-retro', 'theme-candy', 'theme-basalt', 'theme-parchment');
+      if (!VALID.includes(theme)) theme = 'basalt';
+      root.classList.remove('theme-retro', 'theme-bubblegum', 'theme-basalt', 'theme-parchment');
       if (CLASS[theme]) root.classList.add(CLASS[theme]);  // pink (kawaii) = no class
       pills.forEach(p => p.setAttribute('aria-pressed', String(p.dataset.theme === theme)));
       try { localStorage.setItem(KEY, theme); } catch (_) {}
@@ -39,7 +39,7 @@ const mqFine = window.matchMedia('(hover: hover) and (pointer: fine)');
     }
 
     const current = root.classList.contains('theme-retro') ? 'retro'
-      : root.classList.contains('theme-candy') ? 'candy'
+      : root.classList.contains('theme-bubblegum') ? 'bubblegum'
       : root.classList.contains('theme-basalt') ? 'basalt'
       : root.classList.contains('theme-parchment') ? 'parchment' : 'pink';
     pills.forEach(p => p.setAttribute('aria-pressed', String(p.dataset.theme === current)));
@@ -121,7 +121,7 @@ const isMotionTheme = () => {
 };
 
 // ══════════════════════════════════════════════════════════════════════════════
-// DYSON SWARM — candy + kawaii only, motion allowed. Three sparse orbital shells
+// DYSON SWARM — bubblegum + kawaii only, motion allowed. Three sparse orbital shells
 // of fine dust around the heart (~180 spans; was 5 shells / 1,074). Built when
 // the theme + motion gate passes, torn down (DOM removed) on a switch to
 // retro/basalt or when reduced motion turns on. Paused via the shared hero
@@ -403,7 +403,7 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 // HERO VIDEOS — the markup ships `data-src` + poster only, so nothing downloads
 // until this runs. A video only gets a src in the theme that shows it (and
 // loses it again on a switch away): basalt shows only its charcoal-glyph
-// wordmark (.hero-mark--basalt), retro shows none, kawaii/candy show the rest.
+// wordmark (.hero-mark--basalt), retro shows none, kawaii/bubblegum show the rest.
 // Reduced motion: src stays, playback stops and the poster frame shows.
 // Without JS: poster only.
 // ══════════════════════════════════════════════════════════════════════════════

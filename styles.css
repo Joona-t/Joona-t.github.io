@@ -1144,12 +1144,12 @@ details.gallery-project[open] > .gallery-body {
 .hero-cta--null    { --ember:#c79be0; --ember-hot:#e4cbf5; }  /* lilac-pink */
 .hero-cta--zara    { --ember:#e89ab0; --ember-hot:#ffbcd0; }  /* coral-rose */
 .hero-cta--forging { --ember:#f08aa2; --ember-hot:#ff9eb6; }  /* hot coral-pink */
-.hero-cta--games   { --ember:#8fd6c8; --ember-hot:#bdeee2; }  /* mint kept, softened toward candy */
+.hero-cta--games   { --ember:#8fd6c8; --ember-hot:#bdeee2; }  /* mint kept, softened toward bubblegum */
 
 /* --- CANDY (glass) theme --- */
 /* ════════════════════════════════════════════════════════════════════════════
-   CANDY THEME — glass-sticker (html.theme-candy)
-   LoveSpark candy design system. Scoped entirely under html.theme-candy so
+   CANDY THEME — glass-sticker (html.theme-bubblegum)
+   LoveSpark bubblegum design system. Scoped entirely under html.theme-bubblegum so
    kawaii (base), retro, and basalt are untouched. Candy reuses the kawaii pink
    ♡ video heart + Dyson swarm + orb-rings (they leak in via the existing
    html:not(.theme-retro) selectors — intended). Everything below is SKIN only.
@@ -1157,8 +1157,8 @@ details.gallery-project[open] > .gallery-body {
 
 /* ── TOKENS ─────────────────────────────────────────────────────────────────
    Candy default palette from the LoveSpark design system. Scoped to the class
-   so they only exist when candy is active. */
-html.theme-candy {
+   so they only exist when bubblegum is active. */
+html.theme-bubblegum {
   --ls-bg-mid:#ffd9ec;
   --ls-bg-gradient:linear-gradient(145deg,#ffd3e5 0%,#ffe8d9 28%,#ffd9ec 55%,#ffe2cc 78%,#ffcbe0 100%);
   --ls-glass:linear-gradient(135deg,#fffafd,#ffeef3 45%,#ffdfe9 75%,#ffcfe0);
@@ -1199,43 +1199,43 @@ html.theme-candy {
 /* ── PAGE BACKGROUND ────────────────────────────────────────────────────────
    Cream→pink candy gradient replaces the flat pastel paper. Fixed so it doesn't
    scroll. Text base recolored to candy plum. */
-html.theme-candy body {
+html.theme-bubblegum body {
   color: var(--ls-text);
   background-color: var(--ls-bg-mid);
 }
-html.theme-candy body::before {
+html.theme-bubblegum body::before {
   background-color: var(--ls-bg-mid);
   background-image: var(--ls-bg-gradient);
   background-repeat: no-repeat;
   background-size: cover;
 }
-/* Soften the multiply grain so the glass gloss can read on candy. */
-html.theme-candy .grain-overlay { opacity: 0.03; }
+/* Soften the multiply grain so the glass gloss can read on bubblegum. */
+html.theme-bubblegum .grain-overlay { opacity: 0.03; }
 
 /* ── HEADER : THEME SWITCHER ────────────────────────────────────────────────
    Frosted candy capsule; active pill = deep --ls-grad-btn (white text legal). */
-html.theme-candy .theme-switcher {
+html.theme-bubblegum .theme-switcher {
   background: var(--ls-glass-light);
   border: 1px solid var(--ls-glass-border);
   box-shadow: var(--ls-glow);
 }
-html.theme-candy .theme-pill { color: var(--ls-text-muted); }
-html.theme-candy .theme-pill:hover { color: var(--ls-pink-deep); }
-html.theme-candy .theme-pill[aria-pressed="true"] {
+html.theme-bubblegum .theme-pill { color: var(--ls-text-muted); }
+html.theme-bubblegum .theme-pill:hover { color: var(--ls-pink-deep); }
+html.theme-bubblegum .theme-pill[aria-pressed="true"] {
   background: var(--ls-grad-btn);
   color: var(--ls-btn-tx);
   box-shadow: 0 1px 0 rgba(255,255,255,0.45) inset, var(--ls-halo-pill);
 }
-html.theme-candy .theme-pill:focus-visible {
+html.theme-bubblegum .theme-pill:focus-visible {
   outline: 2px solid var(--ls-focus);
   outline-offset: 2px;
 }
 
 /* ── HERO : WORDMARK + TAGLINES + SOCIALS ───────────────────────────────────
-   The kawaii video .hero-mark + ♡ heart show by default in candy (leaked in).
-   We retint the textual hero bits to candy and give .logo-text the candy
+   The kawaii video .hero-mark + ♡ heart show by default in bubblegum (leaked in).
+   We retint the textual hero bits to bubblegum and give .logo-text the bubblegum
    gradient in case it is ever surfaced. */
-html.theme-candy .logo-text {
+html.theme-bubblegum .logo-text {
   background: var(--ls-grad-text);
   -webkit-background-clip: text;
   background-clip: text;
@@ -1245,12 +1245,12 @@ html.theme-candy .logo-text {
           drop-shadow(0 10px 26px rgba(255,73,166,0.30));
 }
 @supports not ((-webkit-background-clip:text) or (background-clip:text)) {
-  html.theme-candy .logo-text { -webkit-text-fill-color: currentColor; color: var(--ls-heading); }
+  html.theme-bubblegum .logo-text { -webkit-text-fill-color: currentColor; color: var(--ls-heading); }
 }
 /* Tagline = readable plum body on the cream gradient. */
-html.theme-candy .tagline { color: var(--ls-text); }
+html.theme-bubblegum .tagline { color: var(--ls-text); }
 /* Sub-tagline: keep the glow but recolor to candy pink (decorative line). */
-html.theme-candy .sub-tagline {
+html.theme-bubblegum .sub-tagline {
   color: var(--ls-pink-deep);
   text-shadow:
     0 0 4px rgba(255,73,166,0.55),
@@ -1258,28 +1258,28 @@ html.theme-candy .sub-tagline {
     0 0 20px rgba(255,124,182,0.35);
 }
 /* Social row: plum text, candy-pink underline that deepens on hover. */
-html.theme-candy .hero-social-link {
+html.theme-bubblegum .hero-social-link {
   color: var(--ls-text);
   border-bottom-color: var(--ls-pink-accent);
 }
-html.theme-candy .hero-social-link:hover {
+html.theme-bubblegum .hero-social-link:hover {
   color: var(--ls-pink-deep);
   border-color: var(--ls-pink-deep);
 }
-html.theme-candy .footer-sep { color: var(--ls-pink-accent); }
+html.theme-bubblegum .footer-sep { color: var(--ls-pink-accent); }
 
-/* Heart tint: candy keeps the kawaii ♡; nudge its drop-shadow toward candy
+/* Heart tint: bubblegum keeps the kawaii ♡; nudge its drop-shadow toward bubblegum
    glow (the video itself is unchanged). */
 /* Blend both hero videos into the gradient. `darken` drops their light
    baked-in backgrounds (multiply left a visible MP4 box) — keep exactly one. */
-html.theme-candy .heart-mark,
-html.theme-candy .hero-mark { mix-blend-mode: darken; }
+html.theme-bubblegum .heart-mark,
+html.theme-bubblegum .hero-mark { mix-blend-mode: darken; }
 /* Feather the wordmark video's rectangle edges so the pale panel blends out. */
-html.theme-candy .hero-mark {
+html.theme-bubblegum .hero-mark {
   -webkit-mask-image: radial-gradient(ellipse 70% 58% at 50% 50%, #000 54%, rgba(0,0,0,0.45) 76%, transparent 92%);
           mask-image: radial-gradient(ellipse 70% 58% at 50% 50%, #000 54%, rgba(0,0,0,0.45) 76%, transparent 92%);
 }
-html.theme-candy .heart-mark {
+html.theme-bubblegum .heart-mark {
   filter:
     drop-shadow(0 0 18px rgba(255,73,166,0.40))
     drop-shadow(0 10px 26px rgba(233,30,140,0.30));
@@ -1289,7 +1289,7 @@ html.theme-candy .heart-mark {
    Full override of the base basalt skin. Glossy cream→pink glass fill, white
    ~0.85 edge stroke, pink halo glow, PLUM label on the cream glass surface
    (plum-on-cream >12:1). No text ever rides the bright --ls-grad-pill. */
-html.theme-candy .hero-cta {
+html.theme-bubblegum .hero-cta {
   font-family: var(--font-body);
   font-size: 13px;
   font-weight: 700;
@@ -1309,7 +1309,7 @@ html.theme-candy .hero-cta {
   transition: transform 0.16s ease, box-shadow 0.3s ease, filter 0.2s ease, color 0.2s ease;
 }
 /* Re-skin the inherited ::before (was stone grain) → soft white gloss cap. */
-html.theme-candy .hero-cta::before {
+html.theme-bubblegum .hero-cta::before {
   background-image: none;
   background: linear-gradient(180deg, rgba(255,255,255,0.55), transparent 60%);
   border-radius: 999px;
@@ -1319,14 +1319,14 @@ html.theme-candy .hero-cta::before {
   opacity: 1;
 }
 /* Re-skin the inherited ::after (was ember vein) → faint candy underglow line. */
-html.theme-candy .hero-cta::after {
+html.theme-bubblegum .hero-cta::after {
   background: linear-gradient(90deg, transparent, var(--ls-pink-accent), transparent);
   box-shadow: 0 0 10px rgba(255,73,166,0.45);
   opacity: 0;
 }
-html.theme-candy .hero-cta .cta-glyph { color: var(--ls-pink-deep); opacity: 0.9; }
-html.theme-candy .hero-cta:hover,
-html.theme-candy .hero-cta:focus-visible {
+html.theme-bubblegum .hero-cta .cta-glyph { color: var(--ls-pink-deep); opacity: 0.9; }
+html.theme-bubblegum .hero-cta:hover,
+html.theme-bubblegum .hero-cta:focus-visible {
   color: var(--ls-pink-deep);
   background: var(--ls-glass-strong);
   box-shadow:
@@ -1335,27 +1335,27 @@ html.theme-candy .hero-cta:focus-visible {
   text-shadow: 0 1px 0 rgba(255,255,255,0.8);
   transform: translateY(-2px);
 }
-html.theme-candy .hero-cta:hover::after,
-html.theme-candy .hero-cta:focus-visible::after { opacity: 0.85; }
-html.theme-candy .hero-cta:hover .cta-glyph,
-html.theme-candy .hero-cta:focus-visible .cta-glyph { color: var(--ls-pink-deep); opacity: 1; text-shadow: none; }
-html.theme-candy .hero-cta:active { transform: translateY(1px); }
-html.theme-candy .hero-cta:focus-visible { outline: 2px solid var(--ls-focus); outline-offset: 3px; }
+html.theme-bubblegum .hero-cta:hover::after,
+html.theme-bubblegum .hero-cta:focus-visible::after { opacity: 0.85; }
+html.theme-bubblegum .hero-cta:hover .cta-glyph,
+html.theme-bubblegum .hero-cta:focus-visible .cta-glyph { color: var(--ls-pink-deep); opacity: 1; text-shadow: none; }
+html.theme-bubblegum .hero-cta:active { transform: translateY(1px); }
+html.theme-bubblegum .hero-cta:focus-visible { outline: 2px solid var(--ls-focus); outline-offset: 3px; }
 /* Per-button accents remapped from gold embers to soft candy halos so the set
    still reads as one family but stays glass. */
-html.theme-candy .hero-cta--glyph   { --ember:var(--ls-pink-accent); --ember-hot:var(--ls-pink-deep); }
-html.theme-candy .hero-cta--null    { --ember:#c39bff; --ember-hot:#a36bff; }
-html.theme-candy .hero-cta--zara    { --ember:#ff9ecb; --ember-hot:#ff5fa8; }
-html.theme-candy .hero-cta--forging { --ember:#ff8fb3; --ember-hot:#ff4f8f; }
-html.theme-candy .hero-cta--games   { --ember:#7fe3cf; --ember-hot:#34c7a6; }
+html.theme-bubblegum .hero-cta--glyph   { --ember:var(--ls-pink-accent); --ember-hot:var(--ls-pink-deep); }
+html.theme-bubblegum .hero-cta--null    { --ember:#c39bff; --ember-hot:#a36bff; }
+html.theme-bubblegum .hero-cta--zara    { --ember:#ff9ecb; --ember-hot:#ff5fa8; }
+html.theme-bubblegum .hero-cta--forging { --ember:#ff8fb3; --ember-hot:#ff4f8f; }
+html.theme-bubblegum .hero-cta--games   { --ember:#7fe3cf; --ember-hot:#34c7a6; }
 
 /* ── SECTION HEADERS ────────────────────────────────────────────────────────
-   Candy gradient-text title; deco sparkle in candy pink. */
-html.theme-candy .section-deco {
+   Bubblegum gradient-text title; deco sparkle in candy pink. */
+html.theme-bubblegum .section-deco {
   color: var(--ls-pink-accent);
   text-shadow: 0 0 12px rgba(255,73,166,0.55);
 }
-html.theme-candy .section-title {
+html.theme-bubblegum .section-title {
   background: var(--ls-grad-text);
   -webkit-background-clip: text;
   background-clip: text;
@@ -1364,14 +1364,14 @@ html.theme-candy .section-title {
   filter: drop-shadow(0 2px 0 rgba(255,255,255,0.6));
 }
 @supports not ((-webkit-background-clip:text) or (background-clip:text)) {
-  html.theme-candy .section-title { -webkit-text-fill-color: currentColor; color: var(--ls-heading); }
+  html.theme-bubblegum .section-title { -webkit-text-fill-color: currentColor; color: var(--ls-heading); }
 }
 
 /* ── TOOL CARDS : GLASS-STICKER (.win98-card) ───────────────────────────────
    Gradient glass fill, NO hard border, film-grain ::before + white gloss
    ::after, halo shadow. Real children (.titlebar/.card-body) are lifted above
    the pseudo layers via z-index. */
-html.theme-candy .win98-card {
+html.theme-bubblegum .win98-card {
   background: var(--ls-glass);
   border: 0;
   border-radius: var(--ls-radius);
@@ -1380,7 +1380,7 @@ html.theme-candy .win98-card {
   isolation: isolate;
   overflow: hidden;
 }
-html.theme-candy .win98-card::before {
+html.theme-bubblegum .win98-card::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -1392,7 +1392,7 @@ html.theme-candy .win98-card::before {
   mix-blend-mode: soft-light;
   opacity: calc(0.055 * var(--ls-grain));
 }
-html.theme-candy .win98-card::after {
+html.theme-bubblegum .win98-card::after {
   content: "";
   position: absolute;
   inset: 0 0 auto 0;
@@ -1404,83 +1404,83 @@ html.theme-candy .win98-card::after {
   mix-blend-mode: plus-lighter;
 }
 /* Lift real card content above grain + gloss. */
-html.theme-candy .win98-card > .titlebar,
-html.theme-candy .win98-card > .card-body { position: relative; z-index: 1; }
-html.theme-candy .win98-card:hover {
+html.theme-bubblegum .win98-card > .titlebar,
+html.theme-bubblegum .win98-card > .card-body { position: relative; z-index: 1; }
+html.theme-bubblegum .win98-card:hover {
   transform: translateY(-2px) rotate(-0.3deg);
   box-shadow: var(--ls-glow-strong);
 }
 /* Titlebar = frosted glass tab strip (no hard border). */
-html.theme-candy .titlebar {
+html.theme-bubblegum .titlebar {
   background: linear-gradient(180deg, var(--ls-glass-strong) 0%, var(--ls-glass-solid) 100%);
   border-bottom: 1px solid var(--ls-glass-border);
 }
-html.theme-candy .win-title {
+html.theme-bubblegum .win-title {
   color: var(--ls-text-muted);
   background: rgba(255,255,255,0.6);
 }
-html.theme-candy .win-btn {
+html.theme-bubblegum .win-btn {
   background: rgba(255,255,255,0.7);
   color: var(--ls-text-muted);
 }
-html.theme-candy .win-buttons .win-btn:nth-child(2) { background: rgba(255,111,190,0.45); }
-html.theme-candy .win-btn-close { background: var(--ls-pink-deep) !important; color: #fff !important; }
+html.theme-bubblegum .win-buttons .win-btn:nth-child(2) { background: rgba(255,111,190,0.45); }
+html.theme-bubblegum .win-btn-close { background: var(--ls-pink-deep) !important; color: #fff !important; }
 /* Card text on glass: badge = candy pink (large/uppercase ok), desc = muted plum. */
-html.theme-candy .card-badge { color: var(--ls-pink-deep); }
-html.theme-candy .card-desc { color: var(--ls-text-muted); }
+html.theme-bubblegum .card-badge { color: var(--ls-pink-deep); }
+html.theme-bubblegum .card-desc { color: var(--ls-text-muted); }
 
 /* card-link = the ONE legal white-on-pink: deep --ls-grad-btn fill. */
-html.theme-candy .card-link {
+html.theme-bubblegum .card-link {
   color: var(--ls-btn-tx);
   background: var(--ls-grad-btn);
   border: 1.5px solid rgba(255,255,255,0.5);
   box-shadow: var(--ls-halo-btn);
   text-shadow: none;
 }
-html.theme-candy .card-link:hover {
+html.theme-bubblegum .card-link:hover {
   transform: translateY(-2px);
   box-shadow: var(--ls-glow-strong);
   filter: brightness(1.04);
 }
-html.theme-candy .card-link:active { transform: translateY(1px); box-shadow: var(--ls-halo-pill); }
+html.theme-bubblegum .card-link:active { transform: translateY(1px); box-shadow: var(--ls-halo-pill); }
 /* Soon = quiet frosted chip, plum label on glass. */
-html.theme-candy .card-link--soon {
+html.theme-bubblegum .card-link--soon {
   background: var(--ls-glass-light);
   color: var(--ls-text-muted);
   border: 1.5px dashed var(--ls-pink-accent);
   box-shadow: none;
   text-shadow: none;
 }
-html.theme-candy .card-link--soon:hover { transform: none; box-shadow: none; filter: none; }
+html.theme-bubblegum .card-link--soon:hover { transform: none; box-shadow: none; filter: none; }
 /* Aaron variant keeps a warm titlebar but in candy glass terms. */
-html.theme-candy .win98-card--aaron .titlebar {
+html.theme-bubblegum .win98-card--aaron .titlebar {
   background: linear-gradient(180deg, #fff2ea 0%, #ffe0d2 100%);
 }
 
 /* ── CATEGORY DISCLOSURE ────────────────────────────────────────────────────
    Plum/pink accents on the cream gradient. */
-html.theme-candy summary.category-header:hover { background-color: rgba(233,30,140,0.06); }
-html.theme-candy summary.category-header:focus-visible {
+html.theme-bubblegum summary.category-header:hover { background-color: rgba(233,30,140,0.06); }
+html.theme-bubblegum summary.category-header:focus-visible {
   outline: 2px solid var(--ls-focus);
   outline-offset: 2px;
 }
-html.theme-candy .category-title { color: var(--ls-pink-deep); }
-html.theme-candy .category-count { color: var(--ls-pink-accent); }
-html.theme-candy .category-rule {
+html.theme-bubblegum .category-title { color: var(--ls-pink-deep); }
+html.theme-bubblegum .category-count { color: var(--ls-pink-accent); }
+html.theme-bubblegum .category-rule {
   background: linear-gradient(90deg, var(--ls-pink-accent) 0%, transparent 100%);
 }
-html.theme-candy .category-chevron { color: var(--ls-pink-accent); }
+html.theme-bubblegum .category-chevron { color: var(--ls-pink-accent); }
 
 /* ── SNEAK PEEKS / GALLERY ──────────────────────────────────────────────────
    Glass framing for shots; candy text. */
-html.theme-candy .gallery-subtitle { color: var(--ls-text); }
-html.theme-candy .gallery-img {
+html.theme-bubblegum .gallery-subtitle { color: var(--ls-text); }
+html.theme-bubblegum .gallery-img {
   border: 1.5px solid var(--ls-glass-border);
   box-shadow: var(--ls-glow);
   background: var(--ls-glass-solid);
 }
-html.theme-candy .gallery-caption { color: var(--ls-text-muted); }
-html.theme-candy .gallery-empty {
+html.theme-bubblegum .gallery-caption { color: var(--ls-text-muted); }
+html.theme-bubblegum .gallery-empty {
   color: var(--ls-text);
   background: var(--ls-glass-light);
   border: 1.5px dashed var(--ls-pink-accent);
@@ -1488,32 +1488,32 @@ html.theme-candy .gallery-empty {
 
 /* ── NOTICE ─────────────────────────────────────────────────────────────────
    Glass card with a candy-pink left accent. */
-html.theme-candy .notice-inner {
+html.theme-bubblegum .notice-inner {
   background: var(--ls-glass);
   border: 0;
   border-left: 4px solid var(--ls-pink-accent);
   border-radius: var(--ls-radius-sm);
   box-shadow: var(--ls-glow);
 }
-html.theme-candy .notice-text { color: var(--ls-text-muted); }
-html.theme-candy .notice-link {
+html.theme-bubblegum .notice-text { color: var(--ls-text-muted); }
+html.theme-bubblegum .notice-link {
   color: var(--ls-pink-deep);
   border-bottom-color: var(--ls-pink-accent);
 }
-html.theme-candy .notice-link:hover { color: var(--ls-text-strong); border-color: var(--ls-pink-deep); }
+html.theme-bubblegum .notice-link:hover { color: var(--ls-text-strong); border-color: var(--ls-pink-deep); }
 
 /* ── MISSION ────────────────────────────────────────────────────────────────*/
-html.theme-candy .mission-text { color: var(--ls-text); }
-html.theme-candy .mission-sparkles {
+html.theme-bubblegum .mission-text { color: var(--ls-text); }
+html.theme-bubblegum .mission-sparkles {
   color: var(--ls-pink-accent);
   text-shadow: 0 0 10px rgba(255,73,166,0.40);
 }
-html.theme-candy .mission-sparkles span:nth-child(2) { color: #ffb84f; }
-html.theme-candy .mission-sparkles span:nth-child(3) { color: #34c7a6; }
+html.theme-bubblegum .mission-sparkles span:nth-child(2) { color: #ffb84f; }
+html.theme-bubblegum .mission-sparkles span:nth-child(3) { color: #34c7a6; }
 
 /* ── SUPPORT / CONTACT ──────────────────────────────────────────────────────
    Glass card, candy gradient-text heading, deep-pill Ko-fi button (white text). */
-html.theme-candy .support-inner {
+html.theme-bubblegum .support-inner {
   background: var(--ls-glass);
   border: 0;
   border-radius: var(--ls-radius);
@@ -1522,7 +1522,7 @@ html.theme-candy .support-inner {
   isolation: isolate;
   overflow: hidden;
 }
-html.theme-candy .support-inner::after {
+html.theme-bubblegum .support-inner::after {
   content: "";
   position: absolute;
   inset: 0 0 auto 0;
@@ -1533,8 +1533,8 @@ html.theme-candy .support-inner::after {
   background: linear-gradient(180deg, rgba(255,255,255,0.5), transparent);
   mix-blend-mode: plus-lighter;
 }
-html.theme-candy .support-inner > * { position: relative; z-index: 1; }
-html.theme-candy .support-text {
+html.theme-bubblegum .support-inner > * { position: relative; z-index: 1; }
+html.theme-bubblegum .support-text {
   background: var(--ls-grad-text);
   -webkit-background-clip: text;
   background-clip: text;
@@ -1542,41 +1542,41 @@ html.theme-candy .support-text {
   color: var(--ls-heading);
 }
 @supports not ((-webkit-background-clip:text) or (background-clip:text)) {
-  html.theme-candy .support-text { -webkit-text-fill-color: currentColor; color: var(--ls-heading); }
+  html.theme-bubblegum .support-text { -webkit-text-fill-color: currentColor; color: var(--ls-heading); }
 }
-html.theme-candy .kofi-btn {
+html.theme-bubblegum .kofi-btn {
   color: var(--ls-btn-tx);
   background: var(--ls-grad-btn);
   border: 1.5px solid rgba(255,255,255,0.5);
   box-shadow: var(--ls-halo-btn);
   text-shadow: none;
 }
-html.theme-candy .kofi-btn:hover {
+html.theme-bubblegum .kofi-btn:hover {
   transform: translateY(-2px);
   box-shadow: var(--ls-glow-strong);
   filter: brightness(1.04);
 }
-html.theme-candy .kofi-btn:active { transform: translateY(1px); box-shadow: var(--ls-halo-pill); }
-html.theme-candy .support-sub { color: var(--ls-text-muted); }
+html.theme-bubblegum .kofi-btn:active { transform: translateY(1px); box-shadow: var(--ls-halo-pill); }
+html.theme-bubblegum .support-sub { color: var(--ls-text-muted); }
 
 /* ── FOOTER ─────────────────────────────────────────────────────────────────*/
-html.theme-candy .footer-copy { color: var(--ls-text-muted); }
-html.theme-candy .footer-heart { color: var(--ls-pink-accent); }
+html.theme-bubblegum .footer-copy { color: var(--ls-text-muted); }
+html.theme-bubblegum .footer-heart { color: var(--ls-pink-accent); }
 
 
-/* ── MOBILE (candy) ─────────────────────────────────────────────────────────
+/* ── MOBILE (bubblegum) ─────────────────────────────────────────────────────────
    Match base mobile CTA sizing; pills stay legible. */
 @media (max-width: 760px) {
-  html.theme-candy .hero-cta { padding: 11px 20px; font-size: 13px; }
+  html.theme-bubblegum .hero-cta { padding: 11px 20px; font-size: 13px; }
 }
 
-/* ── A11Y (candy) — darker pink >=3:1 on the candy gradient. Kept last in the
-   candy block so it beats the decorative accent colours above. */
-html.theme-candy .section-deco,
-html.theme-candy .footer-sep,
-html.theme-candy .footer-heart,
-html.theme-candy .category-count,
-html.theme-candy .mission-sparkles { color: #b3185c; }
+/* ── A11Y (bubblegum) — darker pink >=3:1 on the candy gradient. Kept last in the
+   bubblegum block so it beats the decorative accent colours above. */
+html.theme-bubblegum .section-deco,
+html.theme-bubblegum .footer-sep,
+html.theme-bubblegum .footer-heart,
+html.theme-bubblegum .category-count,
+html.theme-bubblegum .mission-sparkles { color: #b3185c; }
 
 /* --- BASALT theme + ankh hero --- */
 /* ════════════════════════════════════════════════════════════════════════════
@@ -1588,8 +1588,8 @@ html.theme-candy .mission-sparkles { color: #b3185c; }
 
    PREREQUISITE LEAK FIX (do this too — see notes): the kawaii-only rules at
    styles.css:142-143 and 853-857 use html:not(.theme-retro) and WILL leak into
-   basalt. Re-scope them to add :not(.theme-candy):not(.theme-basalt):not(.theme-parchment), e.g.
-     html:not(.theme-retro):not(.theme-candy):not(.theme-basalt):not(.theme-parchment) #sparkle-field {…}
+   basalt. Re-scope them to add :not(.theme-bubblegum):not(.theme-basalt):not(.theme-parchment), e.g.
+     html:not(.theme-retro):not(.theme-bubblegum):not(.theme-basalt):not(.theme-parchment) #sparkle-field {…}
    (same for .starburst, .heart-glyph, .orb-ring-css, .logo-text). Without this,
    basalt inherits the kawaii hide of .heart-glyph/.logo-text and the basalt
    wordmark/ankh swap below partially fails.
@@ -1936,26 +1936,26 @@ html.theme-basalt summary:focus-visible {
 /* ── Contrast: KAWAII (no theme class) ─────────────────────────────────────────
    Small pink text → #b3185c (5.1–6.4:1 on the pink paper). White-on-pink
    buttons → #d81b73→#a51259 (white 4.86–7.42:1). */
-html:not(.theme-retro):not(.theme-candy):not(.theme-basalt):not(.theme-parchment) .card-badge,
-html:not(.theme-retro):not(.theme-candy):not(.theme-basalt):not(.theme-parchment) .category-count,
-html:not(.theme-retro):not(.theme-candy):not(.theme-basalt):not(.theme-parchment) .notice-link {
+html:not(.theme-retro):not(.theme-bubblegum):not(.theme-basalt):not(.theme-parchment) .card-badge,
+html:not(.theme-retro):not(.theme-bubblegum):not(.theme-basalt):not(.theme-parchment) .category-count,
+html:not(.theme-retro):not(.theme-bubblegum):not(.theme-basalt):not(.theme-parchment) .notice-link {
   color: #b3185c;
 }
-html:not(.theme-retro):not(.theme-candy):not(.theme-basalt):not(.theme-parchment) .notice-link { border-bottom-color: #b3185c; }
-html:not(.theme-retro):not(.theme-candy):not(.theme-basalt):not(.theme-parchment) .sub-tagline {
+html:not(.theme-retro):not(.theme-bubblegum):not(.theme-basalt):not(.theme-parchment) .notice-link { border-bottom-color: #b3185c; }
+html:not(.theme-retro):not(.theme-bubblegum):not(.theme-basalt):not(.theme-parchment) .sub-tagline {
   color: #b3185c;
   text-shadow: 0 0 6px rgba(255, 79, 179, 0.30);
 }
-html:not(.theme-retro):not(.theme-candy):not(.theme-basalt):not(.theme-parchment) .card-link:not(.card-link--soon),
-html:not(.theme-retro):not(.theme-candy):not(.theme-basalt):not(.theme-parchment) .kofi-btn,
-html:not(.theme-retro):not(.theme-candy):not(.theme-basalt):not(.theme-parchment) .theme-pill[aria-pressed="true"] {
+html:not(.theme-retro):not(.theme-bubblegum):not(.theme-basalt):not(.theme-parchment) .card-link:not(.card-link--soon),
+html:not(.theme-retro):not(.theme-bubblegum):not(.theme-basalt):not(.theme-parchment) .kofi-btn,
+html:not(.theme-retro):not(.theme-bubblegum):not(.theme-basalt):not(.theme-parchment) .theme-pill[aria-pressed="true"] {
   background: linear-gradient(135deg, #d81b73 0%, #a51259 100%);
   color: #fff;
 }
 
 /* ── Contrast: CANDY ─────────────────────────────────────────────────────────── */
-html.theme-candy .card-badge { color: #b3185c; }
-html.theme-candy .sub-tagline {
+html.theme-bubblegum .card-badge { color: #b3185c; }
+html.theme-bubblegum .sub-tagline {
   color: #b3185c;
   text-shadow: 0 0 6px rgba(255, 73, 166, 0.30);
 }
@@ -1971,10 +1971,10 @@ html.theme-candy .sub-tagline {
   outline: 2px solid #7a1540;
   outline-offset: 3px;
 }
-html.theme-candy .card-link:focus-visible,
-html.theme-candy .kofi-btn:focus-visible,
-html.theme-candy .notice-link:focus-visible,
-html.theme-candy .hero-social-link:focus-visible {
+html.theme-bubblegum .card-link:focus-visible,
+html.theme-bubblegum .kofi-btn:focus-visible,
+html.theme-bubblegum .notice-link:focus-visible,
+html.theme-bubblegum .hero-social-link:focus-visible {
   outline: 2px solid var(--ls-focus);
   outline-offset: 3px;
 }
@@ -2323,7 +2323,7 @@ html.theme-retro:root .support-actions a.kofi-btn.kofi-btn--ghost { color: var(-
   --ring-a: #ff4fb3; --ring-b: #ffd1e8; --ring-c: #b3185c;
   --wipe-ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
-html.theme-candy {
+html.theme-bubblegum {
   --tilt-max: 4;
   --spot: rgba(255, 255, 255, 0.55);               /* white gloss glow */
   --lift-y: -2px; --lift-rot: -0.3deg;
@@ -2377,7 +2377,7 @@ html:root body .win98-card:hover {
     rotateX(calc(var(--ry, 0) * var(--tilt-max) * -1deg))
     rotateY(calc(var(--rx, 0) * var(--tilt-max) * 1deg));
 }
-/* Spotlight lives on the free .card-body::after (candy owns the card's pseudos).
+/* Spotlight lives on the free .card-body::after (bubblegum owns the card's pseudos).
    isolation keeps it under the card text, above the card fill. */
 html:root body .card-body { position: relative; isolation: isolate; }
 html:root body .card-body::after {
@@ -2417,7 +2417,7 @@ html:root .hero-cta-group a.hero-cta.hero-cta--primary {
   --ring-fill: linear-gradient(180deg, #f2c7da 0%, #e8aecb 52%, #dd9bbe 100%);
   --ring-fill-hover: linear-gradient(180deg, #f7d4e3 0%, #edb6d1 52%, #e2a3c4 100%);
 }
-html.theme-candy:root .hero-cta-group a.hero-cta.hero-cta--primary {
+html.theme-bubblegum:root .hero-cta-group a.hero-cta.hero-cta--primary {
   --ring-fill: var(--ls-glass);
   --ring-fill-hover: linear-gradient(var(--ls-glass-strong), var(--ls-glass-strong));
 }
@@ -2430,7 +2430,7 @@ html:root .support-actions a.kofi-btn:not(.kofi-btn--ghost) {
   --ring-fill: linear-gradient(135deg, #d81b73 0%, #a51259 100%);
   --ring-fill-hover: var(--ring-fill);
 }
-html.theme-candy:root .support-actions a.kofi-btn:not(.kofi-btn--ghost) {
+html.theme-bubblegum:root .support-actions a.kofi-btn:not(.kofi-btn--ghost) {
   --ring-fill: var(--ls-grad-btn);
 }
 html.theme-basalt:root .support-actions a.kofi-btn:not(.kofi-btn--ghost) {
