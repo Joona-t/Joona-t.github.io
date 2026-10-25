@@ -1,5 +1,11 @@
 # Bugs & Iterations
 
+## 2026-10-25: ITER: Tagline is now "Good Vibes Only"
+
+**Change:** The hero tagline "Retro pink tools for a calmer, more beautiful internet." is now **Good Vibes Only 😎**, at Joona's request. In basalt and parchment the 😎 becomes **𓈗** (Egyptian hieroglyph N035A, water), through one new row in the `ancientGlyphs` table. The `<title>` and `og:description` keep the old line, since the request was for the visible header.
+**Verification:** Local Chromium. Basalt and parchment hide the 😎 and draw 𓈗 (`::before` content); bubblegum and kawaii show 😎 (`.glyph-orig` inline). Basalt hero screenshot checked. `node --check` passes. Cache strings bumped to `2026-10-25-vibes`.
+**Files:** index.html, script.js
+
 ## 2026-10-25: ITER + BUG: Glyph Grid Studio card says "Visit"; basalt card buttons lose the pink glow
 
 **Change:** The Glyph Grid Studio card's button now reads "Visit" instead of "Download", because it links to the studio's site, not a file. Changed in `data/gallery.json` and rebuilt with `scripts/build-gallery.py`, which touched only that line.
