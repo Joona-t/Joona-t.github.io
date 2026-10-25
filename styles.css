@@ -2472,15 +2472,16 @@ html:root .support-actions a.kofi-btn:not(.kofi-btn--ghost):focus-visible {
   .hero-inner > .hero-mark,
   .hero-inner > .logo-text { --i: 1; }
   .hero-inner > .tagline,
-  .hero-inner > .sub-tagline { --i: 2; }
+  .hero-inner > .sub-tagline,
+  .hero-inner > .lore { --i: 2; }
   .hero-inner > .hero-cta-group { --i: 3; }
-  .hero-inner > :is(.heart-orb, .hero-mark, .logo-text, .tagline, .sub-tagline, .hero-cta-group) {
+  .hero-inner > :is(.heart-orb, .hero-mark, .logo-text, .tagline, .sub-tagline, .lore, .hero-cta-group) {
     transition:
       opacity 560ms var(--ease-out) calc(var(--i) * 120ms),
       translate 680ms var(--ease-pop) calc(var(--i) * 120ms);
   }
   @starting-style {
-    .hero-inner > :is(.heart-orb, .hero-mark, .logo-text, .tagline, .sub-tagline, .hero-cta-group) {
+    .hero-inner > :is(.heart-orb, .hero-mark, .logo-text, .tagline, .sub-tagline, .lore, .hero-cta-group) {
       opacity: 0;
       translate: 0 14px;
     }
@@ -2817,3 +2818,53 @@ html.theme-parchment .ankh-glyph {
           mask-image: radial-gradient(circle, #000 60%, transparent 74%);
 }
 html.theme-parchment .site-brand-mark { filter: sepia(0.85) saturate(0.7) contrast(1.05); }
+
+/* ── LORE INSCRIPTION ──────────────────────────────────────────────────────────
+   Joona's sigil, the four-element verse and the Aramaic cipher, carved under
+   the taglines. Only the two esoteric themes show it: basalt (ember on stone)
+   and parchment (rubric and ink on the leaf). */
+.lore { display: none; }
+html.theme-basalt .lore,
+html.theme-parchment .lore {
+  display: block;
+  max-width: 34rem;
+  margin: 0 auto var(--gap-md);
+  padding: var(--gap-sm) var(--gap-md);
+  text-align: center;
+  font-family: 'Cormorant Garamond', 'Cinzel', Georgia, serif;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+}
+.lore-sigil {
+  margin: 0 0 10px;
+  font-size: 1.15rem;
+  letter-spacing: 0.14em;
+}
+.lore-verse {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 1.15rem;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.75;
+}
+.lore-glyph {
+  display: inline-block;
+  width: 1.6em;
+  font-style: normal;
+}
+.lore-cipher {
+  margin: 10px 0 0;
+  font-size: 1.05rem;
+  letter-spacing: 0.22em;
+  font-family: 'Noto Sans Imperial Aramaic', 'Segoe UI Historic', serif;
+}
+html.theme-basalt .lore { border-color: var(--bs-line); color: var(--bs-text); }
+html.theme-basalt .lore-sigil,
+html.theme-basalt .lore-glyph,
+html.theme-basalt .lore-cipher { color: var(--bs-ember); text-shadow: 0 0 8px rgba(217,162,59,.35); }
+html.theme-parchment .lore { border-color: rgba(122,31,26,.45); color: var(--pc-ink); }
+html.theme-parchment .lore-sigil,
+html.theme-parchment .lore-glyph,
+html.theme-parchment .lore-cipher { color: var(--pc-rubric); }

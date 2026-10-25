@@ -1,5 +1,11 @@
 # Bugs & Iterations
 
+## 2026-10-25: ITER: Lore inscription in basalt and parchment
+
+**Change:** Joona's lore is now carved under the taglines in the two esoteric themes: the sigil line (ヨーナ 𓇳 เมฆ 🜁 餓狼), the four-element verse (𓂀 veil, 🜃 ground, ✺ Architects, 🜂 fire) and the Imperial Aramaic cipher. It is set in Cormorant italic between hairline rules, with glyphs in ember (basalt) or oxblood rubric (parchment). The `.lore` aside is `display:none` in kawaii, candy and retro, and it joins the hero entrance stagger. Decorative glyphs and the cipher are `aria-hidden`, so screen readers get the verse text. Cache strings bumped to `2026-10-25-lore`.
+**Verification:** Local Chromium at 1280px and 375px. Lore shows only in basalt and parchment (307px wide on a phone). scrollWidth = 375 in all five themes. The Aramaic glyphs render. No console errors.
+**Files:** index.html, styles.css
+
 ## 2026-10-25: BUG + ITER: Basalt loses its beige panels; new esoteric Parchment theme
 
 **Problem:** Joona found basalt's charcoal-on-cream wordmark panel (and its ember frame) off-putting on the dark stone.
