@@ -1,5 +1,11 @@
 # Bugs & Iterations
 
+## 2026-10-25: ITER: Basalt is the default theme; candy renamed to bubblegum
+
+**Change:** A first visit now opens on basalt instead of candy. The candy theme is renamed bubblegum throughout: the class `theme-candy` → `theme-bubblegum` (115 selectors), the storage key `'candy'` → `'bubblegum'`, and the theme-name comments. Colour adjectives such as "candy pink" and the `--candy-mint` token stay. The pills now read basalt · bubblegum · parchment · kawaii · retro. A visitor who saved `'candy'` is migrated to `'bubblegum'` in the head script, so nobody loses their choice. Cache strings bumped to `2026-10-25-basalt-default`.
+**Verification:** Local Chromium. With nothing saved, the page opens on `theme-basalt` with the basalt pill pressed. A saved `'candy'` reloads as `theme-bubblegum`, the stored value is rewritten, and the bubblegum gradient applies. Each theme loads only its own hero videos. scrollWidth = 375 in all five themes on a phone. No console errors. `node --check` passes.
+**Files:** index.html, script.js, styles.css, styles-retro.css
+
 ## 2026-10-25: BUG + ITER: Basalt ankh glow off-centre; ancient glyphs replace the cute marks
 
 **Problem 1:** In basalt, the ember glow sat 20px to the right of the ankh.
