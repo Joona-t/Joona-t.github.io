@@ -1696,8 +1696,12 @@ html.theme-basalt .ankh-glyph {
 html.theme-basalt .heart-orb::after {
   content: "";
   position: absolute;
-  inset: 0;
-  margin: auto;
+  /* Centre by transform: the pool (300px) is wider than the orb (260px), and an
+     over-wide abspos box with inset:0 + margin:auto puts all the overflow on
+     the right (LTR), shifting the light 20px off the ankh. */
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   width: 300px;
   height: 300px;
   border-radius: 50%;
@@ -2868,3 +2872,34 @@ html.theme-parchment .lore { border-color: rgba(122,31,26,.45); color: var(--pc-
 html.theme-parchment .lore-sigil,
 html.theme-parchment .lore-glyph,
 html.theme-parchment .lore-cipher { color: var(--pc-rubric); }
+
+/* ── ANCIENT GLYPHS (basalt + parchment) ──────────────────────────────────────
+   script.js wraps every emoji/heart/flower/sparkle in .glyph-swap with its
+   ancient counterpart in data-ancient. The esoteric themes hide the original
+   and draw the ancient glyph in the surrounding ink, with no pastel colours,
+   glows or emoji colour fonts. Other themes are untouched. */
+html.theme-basalt .glyph-orig,
+html.theme-parchment .glyph-orig { display: none; }
+html.theme-basalt .glyph-swap::before,
+html.theme-parchment .glyph-swap::before {
+  content: attr(data-ancient);
+  font-family: 'Noto Sans Egyptian Hieroglyphs', 'Segoe UI Historic', 'Apple Symbols', 'Noto Sans Runic', 'Noto Sans Symbols', serif;
+  font-style: normal;
+  font-weight: 400;
+}
+/* Ornaments take the theme accent, never the kawaii pastel per-child colours */
+html.theme-basalt :is(.section-deco, .mission-sparkles span, .footer-heart, .footer-sep) {
+  color: var(--bs-ember) !important;
+  text-shadow: 0 0 6px rgba(217,162,59,.35) !important;
+  animation: none !important;
+}
+html.theme-parchment :is(.section-deco, .mission-sparkles span, .footer-heart, .footer-sep) {
+  color: var(--pc-rubric) !important;
+  text-shadow: none !important;
+  animation: none !important;
+}
+/* Pacifico script reads as cute; basalt engraves in Cinzel like parchment */
+html.theme-basalt { --font-display: 'Cinzel', 'Cormorant Garamond', Georgia, serif; }
+/* Sparky stays (suite rule) but loses the pink: toned into each theme's ink */
+html.theme-basalt :is(.site-brand-mark, .gallery-mascot, .footer-sparky) { filter: grayscale(1) sepia(0.5) brightness(0.9); }
+html.theme-parchment :is(.site-brand-mark, .gallery-mascot, .footer-sparky) { filter: grayscale(1) sepia(0.85) contrast(1.05); }
