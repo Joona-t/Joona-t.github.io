@@ -9,7 +9,7 @@ const mqReduce = window.matchMedia('(prefers-reduced-motion: reduce)');
 const mqFine = window.matchMedia('(hover: hover) and (pointer: fine)');
 
 // ══════════════════════════════════════════════════════════════════════════════
-// THEME SWITCHER — candy (default) · kawaii ('pink') · basalt · retro
+// THEME SWITCHER — candy (default) · kawaii ('pink') · basalt · parchment · retro
 // The FOUC-prevention script in <head> already applied the saved theme class
 // (theme-candy when nothing is saved; kawaii = no class). This wires the switcher buttons and
 // syncs across tabs via the storage event.
@@ -25,12 +25,12 @@ const mqFine = window.matchMedia('(hover: hover) and (pointer: fine)');
       return;
     }
 
-    const CLASS = { retro: 'theme-retro', candy: 'theme-candy', basalt: 'theme-basalt' };
-    const VALID = ['pink', 'candy', 'basalt', 'retro'];
+    const CLASS = { retro: 'theme-retro', candy: 'theme-candy', basalt: 'theme-basalt', parchment: 'theme-parchment' };
+    const VALID = ['pink', 'candy', 'basalt', 'parchment', 'retro'];
 
     function apply(theme) {
       if (!VALID.includes(theme)) theme = 'candy';
-      root.classList.remove('theme-retro', 'theme-candy', 'theme-basalt');
+      root.classList.remove('theme-retro', 'theme-candy', 'theme-basalt', 'theme-parchment');
       if (CLASS[theme]) root.classList.add(CLASS[theme]);  // pink (kawaii) = no class
       pills.forEach(p => p.setAttribute('aria-pressed', String(p.dataset.theme === theme)));
       try { localStorage.setItem(KEY, theme); } catch (_) {}
@@ -40,7 +40,8 @@ const mqFine = window.matchMedia('(hover: hover) and (pointer: fine)');
 
     const current = root.classList.contains('theme-retro') ? 'retro'
       : root.classList.contains('theme-candy') ? 'candy'
-      : root.classList.contains('theme-basalt') ? 'basalt' : 'pink';
+      : root.classList.contains('theme-basalt') ? 'basalt'
+      : root.classList.contains('theme-parchment') ? 'parchment' : 'pink';
     pills.forEach(p => p.setAttribute('aria-pressed', String(p.dataset.theme === current)));
 
     // Theme wipe: a clip-path circle grows from the clicked pill over a View
@@ -116,7 +117,7 @@ const heroActivity = (function () {
 
 const isMotionTheme = () => {
   const c = document.documentElement.classList;
-  return !c.contains('theme-retro') && !c.contains('theme-basalt');
+  return !c.contains('theme-retro') && !c.contains('theme-basalt') && !c.contains('theme-parchment');
 };
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -413,8 +414,10 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 
   function themeShowsVideo(v) {
     if (root.classList.contains('theme-retro')) return false;
-    const basaltOnly = v.classList.contains('hero-mark--basalt');
-    return root.classList.contains('theme-basalt') ? basaltOnly : !basaltOnly;
+    const own = v.classList.contains('hero-mark--basalt') ? 'theme-basalt'
+      : v.classList.contains('hero-mark--parchment') ? 'theme-parchment' : null;
+    const active = ['theme-basalt', 'theme-parchment'].find(c => root.classList.contains(c));
+    return own ? own === active : !active;
   }
 
   function sync() {
