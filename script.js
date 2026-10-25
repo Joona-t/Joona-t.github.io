@@ -466,3 +466,73 @@ document.querySelectorAll('.win-btn-close').forEach(btn => {
   });
 });
 // @keyframes cardWobble lives in styles.css.
+
+// ══════════════════════════════════════════════════════════════════════════════
+// ANCIENT GLYPHS — basalt and parchment are esoteric themes, so the cute emoji,
+// hearts, flowers and sparkles become glyphs from ancient scripts (Egyptian
+// hieroglyphs, runes, alchemical and planetary signs). This only wraps each
+// one once: <span class="glyph-swap" data-ancient="𓆸"><span class="glyph-orig">🌸</span></span>.
+// CSS decides what shows: the original everywhere, the ancient glyph in
+// html.theme-basalt / html.theme-parchment. Runs over the whole page, so the
+// generated gallery (data/gallery.json) needs no edits. ✕ window buttons and
+// glyphs that are already ancient (☉ ☥ 𓂀, the lore) are not in the table.
+// ══════════════════════════════════════════════════════════════════════════════
+(function ancientGlyphs() {
+  const ANCIENT = {
+    '✦': '🜂',                                    // sparkle → fire rising (the lore's 🜂)
+    '✨': '𓇼', '💫': '𓇼', '✶': '𓆼',             // stars → star N014, lotus-thousand M012
+    '♡': '𓄣', '💕': '𓄣', '💌': '𓄣',             // hearts → ib, the heart F034
+    '✿': '⧫',                                     // ornament flower → the forge lozenge (⟊⧫ cipher)
+    '🌸': '𓆸', '🎀': '𓆸',                        // blossom, ribbon → lotus M009
+    '📖': '𓏛', '📚': '𓏛', '✉': '𓏛',             // books, letter → papyrus roll Y001
+    '📝': '𓏞',                                    // notes → scribe's kit Y003
+    '🧠': '𓂀',                                    // focus → wedjat eye D010
+    '🛡': 'ᛉ',                                     // privacy → algiz, rune of protection
+    '🍎': '𓊽',                                    // Mac & iOS → djed pillar R011
+    '🗣': '𓂋',                                    // language → mouth D021
+    '🃏': '𓎆',                                    // flashcards → tally of ten V020
+    '🌐': '🜨',                                    // web → alchemical verdigris
+    '⚛': '☿',                                     // STEM → Mercury
+    '🖨': '𓊮',                                    // 3D printer → brazier Q007
+    '🔭': '𓇯',                                    // physics → sky N001
+    '🧪': '🝪',                                    // lab → alembic
+    '🌙': '☽',                                     // sleep → moon
+    '🧩': 'ᛝ',                                     // extensions → ing rune
+    '📊': '𓍝',                                    // dashboard → plumb level U038
+    '🛋': '𓉐',                                    // a11y home → house O001
+    '🍪': '𓏏',                                    // cookies → bread loaf X001
+    '🧹': '𓂡',                                    // ad blocker → arm with stick D040
+    '✂': '𓌪',                                    // link cleaner → knife T030
+    '🚫': '𓂜',                                    // popup blocker → negation arms D035
+    '🖱': '𓂧',                                    // cursor → hand D046
+    '☕': '𓏊',                                    // coffee → jar W022
+    '⏲': '𓇳',                                    // timer → sun disc N005
+    '⏭': '𓂻',                                    // skip → walking legs D054
+  };
+  // Optional U+FE0F variation selector rides along with the emoji it follows.
+  const re = new RegExp('(' + Object.keys(ANCIENT).join('|') + ')️?', 'gu');
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+    acceptNode: n => n.parentElement.closest('script, style, .lore') ? NodeFilter.FILTER_REJECT
+      : (re.lastIndex = 0, re.test(n.nodeValue)) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP,
+  });
+  const nodes = [];
+  while (walker.nextNode()) nodes.push(walker.currentNode);
+  nodes.forEach(node => {
+    const frag = document.createDocumentFragment();
+    let last = 0;
+    node.nodeValue.replace(re, (match, key, at) => {
+      frag.append(node.nodeValue.slice(last, at));
+      const swap = document.createElement('span');
+      swap.className = 'glyph-swap';
+      swap.dataset.ancient = ANCIENT[key];
+      const orig = document.createElement('span');
+      orig.className = 'glyph-orig';
+      orig.textContent = match;
+      swap.append(orig);
+      frag.append(swap);
+      last = at + match.length;
+    });
+    frag.append(node.nodeValue.slice(last));
+    node.replaceWith(frag);
+  });
+})();

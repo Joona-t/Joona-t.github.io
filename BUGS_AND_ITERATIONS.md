@@ -1,5 +1,21 @@
 # Bugs & Iterations
 
+## 2026-10-25: BUG + ITER: Basalt ankh glow off-centre; ancient glyphs replace the cute marks
+
+**Problem 1:** In basalt, the ember glow sat 20px to the right of the ankh.
+**Root cause:** The glow `.heart-orb::after` is 300px wide inside the 260px orb and was centred with `inset: 0; margin: auto`. When an absolutely positioned box is wider than its container, the browser can't satisfy both sides, so in left-to-right layout `margin-left` resolves to 0 and all 40px of overflow goes to the right. Vertically the margins came out −20/−20, so it was only off horizontally.
+**Fix:** Centre it with `left: 50%; top: 50%; transform: translate(-50%, -50%)`. The `ankhPool` animation only changes opacity, so the transform is safe. No other element uses the `inset: 0` + `margin: auto` pattern (grep).
+
+**Change 2:** Joona asked for basalt and parchment to be esoteric, cryptic and mythic, built on the fire-rising and forge motifs, with no flowers, stars or emoji. `script.js` `ancientGlyphs()` wraps each emoji, heart, flower and sparkle in `.glyph-swap[data-ancient]`, using one lookup table of 34 entries. CSS hides the original and draws the ancient glyph, in those two themes only. The swaps:
+- ✦ → 🜂 (fire rising)
+- ✿ → ⧫ (forge lozenge from the cipher)
+- ♡ → 𓄣 (ib, the heart)
+- the category and card emoji → Egyptian hieroglyphs, runes, and alchemical or planetary signs (for example 🍎 → djed 𓊽, 🛡 → algiz ᛉ, 🧪 → alembic 🝪)
+
+The walk covers the whole page, so the generated gallery (`data/gallery.json`) needs no edits. Ornaments take the theme accent (ember or rubric) instead of the kawaii pastels and glows. Basalt's display font is now Cinzel instead of the Pacifico script. All three Sparky images are toned to the theme ink rather than pink; the mascot stays, as the suite rule requires. Cache strings bumped to `2026-10-25-glyphs`.
+**Verification:** Local Chromium. The glow centre and the ankh centre are identical (512, 264). There are 120 swaps, and no pictographs are left in either theme apart from ✕ (window buttons), © and the already-ancient ☉ ☥ 𓂀. Kawaii, candy and retro still show the originals (`.glyph-orig` is inline, no `::before`). scrollWidth = 375 in all five themes. No console errors. `node --check` passes.
+**Files:** index.html, script.js, styles.css
+
 ## 2026-10-25: ITER: Lore inscription in basalt and parchment
 
 **Change:** Joona's lore is now carved under the taglines in the two esoteric themes: the sigil line (ヨーナ 𓇳 เมฆ 🜁 餓狼), the four-element verse (𓂀 veil, 🜃 ground, ✺ Architects, 🜂 fire) and the Imperial Aramaic cipher. It is set in Cormorant italic between hairline rules, with glyphs in ember (basalt) or oxblood rubric (parchment). The `.lore` aside is `display:none` in kawaii, candy and retro, and it joins the hero entrance stagger. Decorative glyphs and the cipher are `aria-hidden`, so screen readers get the verse text. Cache strings bumped to `2026-10-25-lore`.
