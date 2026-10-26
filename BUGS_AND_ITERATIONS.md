@@ -1,5 +1,11 @@
 # Bugs & Iterations
 
+## 2026-10-27: ITER: "See the tools" hero button removed
+
+**Change:** At Joona's request the "See the tools" hero button is gone. The site bar's "Suite" link still jumps to `#tools`.
+**Verification:** Local headless Chrome: the hero group lists 9 buttons, none "See the tools"; screenshot checked.
+**Files:** index.html
+
 ## 2026-10-27: ITER: Destiny specks shrunk to pinpoints
 
 **Change:** Joona: the Qwen Guide sparkle was still too large. Specks are now 0.5–1.1 px (were 0.8–1.9 px) with a 1 px glow (was 2 px).
