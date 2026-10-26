@@ -1,5 +1,11 @@
 # Bugs & Iterations
 
+## 2026-10-27: ITER: Destiny specks shrunk to pinpoints
+
+**Change:** Joona: the Qwen Guide sparkle was still too large. Specks are now 0.5–1.1 px (were 0.8–1.9 px) with a 1 px glow (was 2 px).
+**Verification:** Local preview, basalt: 40 specks, widths 0.51–1.06 px; screenshot shows pinpoint sparkle. `node --check` passes. Cache strings bumped to `2026-10-27-fine`.
+**Files:** index.html, script.js, styles.css
+
 ## 2026-10-26: ITER: Destiny specks made subtle, a wordmark-style sparkle
 
 **Change:** Joona: the gold dust flying off the Qwen Guide button was too much; it should sparkle subtly like the LoveSpark wordmark's specks. Now 40 tiny (0.8–1.9 px) pale-gold dots sit on the button face and a thin halo just past its edge, twinkle in place and creep only a few px outward before fading. Softer glow (`0 0 2px`).

@@ -215,7 +215,7 @@ const isMotionTheme = () => {
       const y = -14 + Math.random() * 128;
       const dx = (x - 50) * 0.06;   // a few px outward, no further
       const dy = (y - 50) * 0.08;
-      const size = (0.8 + Math.random() * 1.1).toFixed(2);
+      const size = (0.5 + Math.random() * 0.6).toFixed(2);
       const dot = document.createElement('span');
       dot.style.cssText =
         `left:${x.toFixed(1)}%;top:${y.toFixed(1)}%;width:${size}px;height:${size}px;` +
