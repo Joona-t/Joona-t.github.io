@@ -2916,7 +2916,7 @@ html:root .hero-cta-group a.hero-cta.hero-cta--primary { overflow: visible; z-in
   position: absolute;
   border-radius: 50%;
   background: var(--c);
-  box-shadow: 0 0 2px var(--c);
+  box-shadow: 0 0 1px var(--c);
   opacity: 0;
   animation-name: destinySpeck;
   animation-timing-function: ease-in-out;
