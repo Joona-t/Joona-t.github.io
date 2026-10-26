@@ -1,5 +1,11 @@
 # Bugs & Iterations
 
+## 2026-10-26: ITER: Gold ring glow moves from "See the tools" to Qwen Guide
+
+**Change:** At Joona's request the conic ring glow (`.hero-cta--primary`) moved off the "See the tools" hero button and onto the Qwen Guide button, which also gains an Eye of Horus 𓂀 after its label. HTML-only: the class moved, no CSS changed.
+**Verification:** Local preview, basalt: only "Qwen Guide𓂀" computes a `conic-gradient` background; hero screenshot checked.
+**Files:** index.html
+
 ## 2026-10-26: ITER: Sneak Peeks moved first, under the hero buttons
 
 **Change:** At Joona's request the Sneak Peeks section (`#gallery`) now sits directly after the hero (buttons + hiatus note), before The Suite. The nav lists Peeks before Suite to match. Intro copy adds: some projects may stay fully private for personal use, but most will likely be published at some point.
