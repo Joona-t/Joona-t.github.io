@@ -1,5 +1,11 @@
 # Bugs & Iterations
 
+## 2026-10-26: ITER: Sneak Peeks moved first, under the hero buttons
+
+**Change:** At Joona's request the Sneak Peeks section (`#gallery`) now sits directly after the hero (buttons + hiatus note), before The Suite. The nav lists Peeks before Suite to match. Intro copy adds: some projects may stay fully private for personal use, but most will likely be published at some point.
+**Verification:** Local preview: `main` children order is top → gallery → tools; section screenshot checked in basalt; `build-gallery.py --check` in sync (9 categories, 35 cards).
+**Files:** index.html
+
 ## 2026-10-25: ITER: Tagline is now "Good Vibes Only"
 
 **Change:** The hero tagline "Retro pink tools for a calmer, more beautiful internet." is now **Good Vibes Only 😎**, at Joona's request. In basalt and parchment the 😎 becomes **𓈗** (Egyptian hieroglyph N035A, water), through one new row in the `ancientGlyphs` table. The `<title>` and `og:description` keep the old line, since the request was for the visible header.
