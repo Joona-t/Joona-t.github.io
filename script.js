@@ -192,16 +192,17 @@ const isMotionTheme = () => {
 })();
 
 // ══════════════════════════════════════════════════════════════════════════════
-// DESTINY SPECKS — light gold dust drifting outward from the primary hero CTA
-// (Qwen Guide), all themes. ~48 spans, CSS keyframes only. Not built under
-// reduced motion; paused with the shared hero visibility gate.
+// DESTINY SPECKS — fine gold sparkle on and just around the primary hero CTA
+// (Qwen Guide), all themes, like the wordmark's speck shimmer: tiny dots that
+// twinkle in place and creep a few px outward. ~40 spans, CSS keyframes only.
+// Not built under reduced motion; paused with the shared hero visibility gate.
 // ══════════════════════════════════════════════════════════════════════════════
 (function initDestinySpecks() {
   const host = document.querySelector('.hero-cta--primary');
   if (!host) return;
 
-  const COUNT = 48;
-  const COLORS = ['#fff1c9', '#f7dc93', '#eec46a', '#ffe7a8'];
+  const COUNT = 40;
+  const COLORS = ['#fff4d6', '#f7e2a6', '#efd08a'];
   let specks = null;
 
   function build() {
@@ -209,20 +210,18 @@ const isMotionTheme = () => {
     specks.className = 'destiny-specks';
     specks.setAttribute('aria-hidden', 'true');
     for (let i = 0; i < COUNT; i++) {
-      // start on the button's edge (percent box), drift away from its centre
-      const t = Math.random();
-      const edge = i % 4;
-      const x = edge === 0 ? 0 : edge === 1 ? 100 : t * 100;
-      const y = edge === 2 ? 0 : edge === 3 ? 100 : t * 100;
-      const dx = (x - 50) * (0.6 + Math.random() * 0.9) + (Math.random() - 0.5) * 20;
-      const dy = (y - 50) * (0.9 + Math.random() * 1.2) + (Math.random() - 0.5) * 16;
-      const size = (1.6 + Math.random() * 2.2).toFixed(2);
+      // scattered over the face and a thin halo past the edge (percent box)
+      const x = -4 + Math.random() * 108;
+      const y = -14 + Math.random() * 128;
+      const dx = (x - 50) * 0.06;   // a few px outward, no further
+      const dy = (y - 50) * 0.08;
+      const size = (0.8 + Math.random() * 1.1).toFixed(2);
       const dot = document.createElement('span');
       dot.style.cssText =
         `left:${x.toFixed(1)}%;top:${y.toFixed(1)}%;width:${size}px;height:${size}px;` +
         `--dx:${dx.toFixed(1)}px;--dy:${dy.toFixed(1)}px;--c:${COLORS[i % COLORS.length]};` +
-        `animation-duration:${(2.8 + Math.random() * 2.6).toFixed(2)}s;` +
-        `animation-delay:${(-Math.random() * 5).toFixed(2)}s;`;
+        `animation-duration:${(1.8 + Math.random() * 2.4).toFixed(2)}s;` +
+        `animation-delay:${(-Math.random() * 4).toFixed(2)}s;`;
       specks.appendChild(dot);
     }
     host.appendChild(specks);
