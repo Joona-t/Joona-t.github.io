@@ -1,5 +1,11 @@
 # Bugs & Iterations
 
+## 2026-10-26: ITER: Destiny specks — gold dust radiates from the Qwen Guide button
+
+**Change:** At Joona's request, 48 light-gold specks drift outward from the edges of the Qwen Guide button (`.hero-cta--primary`) and fade, looping, in every theme. Built in `script.js` (`initDestinySpecks`), animated by CSS keyframes only; not built under reduced motion and paused with the shared hero visibility gate. The button now has `overflow: visible; z-index: 2` so specks pass over neighbouring buttons; they never take clicks.
+**Verification:** Local preview, basalt: 48 specks, absolutely positioned, `destinySpeck` animation running; screenshot shows dust spreading around the button; no console errors; `node --check` passes. Cache strings bumped to `2026-10-26-destiny`.
+**Files:** index.html, script.js, styles.css
+
 ## 2026-10-26: ITER: Gold ring glow moves from "See the tools" to Qwen Guide
 
 **Change:** At Joona's request the conic ring glow (`.hero-cta--primary`) moved off the "See the tools" hero button and onto the Qwen Guide button, which also gains an Eye of Horus 𓂀 after its label. HTML-only: the class moved, no CSS changed.

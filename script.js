@@ -192,6 +192,55 @@ const isMotionTheme = () => {
 })();
 
 // ══════════════════════════════════════════════════════════════════════════════
+// DESTINY SPECKS — light gold dust drifting outward from the primary hero CTA
+// (Qwen Guide), all themes. ~48 spans, CSS keyframes only. Not built under
+// reduced motion; paused with the shared hero visibility gate.
+// ══════════════════════════════════════════════════════════════════════════════
+(function initDestinySpecks() {
+  const host = document.querySelector('.hero-cta--primary');
+  if (!host) return;
+
+  const COUNT = 48;
+  const COLORS = ['#fff1c9', '#f7dc93', '#eec46a', '#ffe7a8'];
+  let specks = null;
+
+  function build() {
+    specks = document.createElement('span');
+    specks.className = 'destiny-specks';
+    specks.setAttribute('aria-hidden', 'true');
+    for (let i = 0; i < COUNT; i++) {
+      // start on the button's edge (percent box), drift away from its centre
+      const t = Math.random();
+      const edge = i % 4;
+      const x = edge === 0 ? 0 : edge === 1 ? 100 : t * 100;
+      const y = edge === 2 ? 0 : edge === 3 ? 100 : t * 100;
+      const dx = (x - 50) * (0.6 + Math.random() * 0.9) + (Math.random() - 0.5) * 20;
+      const dy = (y - 50) * (0.9 + Math.random() * 1.2) + (Math.random() - 0.5) * 16;
+      const size = (1.6 + Math.random() * 2.2).toFixed(2);
+      const dot = document.createElement('span');
+      dot.style.cssText =
+        `left:${x.toFixed(1)}%;top:${y.toFixed(1)}%;width:${size}px;height:${size}px;` +
+        `--dx:${dx.toFixed(1)}px;--dy:${dy.toFixed(1)}px;--c:${COLORS[i % COLORS.length]};` +
+        `animation-duration:${(2.8 + Math.random() * 2.6).toFixed(2)}s;` +
+        `animation-delay:${(-Math.random() * 5).toFixed(2)}s;`;
+      specks.appendChild(dot);
+    }
+    host.appendChild(specks);
+  }
+
+  function sync() {
+    const want = !mqReduce.matches;
+    if (want && !specks) build();
+    if (!want && specks) { specks.remove(); specks = null; }
+    if (specks) specks.classList.toggle('is-paused', !heroActivity.active());
+  }
+
+  sync();
+  if (mqReduce.addEventListener) mqReduce.addEventListener('change', sync);
+  heroActivity.subscribe(sync);
+})();
+
+// ══════════════════════════════════════════════════════════════════════════════
 // CARD SPOTLIGHT + TILT — one delegated, passive pointermove, throttled to one
 // rAF. Sets --mx/--my (spotlight position on .card-body) and --rx/--ry (-1..1,
 // scaled by the theme's --tilt-max in CSS) on the hovered card. Only for a

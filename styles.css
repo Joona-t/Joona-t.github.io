@@ -2907,3 +2907,26 @@ html.theme-basalt { --font-display: 'Cinzel', 'Cormorant Garamond', Georgia, ser
 /* Sparky stays (suite rule) but loses the pink: toned into each theme's ink */
 html.theme-basalt :is(.site-brand-mark, .gallery-mascot, .footer-sparky) { filter: grayscale(1) sepia(0.5) brightness(0.9); }
 html.theme-parchment :is(.site-brand-mark, .gallery-mascot, .footer-sparky) { filter: grayscale(1) sepia(0.85) contrast(1.05); }
+
+/* ── Destiny specks — light gold dust drifting off the primary hero CTA (script.js).
+   The button lets them overflow; they sit under the label and never take clicks. ── */
+html:root .hero-cta-group a.hero-cta.hero-cta--primary { overflow: visible; z-index: 2; }
+.destiny-specks { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+.destiny-specks > span {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--c);
+  box-shadow: 0 0 4px var(--c), 0 0 9px rgba(244, 196, 106, 0.55);
+  opacity: 0;
+  animation-name: destinySpeck;
+  animation-timing-function: cubic-bezier(.2, .6, .35, 1);
+  animation-iteration-count: infinite;
+}
+.destiny-specks.is-paused > span { animation-play-state: paused; }
+@keyframes destinySpeck {
+  0%   { opacity: 0; translate: 0 0; scale: 0.6; }
+  18%  { opacity: 1; }
+  70%  { opacity: 0.7; }
+  100% { opacity: 0; translate: var(--dx) var(--dy); scale: 1.1; }
+}
+@media (prefers-reduced-motion: reduce) { .destiny-specks { display: none; } }
