@@ -1,5 +1,11 @@
 # Bugs & Iterations
 
+## 2026-10-26: ITER: Destiny specks made subtle, a wordmark-style sparkle
+
+**Change:** Joona: the gold dust flying off the Qwen Guide button was too much; it should sparkle subtly like the LoveSpark wordmark's specks. Now 40 tiny (0.8–1.9 px) pale-gold dots sit on the button face and a thin halo just past its edge, twinkle in place and creep only a few px outward before fading. Softer glow (`0 0 2px`).
+**Verification:** Local preview, basalt: 40 specks; screenshot shows a fine shimmer on and around the button only, none reaching neighbouring buttons. `node --check` passes. Cache strings bumped to `2026-10-26-sparkle`.
+**Files:** index.html, script.js, styles.css
+
 ## 2026-10-26: ITER: Destiny specks — gold dust radiates from the Qwen Guide button
 
 **Change:** At Joona's request, 48 light-gold specks drift outward from the edges of the Qwen Guide button (`.hero-cta--primary`) and fade, looping, in every theme. Built in `script.js` (`initDestinySpecks`), animated by CSS keyframes only; not built under reduced motion and paused with the shared hero visibility gate. The button now has `overflow: visible; z-index: 2` so specks pass over neighbouring buttons; they never take clicks.
