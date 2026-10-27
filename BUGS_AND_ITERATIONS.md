@@ -1,5 +1,11 @@
 # Bugs & Iterations
 
+## 2026-10-27: ITER: X / Twitter link back in the footer
+
+**Change:** Restored the `x.com/the_null_path` link (and its `✦` separator) after GitHub in the footer "Elsewhere" nav, at Joona's request. Reverts the 2026-10-24 removal.
+**Verification:** `grep -n 'x.com/the_null_path' index.html` finds one footer link; the page loads with it rendered.
+**Files:** index.html
+
 ## 2026-10-27: ITER: "See the tools" hero button removed
 
 **Change:** At Joona's request the "See the tools" hero button is gone. The site bar's "Suite" link still jumps to `#tools`.
