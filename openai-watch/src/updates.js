@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-10-26",
+  verifiedAt: "2026-10-27",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -19,6 +19,33 @@ window.OPENAI_WATCH = {
     ]
   },
   updates: [
+    {
+      "id": "gpt-6-1-terra-release",
+      "date": "2026-10-26",
+      "type": "release",
+      "channel": "Models",
+      "title": "GPT-6.1 Terra launches across API, Work, and Codex",
+      "summary": "OpenAI released GPT-6.1 Terra for visual reasoning, computer use, coding, and writing. It is available through the API and is rolling out to eligible Plus, Pro, Business, Enterprise, and Edu users in ChatGPT Work and Codex.",
+      "tags": [
+        "gpt-6.1 terra",
+        "computer use",
+        "visual reasoning"
+      ],
+      "links": [
+        {
+          "label": "Model announcement",
+          "url": "https://openai.com/index/introducing-gpt-6-1-terra/"
+        },
+        {
+          "label": "API changelog",
+          "url": "https://developers.openai.com/api/docs/changelog"
+        },
+        {
+          "label": "ChatGPT release notes",
+          "url": "https://help.openai.com/en/articles/6825453-chatgpt-release-notes"
+        }
+      ]
+    },
     {
       "id": "frontier-training-containment-security-disclosure",
       "date": "2026-10-23",
