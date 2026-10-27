@@ -18,6 +18,47 @@ window.OPENAI_WATCH = {
       { name: "Ads Platform", value: "Operational" }
     ]
   },
+  communityReports: [
+    {
+      id: "october-2026-work-codex-usage-depletion-reports",
+      date: "2026-10-24",
+      status: "Unconfirmed community signal",
+      title: "Users report faster allowance depletion",
+      summary: "Multiple public threads describe five-hour or weekly Work and Codex allowances falling faster than users expected across Plus and Pro plans, including abrupt meter changes and shorter working windows. The reports establish recurring user concern, but do not prove a hidden limit change or a single technical cause.",
+      tags: ["usage limits", "codex", "chatgpt work", "community reports"],
+      links: [
+        { label: "Reddit: October 24 discussion", url: "https://www.reddit.com/r/OpenaiCodex/comments/1xed3ev/after_6_months_of_building_im_out/" },
+        { label: "Reddit: October 16 consumption reports", url: "https://www.reddit.com/r/OpenAI/comments/1x7nqxl/something_is_off_with_token_consumption_this_week/" },
+        { label: "Reddit: abrupt allowance change", url: "https://www.reddit.com/r/codex/comments/1x7obzw/codex_usage_dropped_from_57_remaining_to_0/" },
+        { label: "X trend archive: earlier limit pressure", url: "https://x.com/i/trending/2062204207248417162" },
+        { label: "Official Pro tier context", url: "https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers" }
+      ]
+    },
+    {
+      id: "october-2026-slow-loading-reasoning-reports",
+      date: "2026-10-20",
+      status: "Unconfirmed community signal",
+      title: "Users report slower loading and reasoning",
+      summary: "Users across public threads describe slow response starts, longer code-generation and reasoning times, timeouts, and responses that do not appear until a refresh. Experiences vary by account, model, task, region, and time of day, and the reports do not establish a platform-wide degradation.",
+      tags: ["latency", "reasoning time", "loading", "timeouts", "community reports"],
+      links: [
+        { label: "Reddit: October 20 performance reports", url: "https://www.reddit.com/r/ChatGPT/comments/1xaoh8e/whats_going_on_with_chatgpt_today/" },
+        { label: "Reddit: October 12 Codex slowdown", url: "https://www.reddit.com/r/codex/comments/1x3v81l/is_anyone_else_experiencing_extremely_slow/" }
+      ]
+    },
+    {
+      id: "october-2026-capacity-reconnect-reports",
+      date: "2026-10-13",
+      status: "Unconfirmed community signal",
+      title: "Users report capacity blocks and disconnects",
+      summary: "Community posts describe temporary full-capacity messages, repeated reconnect prompts, endless retries, and streams disconnecting before completion. These observations indicate intermittent user-facing failures, but do not by themselves confirm a continuing OpenAI-wide capacity shortage.",
+      tags: ["capacity", "disconnects", "reconnect", "retries", "community reports"],
+      links: [
+        { label: "Reddit: capacity and reconnect reports", url: "https://www.reddit.com/r/codex/comments/1x4vy2i/codex_literally_unusable/" },
+        { label: "Reddit: stream disconnect reports", url: "https://www.reddit.com/r/codex/comments/1x45cci/this_is_a_new_release_from_codex/" }
+      ]
+    }
+  ],
   updates: [
     {
       "id": "gpt-6-1-terra-release",

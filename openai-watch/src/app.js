@@ -119,6 +119,43 @@
     document.getElementById("tickerTrack").innerHTML = tickerItems + tickerItems;
   }
 
+  function renderCommunityReports() {
+    var reports = Array.isArray(data.communityReports) ? data.communityReports : [];
+    var reportsNode = document.getElementById("communityReports");
+
+    reportsNode.innerHTML = reports.map(function (report) {
+      var links = report.links.map(function (link) {
+        return [
+          '<a href="',
+          escapeHtml(link.url),
+          '" target="_blank" rel="noreferrer">',
+          escapeHtml(link.label),
+          " +</a>"
+        ].join("");
+      }).join("");
+
+      return [
+        '<article class="community-card">',
+        '<div class="community-meta"><time datetime="',
+        escapeHtml(report.date),
+        '">',
+        escapeHtml(formatDate(report.date)),
+        '</time><span>',
+        escapeHtml(report.status),
+        "</span></div>",
+        "<h3>",
+        escapeHtml(report.title),
+        "</h3>",
+        "<p>",
+        escapeHtml(report.summary),
+        "</p>",
+        '<div class="community-links">',
+        links,
+        "</div></article>"
+      ].join("");
+    }).join("");
+  }
+
   function renderFeed() {
     var updates = getFilteredUpdates();
     var currentFilter = filters.find(function (filter) {
@@ -185,6 +222,7 @@
     renderFilters();
     renderStatus();
     renderTicker();
+    renderCommunityReports();
     renderFeed();
     sortButton.textContent = state.sort === "desc" ? "Newest first" : "Oldest first";
   }
