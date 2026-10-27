@@ -7,6 +7,19 @@
     sort: "desc"
   };
 
+  var themeToggle = document.getElementById("themeToggle");
+  function applyTheme(theme) {
+    document.documentElement.dataset.theme = theme;
+    themeToggle.setAttribute("aria-pressed", theme === "beige" ? "true" : "false");
+    document.querySelector('meta[name="theme-color"]').content = theme === "beige" ? "#f2ead9" : "#090a08";
+  }
+  applyTheme(document.documentElement.dataset.theme === "beige" ? "beige" : "dark");
+  themeToggle.addEventListener("click", function () {
+    var theme = document.documentElement.dataset.theme === "beige" ? "dark" : "beige";
+    applyTheme(theme);
+    try { localStorage.setItem("openai-watch-theme", theme); } catch (e) {}
+  });
+
   var data = window.OPENAI_WATCH;
   var filters = [
     { key: "all", label: "All" },

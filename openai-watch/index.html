@@ -7,9 +7,12 @@
   <title>OpenAI Watch - Release Intelligence</title>
   <meta name="description" content="A daily intelligence feed for OpenAI releases, patches, deprecations, security notes, and platform signals.">
   <link rel="preload" href="assets/signal-globe.png" as="image" type="image/png">
-  <link rel="stylesheet" href="styles.css">
+  <script>
+    try { if (localStorage.getItem("openai-watch-theme") === "beige") document.documentElement.dataset.theme = "beige"; } catch (e) {}
+  </script>
+  <link rel="stylesheet" href="styles.css?v=beige1">
   <script defer src="src/updates.js?v=fae4b1ec8454"></script>
-  <script defer src="src/app.js"></script>
+  <script defer src="src/app.js?v=beige1"></script>
 </head>
 <body>
   <a class="skip-link" href="#releaseFeed">Skip to release feed</a>
@@ -19,6 +22,7 @@
       <span>OA</span><span>/</span><span>WATCH</span>
     </a>
     <p class="edition">Independent release intelligence</p>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false">Beige theme</button>
     <div class="sync-chip" aria-label="Daily tracker automation status">
       <span class="pulse" aria-hidden="true"></span>
       <span>Daily agent</span>
