@@ -670,6 +670,19 @@ window.OPENAI_WATCH = {
       ]
     },
     {
+      id: "chatgpt-pro-200-lower-usage-allowance",
+      date: "2026-09-29",
+      type: "patch",
+      channel: "ChatGPT",
+      title: "Pro 200 moves to a lower included usage allowance",
+      summary: "OpenAI says new Pro 200 subscriptions that are not eligible for grandfathering receive a lower included usage allowance while the $200 monthly price remains unchanged. Eligible existing subscribers keep the previous allowance through October 29, 2026, then move to the lower allowance on October 30.",
+      tags: ["pro 200", "usage limits", "codex", "chatgpt work", "grandfathering"],
+      links: [
+        { label: "Pro tier guidance", url: "https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers" },
+        { label: "Release notes", url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes" }
+      ]
+    },
+    {
       id: "codex-cloud-release",
       date: "2026-09-29",
       type: "release",
