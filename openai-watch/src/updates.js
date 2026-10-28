@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-10-27",
+  verifiedAt: "2026-10-28",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -60,6 +60,45 @@ window.OPENAI_WATCH = {
     }
   ],
   updates: [
+    {
+      "id": "chatgpt-icloud-mail-calendar-plugins",
+      "date": "2026-10-27",
+      "type": "release",
+      "channel": "ChatGPT",
+      "title": "ChatGPT adds iCloud Mail and Calendar plugins",
+      "summary": "iCloud users can now connect Mail and Calendar so ChatGPT can search email, summarize inbox activity, review schedules, and update calendar events. The plugins are available on all ChatGPT plans across web, desktop, and iOS.",
+      "tags": [
+        "icloud",
+        "mail",
+        "calendar",
+        "plugins"
+      ],
+      "links": [
+        {
+          "label": "ChatGPT release notes",
+          "url": "https://help.openai.com/en/articles/6825453-chatgpt-release-notes"
+        }
+      ]
+    },
+    {
+      "id": "oracle-marketplace-access-and-chatgpt-integrations-announced",
+      "date": "2026-10-27",
+      "type": "release",
+      "channel": "News",
+      "title": "Oracle Marketplace adds OpenAI access as integrations are announced",
+      "summary": "U.S. Oracle customers can now purchase the OpenAI API, Codex, and ChatGPT Work through Oracle Marketplace. Oracle also announced forthcoming ChatGPT integrations and products that will connect approved Oracle data and workflows with OpenAI tools.",
+      "tags": [
+        "oracle marketplace",
+        "enterprise integrations",
+        "forthcoming"
+      ],
+      "links": [
+        {
+          "label": "Oracle partnership announcement",
+          "url": "https://openai.com/index/oracle-apps-in-chatgpt/"
+        }
+      ]
+    },
     {
       "id": "gpt-6-1-terra-release",
       "date": "2026-10-26",
