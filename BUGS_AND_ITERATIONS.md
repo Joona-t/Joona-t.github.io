@@ -1,5 +1,11 @@
 # Bugs & Iterations
 
+## 2026-10-28: ITER: 3D Agentic Studio sneak peek
+
+**Change:** New first Sneak Peeks panel, "🖨️ 3D Agentic Studio", at Joona's request: a screenshot of the studio's C.C. plaque viewer (Concept 11), captioned as a free guide to making 3D-printed art with an AI agent, in the workshop, with a fan-art note. No link: the studio is not published yet. Image `images/gallery/3d-agentic-studio/3d-agentic-studio-01.jpg` (1600×757, 132 KB, re-encoded from Joona's screenshot, no metadata), same markup as the other panels.
+**Verification:** Local preview of the branch: panel first, image loads (1600 px natural); checked open in basalt, bubblegum, parchment and kawaii (🖨 renders as the existing brazier glyph in basalt/parchment); no horizontal overflow at 320 and 375 px. `scripts/build-gallery.py` reports no change. `ls-check .`: 7 pass, 0 fail.
+**Files:** index.html, images/gallery/3d-agentic-studio/3d-agentic-studio-01.jpg
+
 ## 2026-10-27: ITER: X / Twitter link back in the footer
 
 **Change:** Restored the `x.com/the_null_path` link (and its `✦` separator) after GitHub in the footer "Elsewhere" nav, at Joona's request. Reverts the 2026-10-24 removal.
