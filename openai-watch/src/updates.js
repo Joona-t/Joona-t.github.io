@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-10-28",
+  verifiedAt: "2026-10-29",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -60,6 +60,67 @@ window.OPENAI_WATCH = {
     }
   ],
   updates: [
+    {
+      "id": "chatgpt-dot-texting-beta",
+      "date": "2026-10-28",
+      "type": "release",
+      "channel": "ChatGPT",
+      "title": "Texting for dots enters U.S. Pro beta",
+      "summary": "OpenAI is starting a U.S. beta that lets Pro users exchange iMessage or RCS texts with their dot. The texting connection carries the dot's existing memory and plugins, while remaining isolated from the user's other text conversations.",
+      "tags": [
+        "dots",
+        "texting",
+        "beta"
+      ],
+      "links": [
+        {
+          "label": "ChatGPT release notes",
+          "url": "https://help.openai.com/en/articles/6825453-chatgpt-release-notes"
+        }
+      ]
+    },
+    {
+      "id": "chatgpt-pro-business-api-credits-benefit",
+      "date": "2026-10-28",
+      "type": "release",
+      "channel": "API",
+      "title": "Eligible ChatGPT plans add promotional API credits",
+      "summary": "Eligible ChatGPT Pro and Business subscribers can now activate up to $500 per month in promotional API credits for an API organization they own. The benefit is separate from ChatGPT usage and depends on offer eligibility and terms.",
+      "tags": [
+        "api credits",
+        "chatgpt pro",
+        "chatgpt business"
+      ],
+      "links": [
+        {
+          "label": "API changelog",
+          "url": "https://developers.openai.com/api/docs/changelog"
+        },
+        {
+          "label": "ChatGPT release notes",
+          "url": "https://help.openai.com/en/articles/6825453-chatgpt-release-notes"
+        }
+      ]
+    },
+    {
+      "id": "servicenow-mcp-plugin-and-integrations-announced",
+      "date": "2026-10-28",
+      "type": "release",
+      "channel": "News",
+      "title": "ServiceNow MCP plugin launches as broader integrations are announced",
+      "summary": "The ServiceNow MCP plugin is now available in OpenAI's marketplace. OpenAI and ServiceNow also announced forthcoming ChatGPT workflow actions, Codex development tooling, security capabilities, and voice experiences with staged availability through 2027.",
+      "tags": [
+        "servicenow",
+        "mcp plugin",
+        "forthcoming"
+      ],
+      "links": [
+        {
+          "label": "ServiceNow partnership announcement",
+          "url": "https://openai.com/index/openai-servicenow-partnership-expansion/"
+        }
+      ]
+    },
     {
       "id": "chatgpt-icloud-mail-calendar-plugins",
       "date": "2026-10-27",
