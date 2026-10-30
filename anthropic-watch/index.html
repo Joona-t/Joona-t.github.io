@@ -22,6 +22,7 @@
   <script defer src="src/shell.js"></script>
   <script defer src="src/app.js"></script>
   <script defer src="src/models-app.js"></script>
+  <script defer src="src/cursors.js"></script>
 </head>
 <body>
   <div class="grain-overlay" aria-hidden="true"></div>
@@ -44,7 +45,11 @@
         <span class="pulse-dot" aria-hidden="true"></span>
         <span id="syncChipText">Source-linked</span>
       </p>
-      <a class="chip-link" href="https://lovespark.love/" aria-label="Back to lovespark.love">lovespark.love <span aria-hidden="true">&#8599;</span></a>
+      <label class="visually-hidden" for="cursorSelect">Cursor theme</label>
+      <select class="cursor-select" id="cursorSelect">
+        <option value="">✦ Cursor: default</option>
+      </select>
+      <a class="chip-link" href="https://lovespark.love/" aria-label="Back to lovespark.love"><span class="chip-link-text">lovespark.love</span> <span aria-hidden="true">&#8599;</span></a>
     </div>
   </header>
 
@@ -451,7 +456,7 @@ Haiku 5.5:  1,300 × $0.10 / 1M = $0.00013   → ≈ 87% cheaper</code></pre>
           <img class="mascot small" src="assets/sparky.png" alt="Sparky, the LoveSpark mascot" width="44" height="44">
           <div>
             <p class="footer-word">Anthropic Watch</p>
-            <p>Independent, source-linked, re-verified every day. Made with <span aria-label="love">&#9829;</span> by <a href="https://lovespark.love/">LoveSpark</a>.</p>
+            <p>Independent and source-linked. Made with <span aria-label="love">&#9829;</span> by <a href="https://lovespark.love/">LoveSpark</a>.</p>
           </div>
         </div>
         <p class="footer-note">Anthropic and Claude are trademarks of Anthropic, PBC. This tracker is an independent fan project and is not affiliated with or endorsed by Anthropic. Every entry links to its official source.</p>

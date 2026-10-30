@@ -539,12 +539,18 @@ details[open] > summary { margin-bottom: 6px; }
   .topbar .brand-sub { display: none; }
   .topbar .brand-word { font-size: 17px; }
   .chip-link { padding: 6px 10px; font-size: 12px; }
+  /* icon-only pill: the first glyph of each option (emoji) is all that shows */
+  .cursor-select { width: 44px; min-width: 44px; padding: 6px 0 6px 12px; background-image: none; font-size: 16px; text-overflow: clip; }
   .pager { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
   .pager .progress { grid-column: 1 / -1; grid-row: 2; text-align: center; }
   .pg-btn { padding: 8px 12px; font-size: 13px; }
   .pager .pg-btn:last-child { justify-self: end; text-align: right; }
   .src-list { columns: 1; }
   .step-date { margin-left: 0; width: 100%; }
+}
+@media (max-width: 420px) {
+  .chip-link-text { display: none; }
+  .chip-link { min-width: 36px; justify-content: center; }
 }
 @media (prefers-reduced-motion: reduce) {
   .sidebar { transition: none; }
