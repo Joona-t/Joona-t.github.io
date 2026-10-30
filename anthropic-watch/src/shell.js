@@ -10,7 +10,6 @@
   var sidebar = document.getElementById("sidebar");
   var menuBtn = document.getElementById("menuBtn");
   var backdrop = document.getElementById("backdrop");
-  var pagerTop = document.getElementById("pagerTop");
   var pagerBottom = document.getElementById("pagerBottom");
   var announcer = document.getElementById("announcer");
   var content = document.getElementById("content");
@@ -61,7 +60,6 @@
       else { a.removeAttribute("aria-current"); }
     });
     var index = order.indexOf(name);
-    pagerTop.innerHTML = pagerHtml(index);
     pagerBottom.innerHTML = pagerHtml(index);
     document.title = (name === "overview" ? "" : titleOf(name).replace("&amp;", "&") + " · ") + "Anthropic Watch · LoveSpark";
 

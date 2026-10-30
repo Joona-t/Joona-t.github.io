@@ -16,13 +16,22 @@
   <link rel="preload" href="assets/sparky.png" as="image" type="image/png">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="shell.css">
+  <link rel="stylesheet" href="src/themes.css">
+  <script>
+    /* apply the saved theme + font before first paint (src/prefs.js builds the menu) */
+    try {
+      var awT = localStorage.getItem("aw-theme"), awF = localStorage.getItem("aw-font");
+      if (awT && awT !== "bubblegum" && /^[a-z-]{2,24}$/.test(awT)) document.documentElement.setAttribute("data-theme", awT);
+      if (awF && awF !== "classic" && /^[a-z]{2,12}$/.test(awF)) document.documentElement.setAttribute("data-font", awF);
+    } catch (e) {}
+  </script>
   <script defer src="src/updates.js"></script>
   <script defer src="src/models.js"></script>
   <script defer src="src/benchmarks.js"></script>
   <script defer src="src/shell.js"></script>
   <script defer src="src/app.js"></script>
   <script defer src="src/models-app.js"></script>
-  <script defer src="src/cursors.js"></script>
+  <script defer src="src/prefs.js"></script>
 </head>
 <body>
   <div class="grain-overlay" aria-hidden="true"></div>
@@ -45,10 +54,12 @@
         <span class="pulse-dot" aria-hidden="true"></span>
         <span id="syncChipText">Source-linked</span>
       </p>
-      <label class="visually-hidden" for="cursorSelect">Cursor theme</label>
-      <select class="cursor-select" id="cursorSelect">
-        <option value="">✦ Cursor: default</option>
-      </select>
+      <div class="prefs">
+        <button type="button" class="chip-link prefs-btn" id="prefsBtn" aria-expanded="false" aria-controls="prefsPanel" aria-label="Change Theme">
+          <span class="prefs-icon" aria-hidden="true">&#9680;</span><span class="prefs-label">Change Theme</span><span aria-hidden="true">&#9662;</span>
+        </button>
+        <div class="prefs-panel" id="prefsPanel" hidden></div>
+      </div>
       <a class="chip-link" href="https://lovespark.love/" aria-label="Back to lovespark.love"><span class="chip-link-text">lovespark.love</span> <span aria-hidden="true">&#8599;</span></a>
     </div>
   </header>
@@ -84,7 +95,6 @@
     </nav>
 
     <main class="content" id="content" tabindex="-1">
-      <div class="pager pager-top" id="pagerTop"></div>
 
       <!-- ===================== NEWS: OVERVIEW ===================== -->
       <section class="view view-wide" data-view="overview" data-title="Overview" aria-labelledby="heroTitle">
@@ -92,17 +102,16 @@
           <div class="titlebar" aria-hidden="true">
             <span class="titlebar-dots"><i></i><i></i><i></i></span>
             <span class="titlebar-name">anthropic_watch.exe</span>
-            <span class="titlebar-tag">&#9825; live</span>
+            <span class="titlebar-tag">&#9825; diary</span>
           </div>
           <div class="hero-body">
             <div class="hero-copy">
-              <p class="eyebrow"><span aria-hidden="true">&#10022;</span> Release intelligence for the Claude ecosystem</p>
+              <p class="eyebrow"><span aria-hidden="true">&#10022;</span> Claude release diary</p>
               <h1 id="heroTitle" class="wordmark">Anthropic <span>Watch</span></h1>
               <p class="hero-deck">Every Claude model, feature, patch, retirement and security note, verified against official Anthropic sources. Plus a full archive of every public Claude model and how each generation stacks up.</p>
               <div class="hero-actions">
                 <a class="btn primary" href="?view=ledger" data-view-link="ledger">Open the ledger</a>
                 <a class="btn glass" href="?view=latest" data-view-link="latest">New: Haiku 5.5 <span aria-hidden="true">&rarr;</span></a>
-                <a class="btn glass" id="latestLink" href="#releaseFeed">Latest ship <span aria-hidden="true">&rarr;</span></a>
               </div>
             </div>
             <figure class="hero-mascot">

@@ -315,7 +315,7 @@
         }) });
       }
     });
-    series.unshift({ name: "Best so far", color: "#7a1f4d", step: true, label: true, noDots: true,
+    series.unshift({ name: "Best so far", color: "var(--c-heading)", step: true, label: true, noDots: true,
       points: frontierPts.map(function (p) { return { x: p.m.released, y: p.v }; }) });
     var lines = LINES.filter(function (l) { return pts.some(function (p) { return p.m.line === l; }); });
     var table = '<details class="table-view"><summary>Table view</summary><div class="table-wrap"><table><thead><tr><th scope="col">Model</th><th scope="col">Score</th><th scope="col">Conditions</th><th scope="col">Reported in</th></tr></thead><tbody>' +
@@ -348,13 +348,13 @@
     var priced = F.filter(function (m) { return m.inP != null; });
     html += figure("What the frontier cost: input price per million tokens",
       timeChart({ label: "Input price of each frontier Claude model over time", log: true, yMin: 1, yMax: 20, yTicks: [1, 2, 5, 10, 20], yFmt: function (v) { return "$" + v; },
-        series: [{ name: "Frontier input $", color: "#7a1f4d", step: true, points: priced.map(function (m) { return { x: m.released, y: m.inP, tip: m.name + ": $" + m.inP + " in / $" + m.outP + " out", color: COLOR[m.line], big: true }; }) }] }),
+        series: [{ name: "Frontier input $", color: "var(--c-heading)", step: true, points: priced.map(function (m) { return { x: m.released, y: m.inP, tip: m.name + ": $" + m.inP + " in / $" + m.outP + " out", color: COLOR[m.line], big: true }; }) }] }),
       "Log scale. Claude 1 and 2 prices aren't on any current official page, so the line starts at Claude 3 Opus. The frontier price fell from $15 to $3 with 3.5 Sonnet, rose back to $15 with Opus 4, dropped to $5 with Opus 4.5, rose to $10 with the new Fable tier, then fell to $4 when Opus 5.5 overtook it.", legend(LINES.filter(function (l) { return priced.some(function (m) { return m.line === l; }); })));
 
     var ctxd = F.filter(function (m) { return m.ctx != null; });
     html += figure("How much the frontier could read: context window",
       timeChart({ label: "Context window of frontier Claude models over time", log: true, yMin: 50000, yMax: 2000000, yTicks: [100000, 200000, 500000, 1000000], yFmt: function (v) { return tokens(v); },
-        series: [{ name: "Context", color: "#7a1f4d", step: true, points: ctxd.map(function (m) { return { x: m.released, y: m.ctx, tip: m.name + ": " + tokens(m.ctx) + " tokens", color: COLOR[m.line], big: true }; }) }] }),
+        series: [{ name: "Context", color: "var(--c-heading)", step: true, points: ctxd.map(function (m) { return { x: m.released, y: m.ctx, tip: m.name + ": " + tokens(m.ctx) + " tokens", color: COLOR[m.line], big: true }; }) }] }),
       "Log scale. 100K with Claude 2, 200K from Claude 2.1, 1M from Opus 4.6. Some 2024–25 frontier models have no context figure on a current official page, so they're skipped rather than guessed.", "");
 
     TREND_BENCHES.forEach(function (tb) { html += trendChart(tb); });
