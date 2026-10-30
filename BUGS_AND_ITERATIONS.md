@@ -1,5 +1,11 @@
 # Bugs & Iterations
 
+## 2026-10-30: ITER: Anthropic Watch published
+
+**Change:** Anthropic Watch (repo `lovespark-anthropic-watch`, commit 590bc05) is now served at `/anthropic-watch/`. It's added as a hero button next to OpenAI Watch and as a card in the STEM and More panels (`data/gallery.json` → `scripts/build-gallery.py`). The tracker's "Verified daily" chip was false, since no daily job exists, so it now shows the real check date (Oct 4, 2026).
+**Verification:** Local preview: the home page shows all three links, and STEM count is 5; `/anthropic-watch/` loads 13/13 requests 200 with 0 console errors and no horizontal scroll at 375 px; every deployed file is byte-identical to the tracker repo; the tracker's `validate.mjs` passes.
+**Files:** anthropic-watch/ (14 files), data/gallery.json, index.html
+
 ## 2026-10-28: ITER: 3D Agentic Studio sneak peek
 
 **Change:** New first Sneak Peeks panel, "🖨️ 3D Agentic Studio", at Joona's request: a screenshot of the studio's C.C. plaque viewer (Concept 11), captioned as a free guide to making 3D-printed art with an AI agent, in the workshop, with a fan-art note. No link: the studio is not published yet. Image `images/gallery/3d-agentic-studio/3d-agentic-studio-01.jpg` (1600×757, 132 KB, re-encoded from Joona's screenshot, no metadata), same markup as the other panels.

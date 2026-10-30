@@ -55,6 +55,13 @@
           "link_label": "Open tracker ✦"
         },
         {
+          "title": "Anthropic Watch ✻",
+          "badge": "Release Diary",
+          "desc": "A source-linked ledger of Anthropic and Claude releases, patches, retirements and security notes, plus an archive of every public Claude model since 2023 with generation-by-generation benchmark comparisons.",
+          "url": "https://lovespark.love/anthropic-watch/",
+          "link_label": "Open tracker ✦"
+        },
+        {
           "title": "How the Bambu Lab A1 Works 🖨️",
           "badge": "Interactive Tutorial",
           "desc": "A sourced, chapter-by-chapter guide to the A1 3D printer — with a safe first-print route, symptom diagnosis, maintenance boundaries, and 18 hands-on simulations. Unofficial and independent.",
@@ -244,6 +251,13 @@
           "desc": "A daily intelligence feed for OpenAI releases, patches, deprecations, security notes and platform signals.",
           "url": "https://lovespark.love/openai-watch/",
           "link_label": "Open feed ✦"
+        },
+        {
+          "title": "Anthropic Watch ✻",
+          "badge": "Release diary",
+          "desc": "Claude and Anthropic releases, model archive and gen-by-gen comparisons, every entry linked to an official source.",
+          "url": "https://lovespark.love/anthropic-watch/",
+          "link_label": "Open diary ✦"
         },
         {
           "title": "The Null Path ⊙",
