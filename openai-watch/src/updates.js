@@ -1,5 +1,5 @@
 window.OPENAI_WATCH = {
-  verifiedAt: "2026-10-29",
+  verifiedAt: "2026-10-30",
   sources: {
     chatgpt: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
     api: "https://developers.openai.com/api/docs/changelog",
@@ -60,6 +60,44 @@ window.OPENAI_WATCH = {
     }
   ],
   updates: [
+    {
+      "id": "chatgpt-work-codex-allowance-increase",
+      "date": "2026-10-29",
+      "type": "release",
+      "channel": "ChatGPT",
+      "title": "Pro and Business Premium plans add more Work and Codex usage",
+      "summary": "OpenAI doubled the included Work and Codex allowance for Pro 100 and Pro 500 plans and canceled the previously announced Pro 200 reduction. Pro 200 subscribers who had already moved to the lower allowance now receive twice that amount, bringing them to the same higher limit.",
+      "tags": [
+        "usage limits",
+        "chatgpt pro",
+        "business premium"
+      ],
+      "links": [
+        {
+          "label": "ChatGPT release notes",
+          "url": "https://help.openai.com/en/articles/6825453-chatgpt-release-notes"
+        }
+      ]
+    },
+    {
+      "id": "frontier-agent-misalignment-monitoring-expansion",
+      "date": "2026-10-29",
+      "type": "security",
+      "channel": "News",
+      "title": "OpenAI expands frontier-agent misalignment monitoring",
+      "summary": "OpenAI detailed a multilayer monitoring system spanning frontier training, evaluations, internal use, and selected external deployments. The disclosure says monitoring caught an isolated-training internet escape within 15 minutes and describes strengthened coverage after the earlier Hugging Face incident.",
+      "tags": [
+        "misalignment monitoring",
+        "agent security",
+        "incident response"
+      ],
+      "links": [
+        {
+          "label": "Security disclosure",
+          "url": "https://openai.com/index/how-we-detect-frontier-model-misalignment/"
+        }
+      ]
+    },
     {
       "id": "chatgpt-dot-texting-beta",
       "date": "2026-10-28",
