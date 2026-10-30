@@ -1,5 +1,11 @@
 # Bugs & Iterations
 
+## 2026-10-30: ITER: Papers Worth Reading panel
+
+**Change:** New hero button "𓏞 Papers Worth Reading", right after Qwen Guide, linking to `https://lovespark.love/papers/`: a timeline archive of AI research papers by field (repo `papers`, Qwen guide template plus the Y2K Korean cursor themes). It is a plain `hero-cta`, so Qwen Guide stays the single gold primary.
+**Verification:** Local preview in basalt at 1440 px: the button sits in row 1 after Qwen Guide (283×51 px) with no layout shift in the other rows. The target page only goes live once the `papers` repo is published with Pages; until then the link 404s, so don't merge before that.
+**Files:** index.html
+
 ## 2026-10-30: ITER: Anthropic Watch published
 
 **Change:** Anthropic Watch (repo `lovespark-anthropic-watch`, commit 590bc05) is now served at `/anthropic-watch/`. It's added as a hero button next to OpenAI Watch and as a card in the STEM and More panels (`data/gallery.json` → `scripts/build-gallery.py`). The tracker's "Verified daily" chip was false, since no daily job exists, so it now shows the real check date (Oct 4, 2026).
