@@ -1,5 +1,12 @@
 # Bugs & Iterations
 
+## 2026-10-31: BUG: Axion Algebra card claimed ML math the course doesn't have
+
+**Problem:** The STEM card said "algebra through the maths behind ML". Axion Algebra's 12-domain plan runs from first equations to trigonometry; ML math is Axion Academy's pitch. The April card copy was written from axion-academy's GitHub description by mistake.
+**Fix:** Now reads "algebra from first equations to trigonometry", which matches `assets/data/missions.json` in axion-algebra. The rest of Joona's wording is unchanged. Also fixed the surname typo in LICENSE (Tyrinoksa → Tyrninoksa).
+**Verification:** `grep -c 'maths behind ML' index.html` = 0; domain list checked against the axion-algebra manifest (domain 1 expressions → domain 11 trigonometry → domain 12 modelling capstone).
+**Files:** index.html, LICENSE
+
 ## 2026-10-30: ITER: Papers Worth Reading panel
 
 **Change:** New hero button "𓏞 Papers Worth Reading", right after Qwen Guide, linking to `https://lovespark.love/papers/`: a timeline archive of AI research papers by field (repo `papers`, Qwen guide template plus the Y2K Korean cursor themes). It is a plain `hero-cta`, so Qwen Guide stays the single gold primary.
