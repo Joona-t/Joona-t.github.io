@@ -1,5 +1,11 @@
 # Bugs & Iterations
 
+## 2026-11-01: ITER: Remove the X / Twitter link from the footer
+
+**Change:** Dropped the `x.com/the_null_path` link and one adjacent `✦` separator from the footer "Elsewhere" nav at Joona's request. Footer now reads GitHub ✦ Substack ✦ Goodreads. Reverts the 2026-10-27 restore (third toggle of this link: removed 10-24, restored 10-27, removed again now).
+**Verification:** `grep -n 'x.com/the_null_path\|X / Twitter' index.html` finds nothing; footer nav renders the three remaining links with no orphaned separator.
+**Files:** index.html
+
 ## 2026-10-30: ITER: Papers Worth Reading panel
 
 **Change:** New hero button "𓏞 Papers Worth Reading", right after Qwen Guide, linking to `https://lovespark.love/papers/`: a timeline archive of AI research papers by field (repo `papers`, Qwen guide template plus the Y2K Korean cursor themes). It is a plain `hero-cta`, so Qwen Guide stays the single gold primary.
