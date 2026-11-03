@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>(()=>{try{let t=localStorage.getItem('lovespark-theme')||'basalt';if(t==='candy'||t==='retro'){t=t==='candy'?'bubblegum':'basalt';localStorage.setItem('lovespark-theme',t);}const m={bubblegum:'theme-bubblegum',basalt:'theme-basalt',parchment:'theme-parchment'};if(m[t])document.documentElement.classList.add(m[t]);}catch(_){document.documentElement.classList.add('theme-basalt');}})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sparky and SparkyBrain — LoveSpark</title>
+  <meta name="description" content="How the Sparky app and SparkyBrain, the shared memory for LoveSpark's AI agents, work, and why they are kept separate.">
+  <meta property="og:title" content="Sparky and SparkyBrain">
+  <meta property="og:description" content="A local knowledge app and a plain-markdown agent memory, and why they are two things.">
+  <meta property="og:image" content="../og.png">
+  <link rel="icon" href="../images/sparky-avatar.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Pacifico&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet"></noscript>
+  <link rel="stylesheet" href="../styles.css?v=2026-11-03-sparkybrain">
+  <style>
+    /* Page-local layout only; all colours come from the site theme via the card. */
+    .explainer { max-width: 760px; margin: 0 auto; padding: 0 16px 48px; display: grid; gap: 28px; }
+    .explainer .win98-card { max-width: none; }
+    .explainer .card-body h3 { font-size: 1.05rem; margin: 18px 0 6px; color: inherit; }
+    .explainer .card-body h3:first-child { margin-top: 0; }
+    .explainer .card-body ul, .explainer .card-body ol { margin: 6px 0 10px; padding-left: 1.3em; }
+    .explainer .card-body li { margin: 4px 0; line-height: 1.55; }
+    .explainer .card-body li, .explainer .card-body p { overflow-wrap: anywhere; }
+    .explainer code { font-family: 'DM Mono', ui-monospace, monospace; font-size: .92em; }
+    /* Sits on the page background, not a card: use --ink like .mission-text (--ink-soft is 4.49:1 in kawaii). */
+    .explainer-lede { text-align: center; max-width: 620px; margin: 0 auto; color: var(--ink); }
+    /* The homepage section titles are one word; this one is longer, so let it wrap at 320px. */
+    .section-header .section-title { min-width: 0; text-align: center; }
+    @media (max-width: 420px) {
+      .section-header { gap: 8px; padding: 0 12px; }
+      .section-header .section-title { font-size: clamp(1.5rem, 8.5vw, 2.2rem); }
+    }
+  </style>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="site-bar-sentinel" aria-hidden="true"></div>
+
+  <header class="site-bar">
+    <div class="site-bar-inner">
+      <a class="site-brand" href="../">
+        <img class="site-brand-mark" src="../images/sparky-avatar.png" width="32" height="32" alt="">
+        <span class="site-brand-name">LoveSpark</span>
+      </a>
+      <nav class="site-nav" aria-label="Sections">
+        <ul class="site-nav-list">
+          <li><a class="site-nav-link" href="../#tools">Suite</a></li>
+          <li><a class="site-nav-link" href="../#mission">Mission</a></li>
+        </ul>
+      </nav>
+      <div class="theme-switcher" role="group" aria-label="Site theme">
+        <button class="theme-pill" data-theme="basalt" type="button" aria-pressed="true">basalt</button>
+        <button class="theme-pill" data-theme="bubblegum" type="button" aria-pressed="false">bubblegum</button>
+        <button class="theme-pill" data-theme="parchment" type="button" aria-pressed="false">parchment</button>
+        <button class="theme-pill" data-theme="pink" type="button" aria-pressed="false">kawaii</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="grain-overlay" aria-hidden="true"></div>
+
+  <main id="main">
+  <section class="tools-section" aria-labelledby="page-title">
+    <div class="section-header">
+      <span class="section-deco" aria-hidden="true">✦</span>
+      <h1 class="section-title" id="page-title">Sparky &amp; SparkyBrain</h1>
+      <span class="section-deco" aria-hidden="true">✦</span>
+    </div>
+
+    <div class="explainer">
+      <p class="card-desc explainer-lede">Two separate pieces with two different jobs. <strong>Sparky</strong> is a Mac app for one person. <strong>SparkyBrain</strong> is the plain-text memory that my AI agents share across machines. They are kept apart on purpose, and they are not wired together yet.</p>
+
+      <div class="win98-card">
+        <div class="titlebar"><span class="win-title">Sparky ✨: the app</span></div>
+        <div class="card-body">
+          <div class="card-badge">macOS · SwiftUI · in development</div>
+          <h3>Storage</h3>
+          <p class="card-desc">One SQLite database (GRDB, WAL mode) in the app's Application Support folder. Nothing is synced to a server, and there are no accounts.</p>
+          <h3>Knowledge graph</h3>
+          <ul class="card-desc">
+            <li>12 object types: conversation, memory, note, decision, commitment, person, topic, project, source, digest, goal, plan.</li>
+            <li>Typed edges between objects, an immutable revision history, and an evidence trail that records where each fact came from.</li>
+          </ul>
+          <h3>Retrieval</h3>
+          <p class="card-desc">Hybrid search: SQLite FTS5 (BM25) for words, plus vector embeddings computed on the Mac with Apple's NaturalLanguage framework. The two rankings are merged into one list.</p>
+          <h3>Agents</h3>
+          <p class="card-desc"><code>sparky-mcp serve</code> is an MCP server over stdio that opens the same database as the app (WAL makes that safe across processes). It makes no model calls of its own: the agent brings its own model. Anything an agent captures is marked <code>local_only</code> by default.</p>
+          <h3>Chat and the rest</h3>
+          <p class="card-desc">Chat runs through the Claude Code CLI by default; opencode is an opt-in backend. The app also has a focus timer, habits, study, notes and a medication logger.</p>
+        </div>
+      </div>
+
+      <div class="win98-card">
+        <div class="titlebar"><span class="win-title">SparkyBrain 🜁: shared agent memory</span></div>
+        <div class="card-body">
+          <div class="card-badge">Markdown + git · Python · Mac mini</div>
+          <h3>Storage</h3>
+          <p class="card-desc">A folder of markdown files with front matter, tracked in git, on a Mac mini that is always on. Any editor or Obsidian can open it.</p>
+          <ul class="card-desc">
+            <li><code>profile.md</code>: who I am; agents read this first.</li>
+            <li><code>notes/</code>, <code>knowledge/&lt;type&gt;/</code>, <code>projects/</code> (one note per code repository), <code>inbox/</code> (dated facts agents save), <code>chats/</code> (private).</li>
+            <li><code>ledgers/</code>: four append-only JSONL files (see below).</li>
+          </ul>
+          <h3>Server</h3>
+          <p class="card-desc">One Python file, <code>brain.py</code>, with no dependencies beyond Python itself. It builds a SQLite FTS5 index from the files; the index can be deleted and rebuilt at any time, because the markdown is the source of truth. It answers over:</p>
+          <ul class="card-desc">
+            <li>MCP over stdio, for agents on the Mac mini;</li>
+            <li>MCP and plain HTTP on the home network, behind a bearer token, for the other machines;</li>
+            <li>a command line for me.</li>
+          </ul>
+          <p class="card-desc">Claude Code, Codex and Hermes (running a local Qwen model) are registered as clients.</p>
+          <h3>Writes are commits</h3>
+          <p class="card-desc">Every agent write is a git commit named after the client that made it, for example <code>claude-code: write projects/tongue-mac.md</code>. <code>git log</code> shows which agent changed what, and <code>git revert</code> undoes it. A scheduled job pushes a snapshot to a private repository every night.</p>
+          <h3>Privacy</h3>
+          <p class="card-desc">A note with <code>private: true</code> in its front matter never appears in MCP or HTTP results; only the owner's command line sees it. Chat transcripts are private.</p>
+          <h3>Project notes from coding sessions</h3>
+          <ol class="card-desc">
+            <li>When a Claude Code session starts in a repository, a hook loads that project's note into the session.</li>
+            <li>When the session ends, a background job reads the transcript and folds it into the note under What it is, Current state, Decisions, Open threads and Log. It uses <code>claude -p</code>, or a local Qwen model through Ollama if the CLI isn't signed in.</li>
+            <li>The result is committed as <code>claude-code</code>.</li>
+          </ol>
+          <h3>Ledgers</h3>
+          <p class="card-desc">Four append-only files, written through <code>ledger.py</code>, which rejects an entry with a missing field:</p>
+          <ul class="card-desc">
+            <li><strong>failures</strong>: each bug or false "done", with root cause, why it was missed, the prevention, and whether that prevention is enforced in code or only written down;</li>
+            <li><strong>jobs</strong>: long-running work and its state;</li>
+            <li><strong>decisions</strong>: my calls, in my words;</li>
+            <li><strong>deliveries</strong>: what shipped and how it was checked.</li>
+          </ul>
+          <p class="card-desc">Before an agent starts work it reads the failures that are still open; afterwards it checks its work against them and logs what it delivered.</p>
+        </div>
+      </div>
+
+      <div class="win98-card">
+        <div class="titlebar"><span class="win-title">Why they're separate</span></div>
+        <div class="card-body">
+          <h3>The heavy version didn't hold up</h3>
+          <p class="card-desc">SparkyBrain was rebuilt on 6 October 2026. Before that, agent memory went through a Swift brain service with its own database schema and migrations, and an earlier design on Temporal and PostgreSQL. Both took more running and upkeep than one person's memory needs. They were replaced with a markdown folder, git and one Python file.</p>
+          <h3>Different jobs, different machines</h3>
+          <p class="card-desc">Sparky is an app I use on my MacBook, with a typed schema and a UI. SparkyBrain is read and written by agents on several machines, so it has to stay on, be reachable over the network, and be readable by anything that can open a text file, including small local models.</p>
+          <h3>Code and notes apart</h3>
+          <p class="card-desc">The SparkyBrain code and the notes live in separate repositories, so the code can be shared without exposing personal notes.</p>
+          <h3>The trade-off</h3>
+          <p class="card-desc">SparkyBrain only has keyword search: no typed graph and no vectors. Sparky has both, but it lives on one Mac.</p>
+          <h3>Not built yet</h3>
+          <p class="card-desc">The Sparky app does not read SparkyBrain today. A shared contract between Sparky and the other LoveSpark apps (SparkyBridge) is planned, but it has no code yet.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <footer class="site-footer">
+    <img class="footer-sparky" src="../images/sparky-avatar.png" width="48" height="48"
+         alt="Sparky, the LoveSpark mascot, giving a thumbs up">
+    <nav class="hero-socials footer-socials" aria-label="Elsewhere">
+      <a href="../" class="hero-social-link">Back to LoveSpark</a>
+      <span class="footer-sep" aria-hidden="true">✦</span>
+      <a href="https://github.com/Joona-t" target="_blank" rel="noopener" class="hero-social-link">GitHub</a>
+    </nav>
+    <p class="footer-copy">© LoveSpark. Built with intent.</p>
+  </footer>
+
+  <script src="../script.js?v=2026-10-27-fine"></script>
+</body>
+</html>

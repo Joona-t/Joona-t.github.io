@@ -537,7 +537,7 @@ html:not(.theme-retro) #cursor-sparks { display: none; }
   line-height: 1;
 }
 .win-buttons .win-btn:nth-child(2) { background: var(--candy-mint); }
-.win-btn-close { background: var(--hot-pink) !important; color: white !important; }
+.win-btn-close { background: #f03ea4 !important; color: white !important; } /* kawaii only; --hot-pink under white was 2.99:1, this is 3.54:1 */
 
 .card-body {
   padding: 18px 20px 20px;
@@ -592,7 +592,7 @@ html:not(.theme-retro) #cursor-sparks { display: none; }
 
 .card-link--soon {
   background: var(--bg-pink-1);
-  color: var(--ink-soft);
+  color: var(--ink); /* --ink-soft was 4.49:1 on --bg-pink-1 */
   border: 1.5px dashed var(--hot-pink-2);
   box-shadow: none;
   text-shadow: none;
@@ -741,7 +741,7 @@ html:not(.theme-retro) #cursor-sparks { display: none; }
 .footer-copy {
   font-family: var(--font-mono);
   font-size: var(--fs-xs);
-  color: var(--ink-soft);
+  color: var(--ink); /* kawaii only (other themes override); --ink-soft on the page pink was 4.49:1 */
   margin: 0 0 6px;
 }
 .footer-heart {
@@ -872,7 +872,7 @@ summary.category-header:focus-visible {
   font-family: var(--font-mono);
   font-size: var(--fs-lg);
   font-weight: 700;
-  color: var(--deep-mauve);
+  color: #a63d73; /* kawaii only; --deep-mauve was 3.44:1 on the page pink, this is 4.84:1 */
   letter-spacing: 0.08em;
   text-transform: uppercase;
   margin: 0;
@@ -1464,7 +1464,8 @@ html.theme-bubblegum summary.category-header:focus-visible {
   outline: 2px solid var(--ls-focus);
   outline-offset: 2px;
 }
-html.theme-bubblegum .category-title { color: var(--ls-pink-deep); }
+html.theme-bubblegum .category-title { color: #ad0f66; } /* --ls-pink-deep was 2.96:1 on the lightest page stop; 4.9:1 */
+html.theme-bubblegum .aaron-memorial { color: var(--ls-text-muted); } /* --ink-soft was 4.45:1 */
 html.theme-bubblegum .category-count { color: var(--ls-pink-accent); }
 html.theme-bubblegum .category-rule {
   background: linear-gradient(90deg, var(--ls-pink-accent) 0%, transparent 100%);
@@ -1827,9 +1828,11 @@ html.theme-basalt .titlebar {
   background: linear-gradient(180deg, #2a2d33 0%, #1f2226 100%);
   border-bottom: 1px solid var(--bs-stone-edge);
 }
-html.theme-basalt .win-title { color: var(--bs-text); }
+/* Dark pill: the base 55% white pill under --bs-text measured 1.9:1 (2026-11-03). */
+html.theme-basalt .win-title { color: var(--bs-text); background: rgba(0,0,0,0.35); }
 html.theme-basalt .card-body { color: var(--bs-text-soft); }
 html.theme-basalt .card-desc { color: var(--bs-text-soft); }
+html.theme-basalt .aaron-memorial { color: var(--bs-text-soft); } /* inherited kawaii --ink-soft was 2.86:1 on stone */
 html.theme-basalt .card-badge {
   background: rgba(217,162,59,0.14);
   color: var(--bs-ember-hot);
@@ -1851,7 +1854,7 @@ html.theme-basalt .card-link:focus-visible {
   border-color: var(--bs-ember);
 }
 html.theme-basalt .card-link--soon {
-  color: #8a9099;   /* >=4.5:1 on card stone */
+  color: #959ba4;   /* 5.0:1 on the lightest card stone (#8a9099 measured 4.35:1) */
   background: rgba(255,255,255,0.04);
   border: 1px dashed var(--bs-stone-edge);
 }

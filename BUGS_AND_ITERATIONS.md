@@ -1,5 +1,12 @@
 # Bugs & Iterations
 
+## 2026-11-03: ITER: Sparky card corrected, SparkyBrain card and explainer page
+
+**Change:** Joona asked to update the Sparky description and add SparkyBrain, with a technical explanation of the setup and why it is kept separate. The Sparky card said "Mac &amp; iOS App" and "bring your own AI"; the app is macOS-only (`project.yml` platform macOS) and chat runs through the Claude Code CLI by default, so the badge and text now say that. A new SparkyBrain card (Mac &amp; iOS panel) links to a new page, `/sparky-brain/`, which covers how each one stores, searches and serves data, the ledgers, why they were split, and what isn't built yet: the app doesn't read SparkyBrain, and SparkyBridge has no code. Every claim on the page was checked against the Sparky repo and the sparky-hub code and notes on the Mac mini. The page reuses `styles.css` and `script.js`, so all four themes work.
+**Bug (contrast, found while checking):** In basalt, the default theme, every card title was `--bs-text` on the base 55% white pill (1.9:1); it now has a dark pill (10.5:1). Kawaii and bubblegum also had failures: category titles (3.44 and 2.96), "Coming soon" pills (4.49, and 4.35 in basalt), the footer copyright line (4.49), the Aaron memorial line (2.86 basalt, 4.45 bubblegum) and the kawaii ✕ (2.99 against 3:1). Each now has its own colour that passes. Root cause: base rules use kawaii tokens, and a theme override that sets only the text colour leaves the kawaii background or token underneath. A theme that has no override at all inherits the kawaii value.
+**Verification:** Local preview at 320 px. An in-page audit composites each text node over its real background (against every gradient stop) in basalt, bubblegum, parchment and kawaii: 0 failures on `/sparky-brain/` and on the home gallery and footer. scrollWidth is 320 on the new page. The home page reports 328 because of the hero "dyson shell", which `body { overflow-x: hidden }` clips, and `scrollX` stays 0. `build-gallery.py --check` is in sync (9 categories, 36 cards).
+**Files:** data/gallery.json, index.html, styles.css, sparky-brain/index.html
+
 ## 2026-11-01: ITER: Remove the X / Twitter link from the footer
 
 **Change:** Dropped the `x.com/the_null_path` link and one adjacent `✦` separator from the footer "Elsewhere" nav at Joona's request. Footer now reads GitHub ✦ Substack ✦ Goodreads. Reverts the 2026-10-27 restore (third toggle of this link: removed 10-24, restored 10-27, removed again now).

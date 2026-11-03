@@ -18,8 +18,15 @@
         },
         {
           "title": "Sparky ✨",
-          "badge": "Mac &amp; iOS App",
-          "desc": "A local knowledge brain for you and your AI agents. Sparky captures what matters into a private, typed knowledge graph with hybrid retrieval, then serves it back as memory — to your agents or to you. Focus timer, habits, study, notes, and a medication logger built in. No accounts, bring your own AI."
+          "badge": "Mac App · In development",
+          "desc": "A local knowledge brain for you and your AI agents. Sparky turns chats and notes into a typed knowledge graph stored in one SQLite database on your Mac, searched with full-text and on-device vector search together. A small MCP server lets coding agents on the same Mac read it. Focus timer, habits, study, notes and a medication logger built in. Chat runs through the Claude Code CLI you already have. No accounts."
+        },
+        {
+          "title": "SparkyBrain 🜁",
+          "badge": "Agent memory · Mac mini",
+          "desc": "The shared memory my AI agents use across machines: a git-tracked folder of plain markdown on an always-on Mac mini, served over MCP by one dependency-free Python file. Every agent write is a named git commit, and it keeps the ledgers of failures, jobs, decisions and deliveries. Kept separate from the Sparky app on purpose.",
+          "url": "https://lovespark.love/sparky-brain/",
+          "link_label": "How it works ✦"
         },
         {
           "title": "Tongue 🗣️",
