@@ -1,3 +1,0 @@
-"version": "0.180.0"
-
-vendor/STLLoader.js and vendor/OrbitControls.js import ./three.module.js directly (edited from the upstream "three" bare import) so no inline import map is needed under the CSP.
