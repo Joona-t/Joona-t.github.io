@@ -1,5 +1,11 @@
 # Bugs & Iterations
 
+## 2026-11-08: ITER: 3D Agentic Studio published at /3d-agentic-studio/
+
+**Change:** Joona asked to publish the 3D Agentic Studio site. `/3d-agentic-studio/` is the built `dist/` of `Joona-t/3d-agentic-studio` at v0.8.3 (f732564), without `release/`: the print files are on that repo's v0.8.3 GitHub Release (175 assets, sizes checked against the local files). Nothing outside the new folder changed.
+**Verification:** `build_site.py --check-links` with the release base: 24 outbound links alive, 174 release URLs in the pages and data all present on the release, page-weight budget ok, 37.6 MB. Live check: see the next entry or the source repo's log.
+**Files:** 3d-agentic-studio/ (new)
+
 ## 2026-11-03: ITER: Sparky card corrected, SparkyBrain card and explainer page
 
 **Change:** Joona asked to update the Sparky description and add SparkyBrain, with a technical explanation of the setup and why it is kept separate. The Sparky card said "Mac &amp; iOS App" and "bring your own AI"; the app is macOS-only (`project.yml` platform macOS) and chat runs through the Claude Code CLI by default, so the badge and text now say that. A new SparkyBrain card (Mac &amp; iOS panel) links to a new page, `/sparky-brain/`, which covers how each one stores, searches and serves data, the ledgers, why they were split, and what isn't built yet: the app doesn't read SparkyBrain, and SparkyBridge has no code. Every claim on the page was checked against the Sparky repo and the sparky-hub code and notes on the Mac mini. The page reuses `styles.css` and `script.js`, so all four themes work.

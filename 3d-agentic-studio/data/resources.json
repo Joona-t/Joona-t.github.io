@@ -1,0 +1,42 @@
+{
+  "checked": "2026-10-28",
+  "note": "Every link was opened with a scripted check on the date above; scripts/check_links.py re-checks them before publishing.",
+  "groups": [
+    {
+      "title": "Start here: what agents are and how to talk to them",
+      "items": [
+        {"name": "Building effective AI agents", "by": "Anthropic", "url": "https://www.anthropic.com/research/building-effective-agents", "cost": "free", "why": "A clear, short explanation of what an agent is and when a simple workflow is better."},
+        {"name": "A practical guide to building agents", "by": "OpenAI", "url": "https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf", "cost": "free PDF", "why": "The same idea from OpenAI's side, with examples of instructions and guardrails."},
+        {"name": "Prompt engineering overview", "by": "Anthropic", "url": "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview", "cost": "free", "why": "How to ask clearly: be specific, give examples, say what a good answer looks like."},
+        {"name": "Prompt engineering guide", "by": "OpenAI", "url": "https://developers.openai.com/api/docs/guides/prompt-engineering", "cost": "free", "why": "OpenAI's version of the same advice."}
+      ]
+    },
+    {
+      "title": "Official coding agents",
+      "items": [
+        {"name": "Claude Code", "by": "Anthropic", "url": "https://code.claude.com/docs/en/overview", "cost": "docs free; needs a paid Claude plan to use", "why": "The agent used to build the projects on this site. Runs in a terminal, a desktop app or the web."},
+        {"name": "Codex", "by": "OpenAI", "url": "https://developers.openai.com/codex", "cost": "docs free; needs a paid ChatGPT plan to use", "why": "OpenAI's coding agent, used for some of the earlier design work here."},
+        {"name": "Gemini CLI", "by": "Google (open source)", "url": "https://github.com/google-gemini/gemini-cli", "cost": "free tier", "why": "An open-source terminal agent with a free tier, if you want to try one at no cost."}
+      ]
+    },
+    {
+      "title": "Free courses",
+      "items": [
+        {"name": "Claude Academy", "by": "Anthropic", "url": "https://academy.claude.com/", "cost": "free", "why": "Official lessons on working and building with Claude."},
+        {"name": "Anthropic Courses", "by": "Anthropic", "url": "https://anthropic.skilljar.com/", "cost": "free", "why": "Self-paced courses, including ones on Claude Code."},
+        {"name": "OpenAI Academy", "by": "OpenAI", "url": "https://academy.openai.com/", "cost": "free", "why": "Official beginner-friendly videos and guides from OpenAI."},
+        {"name": "AI Agents Course", "by": "Hugging Face", "url": "https://huggingface.co/learn/agents-course", "cost": "free, with certificate", "why": "A structured course on how agents work, from the basics up."},
+        {"name": "Short courses", "by": "DeepLearning.AI", "url": "https://www.deeplearning.ai/courses", "cost": "many free", "why": "One-hour courses on prompting and agents from well-known teachers."},
+        {"name": "Neural Networks: Zero to Hero", "by": "Andrej Karpathy", "url": "https://karpathy.ai/zero-to-hero.html", "cost": "free", "why": "For the curious who want to see how the models work underneath. Needs some Python."}
+      ]
+    },
+    {
+      "title": "3D printing basics",
+      "items": [
+        {"name": "Bambu Lab Wiki", "by": "Bambu Lab", "url": "https://wiki.bambulab.com/en/home", "cost": "free", "why": "Official guides for the printer and slicer used here, including safety and materials."},
+        {"name": "Prusa Knowledge Base", "by": "Prusa Research", "url": "https://help.prusa3d.com/", "cost": "free", "why": "Clear, printer-neutral articles on materials, slicing and fixing common print problems."},
+        {"name": "MakerWorld", "by": "Bambu Lab", "url": "https://makerworld.com/", "cost": "free models", "why": "A library of free printable models, including the bookmarks on this site.", "browser_only": true}
+      ]
+    }
+  ]
+}

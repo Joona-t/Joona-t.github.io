@@ -1,0 +1,609 @@
+{
+ "id": "phone-cases",
+ "title": "Phone cases",
+ "device": "iPhone 14 Pro Max",
+ "material": "Bambu TPU for AMS, neon green (68D)",
+ "printer": "Bambu Lab A1, 0.4 mm nozzle",
+ "sets": [
+  {
+   "id": "original-10",
+   "title": "Original concepts",
+   "owner": "my_design",
+   "ai_generated": true,
+   "items": [
+    {
+     "id": "01-the-forge",
+     "name": "The Forge",
+     "description": "A bold central anvil silhouette framed by three rising flame ribbons, with a restrained solar disk above; connected angular ribs evoke a forge doorway. Ritual, discipline, fire. Charcoal black TPU.",
+     "image": "media/phone/original-10/01-the-forge.webp",
+     "size": [
+      600,
+      900
+     ]
+    },
+    {
+     "id": "02-null-gate",
+     "name": "Null Gate",
+     "description": "One large quiet circular void-like recessed disk centered on the back, nested incomplete concentric rings radiate outward and meet a vertical axis, carefully spaced broad rounded grooves; minimalist mystical portal, zero and structured absence. Deep plum TPU.",
+     "image": "media/phone/original-10/02-null-gate.webp",
+     "size": [
+      600,
+      900
+     ]
+    },
+    {
+     "id": "03-spacetime",
+     "name": "Spacetime",
+     "description": "A broad curved coordinate grid bends around an off-center circular gravity well in the lower middle. Smooth continuous raised ribs form a dramatic gravitational lens pattern, scientifically inspired artistic geometry. Midnight blue TPU.",
+     "image": "media/phone/original-10/03-spacetime.webp",
+     "size": [
+      600,
+      900
+     ]
+    },
+    {
+     "id": "04-noether",
+     "name": "Noether",
+     "description": "Mathematical rotational symmetry expressed as a large sixfold geometric rosette, three concentric bands of interlocking rounded triangular cells, clear radial order, no equations or lettering, bold architectural negative spaces in shallow relief. Dark teal TPU.",
+     "image": "media/phone/original-10/04-noether.webp",
+     "size": [
+      600,
+      900
+     ]
+    },
+    {
+     "id": "05-automaton",
+     "name": "Automaton",
+     "description": "A striking abstract robot spinal column down the back, broad segmented vertebrae connected to symmetric sweeping circuit branches, two understated sensor disks near the shoulders below camera level; robotics designed as elegant anatomy, no humanoid face. Graphite gray TPU.",
+     "image": "media/phone/original-10/05-automaton.webp",
+     "size": [
+      600,
+      900
+     ]
+    },
+    {
+     "id": "06-source-current",
+     "name": "Source Current",
+     "description": "Five broad flowing river contour ribbons sweep diagonally from the upper right to lower left, merge into a central organic stream then separate, calming asymmetric topography, a quiet small sun in the lower part. Petrol green TPU.",
+     "image": "media/phone/original-10/06-source-current.webp",
+     "size": [
+      600,
+      900
+     ]
+    },
+    {
+     "id": "07-desert-oracle",
+     "name": "Desert Oracle",
+     "description": "Architectural desert mysticism: broad sweeping dune relief in lower half, one rising sun disk and an abstract all-seeing eye made of simple connected geometric lines in the middle, upper right a minimal stepped temple contour. Sandstone beige TPU.",
+     "image": "media/phone/original-10/07-desert-oracle.webp",
+     "size": [
+      600,
+      900
+     ]
+    },
+    {
+     "id": "08-mycelium",
+     "name": "Mycelium",
+     "description": "Organic branching network of thick rounded connected veins fans from bottom center to edges, generous irregular cellular spaces and rounded nodes, visual vocabulary of living fungal networks and distributed intelligence. Moss green TPU.",
+     "image": "media/phone/original-10/08-mycelium.webp",
+     "size": [
+      600,
+      900
+     ]
+    },
+    {
+     "id": "09-celestial-navigator",
+     "name": "Celestial Navigator",
+     "description": "A large minimalist astrolabe in the lower two-thirds, concentric circular bands, broad radial direction markers, three simple orbit arcs flow up toward upper right; navigation and celestial mechanics, no tiny star speckles, no writing. Deep indigo TPU.",
+     "image": "media/phone/original-10/09-celestial-navigator.webp",
+     "size": [
+      600,
+      900
+     ]
+    },
+    {
+     "id": "10-open-commons",
+     "name": "Open Commons",
+     "description": "An architectural network of interlocking open archways and bridges, staggered rounded rectangular apertures rendered as shallow recesses, a strong central open doorway connects to branching paths, distributed knowledge and access in tactile geometric relief. Burnt orange TPU.",
+     "image": "media/phone/original-10/10-open-commons.webp",
+     "size": [
+      600,
+      900
+     ]
+    }
+   ]
+  },
+  {
+   "id": "neon-green-10",
+   "title": "Neon-green TPU concepts",
+   "owner": "my_design",
+   "ai_generated": true,
+   "items": [
+    {
+     "id": "11-reactor-core",
+     "name": "Reactor Core",
+     "description": "Industrial physics: one large circular reactor core in lower center, chunky segmented concentric rings and six thick radial conduits, asymmetrical upper vent-like recessed panels.",
+     "image": "media/phone/neon-green-10/11-reactor-core.webp",
+     "size": [
+      600,
+      900
+     ]
+    },
+    {
+     "id": "12-cyber-scarab",
+     "name": "Cyber Scarab",
+     "description": "Mysticism meets robotics: a bold geometric scarab with broad wing plates and six rounded circuit legs, solar disk above, strongly sculptural but shallow integrated relief.",
+     "image": "media/phone/neon-green-10/12-cyber-scarab.webp",
+     "size": [
+      600,
+      900
+     ]
+    },
+    {
+     "id": "13-waveform",
+     "name": "Waveform",
+     "description": "Physics: intersecting broad sinusoidal wave ribbons form a single dramatic interference field across the lower two-thirds, elegant repeating rhythm, generous spacing.",
+     "image": "media/phone/neon-green-10/13-waveform.webp",
+     "size": [
+      600,
+      900
+     ]
+    },
+    {
+     "id": "14-xenobot",
+     "name": "Xenobot",
+     "description": "Soft robotics: an organic exoskeleton made of broad soft-edged overlapping armored cells and a central segmented flexible spine, otherworldly, no face.",
+     "image": "media/phone/neon-green-10/14-xenobot.webp",
+     "size": [
+      600,
+      900
+     ]
+    },
+    {
+     "id": "15-neon-labyrinth",
+     "name": "Neon Labyrinth",
+     "description": "Meditative mathematics: one continuous broad rectangular spiral labyrinth that winds inward around a quiet rectangular center, rounded turns, generous clean recessed channels.",
+     "image": "media/phone/neon-green-10/15-neon-labyrinth.webp",
+     "size": [
+      600,
+      900
+     ]
+    },
+    {
+     "id": "16-flux-lines",
+     "name": "Flux Lines",
+     "description": "Electromagnetism: bold flowing magnetic field loops between two large circular poles diagonally offset along the back, curved broad ribs, sparse clean geometry.",
+     "image": "media/phone/neon-green-10/16-flux-lines.webp",
+     "size": [
+      600,
+      900
+     ]
+    },
+    {
+     "id": "17-emerald-forge",
+     "name": "Emerald Forge",
+     "description": "Personal Forge emblem reinvented for neon green: an angular hammer silhouette suspended above a broad anvil, three large radiating spark shapes, strong stepped architectural framing, restrained negative space.",
+     "image": "media/phone/neon-green-10/17-emerald-forge.webp",
+     "size": [
+      600,
+      900
+     ]
+    },
+    {
+     "id": "18-fibonacci-bloom",
+     "name": "Fibonacci Bloom",
+     "description": "Mathematics and nature: a large spiraling botanical rosette built from broad rounded petal plates in a phyllotaxis-inspired arrangement, tactile elegant offset center, no tiny dense details.",
+     "image": "media/phone/neon-green-10/18-fibonacci-bloom.webp",
+     "size": [
+      600,
+      900
+     ]
+    },
+    {
+     "id": "19-serpent-circuit",
+     "name": "Serpent Circuit",
+     "description": "Mystic technology: an abstract ouroboros serpent forms a single large broken circular loop, head suggested by simple geometric planes; broad circuit pathways run within its body and outward to border.",
+     "image": "media/phone/neon-green-10/19-serpent-circuit.webp",
+     "size": [
+      600,
+      900
+     ]
+    },
+    {
+     "id": "20-tectonic",
+     "name": "Tectonic",
+     "description": "Geology and computational design: five large asymmetrical polygonal landform plates separated by broad rounded recessed fault channels, shallow faceted slopes and contour steps, bold minimalist technical look.",
+     "image": "media/phone/neon-green-10/20-tectonic.webp",
+     "size": [
+      600,
+      900
+     ]
+    }
+   ]
+  },
+  {
+   "id": "anime-neon-10",
+   "title": "Anime neon concepts",
+   "owner": "fan_art",
+   "ai_generated": true,
+   "items": [
+    {
+     "id": "01-neliel",
+     "name": "Neliel · Hollow Bloom",
+     "description": "Your supplied horned portrait, simplified into flowing contours and a Fibonacci-like blossom.",
+     "image": "media/phone/anime-neon-10/01-neliel.webp",
+     "size": [
+      741,
+      900
+     ]
+    },
+    {
+     "id": "02-tatsumaki",
+     "name": "Tatsumaki · Vector Storm",
+     "description": "Swept curls and concentric telekinetic flow lines.",
+     "image": "media/phone/anime-neon-10/02-tatsumaki.webp",
+     "size": [
+      600,
+      900
+     ]
+    },
+    {
+     "id": "03-cc",
+     "name": "C.C. · Geass Garden",
+     "description": "Long hair, a focused eye motif and botanical curves.",
+     "image": "media/phone/anime-neon-10/03-cc.webp",
+     "size": [
+      600,
+      900
+     ]
+    },
+    {
+     "id": "04-zoro",
+     "name": "Zoro · Three Paths",
+     "description": "A stern portrait and a three-sword geometric crest.",
+     "image": "media/phone/anime-neon-10/04-zoro.webp",
+     "size": [
+      600,
+      900
+     ]
+    },
+    {
+     "id": "05-midoriya",
+     "name": "Midoriya · Full Cowl",
+     "description": "Spiky hair and branching lightning channels.",
+     "image": "media/phone/anime-neon-10/05-midoriya.webp",
+     "size": [
+      600,
+      900
+     ]
+    },
+    {
+     "id": "06-piccolo",
+     "name": "Piccolo · Orbit",
+     "description": "Angular facial planes, antennae and orbital arcs.",
+     "image": "media/phone/anime-neon-10/06-piccolo.webp",
+     "size": [
+      855,
+      900
+     ]
+    },
+    {
+     "id": "07-spike",
+     "name": "Spike · After Hours",
+     "description": "A quiet portrait with flowing jazz-like linework.",
+     "image": "media/phone/anime-neon-10/07-spike.webp",
+     "size": [
+      857,
+      900
+     ]
+    },
+    {
+     "id": "08-senku",
+     "name": "Senku · Stone to Science",
+     "description": "Swept hair, facial crack lines and molecular diagrams.",
+     "image": "media/phone/anime-neon-10/08-senku.webp",
+     "size": [
+      600,
+      900
+     ]
+    },
+    {
+     "id": "09-cell",
+     "name": "Cell · Bioforge",
+     "description": "Organic armor cells and bold biomechanical geometry.",
+     "image": "media/phone/anime-neon-10/09-cell.webp",
+     "size": [
+      857,
+      900
+     ]
+    },
+    {
+     "id": "10-eva",
+     "name": "EVA-01 · Awakening",
+     "description": "A mecha head, angular armor and circuit channels.",
+     "image": "media/phone/anime-neon-10/10-eva.webp",
+     "size": [
+      600,
+      900
+     ]
+    }
+   ]
+  }
+ ],
+ "selected": [],
+ "anime_engraved": [],
+ "timeline": [
+  {
+   "version": "V1 engraved",
+   "stage": "printed",
+   "result": "issues",
+   "text": "Three engraved cases sliced clean, then one was printed: too tight, the phone does not seat fully and an upper corner sits proud of the rim.",
+   "source": "archive/iphone-14-pro-max-tpu-concepts/revisions/v2-fit-trial/README.md:5"
+  },
+  {
+   "version": "V2 fit trial",
+   "stage": "sliced",
+   "text": "Scaled about 0.5 % wider and 0.6 % longer around the centre as a controlled starting trial; Apple's body size (77.6 × 160.7 × 7.85 mm) showed V1 relied on stretch.",
+   "source": "archive/iphone-14-pro-max-tpu-concepts/revisions/v2-fit-trial/README.md:19-21"
+  },
+  {
+   "version": "V3 length and relief",
+   "stage": "sliced",
+   "text": "Bottom-only length correction, deeper 1.2 mm channels and small detail samples to print first. No V3 physical print reported.",
+   "source": "archive/iphone-14-pro-max-tpu-concepts/revisions/v3-length-and-relief/README.md:29"
+  },
+  {
+   "version": "V4 open buttons",
+   "stage": "sliced",
+   "text": "2 mm extension, corrected corners and exposed buttons, checked in a rigid 3D fit simulation. Physical fit pending.",
+   "source": "archive/iphone-14-pro-max-tpu-concepts/README.md:3"
+  },
+  {
+   "version": "V5 open bottom",
+   "stage": "sliced",
+   "text": "Opened the bottom edge while keeping V4's fit and corner catches.",
+   "source": "git log of the print archive: “Open TPU case bottoms while retaining V4 fit and corner catches”"
+  },
+  {
+   "version": "V6 rounded bumpers",
+   "stage": "sliced",
+   "text": "Softly rounded lower corner pads; all meshes watertight and all projects slice without warnings or supports.",
+   "source": "archive/iphone-14-pro-max-tpu-concepts/revisions/v6-rounded-bumpers/FIT_V6.md:3-7"
+  },
+  {
+   "version": "Anime engraved V6",
+   "stage": "sliced",
+   "text": "The ten anime concepts redrawn as 1.0 mm-deep line engravings on the V6 case, plus 40 × 40 mm detail tests; all 20 projects slice without warnings.",
+   "source": "archive/iphone-14-pro-max-tpu-concepts/revisions/anime-engraved-v6/README.md:5-11"
+  },
+  {
+   "version": "IH1, our own case",
+   "stage": "sliced",
+   "result": "new",
+   "text": "A new shell designed from scratch from Apple's published dimensions (0.25 mm clearance, 2.0 mm back), with sculpted relief plates made from the concepts. Frame and plates slice clean with no supports. Not printed yet.",
+   "source": "cases/iphone-14-pro-max/README.md"
+  }
+ ],
+ "history_note": "V1 to V6 were built on a third-party case shell (Sakkez Games, Standard Digital File License). We kept what they taught us, not their geometry: IH1 is designed from scratch, so its files are ours to share.",
+ "generated_with": "ChatGPT image generation (concept-briefs.json: \"Visual concept studies only, generated with built-in image_gen. Not CAD, dimensional drawings, or validated printable models.\")",
+ "ih1": {
+  "name": "IH1",
+  "frame_image": "media/phone/ih1/frame.webp",
+  "frame_mesh": {
+   "gz": "media/viewer/ih1-frame.lsm.gz",
+   "full_gz": "media/phone/ih1/meshes/frame.stl.gz",
+   "source": "cases/iphone-14-pro-max/build/IH1_fibonacci_frame.stl",
+   "sha256": "ffe11cfe2981343f8032cf8e4652cedeb8da2acccd9cabc6212ea086b856d6e9"
+  },
+  "size_mm": [
+   81.08,
+   164.21,
+   10.85
+  ],
+  "default_colour": "#90FF1A",
+  "layer_height_mm": 0.16,
+  "shell": {
+   "inner_length_mm": 161.21,
+   "inner_width_mm": 78.08,
+   "back_thickness_mm": 2.0,
+   "apple_back_limit_mm": 2.1,
+   "envelope_mm": [
+    81.08,
+    164.21,
+    10.85
+   ],
+   "phone_body_overlap_mm3": -0.0
+  },
+  "clearance_mm": 0.25,
+  "designs": [
+   {
+    "key": "fibonacci",
+    "title": "Fibonacci Blossom",
+    "concept": "media/phone/neon-green-10/18-fibonacci-bloom.webp",
+    "render": "media/phone/ih1/fibonacci_assembled.webp",
+    "plate": "media/phone/ih1/fibonacci_plate.webp",
+    "lpips": 0.6215,
+    "margin": 0.0089,
+    "control_passed": true,
+    "plate_file": {
+     "name": "IH1_Fibonacci_Blossom_plate",
+     "file": "exports/IH1_Fibonacci_Blossom_plate_A1_TPU.3mf",
+     "sha256": "c712143e092e81172db39bd6b4104e0ab453e74c9dbd564368828f019b8604c1",
+     "slicer": "BambuStudio CLI --slice 0",
+     "return_code": 0,
+     "error": "Success.",
+     "warning": "",
+     "hours": 1.41,
+     "grams": 14.7,
+     "support_toolpaths": false,
+     "printer": "Bambu Lab A1",
+     "filament": [
+      "Bambu TPU for AMS @BBL A1"
+     ],
+     "layer_height": "0.16",
+     "supports_enabled": "0",
+     "physical_print": "not printed",
+     "ok": true
+    },
+    "old_v1_lpips": 0.6438,
+    "plate_mesh": {
+     "gz": "media/viewer/ih1-fibonacci-plate.lsm.gz",
+     "full_gz": "media/phone/ih1/meshes/fibonacci_plate.stl.gz",
+     "source": "cases/iphone-14-pro-max/build/IH1_fibonacci_plate_assembled.stl",
+     "sha256": "e31e1033fa4deedd88e752eb86db3206ee81f301ad3410ac20adb9a9212a2fff"
+    }
+   },
+   {
+    "key": "labyrinth",
+    "title": "Neon Labyrinth",
+    "concept": "media/phone/neon-green-10/15-neon-labyrinth.webp",
+    "render": "media/phone/ih1/labyrinth_assembled.webp",
+    "plate": "media/phone/ih1/labyrinth_plate.webp",
+    "lpips": 0.5898,
+    "margin": 0.0391,
+    "control_passed": true,
+    "plate_file": {
+     "name": "IH1_Neon_Labyrinth_plate",
+     "file": "exports/IH1_Neon_Labyrinth_plate_A1_TPU.3mf",
+     "sha256": "e9f5042cee70e75e3244c232b41ee7579d116f73610b32e4a7eba88777f735a7",
+     "slicer": "BambuStudio CLI --slice 0",
+     "return_code": 0,
+     "error": "Success.",
+     "warning": "",
+     "hours": 1.27,
+     "grams": 14.47,
+     "support_toolpaths": false,
+     "printer": "Bambu Lab A1",
+     "filament": [
+      "Bambu TPU for AMS @BBL A1"
+     ],
+     "layer_height": "0.16",
+     "supports_enabled": "0",
+     "physical_print": "not printed",
+     "ok": true
+    },
+    "old_v1_lpips": 0.6172,
+    "plate_mesh": {
+     "gz": "media/viewer/ih1-labyrinth-plate.lsm.gz",
+     "full_gz": "media/phone/ih1/meshes/labyrinth_plate.stl.gz",
+     "source": "cases/iphone-14-pro-max/build/IH1_labyrinth_plate_assembled.stl",
+     "sha256": "5deb0b4697f7749646709bbda0215e63341a98cb51534a1aad574e667f3208dc"
+    }
+   },
+   {
+    "key": "scarab",
+    "title": "Cyber Scarab",
+    "concept": "media/phone/neon-green-10/12-cyber-scarab.webp",
+    "render": "media/phone/ih1/scarab_assembled.webp",
+    "plate": "media/phone/ih1/scarab_plate.webp",
+    "lpips": 0.6448,
+    "margin": -0.0464,
+    "control_passed": false,
+    "plate_file": {
+     "name": "IH1_Cyber_Scarab_plate",
+     "file": "exports/IH1_Cyber_Scarab_plate_A1_TPU.3mf",
+     "sha256": "8f3b4f9c492b86a21e44dfae89e6f85086b0441d07ab72ae772dfa6cd14e4a7d",
+     "slicer": "BambuStudio CLI --slice 0",
+     "return_code": 0,
+     "error": "Success.",
+     "warning": "",
+     "hours": 1.32,
+     "grams": 13.54,
+     "support_toolpaths": false,
+     "printer": "Bambu Lab A1",
+     "filament": [
+      "Bambu TPU for AMS @BBL A1"
+     ],
+     "layer_height": "0.16",
+     "supports_enabled": "0",
+     "physical_print": "not printed",
+     "ok": true
+    },
+    "old_v1_lpips": 0.6504,
+    "plate_mesh": {
+     "gz": "media/viewer/ih1-scarab-plate.lsm.gz",
+     "full_gz": "media/phone/ih1/meshes/scarab_plate.stl.gz",
+     "source": "cases/iphone-14-pro-max/build/IH1_scarab_plate_assembled.stl",
+     "sha256": "96147186284aff99602be416f2e9e7553ebdca6d9360368cd4815e5b5325ea7f"
+    }
+   }
+  ],
+  "files": [
+   {
+    "label": "Frame (fits every design)",
+    "path": "https://github.com/Joona-t/3d-agentic-studio/releases/download/v0.8.3/IH1_frame_A1_TPU.3mf",
+    "bytes": 156653,
+    "sha256": "fc93ba950277633572073adb20519d48625417b8f988bfcb2c56c9e853efbb96",
+    "hours": 0.95,
+    "grams": 11.88,
+    "slice_ok": true,
+    "warning": "",
+    "kind": "3mf",
+    "source_path": "cases/iphone-14-pro-max/exports/IH1_frame_A1_TPU.3mf"
+   },
+   {
+    "label": "Fibonacci Blossom plate",
+    "path": "https://github.com/Joona-t/3d-agentic-studio/releases/download/v0.8.3/IH1_Fibonacci_Blossom_plate_A1_TPU.3mf",
+    "bytes": 3037371,
+    "sha256": "c712143e092e81172db39bd6b4104e0ab453e74c9dbd564368828f019b8604c1",
+    "hours": 1.41,
+    "grams": 14.7,
+    "slice_ok": true,
+    "warning": "",
+    "kind": "3mf",
+    "source_path": "cases/iphone-14-pro-max/exports/IH1_Fibonacci_Blossom_plate_A1_TPU.3mf"
+   },
+   {
+    "label": "Neon Labyrinth plate",
+    "path": "https://github.com/Joona-t/3d-agentic-studio/releases/download/v0.8.3/IH1_Neon_Labyrinth_plate_A1_TPU.3mf",
+    "bytes": 2896873,
+    "sha256": "e9f5042cee70e75e3244c232b41ee7579d116f73610b32e4a7eba88777f735a7",
+    "hours": 1.27,
+    "grams": 14.47,
+    "slice_ok": true,
+    "warning": "",
+    "kind": "3mf",
+    "source_path": "cases/iphone-14-pro-max/exports/IH1_Neon_Labyrinth_plate_A1_TPU.3mf"
+   },
+   {
+    "label": "Cyber Scarab plate",
+    "path": "https://github.com/Joona-t/3d-agentic-studio/releases/download/v0.8.3/IH1_Cyber_Scarab_plate_A1_TPU.3mf",
+    "bytes": 2955989,
+    "sha256": "8f3b4f9c492b86a21e44dfae89e6f85086b0441d07ab72ae772dfa6cd14e4a7d",
+    "hours": 1.32,
+    "grams": 13.54,
+    "slice_ok": true,
+    "warning": "",
+    "kind": "3mf",
+    "source_path": "cases/iphone-14-pro-max/exports/IH1_Cyber_Scarab_plate_A1_TPU.3mf"
+   },
+   {
+    "label": "Test coupon A: relief up (recommended)",
+    "path": "https://github.com/Joona-t/3d-agentic-studio/releases/download/v0.8.3/IH1_Fibonacci_coupon_A_relief_up_A1_TPU.3mf",
+    "bytes": 955567,
+    "sha256": "428a98eccdee6898eb999b965690d1055a28dec85cb4138daee3d08ebe90ff6e",
+    "hours": 0.24,
+    "grams": 2.15,
+    "slice_ok": true,
+    "warning": "",
+    "kind": "3mf",
+    "source_path": "cases/iphone-14-pro-max/exports/IH1_Fibonacci_coupon_A_relief_up_A1_TPU.3mf"
+   },
+   {
+    "label": "Test coupon B: carved face-down (slicer warns)",
+    "path": "https://github.com/Joona-t/3d-agentic-studio/releases/download/v0.8.3/IH1_Fibonacci_coupon_B_face_down_A1_TPU.3mf",
+    "bytes": 515251,
+    "sha256": "69e546c3282e676e516e69bb2e00d9f8750fe9e8fb490d0a07e5c1ef6b0c3137",
+    "hours": 0.26,
+    "grams": 2.12,
+    "slice_ok": false,
+    "warning": "It seems object IH1_Fibonacci_coupon_B_face_down.stl has floating regions. Please re-orient the object or enable support generation.",
+    "kind": "3mf",
+    "source_path": "cases/iphone-14-pro-max/exports/IH1_Fibonacci_coupon_B_face_down_A1_TPU.3mf"
+   }
+  ],
+  "licence": "CC BY 4.0 (models), MIT (code)",
+  "readme": "cases/iphone-14-pro-max/README.md",
+  "apple_drawing": "https://developer.apple.com/download/files/accessories/dimensional-drawings/iphone-14-pro-max.pdf"
+ }
+}

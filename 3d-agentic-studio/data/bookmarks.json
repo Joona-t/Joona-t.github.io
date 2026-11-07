@@ -1,0 +1,164 @@
+{
+ "id": "bookmarks",
+ "title": "Bleach bookmarks",
+ "owner": "fan_art",
+ "makerworld": "https://makerworld.com/en/models/3373993-bleach-bookmarks-ichigo-hollow-byakuya",
+ "makerworld_source": "archive/bleach-bookmarks/makerworld-first-trio/STATUS.md",
+ "size_mm": [
+  40.11,
+  150.19,
+  1.6
+ ],
+ "printer": "Bambu Lab A1, 0.4 mm nozzle, 0.16 mm layers",
+ "construction": "A 1.28 mm base in one colour (eight 0.16 mm layers) with the artwork raised 0.32 mm on top in the second colour (two layers). One filament change, a 3 mm tassel hole and a small LoveSpark maker mark.",
+ "construction_source": "archive/bleach-bookmarks/README.md, archive/bleach-bookmarks/HOLLOW.md",
+ "items": [
+  {
+   "id": "bookmark-ichigo",
+   "name": "Ichigo",
+   "parts": [
+    {
+     "url": "media/bookmarks/meshes/ichigo-e2.stl",
+     "gz": "media/viewer/bookmark-ichigo-base.lsm.gz",
+     "full_gz": "media/bookmarks/meshes/ichigo-e2.stl.gz",
+     "sha256": "8f66dd4d07e41272b773ae8b9ebff984157d774ebdd9acd61ab06b7d01d1a2a1",
+     "colour": "#C8423E",
+     "triangles": 3048,
+     "bbox_mm": [
+      40.113,
+      150.19,
+      1.28
+     ],
+     "z_range": [
+      0.0,
+      1.28
+     ]
+    },
+    {
+     "url": "media/bookmarks/meshes/ichigo-e1.stl",
+     "gz": "media/viewer/bookmark-ichigo-art.lsm.gz",
+     "full_gz": "media/bookmarks/meshes/ichigo-e1.stl.gz",
+     "sha256": "4b7bcafd90856523f2cb2981c3f89e8752eff939fdb294284a3e399a8aab33d7",
+     "colour": "#F3D363",
+     "triangles": 60796,
+     "bbox_mm": [
+      38.107,
+      140.475,
+      0.32
+     ],
+     "z_range": [
+      1.28,
+      1.6
+     ]
+    }
+   ],
+   "source_3mf": "Ichigo.3mf in archive/bleach-bookmarks/makerworld-first-trio/LoveSpark_Bleach_First_Three_Bookmarks.zip",
+   "source_sha256": "9418f340d0b67cd9b44b329a3fbb619f370643757c16ac4a28b12ec9d9407ce2",
+   "colour_changes": []
+  },
+  {
+   "id": "bookmark-hollow",
+   "name": "Hollow",
+   "parts": [
+    {
+     "url": "media/bookmarks/meshes/hollow-e1.stl",
+     "gz": "media/viewer/bookmark-hollow-base.lsm.gz",
+     "full_gz": "media/bookmarks/meshes/hollow-e1.stl.gz",
+     "sha256": "d85f9aa1de46c1c346d4ef4b4a99063cf6269bfd09f75ea183561069782e4297",
+     "colour": "#F7D959",
+     "triangles": 28741,
+     "bbox_mm": [
+      40.113,
+      150.19,
+      1.28
+     ],
+     "z_range": [
+      0.0,
+      1.28
+     ]
+    },
+    {
+     "url": "media/bookmarks/meshes/hollow-e2.stl",
+     "gz": "media/viewer/bookmark-hollow-art.lsm.gz",
+     "full_gz": "media/bookmarks/meshes/hollow-e2.stl.gz",
+     "sha256": "5840ac05b729c82fd5e0a2275b5100891df5fc1f1139468f6354a98157a04cc2",
+     "colour": "#DE4343",
+     "triangles": 76845,
+     "bbox_mm": [
+      38.142,
+      143.335,
+      0.32
+     ],
+     "z_range": [
+      1.28,
+      1.6
+     ]
+    }
+   ],
+   "source_3mf": "Hollow.3mf in archive/bleach-bookmarks/makerworld-first-trio/LoveSpark_Bleach_First_Three_Bookmarks.zip",
+   "source_sha256": "2c158db79b386c398bc6f06680d0c9eaef33c203c5ca933f0c7aab3ac30c5d1f",
+   "colour_changes": [
+    [
+     1.44,
+     2
+    ]
+   ]
+  },
+  {
+   "id": "bookmark-byakuya",
+   "name": "Byakuya",
+   "parts": [
+    {
+     "url": "media/bookmarks/meshes/byakuya-e2.stl",
+     "gz": "media/viewer/bookmark-byakuya-base.lsm.gz",
+     "full_gz": "media/bookmarks/meshes/byakuya-e2.stl.gz",
+     "sha256": "9b9fe28e9a084a403352507babeecea0fe1781ad772ca6e65dcb9520c163afda",
+     "colour": "#C8423E",
+     "triangles": 23387,
+     "bbox_mm": [
+      40.113,
+      150.19,
+      1.28
+     ],
+     "z_range": [
+      0.0,
+      1.28
+     ]
+    },
+    {
+     "url": "media/bookmarks/meshes/byakuya-e1.stl",
+     "gz": "media/viewer/bookmark-byakuya-art.lsm.gz",
+     "full_gz": "media/bookmarks/meshes/byakuya-e1.stl.gz",
+     "sha256": "2197b85c58529acefcac14589bf178ca219f1fd5030766fd22ed8d529a485f2d",
+     "colour": "#F3D363",
+     "triangles": 60513,
+     "bbox_mm": [
+      38.103,
+      140.604,
+      0.32
+     ],
+     "z_range": [
+      1.28,
+      1.6
+     ]
+    }
+   ],
+   "source_3mf": "Byakuya.3mf in archive/bleach-bookmarks/makerworld-first-trio/LoveSpark_Bleach_First_Three_Bookmarks.zip",
+   "source_sha256": "0f4e0622a560adfdbd187f07d1d963d775e58bbb33a2a08b35bbeb37b683bb46",
+   "colour_changes": [
+    [
+     1.44,
+     1
+    ]
+   ]
+  }
+ ],
+ "concept_board": {
+  "image": "media/bookmarks/concept-board.webp",
+  "ai_generated": true,
+  "size": [
+   933,
+   1400
+  ]
+ }
+}

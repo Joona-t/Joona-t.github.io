@@ -1,0 +1,82 @@
+{
+  "_how_to": "One object per real physical print. Fields: id (unique), project (plaques | phone-cases | bookmarks | other), version (optional: a version id from the site, e.g. cc11-195-signed), title, date (YYYY-MM-DD or YYYY-MM), printer, filaments (list), result (success | issues | failed | printed = printed, quality not recorded yet), notes, photos (list of paths in media/prints/), fan_art (true/false), source (where this fact comes from). Then run: python3 scripts/build_catalog.py && python3 scripts/build_pages.py",
+  "prints": [
+    {
+      "id": "shenron06-2026-10",
+      "project": "other",
+      "title": "Shenron · Dragon Balls, signed four-colour plaque",
+      "date": "2026-10",
+      "printer": "Bambu Lab A1 (project printer)",
+      "filaments": [
+        "green PLA",
+        "yellow PLA",
+        "red PLA",
+        "orange PLA"
+      ],
+      "result": "success",
+      "notes": "The creator reported this print came out spectacular. Photo supplied 30 October 2026. Exact spool profiles and project file used for the physical print are not confirmed.",
+      "photos": [
+        "media/prints/shenron06-finished-20261030.webp"
+      ],
+      "fan_art": true,
+      "source": "Creator-supplied photo IMG_1072.HEIC and reported result, 2026-10-30."
+    },
+    {
+      "id": "bleach-trio-2026-09",
+      "project": "bookmarks",
+      "title": "Bleach bookmarks: Byakuya, Hollow and Ichigo",
+      "date": "2026-09-29",
+      "printer": "Bambu Lab A1, 0.4 mm nozzle",
+      "filaments": [
+        "red matte PLA",
+        "yellow matte PLA"
+      ],
+      "result": "printed",
+      "notes": "First three two-colour bookmarks, printed and photographed on the bed and as a set. These are the files published on MakerWorld.",
+      "photos": [
+        "media/prints/bleach-9773.webp",
+        "media/prints/bleach-9760.webp",
+        "media/prints/bleach-9765.webp",
+        "media/prints/bleach-9771.webp"
+      ],
+      "fan_art": true,
+      "source": "archive/bleach-bookmarks/makerworld-first-trio/STATUS.md; photo conversion record evidence/media-conversion.json"
+    },
+    {
+      "id": "harribel-stand-2026-09",
+      "project": "other",
+      "title": "Harribel silhouette stand",
+      "date": "2026-09-29",
+      "printer": "Bambu Lab A1, 0.4 mm nozzle",
+      "filaments": [
+        "PLA"
+      ],
+      "result": "printed",
+      "notes": "Single-colour cut-out silhouette that stands on a rear foot; looks best with light behind it. Which of the three stand designs is in each photo is not recorded.",
+      "photos": [
+        "media/prints/harribel-06.webp",
+        "media/prints/harribel-01.webp",
+        "media/prints/harribel-04.webp",
+        "media/prints/harribel-05.webp",
+        "media/prints/harribel-03.webp"
+      ],
+      "fan_art": true,
+      "source": "archive/harribel-silhouette/upload-prep/photos-20260929/photo-manifest.json"
+    },
+    {
+      "id": "phone-v1-2026-10",
+      "project": "phone-cases",
+      "title": "TPU phone case, first engraved version",
+      "date": "2026-10-26",
+      "printer": "Bambu Lab A1, 0.4 mm nozzle",
+      "filaments": [
+        "Bambu TPU for AMS, neon green"
+      ],
+      "result": "issues",
+      "notes": "Too tight: the phone does not seat fully and an upper corner sits proud of the rim. This led to the V2 to V6 fit trials. No photo on file.",
+      "photos": [],
+      "fan_art": false,
+      "source": "archive/iphone-14-pro-max-tpu-concepts/revisions/v2-fit-trial/README.md:5"
+    }
+  ]
+}

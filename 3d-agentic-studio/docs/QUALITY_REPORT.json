@@ -1,0 +1,552 @@
+[
+  {
+    "design": 1,
+    "passed_geometry_and_slice": true,
+    "tool_changes": [
+      [
+        "T0",
+        0
+      ],
+      [
+        "T1",
+        15
+      ],
+      [
+        "T0",
+        16
+      ]
+    ],
+    "red_g": 3.59,
+    "total_g": 149.82,
+    "hours": 5.12,
+    "warnings": ""
+  },
+  {
+    "design": 2,
+    "passed_geometry_and_slice": true,
+    "tool_changes": [
+      [
+        "T0",
+        0
+      ],
+      [
+        "T1",
+        15
+      ],
+      [
+        "T0",
+        16
+      ]
+    ],
+    "red_g": 2.96,
+    "total_g": 155.43,
+    "hours": 6.03,
+    "warnings": ""
+  },
+  {
+    "design": 3,
+    "passed_geometry_and_slice": true,
+    "tool_changes": [
+      [
+        "T0",
+        0
+      ],
+      [
+        "T1",
+        15
+      ],
+      [
+        "T0",
+        16
+      ]
+    ],
+    "red_g": 3.48,
+    "total_g": 153.2,
+    "hours": 5.78,
+    "warnings": ""
+  },
+  {
+    "design": 4,
+    "passed_geometry_and_slice": true,
+    "tool_changes": [
+      [
+        "T0",
+        0
+      ],
+      [
+        "T1",
+        15
+      ],
+      [
+        "T0",
+        16
+      ]
+    ],
+    "red_g": 3.68,
+    "total_g": 153.61,
+    "hours": 5.76,
+    "warnings": ""
+  },
+  {
+    "design": 5,
+    "passed_geometry_and_slice": true,
+    "tool_changes": [
+      [
+        "T0",
+        0
+      ],
+      [
+        "T1",
+        15
+      ],
+      [
+        "T0",
+        16
+      ]
+    ],
+    "red_g": 3.29,
+    "total_g": 156.22,
+    "hours": 6.23,
+    "warnings": ""
+  },
+  {
+    "design": 6,
+    "passed_geometry_and_slice": true,
+    "tool_changes": [
+      [
+        "T0",
+        0
+      ],
+      [
+        "T1",
+        15
+      ],
+      [
+        "T0",
+        16
+      ]
+    ],
+    "red_g": 4.19,
+    "total_g": 151.26,
+    "hours": 5.55,
+    "warnings": ""
+  },
+  {
+    "design": 7,
+    "passed_geometry_and_slice": true,
+    "tool_changes": [
+      [
+        "T0",
+        0
+      ],
+      [
+        "T1",
+        15
+      ],
+      [
+        "T0",
+        16
+      ]
+    ],
+    "red_g": 4.0,
+    "total_g": 152.01,
+    "hours": 5.73,
+    "warnings": ""
+  },
+  {
+    "design": 8,
+    "passed_geometry_and_slice": true,
+    "tool_changes": [
+      [
+        "T0",
+        0
+      ],
+      [
+        "T1",
+        15
+      ],
+      [
+        "T0",
+        16
+      ]
+    ],
+    "red_g": 4.03,
+    "total_g": 154.03,
+    "hours": 5.92,
+    "warnings": ""
+  },
+  {
+    "design": 9,
+    "passed_geometry_and_slice": true,
+    "tool_changes": [
+      [
+        "T0",
+        0
+      ],
+      [
+        "T1",
+        15
+      ],
+      [
+        "T0",
+        16
+      ]
+    ],
+    "red_g": 4.44,
+    "total_g": 152.55,
+    "hours": 5.52,
+    "warnings": ""
+  },
+  {
+    "design": 10,
+    "passed_geometry_and_slice": true,
+    "tool_changes": [
+      [
+        "T0",
+        0
+      ],
+      [
+        "T1",
+        15
+      ],
+      [
+        "T0",
+        16
+      ]
+    ],
+    "red_g": 4.21,
+    "total_g": 152.54,
+    "hours": 5.72,
+    "warnings": ""
+  },
+  {
+    "design": 11,
+    "passed_geometry_and_slice": true,
+    "tool_changes": [
+      [
+        "T0",
+        0
+      ],
+      [
+        "T1",
+        15
+      ],
+      [
+        "T0",
+        16
+      ]
+    ],
+    "red_g": 4.25,
+    "total_g": 148.58,
+    "hours": 4.93,
+    "warnings": ""
+  },
+  {
+    "design": 12,
+    "passed_geometry_and_slice": true,
+    "tool_changes": [
+      [
+        "T0",
+        0
+      ],
+      [
+        "T1",
+        15
+      ],
+      [
+        "T0",
+        16
+      ]
+    ],
+    "red_g": 3.55,
+    "total_g": 150.22,
+    "hours": 5.18,
+    "warnings": ""
+  },
+  {
+    "design": 13,
+    "passed_geometry_and_slice": true,
+    "tool_changes": [
+      [
+        "T0",
+        0
+      ],
+      [
+        "T1",
+        15
+      ],
+      [
+        "T0",
+        16
+      ]
+    ],
+    "red_g": 4.5,
+    "total_g": 149.75,
+    "hours": 5.12,
+    "warnings": ""
+  },
+  {
+    "design": 14,
+    "passed_geometry_and_slice": true,
+    "tool_changes": [
+      [
+        "T0",
+        0
+      ],
+      [
+        "T1",
+        15
+      ],
+      [
+        "T0",
+        16
+      ]
+    ],
+    "red_g": 4.02,
+    "total_g": 150.37,
+    "hours": 5.27,
+    "warnings": ""
+  },
+  {
+    "design": 15,
+    "passed_geometry_and_slice": true,
+    "tool_changes": [
+      [
+        "T0",
+        0
+      ],
+      [
+        "T1",
+        15
+      ],
+      [
+        "T0",
+        16
+      ]
+    ],
+    "red_g": 4.23,
+    "total_g": 152.56,
+    "hours": 5.78,
+    "warnings": ""
+  },
+  {
+    "design": 16,
+    "passed_geometry_and_slice": true,
+    "tool_changes": [
+      [
+        "T0",
+        0
+      ],
+      [
+        "T1",
+        15
+      ],
+      [
+        "T0",
+        16
+      ]
+    ],
+    "red_g": 3.88,
+    "total_g": 152.6,
+    "hours": 5.6,
+    "warnings": ""
+  },
+  {
+    "design": 17,
+    "passed_geometry_and_slice": true,
+    "tool_changes": [
+      [
+        "T0",
+        0
+      ],
+      [
+        "T1",
+        15
+      ],
+      [
+        "T0",
+        16
+      ]
+    ],
+    "red_g": 4.4,
+    "total_g": 151.79,
+    "hours": 5.58,
+    "warnings": ""
+  },
+  {
+    "design": 18,
+    "passed_geometry_and_slice": true,
+    "tool_changes": [
+      [
+        "T0",
+        0
+      ],
+      [
+        "T1",
+        15
+      ],
+      [
+        "T0",
+        16
+      ]
+    ],
+    "red_g": 4.13,
+    "total_g": 152.0,
+    "hours": 5.44,
+    "warnings": ""
+  },
+  {
+    "design": 19,
+    "passed_geometry_and_slice": true,
+    "tool_changes": [
+      [
+        "T0",
+        0
+      ],
+      [
+        "T1",
+        15
+      ],
+      [
+        "T0",
+        16
+      ]
+    ],
+    "red_g": 4.38,
+    "total_g": 149.45,
+    "hours": 5.27,
+    "warnings": ""
+  },
+  {
+    "design": 20,
+    "passed_geometry_and_slice": true,
+    "tool_changes": [
+      [
+        "T0",
+        0
+      ],
+      [
+        "T1",
+        15
+      ],
+      [
+        "T0",
+        16
+      ]
+    ],
+    "red_g": 3.97,
+    "total_g": 152.65,
+    "hours": 5.73,
+    "warnings": ""
+  },
+  {
+    "design": 21,
+    "passed_geometry_and_slice": true,
+    "tool_changes": [
+      [
+        "T0",
+        0
+      ],
+      [
+        "T1",
+        15
+      ],
+      [
+        "T0",
+        16
+      ]
+    ],
+    "red_g": 4.42,
+    "total_g": 146.96,
+    "hours": 4.76,
+    "warnings": ""
+  },
+  {
+    "design": 22,
+    "passed_geometry_and_slice": true,
+    "tool_changes": [
+      [
+        "T0",
+        0
+      ],
+      [
+        "T1",
+        15
+      ],
+      [
+        "T0",
+        16
+      ]
+    ],
+    "red_g": 3.96,
+    "total_g": 148.97,
+    "hours": 4.84,
+    "warnings": ""
+  },
+  {
+    "design": 23,
+    "passed_geometry_and_slice": true,
+    "tool_changes": [
+      [
+        "T0",
+        0
+      ],
+      [
+        "T1",
+        15
+      ],
+      [
+        "T0",
+        16
+      ]
+    ],
+    "red_g": 4.18,
+    "total_g": 150.06,
+    "hours": 5.1,
+    "warnings": ""
+  },
+  {
+    "design": 24,
+    "passed_geometry_and_slice": true,
+    "tool_changes": [
+      [
+        "T0",
+        0
+      ],
+      [
+        "T1",
+        15
+      ],
+      [
+        "T0",
+        16
+      ]
+    ],
+    "red_g": 4.25,
+    "total_g": 149.17,
+    "hours": 5.12,
+    "warnings": ""
+  },
+  {
+    "design": 25,
+    "passed_geometry_and_slice": true,
+    "tool_changes": [
+      [
+        "T0",
+        0
+      ],
+      [
+        "T1",
+        15
+      ],
+      [
+        "T0",
+        16
+      ]
+    ],
+    "red_g": 4.67,
+    "total_g": 150.46,
+    "hours": 5.24,
+    "warnings": ""
+  }
+]

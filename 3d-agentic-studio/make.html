@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en" data-v="e475ac82313b">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Make your own · 3D Agentic Studio</title>
+<meta name="description" content="Copyable prompts for your own AI agent, and how to get a first print without owning a printer.">
+<meta name="color-scheme" content="light">
+<link rel="canonical" href="https://lovespark.love/3d-agentic-studio/make.html">
+<meta property="og:title" content="Make your own · 3D Agentic Studio">
+<meta property="og:description" content="Copyable prompts for your own AI agent, and how to get a first print without owning a printer.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://lovespark.love/3d-agentic-studio/make.html"><meta property="og:image" content="https://lovespark.love/3d-agentic-studio/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="preload" href="fonts/GowunDodum-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/BlackHanSans-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<style>/* Self-hosted Google Fonts subsets (SIL Open Font License). Korean glyphs fall back to system fonts. */
+@font-face { font-family: 'Black Han Sans'; font-style: normal; font-weight: 400; font-display: swap; src: url('fonts/BlackHanSans-400-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Gaegu'; font-style: normal; font-weight: 400; font-display: swap; src: url('fonts/Gaegu-400-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Gaegu'; font-style: normal; font-weight: 700; font-display: swap; src: url('fonts/Gaegu-700-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Gowun Dodum'; font-style: normal; font-weight: 400; font-display: swap; src: url('fonts/GowunDodum-400-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }</style>
+<link rel="stylesheet" href="css/studio.css?v=d5bb6788">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="3D Agentic Studio, home"><span class="mark" aria-hidden="true">✦</span><span>3D Agentic Studio</span></a>
+    <nav class="nav" aria-label="Main"><a href="index.html">Home</a><a href="learn.html">Learn</a><a href="make.html" aria-current="page">Make your own</a><a href="projects.html">Projects</a><a href="resources.html">Resources</a></nav>
+  </div>
+</header>
+<main id="main">
+<section class="hero hero-sm"><div class="wrap wrap-single"><div>
+<p class="eyebrow">Start here</p><h1>Make your own</h1><p class="lead">You describe, the agent builds, you check. Copy a prompt below, add your own picture, and you have started. This site and its code are the starting kit.</p>
+</div></div></section><section class="block" id="agent" aria-labelledby="agent-h"><div class="wrap">
+<p class="eyebrow">Copy, paste, adapt</p><h2 id="agent-h">Prompts to give your agent</h2>
+<p class="muted">Replace the parts in angle brackets, give the prompt to your agent together with your image, and read what comes back. Each prompt asks the agent to show its work, not just say “done”.</p><div class="prompts"><div class="prompt-box"><h4>Just curious (no coding)</h4><button class="btn btn-sm copy" type="button" data-copy="prompt-curious">Copy</button><pre id="prompt-curious">I am new to 3D printing and I do not write code. Here is a website about making 3D-printed art with an AI agent: &lt;site address&gt;. Read it and explain to me, in plain words, what I would need to make something from my own image: &lt;describe or attach it&gt;. Then give me the first three small steps, and tell me what usually goes wrong for beginners. Do not start building anything yet.</pre></div><div class="prompt-box"><h4>Make mine</h4><button class="btn btn-sm copy" type="button" data-copy="prompt-mine">Copy</button><pre id="prompt-mine">Here is a website and its source code: &lt;site address&gt; and &lt;code folder or repository&gt;. Help me make a &lt;plaque / bookmark / other flat object&gt; from my own image (attached). My printer is &lt;printer model&gt;, the size should be about &lt;size&gt; mm. Work step by step and show me each result before continuing: the printable drawing next to my image, the 3D shape, then the slicer result for my printer. Report &quot;3D shape OK&quot;, &quot;slice OK&quot; and &quot;printed&quot; as three separate facts. Ask me before changing anything about my image.</pre></div><div class="prompt-box"><h4>Remix this site for your own collection</h4><button class="btn btn-sm copy" type="button" data-copy="prompt-remix">Copy</button><pre id="prompt-remix">Here is a gallery site and its code: &lt;site address&gt; and &lt;code folder or repository&gt;. Make a version for my own collection of &lt;what you make&gt;. Keep what works: the plain-language guide, a gallery per project, the 3D viewer, the proof badges, a gallery of real prints and an FAQ. Replace all content with mine. Build the pages from my real files the way the scripts in scripts/ do, and never write a claim about a file that the file does not support. Show me the result running on my computer before anything is published.</pre></div><div class="prompt-box"><h4>Something went wrong</h4><button class="btn btn-sm copy" type="button" data-copy="prompt-fix">Copy</button><pre id="prompt-fix">I printed &lt;what&gt; and &lt;what went wrong: too tight / lines merged / colours wrong / it broke&gt;. Here are photos and the file I printed: &lt;attach&gt;. Explain in plain words what probably caused it, suggest the smallest change to test first, and tell me what to look at in the next print. Don&#x27;t change several things at once.</pre></div><details class="under"><summary>Builder prompt for the shelf-plaque pipeline (technical, exact settings)</summary><div class="prompt-box" style="margin-top:10px"><button class="btn btn-sm copy" type="button" data-copy="prompt-builder">Copy</button><pre id="prompt-builder">Build me a two-colour recessed engraving plaque for FDM printing from my black-and-white artwork, following this workflow:
+
+1. Input: a square black-on-white image (mine: ARTWORK.png). Treat grey &lt; 145 as ink after resizing to 1100 px.
+2. Line-width compensation for a 0.4 mm nozzle: skeletonise the ink mask and union it with a distance band of ≤ 1.12 px around the skeleton; drop specks under 5 px. Trace contours (scikit-image find_contours at 0.5, fully connected).
+3. Geometry (manifold3d): make an even-odd CrossSection from the contours scaled to (plaque_size − 16 mm) so an 8 mm frame remains. Body = square slab plaque_size × plaque_size × 4 mm minus the artwork extruded 1.24 mm from z = 2.76. Floor = the artwork extruded 0.24 mm at z = 2.76. Assert both manifolds are error-free and their intersection volume is &lt; 0.001.
+4. Export body and floor as separate binary STLs (trimesh) and report vertices, faces, watertightness and bounds in a JSON sidecar.
+5. Package a 3MF with both STLs as two parts of one object (extruder 1 = body, extruder 2 = floor), placed at the plate centre, using my printer's project-settings template. For a Bambu A1 (256 × 256 bed): plaque 225 mm, prime tower width 20, brim 2, wipe_tower at x 2 / y 200, supports off.
+6. Slice headlessly: BambuStudio --slice 1 --outputdir OUT file.3mf. Read result.json: require return_code 0, exactly two filaments, empty warning_message, and record hours and grams. A G-code conflict means the prime tower collides: shrink the plaque or move the tower, never ignore it.
+7. Colour variants only change filament_colour in Metadata/project_settings.config; they keep the same geometry and do not verify a material profile.
+8. Report honestly: geometry OK, slice OK and physically printed are three different claims. Do not call anything print-proven without a photo of a finished print.</pre></div></details></div>
+</div></section><section class="block" id="path" aria-labelledby="path-h"><div class="wrap">
+<p class="eyebrow">Four steps</p><h2 id="path-h">From idea to your first print</h2>
+<div class="path">
+      <div class="path-step"><h3>Pick an image</h3><p>Your own drawing, a logo, a photo you want turned into line art, a gift idea. Black lines on white print best, but you can ask the agent to make that conversion for you.</p></div>
+      <div class="path-step"><h3>Open an agent</h3><p>Claude Code, Codex or any assistant that can run code on your computer. Give it two things: the address of this site and its code folder. The code is small: five Python scripts and one web page.</p></div>
+      <div class="path-step"><h3>Ask in plain words</h3><p>Say what you want to end up with and what you have. Use one of the prompts below as a start. You do not need to understand the scripts; you need to say what you want and look at what comes back.</p></div>
+      <div class="path-step"><h3>Check before you print</h3><p>Do what this site does: put the stencil next to your image, spin the model, read the slicer result, and treat "it sliced" as different from "it printed". Ask the agent to show evidence, not confidence.</p></div>
+    </div>
+</div></section><section class="block" id="no-printer" aria-labelledby="no-printer-h"><div class="wrap">
+<p class="eyebrow">No printer?</p><h2 id="no-printer-h">Where to print</h2>
+<ul class="checklist">
+<li><strong>Makerspaces and libraries</strong> often have printers and people who will help with a first print.</li>
+<li><strong>Online print services</strong> print an STL or 3MF file you upload and post it to you.</li>
+<li><strong>A friend with a printer.</strong> Bring the file and the slicer screenshot so they can check it.</li>
+</ul><p class="notice" style="margin-top:14px">Start small: one bookmark costs a few grams of plastic and under an hour of printing.</p>
+</div></section><section class="block" id="rules" aria-labelledby="rules-h"><div class="wrap">
+<p class="eyebrow">Fair play</p><h2 id="rules-h">Using other people's art</h2>
+<p>The code on this site is free to reuse (MIT). The fan art is not: the characters belong to their rights holders, and these pieces are shared for personal, non-commercial use only. Make your version with images you made or have the right to use. If you start from someone else's model (like the phone case base here), check its licence before you share or sell anything made from it.</p>
+</div></section>
+</main>
+<footer>
+  <div class="stars" aria-hidden="true"></div>
+  <div class="wrap">
+    <div>
+      <h3>About this site</h3>
+      <p>A one-off guide to creating things with your own AI agent, with 3D printing as the example. Made by Joona (Tyrninoksa), designing together with AI agents.</p>
+      <p class="small"><strong>Fan art:</strong> many pieces here show characters I don't own (Code Geass, Bleach and others). They are made for fun, not official, and not for sale. <strong>AI images:</strong> concept pictures marked “AI-generated concept” were made with an image generator; prints and photos are real.</p>
+      <p class="small">Code: MIT. Artwork and models: personal, non-commercial use only (ARTWORK-LICENSE.md). Fonts: SIL Open Font License. 3D viewer: three.js (MIT).</p>
+    </div>
+    <div>
+      <h3>Honest by design</h3>
+      <ul class="small">
+        <li>Every design shows what is proven: idea, drawing, 3D shape, slicer check, real print.</li>
+        <li>A clean slicer check is not a finished print.</li>
+        <li>No ads, no tracking, no accounts. Nothing here loads from other sites.</li>
+      </ul>
+      <p class="small">Built 2026-11-08.</p>
+    </div>
+  </div>
+</footer>
+<div class="toast" id="toast" hidden role="status"></div>
+<script src="js/common.js?v=f1fae19a" defer></script>
+
+</body>
+</html>
