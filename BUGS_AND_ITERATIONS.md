@@ -4,8 +4,8 @@
 
 **Change:** Joona asked to update the mission: AI has put the tools to learn anything in everyone's hands, so LoveSpark's mission is now to teach non-technical people to use AI to learn what they are curious about, pursue their passions, accelerate their abilities and bring what they imagine to life; that knowledge should be free and accessible to everyone, and intelligence belongs to the people. The Mission section's three paragraphs are replaced with four in his words. Markup, classes and styles are unchanged.
 **Verification:** The edited section parses with every tag closed; the change is text inside existing `.mission-text` paragraphs only. Not previewed in a browser (the local preview server could not be started this session).
-**Also:** the "A note from the workshop" section now says this shelf is the beginning (built while first learning to build with AI and agents), is no longer actively updated, and that most current work is in private projects. Removed the Sparky convergence paragraph and the claim that "full source and the unrestricted builds" are on GitHub (now: many of these tools are open source there). Added a line that some tools may be outdated or covered by AI models now.
-**Files:** index.html
+**Also:** the "A note from the workshop" section now says this shelf is the beginning (built while first learning to build with AI and agents), is no longer actively updated, and that most current work is in private projects. Removed the Sparky convergence paragraph and the claim that "full source and the unrestricted builds" are on GitHub (now: many of these tools are open source there). Added a line that some tools may be outdated or covered by AI models now. Moved the workshop note above "The Suite" (Joona asked). It used to share a two-column `.about-grid` with the mission on desktop; the wrapper and its CSS are removed, so the note and the mission each use their own centred prose-width styles (the layout phones already had). The whole page still parses with every tag balanced.
+**Files:** index.html, styles.css
 
 ## 2026-11-08: ITER: 3D Agentic Studio published at /3d-agentic-studio/
 
