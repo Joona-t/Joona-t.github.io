@@ -2222,7 +2222,6 @@ html .win-buttons button.win-btn-close::after {   /* 32px hit area around the 16
 .win-btn-close:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 
 /* ── Notice + Mission: real paragraphs, 2 columns at >= 900px ── */
-.about-grid { position: relative; z-index: 2; }
 .notice-title {
   font-family: var(--font-display);
   font-size: var(--fs-xl);
@@ -2232,25 +2231,6 @@ html .win-buttons button.win-btn-close::after {   /* 32px hit area around the 16
   margin: 0 0 var(--sp-3);
 }
 .notice-text + .notice-text { margin-top: 0.9em; }
-@media (min-width: 900px) {
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: start;
-    gap: var(--sp-7);
-    max-width: var(--w-wide);
-    margin: 0 auto;
-    padding: var(--sp-section) var(--sp-5) var(--sp-6);
-  }
-  html .about-grid > .notice-section,
-  html .about-grid > .mission-section {
-    max-width: none;
-    margin: 0;
-    padding: 0;
-    min-height: 0;
-  }
-  html .about-grid > .mission-section .section-header { margin-top: 0; }
-}
 
 /* ── Support + Contact: one card, Ko-fi primary + email ghost ── */
 .support-actions {
