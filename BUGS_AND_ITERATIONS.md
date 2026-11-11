@@ -1,5 +1,11 @@
 # Bugs & Iterations
 
+## 2026-11-11: ITER: New mission statement
+
+**Change:** Joona asked to update the mission: AI has put the tools to learn anything in everyone's hands, so LoveSpark's mission is now to teach non-technical people to use AI to learn what they are curious about, pursue their passions, accelerate their abilities and bring what they imagine to life; that knowledge should be free and accessible to everyone, and intelligence belongs to the people. The Mission section's three paragraphs are replaced with four in his words. Markup, classes and styles are unchanged.
+**Verification:** The edited section parses with every tag closed; the change is text inside existing `.mission-text` paragraphs only. Not previewed in a browser (the local preview server could not be started this session).
+**Files:** index.html
+
 ## 2026-11-08: ITER: 3D Agentic Studio published at /3d-agentic-studio/
 
 **Change:** Joona asked to publish the 3D Agentic Studio site. `/3d-agentic-studio/` is the built `dist/` of `Joona-t/3d-agentic-studio` at v0.8.3 (f732564), without `release/`: the print files are on that repo's v0.8.3 GitHub Release (175 assets, sizes checked against the local files). Nothing outside the new folder changed.
