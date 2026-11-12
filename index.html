@@ -18,7 +18,7 @@
   <!-- Theme-specific fonts (basalt/parchment/hero-CTA serif) — non-blocking -->
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet"></noscript>
-  <link rel="stylesheet" href="styles.css?v=2026-11-03-sparkybrain">
+  <link rel="stylesheet" href="styles.css?v=2026-11-12-agentic">
 </head>
 <body>
 
@@ -36,6 +36,7 @@
       </a>
       <nav class="site-nav" aria-label="Sections">
         <ul class="site-nav-list">
+          <li><a class="site-nav-link" href="#agentic">Repos</a></li>
           <li><a class="site-nav-link" href="#gallery">Peeks</a></li>
           <li><a class="site-nav-link" href="#tools">Suite</a></li>
           <li><a class="site-nav-link" href="#mission">Mission</a></li>
@@ -147,6 +148,43 @@
 
     </div>
   </header>
+
+  <!-- ═════════════════════════════════ AGENTIC REPOS ═════════════════════════════════ -->
+  <section class="agentic-section" id="agentic" aria-labelledby="agentic-title">
+    <div class="section-header">
+      <span class="section-deco" aria-hidden="true">✦</span>
+      <h2 class="section-title" id="agentic-title">Agentic Repos</h2>
+      <span class="section-deco" aria-hidden="true">✦</span>
+    </div>
+    <p class="gallery-subtitle agentic-intro">
+      Open-source repos I build with my agents. Use them as they are, or hand
+      one to your own agent and make it yours ♡
+    </p>
+
+    <div class="win98-card agentic-card">
+      <div class="titlebar">
+        <span class="win-title">Fleet Dashboard 🖥️</span>
+        <div class="win-buttons">
+          <span class="win-btn" aria-hidden="true">─</span>
+          <span class="win-btn" aria-hidden="true">□</span>
+          <button type="button" class="win-btn win-btn-close" aria-label="Wobble this window">✕</button>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-badge">Open source · MIT</div>
+        <p class="card-desc">A live dashboard for every machine you and your agents run on: GPUs, VRAM, temperatures and power on Mac, Linux and Windows. No installs, no accounts, everything stays local.</p>
+        <div class="agentic-video">
+          <button type="button" class="video-facade" data-yt="G_ldLkL11SY" aria-label="Play the Fleet Dashboard video (loads YouTube)">
+            <img src="images/agentic/fleet-dashboard.jpg" width="1280" height="720" loading="lazy" decoding="async"
+                 alt="Fleet Dashboard video: four machines on one live page, a Mac mini, a MacBook Pro, a gaming PC and a dual RTX 3090 box">
+            <span class="video-play" aria-hidden="true">▶</span>
+          </button>
+          <p class="video-note">Plays from YouTube when you press play.</p>
+        </div>
+        <a href="https://github.com/Joona-t/lovespark-fleet-dashboard" class="card-link" target="_blank" rel="noopener">GitHub ✦</a>
+      </div>
+    </div>
+  </section>
 
   <!-- ═════════════════════════════════ SNEAK PEEKS ═════════════════════════════════ -->
   <section class="gallery-section" id="gallery">
@@ -1072,6 +1110,6 @@
     <p class="footer-heart" aria-hidden="true">♡</p>
   </footer>
 
-  <script src="script.js?v=2026-10-27-fine"></script>
+  <script src="script.js?v=2026-11-12-agentic"></script>
 </body>
 </html>

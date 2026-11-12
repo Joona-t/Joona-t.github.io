@@ -2914,3 +2914,22 @@ html:root .hero-cta-group a.hero-cta.hero-cta--primary { overflow: visible; z-in
   100% { opacity: 0; translate: var(--dx) var(--dy); }
 }
 @media (prefers-reduced-motion: reduce) { .destiny-specks { display: none; } }
+
+/* ═══ Agentic Repos: open-source repos built with agents, above the Sneak Peeks ═══ */
+.agentic-section { padding: var(--sp-7, 48px) var(--sp-4, 16px) var(--sp-5, 24px); }
+.agentic-section .section-header { margin-bottom: var(--sp-4, 16px); }
+.agentic-intro { max-width: 60ch; margin: 0 auto var(--sp-5, 24px); text-align: center; }
+.agentic-card { max-width: 760px; margin: 0 auto; }
+.agentic-video { margin: 14px 0 16px; }
+.video-facade { position: relative; display: block; width: 100%; padding: 0; border: 0; border-radius: 10px; overflow: hidden;
+  cursor: pointer; background: #000; aspect-ratio: 16 / 9; }
+.video-facade img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .25s ease, filter .25s ease; }
+.video-facade:hover img, .video-facade:focus-visible img { transform: scale(1.02); filter: brightness(.92); }
+.video-facade:focus-visible { outline: 3px solid currentColor; outline-offset: 3px; }
+.video-play { position: absolute; left: 50%; top: 50%; width: 76px; height: 76px; margin: -38px 0 0 -38px; border-radius: 50%;
+  display: grid; place-items: center; font-size: 30px; padding-left: 6px; box-sizing: border-box; color: #fff;
+  background: rgba(233, 30, 140, .92); box-shadow: 0 8px 24px rgba(0, 0, 0, .35); }
+.agentic-video iframe { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: 10px; }
+.video-note { margin: 6px 0 0; font-size: 12px; opacity: .75; }
+html.theme-basalt .video-play { background: linear-gradient(180deg, #d9a23b, #a8761f); color: #16171a; }
+@media (prefers-reduced-motion: reduce) { .video-facade img { transition: none; } }
