@@ -1,5 +1,11 @@
 # Bugs & Iterations
 
+## 2026-11-12: ITER: Forge Notebook names the models behind each task and their reasoning levels
+
+**Change:** At Joona's request a new section, "The models and their reasoning levels", sits after "The machine". It has a chart of which Claude model worked in each session over the two days (Fable 5.2 or Opus 5.5, solid for high reasoning, pale for medium), a table of every session with its model, reasoning level, step count and what it oversaw, a table of the local Qwen builds and their thinking setting, and Joona's own words on how the work was split. Three timeline entries record his model switches (00:19, 02:29, 18:23), and the mistakes table gets the fan-socket advice from the Claude app.
+**Data:** taken from the session transcripts, which record the model and effort of every step (a private ledger script on the Mac mini computes the windows; the page carries only lane names, times, model names and counts).
+**Before the export:** the diagram label fix that 2f41dff and 0ad8d80 made on the site was ported into the notebook's source first, so this export keeps it (the stale-copy failure from 1427cff). The export differs from the live page only by the new section and a favicon.
+
 ## 2026-11-12: BUG: theme switches glitched; a stale copy undid the diagram fix; a verify gate before every merge
 
 **Symptom (Joona):** switching themes on the home page glitched after #41 (glyph field). Separately the Forge Notebook diagram labels were back behind their arrows on the live site.

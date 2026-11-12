@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Forge Lab Notebook</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext x='32' y='34' text-anchor='middle' dominant-baseline='central' font-size='60' fill='%23e6b04a'%3E%E2%9C%BA%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Lexend:wght@400;600&family=Comfortaa:wght@400;600&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
@@ -277,7 +278,7 @@ body{margin:0} img{max-width:100%} [hidden]{display:none!important}</style>
 <div class="tiles" id="tiles"></div>
 
 <nav class="toc card" aria-label="Contents">
-  <a href="#machine">The machine</a><a href="#timeline">Timeline</a><a href="#tuning">vLLM tuning</a><a href="#lock">The GPU lock</a>
+  <a href="#machine">The machine</a><a href="#models">The models</a><a href="#timeline">Timeline</a><a href="#tuning">vLLM tuning</a><a href="#lock">The GPU lock</a>
   <a href="#engines">vLLM and Ollama</a><a href="#mtp">MTP on and off</a><a href="#llamacpp">llama.cpp</a><a href="#fault">The memory fault</a>
   <a href="#heat">Heat and power</a><a href="#locktest">Lock test</a><a href="#eval">The 20-task eval</a><a href="#mistakes">Mistakes</a><a href="#open">Still open</a><a href="#append">Adding entries</a>
 </nav>
@@ -307,6 +308,44 @@ body{margin:0} img{max-width:100%} [hidden]{display:none!important}</style>
     <div class="diagram" id="dg-layout"></div>
     <figcaption><b>Who was on the Forge.</b> Every session reached the Forge over SSH. The lead session ran the install, tuning and runbook and coordinated the rest. The handoff session ran the lock tests and the eval. Two benchmark jobs came from the MacBook. Blitz Swarm and Primordial were mostly paused while vLLM was set up.</figcaption>
   </figure>
+</section>
+
+<!-- ============ MODELS ============ -->
+<section id="models">
+  <div class="sechead"><span class="eyebrow">Who thought, and how hard</span><h2>The models and their reasoning levels</h2></div>
+  <p class="col">Two kinds of model worked on the Forge. <b>Claude models ran the sessions</b>: they planned, wrote the code, read the logs and decided what to try next. <b>Qwen, running on the Forge itself, was the model being tested.</b> Every Claude session keeps a transcript, and it records the model and the <b>reasoning level</b> of every step. The reasoning level is Claude Code's effort setting (low, medium, high, xhigh or max): how much the model thinks before it acts. This section is built from those transcripts.</p>
+  <figure class="card">
+    <div class="diagram" id="dg-models"></div>
+    <div class="legend" id="lg-models"></div>
+    <figcaption><b>Who was working, and when.</b> Each bar is a stretch of work, taken from the transcripts' timestamps (steps less than 30 minutes apart join into one bar). Solid is high reasoning, pale is medium. The MacBook's session left no transcript on the Mac mini, so its model isn't known here.</figcaption>
+  </figure>
+  <div class="callout card"><p><b>How the work was split.</b> Joona set the pattern himself, twice. At 02:29: <q>you fable 5.2 plan orchestrate verify each checkpoint and use opus 5.5 on medium to implement</q>. At 18:23: <q>fable 5.2 as orchestator and architect then use opus 5.5 as your sub architects for implementation</q>. He also switched the lead session's model himself: to Opus 5.5 at 00:19, and back to Fable 5.2 at 18:23. So Fable 5.2 at high reasoning planned, ran and checked the work, and Opus 5.5 agents at medium wrote the code they were given. Each agent's brief said the session that started it would review and run its work.</p></div>
+  <div class="tbl card" style="padding:4px 6px">
+    <table>
+      <tr><th>Session</th><th>Model</th><th>Reasoning</th><th class="n">Steps</th><th>What it oversaw</th></tr>
+      <tr><td>Lead, 11-11 20:44 to 11-12 00:19</td><td>Fable 5.2</td><td>high (medium for the first 20 minutes and two short stretches)</td><td class="n">396</td><td>Reached the Forge, read the handoff, installed vLLM with Joona's FP8 pick, tuned it, built the two-mode GPU lock and the runbook.</td></tr>
+      <tr><td>Lead, 00:20 to 18:22</td><td>Opus 5.5</td><td>high (first 3 steps medium)</td><td class="n">262</td><td>Coordinated the other sessions overnight, watched the eval, traced the MacBook's jobs, worked on the memory fault, gave the BIOS advice that turned out wrong, tested the Forge after EXPO, and started this notebook.</td></tr>
+      <tr><td>Lead, 18:24 on</td><td>Fable 5.2</td><td>high</td><td class="n">72</td><td>Orchestrator and architect for Blitz Swarm and Primordial on vLLM. Reviews its agents' work.</td></tr>
+      <tr><td>2 agents of the lead, 18:26 on</td><td>Opus 5.5</td><td>medium</td><td class="n">454</td><td>One each for Blitz Swarm and the Primordial eval on vLLM.</td></tr>
+      <tr><td>Handoff, 11-11 21:22 to 11-12 16:30</td><td>Fable 5.2</td><td>high</td><td class="n">822</td><td>vLLM against Ollama, the lock test, the 20-task eval, the temperature log and the memory checks. Planned and checked every step.</td></tr>
+      <tr><td>4 agents of the handoff, 02:31 to 07:34</td><td>Opus 5.5</td><td>medium</td><td class="n">192</td><td>Three small tools, the agent's vLLM backend, the lock test's gaps, and the eval tooling (batches, the idle check, a clean stop).</td></tr>
+      <tr><td>Blitz Swarm, 11-11 21:26 on</td><td>Fable 5.2</td><td>medium</td><td class="n">171</td><td>Ran its four baseline arms on Qwen (Ollama) and stopped at 22:32 when Joona paused it. It labelled those runs as taken on an unstable machine, then waited for Joona's own word before going on.</td></tr>
+      <tr><td>Primordial, 11-11 21:26 on</td><td>Fable 5.2</td><td>medium</td><td class="n">112</td><td>Wrote the local-model backend for its eval. It held the commit while a test suite was red, and waited for Joona's yes before copying anything to the Forge.</td></tr>
+      <tr><td>Notebook, 11-12 15:56 on</td><td>Opus 5.5</td><td>high</td><td class="n">624</td><td>This notebook, its charcoal title and the page on lovespark.love.</td></tr>
+      <tr><td>MacBook, 06:38 to 07:17</td><td colspan="2">not recorded on the Mac mini</td><td class="n">&ndash;</td><td>The llama.cpp benchmark and a 16-request load test.</td></tr>
+      <tr><td>Claude app chat, before 05:36</td><td>Opus (version not recorded)</td><td>&ndash;</td><td class="n">&ndash;</td><td>Which board socket the new front fans go in. The advice was wrong, and Joona moved them.</td></tr>
+    </table>
+    <p class="note" style="padding:6px 10px 2px">A step is one model turn: a reply, or one round of tool calls. Counts run up to 20:47 on 11-12. Fable 5.1 answered 3 steps in the Blitz Swarm session at 19:27, before the Forge work started.</p>
+  </div>
+  <div class="tbl card" style="padding:4px 6px">
+    <table>
+      <tr><th>Local model</th><th>Engine</th><th>What it did</th><th>Thinking</th></tr>
+      <tr><td>Qwen3.8-27B, FP8 (Qwen's own build)</td><td>vLLM 0.33.0, both cards, MTP 3 tokens</td><td>The agent in the lock test and the 20-task eval; the speed tests; Blitz Swarm and Primordial from 18:26</td><td>Eval: the server's default, on (the agent sends no setting). Speed tests: off. Blitz Swarm and Primordial: run both ways and compared, Joona's call at 18:31.</td></tr>
+      <tr><td>Qwen3.8-27B, Q8</td><td>Ollama 0.40.16</td><td>The engine comparison; Blitz Swarm's four baseline arms on 11-11</td><td>off</td></tr>
+      <tr><td>Qwen3.8-27B, four GGUF builds</td><td>llama.cpp b12302</td><td>The MacBook's benchmark</td><td>not recorded here</td></tr>
+    </table>
+  </div>
+  <p class="col"><b>Reasoning is not certainty.</b> Both wrong pieces of advice in these two days came from capable models: the fan socket from Opus in the Claude app, and the BIOS plan from Opus 5.5 at high reasoning in the lead session (see <a href="#fault">The memory fault</a>). Thinking harder helps. It doesn't replace checking, and it doesn't replace Joona knowing his own machine.</p>
 </section>
 
 <!-- ============ TIMELINE ============ -->
@@ -560,6 +599,7 @@ body{margin:0} img{max-width:100%} [hidden]{display:none!important}</style>
       <tr><td class="mono">11-12 03:01</td><td>The stand-in fence used for self-tests was stricter than the real sandbox, which hid a broken test step.</td><td>The lock test now prints who stopped each route; results are checked by hand.</td></tr>
       <tr><td class="mono">11-12 03:01</td><td>Claude Code's first request to vLLM failed: <code>400 Unexpected reasoning effort high</code>.</td><td>The agent always passes an effort level on vLLM (default <code>xhigh</code>).</td></tr>
       <tr><td class="mono">11-12 04:37:59</td><td>Power-off with no shutdown lines, while a roughly 90 GB unthrottled download (curl, tar, model download) from another session ran during the eval. Second hard stop during a big download under GPU load. Two of two is a pattern, not proof.</td><td>Rule 3 applies to every machine and account that logs in.</td></tr>
+      <tr><td class="mono">11-12 05:36</td><td>The new front fans first went on the wrong board socket. The socket came from Opus in the Claude app, not one of these sessions, and wasn't checked against the board's manual. Joona saw they weren't spinning and moved them.</td><td>Wiring advice is checked against the exact board's manual first.</td></tr>
       <tr><td class="mono">11-12 07:12</td><td>A 16-request load test from another machine landed on the server during the eval's resume.</td><td>The eval checks the server is idle before each batch and records how busy it got.</td></tr>
       <tr><td class="mono">11-12 12:36</td><td>The fix advice was wrong. The lead session told Joona to load BIOS defaults to reset the memory profile, assuming EXPO was on. It never confirmed that (no sudo to read the memory speed). EXPO was off; Joona turned it <i>on</i> by instinct, and that is what made every check clean.</td><td>Check the current setting before advising a change to it, or say plainly that it is a guess. The runbook records EXPO on as the setting that made the checks clean.</td></tr>
     </table>
@@ -618,9 +658,11 @@ const ENTRIES = [
  ["2026-11-11","23:43","test","Per-core test: clean","Each of 16 cores alone compared about 220 GB: 3,500 GB, 0 errors. Only the big fill finds the fault."],
  ["2026-11-11","23:52","fix","vLLM starts again","First try, no change made. Tuning round 3 begins at 23:56."],
  ["2026-11-12","00:11","test","Default chosen","FP8 cache + text-only + MTP: 77.3, 139.4, 163.3, 165.1 tokens/s at 1, 4, 8, 16 requests, 254k tokens of shared context. Runbook written."],
+ ["2026-11-12","00:19","decision","Lead session to Opus 5.5","Joona switches the lead session from Fable 5.2 to Opus 5.5. It stays on Opus, at high reasoning, until 18:23."],
  ["2026-11-12","00:47","test","Engine test, vLLM half","Same client for both engines. vLLM: 92 to 118 tokens/s for one short request."],
  ["2026-11-12","01:46","test","Engine test, Ollama half","Ollama Q8 29.3 to 29.4, Ollama MTP 59.7 to 81.5 tokens/s. More requests at once add nothing on Ollama as installed."],
  ["2026-11-12","02:05","fault","Fault back after load","Memory check 1 error at 02:05 and 7 at 02:07, right after 18 minutes of both cards loaded. Clean at 02:09 once cool."],
+ ["2026-11-12","02:29","decision","Fable plans, Opus builds","Joona to the handoff session: <q>you fable 5.2 plan orchestrate verify each checkpoint and use opus 5.5 on medium to implement</q>. Four Opus 5.5 agents at medium write its tools between 02:31 and 07:34."],
  ["2026-11-12","02:59","decision","vLLM from now on","Joona: <q>WAIT NO MORE OLLAMA WE ARE USING VLLM NOW</q>. The handoff moves its tests to vLLM."],
  ["2026-11-12","03:09","test","The agent runs on vLLM","New backend for the agent: 34 of 34 unit tests, two real tasks in 14 s and 11 s. Git lock test: 3 git routes blocked, commit works."],
  ["2026-11-12","03:23","test","Lock test: 14 of 14","Every escape route blocked with the real model driving the agent; a normal commit still works."],
@@ -641,6 +683,7 @@ const ENTRIES = [
  ["2026-11-12","13:22","test","Clean retest","5 checks × 16 passes, 0 errors: after boot, after filling 55 GB with model files, after 16.5 minutes of 16-way load at 165 to 167 tokens/s."],
  ["2026-11-12","13:26","test","Eval resumes","Runs 2 and 3 start with the same code and safeguards. Every memory check since has been clean."],
  ["2026-11-12","16:25","test","Eval complete","Three runs on both sides, all from clean batches: 120 task runs. Side A passed 56 of 60 (median 82.5 s), side B 57 of 60 (median 68.5 s), with 0 refused bash calls on side B against 26 on side A. Both suspect batches re-ran clean. Since EXPO: 32 memory checks, 0 with errors."],
+ ["2026-11-12","18:23","decision","Fable 5.2 leads again","Joona switches the lead session back to Fable 5.2, as orchestrator and architect for Blitz Swarm and Primordial on vLLM, with two Opus 5.5 agents at medium building."],
 ];
 
 /* ---------- Hand-entered memory checks (the eval's own checks come from the live data) ---------- */
@@ -940,6 +983,31 @@ function box(svg, x, y, w, h, title, lines, hot){
   S("text", {x: x + 12, y: y + 22, class: "ttl"}, svg, title);
   (lines || []).forEach((l, i) => S("text", {x: x + 12, y: y + 42 + i * 17}, svg, l));
 }
+/* ---------- Models (from the session transcripts: tools in forge-notes/ledger, model_windows.py) ---------- */
+const MODELS = [{"lane":"Lead session","win":[[1244,1249,"fable-5-2","medium",14],[1265,1279,"fable-5-2","high",48],[1280,1282,"fable-5-2","medium",2],[1281,1286,"fable-5-2","high",45],[1289,1296,"fable-5-2","medium",19],[1297,1458,"fable-5-2","high",263],[1459,1461,"fable-5-2","medium",5],[1460,1462,"opus-5-5","medium",3],[1468,1492,"opus-5-5","high",14],[1569,1648,"opus-5-5","high",72],[1679,1707,"opus-5-5","high",30],[1750,1752,"opus-5-5","high",7],[1785,1787,"opus-5-5","high",7],[1846,1894,"opus-5-5","high",48],[1937,1939,"opus-5-5","high",4],[1977,1979,"opus-5-5","high",8],[2196,2248,"opus-5-5","high",53],[2393,2396,"opus-5-5","high",10],[2497,2499,"opus-5-5","high",4],[2542,2544,"opus-5-5","high",2],[2544,2584,"fable-5-2","high",72]],"count":{"fable-5-2|medium":40,"fable-5-2|high":428,"opus-5-5|medium":3,"opus-5-5|high":259}},{"lane":"Opus agents of the lead","win":[[2546,2688,"opus-5-5","medium",454]],"count":{"opus-5-5|medium":454}},{"lane":"Handoff session","win":[[1283,1302,"fable-5-2","high",106],[1343,1345,"fable-5-2","high",1],[1407,1409,"fable-5-2","high",19],[1460,1492,"fable-5-2","high",158],[1529,1718,"fable-5-2","high",305],[1749,1751,"fable-5-2","high",9],[1782,1806,"fable-5-2","high",54],[1845,1894,"fable-5-2","high",64],[1933,1936,"fable-5-2","high",9],[1976,1978,"fable-5-2","high",8],[2242,2266,"fable-5-2","high",32],[2425,2430,"fable-5-2","high",57]],"count":{"fable-5-2|high":822}},{"lane":"Opus agents of the handoff","win":[[1591,1636,"opus-5-5","medium",116],[1681,1689,"opus-5-5","medium",27],[1876,1894,"opus-5-5","medium",49]],"count":{"opus-5-5|medium":192}},{"lane":"Blitz Swarm session","win":[[1286,1353,"fable-5-2","medium",140],[1407,1409,"fable-5-2","medium",6],[1460,1491,"fable-5-2","medium",15],[1570,1619,"fable-5-2","medium",7],[2546,2548,"fable-5-2","medium",3]],"count":{"fable-5-2|medium":171}},{"lane":"Primordial session","win":[[1286,1298,"fable-5-2","medium",43],[1343,1345,"fable-5-2","medium",3],[1407,1409,"fable-5-2","medium",2],[1459,1491,"fable-5-2","medium",24],[1570,1619,"fable-5-2","medium",5],[2546,2583,"fable-5-2","medium",35]],"count":{"fable-5-2|medium":112}},{"lane":"Notebook session","win":[[2396,2465,"opus-5-5","high",432],[2590,2605,"opus-5-5","high",107],[2681,2688,"opus-5-5","high",85]],"count":{"opus-5-5|high":624}}];
+function dgModels(){
+  const lanes = MODELS.concat([{lane: "MacBook session", win: [[1838, 1877, "unknown", null, 0]]}]);
+  const W = 900, L = 200, R = 14, T = 12, LH = 30, B = 40, Hh = T + lanes.length * LH + B, x0 = 1140, x1 = 2700;
+  const sx = v => L + (v - x0) / (x1 - x0) * (W - L - R);
+  const svg = S("svg", {viewBox: `0 0 ${W} ${Hh}`, role: "img", "aria-label": "Which Claude model worked in each session over the two days, and at what reasoning level"});
+  for (let t = 1260; t <= 2700; t += 180) { S("line", {class: "grid", x1: sx(t), x2: sx(t), y1: T, y2: Hh - B}, svg); S("text", {x: sx(t), y: Hh - B + 18, "text-anchor": "middle"}, svg, hhmm(t)); }
+  S("text", {x: sx(1440), y: Hh - 6, "text-anchor": "middle"}, svg, "12 Nov");
+  const col = m => m.startsWith("fable") ? "var(--heading)" : m.startsWith("opus") ? "var(--ok)" : "var(--dim)";
+  lanes.forEach((ln, i) => {
+    const y = T + i * LH;
+    S("text", {x: L - 10, y: y + LH / 2 + 5, "text-anchor": "end", class: "lbl"}, svg, ln.lane);
+    ln.win.forEach(([a, b, m, ef, n]) => {
+      const r = S("rect", {x: sx(a), y: y + 6, width: Math.max(3, sx(b) - sx(a)), height: LH - 12, rx: 3, fill: col(m), "fill-opacity": ef === "high" ? .95 : m === "unknown" ? 0 : .38, stroke: col(m), "stroke-width": 1.2, "stroke-dasharray": m === "unknown" ? "4 3" : "none"}, svg);
+      S("title", {}, r, m === "unknown" ? "MacBook: model not recorded here" : `${m.replace("-5-", " 5.").replace(/^./, c => c.toUpperCase())}, ${ef} reasoning, ${hhmm(a)} to ${hhmm(b)}, ${n} steps`);
+    });
+  });
+  [[1459, "to Opus 5.5"], [2217, "EXPO on"], [2543, "to Fable 5.2"]].forEach(([t, txt]) => {
+    S("line", {x1: sx(t), x2: sx(t), y1: T, y2: Hh - B, stroke: "var(--fix)", "stroke-width": 1.2, "stroke-dasharray": "3 3"}, svg);
+  });
+  $("dg-models").appendChild(svg);
+  legend($("lg-models"), [["var(--heading)", "Fable 5.2"], ["var(--ok)", "Opus 5.5"], ["var(--fix)", "Joona's model switches (00:19, 18:23) and EXPO (12:57)", true]]);
+  $("lg-models").insertAdjacentHTML("beforeend", "<span>solid = high reasoning, pale = medium, dashed = not recorded</span>");
+}
 function dgLayout(){
   const svg = S("svg", {viewBox: "0 0 900 380", role: "img", "aria-label": "The MacBook Pro and Mac mini reach the Forge over SSH"});
   box(svg, 10, 20, 250, 150, "Mac mini", ["Lead session: install, tuning,", "runbook, coordination", "Handoff session: lock test, eval", "Blitz Swarm, Primordial (paused)"]);
@@ -1171,7 +1239,7 @@ let saved = null; try { saved = JSON.parse(localStorage.getItem(PREFS) || "null"
 applyPrefs(saved ? saved.theme : (document.documentElement.getAttribute("data-theme") || ""), saved ? saved.font : "serif", false);
 
 /* ---------- Render ---------- */
-[tiles, filters, timeline, chTune, chCtx, chEngines, chMtp, chLlama, bytes, chMem, chTemps, evalTable, evalText, chTasks, dgLayout, dgLock, ctTitle].forEach(fn => { try { fn(); } catch (e) { console.error(fn.name, e); } });
+[tiles, filters, timeline, chTune, chCtx, chEngines, chMtp, chLlama, bytes, chMem, chTemps, evalTable, evalText, chTasks, dgLayout, dgLock, dgModels, ctTitle].forEach(fn => { try { fn(); } catch (e) { console.error(fn.name, e); } });
 if (LIVE.updated) $("updated").textContent = `Live eval data last refreshed ${LIVE.updated}.`;
 </script>
 </body>
