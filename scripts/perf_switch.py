@@ -6,7 +6,7 @@ Also printed: the style / layout / script share, and the worst frame gap per cyc
 
 Both sides are served from one origin: requests for repo files come from `git show <base>:<path>` (side A) or from the
 working tree (side B), so the only difference is the code. Samples alternate A, B, A, B so load and thermal drift hit
-both. Verdict: ACCEPT when B's median is lower and a one-sided Mann-Whitney U test gives p < 0.05, and every theme
+both. Verdict: ACCEPT when B's median is lower and a one-sided Mann-Whitney U test gives p < 0.01, and every theme
 ends in the right state on both sides; otherwise REJECT.
 
 Usage: python3 scripts/perf_switch.py [--base HEAD] [--n 12] [--profile]
@@ -63,13 +63,13 @@ def sample(browser, side):
     pg.evaluate(PROBE); bad = []
     for t in CYCLE:                          # timed cycle: nothing but the switches (no style reads of our own)
         pg.locator(f'.theme-pill[data-theme="{t}"]').first.click()
-        pg.wait_for_function("() => !document.documentElement.classList.contains('is-theme-wipe')", timeout=8000)
+        pg.wait_for_function("() => !document.documentElement.classList.contains('is-theme-wipe')", timeout=8000, polling=50)
         pg.wait_for_timeout(250)
     pg.evaluate("() => window.__stop()"); gap = max(pg.evaluate("() => window.__g.slice(1)"))
     m1 = {m["name"]: m["value"] for m in cdp.send("Performance.getMetrics")["metrics"]}
     for t in CYCLE:                          # untimed cycle: check every theme ends in the right state
         pg.locator(f'.theme-pill[data-theme="{t}"]').first.click()
-        pg.wait_for_function("() => !document.documentElement.classList.contains('is-theme-wipe')", timeout=8000)
+        pg.wait_for_function("() => !document.documentElement.classList.contains('is-theme-wipe')", timeout=8000, polling=50)
         st = tuple(pg.evaluate(STATE))
         if st != EXPECT[t]: bad.append(f"{t}: {st}")
     pg.close()
@@ -108,7 +108,7 @@ for s, name in (("A", f"base {BASE}"), ("B", "working tree")):
     print(f"{name:14s} task {med(s,'task'):7.1f} ms (range {v[0]:.0f}-{v[-1]:.0f}, n={len(v)})  style {med(s,'style'):6.1f}  "
           f"layout {med(s,'layout'):6.1f}  script {med(s,'script'):6.1f}  worst gap {med(s,'gap'):5.1f} ms")
 delta = (med("B", "task") - med("A", "task")) / med("A", "task") * 100
-ok = med("B", "task") < med("A", "task") and pval < 0.05 and not bad
+ok = med("B", "task") < med("A", "task") and pval < 0.01 and not bad   # p<0.01 (A/A runs reached p=0.078)
 print(f"delta {delta:+.1f}%  p={pval:.4f}  state errors: {bad or 'none'}")
 print("ACCEPT" if ok else "REJECT")
 out = ROOT / ".verify"; out.mkdir(exist_ok=True)
