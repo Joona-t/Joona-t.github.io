@@ -477,3 +477,22 @@ document.querySelectorAll('.win-btn-close').forEach(btn => {
     node.replaceWith(frag);
   });
 })();
+
+
+/* Agentic Repos video: nothing is loaded from YouTube until the visitor presses play (privacy-enhanced embed). */
+(() => {
+  document.querySelectorAll('.video-facade[data-yt]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.yt;
+      if (!/^[\w-]{11}$/.test(id)) return;
+      const f = document.createElement('iframe');
+      f.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`;
+      f.title = btn.getAttribute('aria-label').replace(' (loads YouTube)', '');
+      f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      f.referrerPolicy = 'strict-origin-when-cross-origin';
+      f.allowFullscreen = true;
+      btn.replaceWith(f);
+      f.focus();
+    });
+  });
+})();

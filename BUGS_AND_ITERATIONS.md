@@ -1,5 +1,12 @@
 # Bugs & Iterations
 
+## 2026-11-12: ITER: Agentic Repos section, first above the Sneak Peeks
+
+**Change:** Joona asked for an "Agentic Repos" section first, above the Sneak Peeks, with the Fleet Dashboard video embedded from YouTube (G_ldLkL11SY) so plays count for the channel, a one-line description and a GitHub button. Added `#agentic` with a Win98 card like the Suite's: badge "Open source · MIT", the line "A live dashboard for every machine you and your agents run on: GPUs, VRAM, temperatures and power on Mac, Linux and Windows. No installs, no accounts, everything stays local.", the video and a "GitHub ✦" link to Joona-t/lovespark-fleet-dashboard. A "Repos" link leads the nav bar.
+**Privacy:** the video is a click-to-play facade (the promo's thumbnail A, `images/agentic/fleet-dashboard.jpg`, 86 KB): no request goes to YouTube until the visitor presses play, then the privacy-enhanced `youtube-nocookie.com` player loads with autoplay. A note under it says so.
+**Verification:** served locally and checked in the browser pane: section order hiatus note → Agentic Repos → Sneak Peeks; 0 YouTube requests before the click, the nocookie iframe after it; Basalt and Bubblegum both styled; 375 px phone width with no sideways scroll (card 343 px); the nav marks "Repos" while the section is in view. The page parses with every tag balanced; script.js parses. Cache versions of styles.css and script.js bumped.
+**Files:** index.html, styles.css, script.js, images/agentic/fleet-dashboard.jpg
+
 ## 2026-11-11: ITER: New mission statement
 
 **Change:** Joona asked to update the mission: AI has put the tools to learn anything in everyone's hands, so LoveSpark's mission is now to teach non-technical people to use AI to learn what they are curious about, pursue their passions, accelerate their abilities and bring what they imagine to life; that knowledge should be free and accessible to everyone, and intelligence belongs to the people. The Mission section's three paragraphs are replaced with four in his words. Markup, classes and styles are unchanged.
