@@ -76,7 +76,9 @@
   function resize() {
     dpr = Math.min(window.devicePixelRatio || 1, 2);
     W = document.documentElement.clientWidth || window.innerWidth; H = window.innerHeight;   // clientWidth: excludes a classic scrollbar
-    canvas.width = Math.ceil(W * dpr); canvas.height = Math.ceil(H * dpr);
+    var cw0 = Math.ceil(W * dpr), ch0 = Math.ceil(H * dpr);
+    // Reallocating a full-screen canvas is the expensive part: only do it when the size really changed.
+    if (canvas.width !== cw0 || canvas.height !== ch0) { canvas.width = cw0; canvas.height = ch0; }
     canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
     cols = Math.ceil(W / CELL_W) + 1; rows = Math.ceil(H / CELL_H) + 1;
     buildAtlas();
@@ -113,7 +115,16 @@
   }
 
   var on = true;   // false while the theme hides the canvas: no drawing, no animation frames
-  function refreshOn() { on = getComputedStyle(canvas).display !== 'none'; }
+  var themeKey = '';
+  // What the field looks like in the current theme. Theme switches also add and remove helper classes on <html>
+  // (the wipe's is-theme-wipe): those must not trigger any work. 2026-11-12: each switch caused 4 class changes and
+  // up to 3 full-canvas reallocations, two of them at the start and end of the View Transition wipe (the glitch).
+  function readTheme() {
+    var cs = getComputedStyle(document.documentElement);
+    on = getComputedStyle(canvas).display !== 'none';
+    return on + '|' + cs.getPropertyValue('--field-ink').trim() + '|' + cs.getPropertyValue('--field-alpha').trim();
+  }
+  function refreshOn() { themeKey = readTheme(); }
 
   function loop(now) {
     raf = 0;
@@ -135,6 +146,13 @@
   window.addEventListener('scroll', function () { scrollY = window.scrollY; }, { passive: true });
   document.addEventListener('visibilitychange', start);
   if (reduce.addEventListener) reduce.addEventListener('change', start);
-  new MutationObserver(function () { refreshOn(); if (on) { resize(); start(); } })
+  new MutationObserver(function () {
+    var k = readTheme();
+    if (k === themeKey) return;            // a helper class, not a theme change: nothing to do
+    themeKey = k;
+    if (!on) return;                       // hidden in this theme: loop() stops by itself
+    buildAtlas();                          // re-tint: rebuild the small sprite atlas, repaint into the same canvas
+    start();
+  })
     .observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
 })();
