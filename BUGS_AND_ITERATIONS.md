@@ -1,5 +1,11 @@
 # Bugs & Iterations
 
+## 2026-11-12: ITER: Basalt + parchment drop Sparky for the ankh
+
+**Change:** At Joona's request, the basalt and parchment themes no longer show Sparky anywhere: the nav logo, gallery mascot and footer avatar are hidden there, and the theme's own ankh art (`assets/hero-ankh-beige.png` for basalt, `hero-ankh-ink.png` for parchment, the hero ankh assets) takes the nav logo (36 px) and footer (56 px) spots via `::before`. Bubblegum and kawaii keep Sparky. CSS only; supersedes the older "Sparky stays, toned to ink" rule for these two themes.
+**Verification:** computed styles in all four themes (basalt/parchment: 3 Sparky images `display:none`, ankh `::before` present; bubblegum/kawaii: images shown, no `::before`); icons rendered at real size on each theme's ground to check legibility; nav seen in the local preview; no console errors.
+**Files:** styles.css
+
 ## 2026-11-12: ITER: X / Twitter link back, plus a link row under the glyph line
 
 **Change:** Restored `x.com/the_null_path` in the footer "Elsewhere" nav (GitHub ✦ X / Twitter ✦ Substack ✦ Goodreads) at Joona's request, and added the same four links as a `hero-socials` row directly under the lore glyph line, above the hero panels. Fourth toggle of the footer link (removed 10-24, restored 10-27, removed 11-01, restored now).
