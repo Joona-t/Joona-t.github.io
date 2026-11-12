@@ -58,7 +58,8 @@ const mqFine = window.matchMedia('(hover: hover) and (pointer: fine)');
       root.classList.add('is-theme-wipe');
       let vt;
       try {
-        vt = document.startViewTransition(() => apply(theme));
+        // is-theme-swap (no CSS transitions) goes on after the old page is captured: see styles.css.
+        vt = document.startViewTransition(() => { root.classList.add('is-theme-swap'); apply(theme); });
       } catch (_) {
         root.classList.remove('is-theme-wipe');
         apply(theme);
@@ -71,7 +72,7 @@ const mqFine = window.matchMedia('(hover: hover) and (pointer: fine)');
           { duration: 560, easing, pseudoElement: '::view-transition-new(root)' }
         );
       }).catch(() => {});
-      vt.finished.finally(() => root.classList.remove('is-theme-wipe'));
+      vt.finished.finally(() => root.classList.remove('is-theme-wipe', 'is-theme-swap'));
     }
 
     pills.forEach(p => {
