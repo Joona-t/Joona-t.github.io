@@ -1,5 +1,21 @@
 # Bugs & Iterations
 
+## 2026-11-12: ITER: Forge Notebook names the models behind each task and their reasoning levels
+
+**Change:** At Joona's request a new section, "The models and their reasoning levels", sits after "The machine". It has a chart of which Claude model worked in each session over the two days (Fable 5.2 or Opus 5.5, solid for high reasoning, pale for medium), a table of every session with its model, reasoning level, step count and what it oversaw, a table of the local Qwen builds and their thinking setting, and Joona's own words on how the work was split. Three timeline entries record his model switches (00:19, 02:29, 18:23), and the mistakes table gets the fan-socket advice from the Claude app.
+**Data:** taken from the session transcripts, which record the model and effort of every step (a private ledger script on the Mac mini computes the windows; the page carries only lane names, times, model names and counts).
+**Before the export:** the diagram label fix that 2f41dff and 0ad8d80 made on the site was ported into the notebook's source first, so this export keeps it (the stale-copy failure from 1427cff). The export differs from the live page only by the new section and a favicon.
+
+## 2026-11-12: BUG: theme switches glitched; a stale copy undid the diagram fix; a verify gate before every merge
+
+**Symptom (Joona):** switching themes on the home page glitched after #41 (glyph field). Separately the Forge Notebook diagram labels were back behind their arrows on the live site.
+**Root cause 1 (glitch):** each theme click changes the `<html>` class 4 times (the wipe's `is-theme-wipe` added, theme swapped, helper removed). `assets/glyph-field.js` treated every one as a theme change and reallocated its full-screen canvas (2880x1800 at 2x) up to 3 times per switch, at the start and end of the View Transition wipe.
+**Fix 1:** the field compares a theme key (visible | `--field-ink` | `--field-alpha`) and ignores helper classes; a real change re-tints by rebuilding the small sprite atlas into the same canvas; the canvas is reallocated only when its size changes. Reallocations per switch 3 -> 0; re-tint checked (parchment #5d3a23, basalt #e7dbaa). Interleaved A/B in headless Chromium (old vs new script, 8 page loads each, 16 switches into basalt/parchment each, load ~8 on 8 cores): worst frame gap per switch median 63.3 -> 50.2 ms, p75 75.6 -> 58.5 ms; long tasks during switches 2 (max 59 ms) -> 0. Separate (non-interleaved) runs were too noisy to compare while the Mac was busy (load 35-58), so only the interleaved numbers count.
+**Root cause 2 (regression):** commit 1427cff (a text edit from another session) wrote the whole `forge-notebook/index.html` from a copy made before 2f41dff, silently undoing the label fix; it went live because nothing ran the diagram check before merging. Fix 2: 2f41dff re-applied (check: 12 problems -> 0).
+**Why missed:** #41 was checked by setting theme classes from code, never by clicking the real switcher with its View Transition; no check ran before merges.
+**Prevention (the gate):** `scripts/verify_site.py` clicks every real theme pill, measures each switch (frame gaps, long tasks), checks the field and titles per theme and runs `check_svg_diagrams.py`, writing `.verify/<commit>.json`; `scripts/merge_pr.sh` refuses to merge a PR without a clean passing run for its exact head commit. README "Before merging".
+**Files:** assets/glyph-field.js, forge-notebook/index.html, scripts/verify_site.py, scripts/merge_pr.sh, .gitignore, README.md
+
 ## 2026-11-12: ITER: Forge Lab Notebook tab icon ✺
 
 **Change:** Joona asked for ✺ as the notebook's browser-tab icon instead of the globe. One `<link rel="icon">` with an inline SVG of ✺ in the notebook's gold (#e6b04a), right after the `<title>`, in `forge-notebook/index.html`; the same line is in the notebook's source on the Mac mini, so the next export keeps it.

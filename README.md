@@ -33,3 +33,12 @@ Double-click `index.html` or open it in your browser.
 3. Under **Build and deployment**, choose **Deploy from a branch**.
 4. Branch: `main` and folder: `/(root)`.
 5. Save and wait for the Pages URL to go live.
+
+## Before merging
+
+Every PR is verified before it merges (Joona, 2026-11-12). With the PR branch checked out and the repo served on `:8766`:
+
+```
+python3 scripts/verify_site.py          # clicks every real theme pill, measures each switch, checks the diagrams
+scripts/merge_pr.sh <pr-number>         # merges only if .verify/<PR head commit>.json passed on a clean tree
+```
