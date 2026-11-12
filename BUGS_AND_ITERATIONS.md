@@ -1,5 +1,11 @@
 # Bugs & Iterations
 
+## 2026-11-12: ITER: X / Twitter link back, plus a link row under the glyph line
+
+**Change:** Restored `x.com/the_null_path` in the footer "Elsewhere" nav (GitHub ✦ X / Twitter ✦ Substack ✦ Goodreads) at Joona's request, and added the same four links as a `hero-socials` row directly under the lore glyph line, above the hero panels. Fourth toggle of the footer link (removed 10-24, restored 10-27, removed 11-01, restored now).
+**Verification:** local preview (basalt theme) at 640 px and 1280 px: the row renders under the glyph divider and above the panels, one line at desktop width and wrapping cleanly when narrow; footer shows all four links; no console errors; `grep -c 'x.com/the_null_path' index.html` = 2.
+**Files:** index.html
+
 ## 2026-11-12: ITER: The Forge Notebook at /forge-notebook/, with a hero button
 
 **Change:** Joona asked for the Forge lab notebook on lovespark.love as a new button next to Forging. `/forge-notebook/` is a standalone export of the notebook (a dated timeline and every test from 2026-11-11 and 11-12 on the dual-GPU PC: vLLM tuning, the memory fault and the EXPO fix, the lock test, the 20-task eval), in Glyph Grid Studio's Cream and Basalt themes with its glyph-field background and a charcoal-sketch title (✺ The Forge Notebook, still plus a 4 s loop). A "✺ Forge Notebook" hero button sits right after "△ Forging" and reuses its ember colours. Nothing else on the home page changed.
