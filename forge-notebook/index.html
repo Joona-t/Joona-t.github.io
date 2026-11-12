@@ -297,7 +297,7 @@ body{margin:0} img{max-width:100%} [hidden]{display:none!important}</style>
       </table>
     </div>
     <div class="col" style="max-width:none">
-      <p><b>Why FP8.</b> The model was only on disk in Ollama's format, which vLLM can't read. Two builds fit the two cards: a 4-bit one (19.5 GB) and Qwen's own FP8 build (30.9 GB). The owner picked FP8: <q>Use FP8 instead</q>. It is the closest to the 8-bit build the agent had been using on Ollama. It is still a different quantization, so results from the two are never compared as if they were the same model.</p>
+      <p><b>Why FP8.</b> The model was only on disk in Ollama's format, which vLLM can't read. Two builds fit the two cards: a 4-bit one (19.5 GB) and Qwen's own FP8 build (30.9 GB). Joona picked FP8: <q>Use FP8 instead</q>. It is the closest to the 8-bit build the agent had been using on Ollama. It is still a different quantization, so results from the two are never compared as if they were the same model.</p>
       <p><b>Why two modes.</b> vLLM wants both cards for itself and serves many requests at once. The existing agent and its evals were built on Ollama, one job at a time. A single lock file decides which one owns the cards (see <a href="#lock">The GPU lock</a>).</p>
     </div>
   </div>
@@ -472,8 +472,8 @@ body{margin:0} img{max-width:100%} [hidden]{display:none!important}</style>
     <p><b>Something changed at 06:38 and stayed changed.</b> From 05:42 to 06:38, 1 of 11 checks failed. At 06:38 the llama.cpp benchmark stopped vLLM, read about 90 GB of model files and started vLLM again. After that, 12 of 13 failed. One explanation that fits: the errors sit in one region of physical memory, and whether a check lands there depends on what else fills memory. <span class="dim">[reading, not proven]</span></p>
   </div>
   <div class="callout good card">
-    <p><b>The fix, 12:57, and the advice it went against.</b> The advice at 12:36 was to load BIOS defaults (F5), on the guess that EXPO was on and pushing the memory too hard. That guess was never checked; the running memory speed couldn't be read without sudo. In the BIOS the owner found the memory at the board's default 4800 MT/s with EXPO off, so defaults would have changed nothing about it. They followed an instinct instead: kept the CPU tuning and turned EXPO on, the kit's tested profile (6000 MT/s with its own voltages and timings). <q>I just had a feeling and followed my intuition.</q> It worked.</p>
-    <p><b>Worth remembering.</b> This is a plain example that even a capable, intelligent AI can be wrong. The advice came from a model that had read every log of the night, and it still rested on a guess it never checked, delivered as "the most likely fix". What found the fix was a person's instinct about their own machine, and the willingness to go against the advice. Ask what the AI is assuming, check it when it matters, and trust your own read.</p>
+    <p><b>The fix, 12:57, and the advice it went against.</b> The advice at 12:36 was to load BIOS defaults (F5), on the guess that EXPO was on and pushing the memory too hard. That guess was never checked; the running memory speed couldn't be read without sudo. In the BIOS Joona found the memory at the board's default 4800 MT/s with EXPO off, so defaults would have changed nothing about it. They followed an instinct instead: kept the CPU tuning and turned EXPO on, the kit's tested profile (6000 MT/s with its own voltages and timings). <q>I just had a feeling and followed my intuition.</q> It worked.</p>
+    <p><b>Worth remembering.</b> This is a plain example that even a capable, intelligent AI can be wrong. The advice came from a model that had read every log of the night, and it still rested on a guess it never checked, delivered as "the most likely fix". What found the fix was Joona's instinct about his own machine, and his willingness to go against the advice. Ask what the AI is assuming, check it when it matters, and trust your own read.</p>
     <p>Retest, 16 passes per check: clean right after boot, clean twice after filling 55 GB of memory with model files (the pattern that failed 12 of 13 times), clean twice after 16.5 minutes of 16-way vLLM load. The load run held 165 to 167 tokens/s with 0 request errors and GPU 1 at 75 °C. <span id="since-expo"></span></p>
     <p class="note">Two readings are still open: EXPO's settings fixed it, or the fresh boot did (the night before, each boot also started clean and got worse over hours). Hours of real use with checks will tell. If errors come back, the next step is CPU tuning back to defaults.</p>
   </div>
@@ -490,7 +490,7 @@ body{margin:0} img{max-width:100%} [hidden]{display:none!important}</style>
   </figure>
   <div class="col">
     <p><b>The bottom card whines.</b> Under load it makes a high-pitched noise. That is almost certainly coil whine: its power coils vibrate when it draws near its limit (366 of 370 W at 80 °C with the fan at 53%). Annoying, not dangerous.</p>
-    <p><b>Front fans, 05:36.</b> After the power-off the owner added front fans. GPU 1 now idles at 32 °C instead of 51 to 54 °C, and a spot reading under load showed 63 °C at 360 W against 80 °C before. Under the eval's sustained load it still reaches 76 to 79 °C, so the fans help most at rest. <span class="dim">[two different workloads, not a controlled comparison]</span></p>
+    <p><b>Front fans, 05:36.</b> After the power-off Joona added front fans. GPU 1 now idles at 32 °C instead of 51 to 54 °C, and a spot reading under load showed 63 °C at 360 W against 80 °C before. Under the eval's sustained load it still reaches 76 to 79 °C, so the fans help most at rest. <span class="dim">[two different workloads, not a controlled comparison]</span></p>
   </div>
 </section>
 
@@ -530,7 +530,7 @@ body{margin:0} img{max-width:100%} [hidden]{display:none!important}</style>
   <div class="sechead"><span class="eyebrow">2026-11-12 04:11 onwards, handoff session</span><h2>The 20-task eval on vLLM</h2></div>
   <div class="col">
     <p>Twenty small coding tasks, each with its own check script. Two versions of the agent, identical except for 12 lines: side <b>A</b> is <code>main</code>; side <b>B</b> also lets the agent run <code>bash script.sh</code> inside the sandbox. In the Ollama baseline, 27 of 144 tool errors were refused bash calls. One agent at a time, 300 s and 30 turns per task.</p>
-    <p><b>The protocol</b> (the owner's: <q>do tests in batches</q>): batches of 5 task runs, a memory check before and after each. A batch counts only if both checks are clean; otherwise it is kept apart as "suspect" and re-run once at the end. The side that goes first alternates.</p>
+    <p><b>The protocol</b> (Joona's: <q>do tests in batches</q>): batches of 5 task runs, a memory check before and after each. A batch counts only if both checks are clean; otherwise it is kept apart as "suspect" and re-run once at the end. The side that goes first alternates.</p>
   </div>
   <div class="tbl card" style="padding:4px 6px" id="eval-table"></div>
   <figure class="card">
@@ -559,7 +559,7 @@ body{margin:0} img{max-width:100%} [hidden]{display:none!important}</style>
       <tr><td class="mono">11-12 03:01</td><td>Claude Code's first request to vLLM failed: <code>400 Unexpected reasoning effort high</code>.</td><td>The agent always passes an effort level on vLLM (default <code>xhigh</code>).</td></tr>
       <tr><td class="mono">11-12 04:37:59</td><td>Power-off with no shutdown lines, while a roughly 90 GB unthrottled download (curl, tar, model download) from another session ran during the eval. Second hard stop during a big download under GPU load. Two of two is a pattern, not proof.</td><td>Rule 3 applies to every machine and account that logs in.</td></tr>
       <tr><td class="mono">11-12 07:12</td><td>A 16-request load test from another machine landed on the server during the eval's resume.</td><td>The eval checks the server is idle before each batch and records how busy it got.</td></tr>
-      <tr><td class="mono">11-12 12:36</td><td>The fix advice was wrong. The lead session told the owner to load BIOS defaults to reset the memory profile, assuming EXPO was on. It never confirmed that (no sudo to read the memory speed). EXPO was off; the owner turned it <i>on</i> by instinct, and that is what made every check clean.</td><td>Check the current setting before advising a change to it, or say plainly that it is a guess. The runbook records EXPO on as the setting that made the checks clean.</td></tr>
+      <tr><td class="mono">11-12 12:36</td><td>The fix advice was wrong. The lead session told Joona to load BIOS defaults to reset the memory profile, assuming EXPO was on. It never confirmed that (no sudo to read the memory speed). EXPO was off; Joona turned it <i>on</i> by instinct, and that is what made every check clean.</td><td>Check the current setting before advising a change to it, or say plainly that it is a guess. The runbook records EXPO on as the setting that made the checks clean.</td></tr>
     </table>
   </div>
 </section>
@@ -602,10 +602,10 @@ const ENTRIES = [
  ["2026-11-11","16:45","test","MTP on Ollama","Same weights, drafting 4 tokens ahead: writing speed 2.05 to 2.86 times faster, long prompts read about half as fast."],
  ["2026-11-11","20:49","setup","First login to the Forge","SSH works from the Mac mini. Both cards already busy with another account's review jobs (19.5 and 18.4 GB used)."],
  ["2026-11-11","21:22","setup","Three sessions in parallel","The handoff work (lock test, sandboxed bash, evals) moves to its own session. Blitz Swarm and Primordial run beside it. The lead session coordinates the Forge."],
- ["2026-11-11","21:30","decision","Switch to vLLM","The owner: <q>pause work and setup and install vLLM</q>."],
+ ["2026-11-11","21:30","decision","Switch to vLLM","Joona: <q>pause work and setup and install vLLM</q>."],
  ["2026-11-11","21:31","mistake","Hard stop 46 s into the install","The install ran on all 32 cores while both cards were generating. The journal ends at 21:31:38 with no shutdown lines. Back at 21:40:55; every queued job gone, install corrupt."],
  ["2026-11-11","21:45","setup","vLLM installed","Clean reinstall, throttled and under the lock: vLLM 0.33.0, torch 2.14.0 for CUDA 13.2, both cards visible, 208 packages consistent."],
- ["2026-11-11","21:58","decision","FP8 build chosen","Two builds fit the cards: 4-bit (19.5 GB) or Qwen's FP8 (30.9 GB). The owner: <q>Use FP8 instead</q>. Downloaded and verified by 22:04: 80 files, 29 GiB."],
+ ["2026-11-11","21:58","decision","FP8 build chosen","Two builds fit the cards: 4-bit (19.5 GB) or Qwen's FP8 (30.9 GB). Joona: <q>Use FP8 instead</q>. Downloaded and verified by 22:04: 80 files, 29 GiB."],
  ["2026-11-11","22:24","test","vLLM serves on both cards","First start failed on a setting after 140 s (the model had loaded, 14.6 GiB per card). Second start served."],
  ["2026-11-11","22:27","test","First light","8 requests at once: 301.8 tokens/s in total with 30-token prompts. A ballpark, one run per level."],
  ["2026-11-11","22:31","test","Tuning round 1","Base, FP8 cache, text-only, MTP. FP8 cache nearly doubles shared context at the same speed; MTP nearly doubles one request."],
@@ -619,15 +619,15 @@ const ENTRIES = [
  ["2026-11-12","00:47","test","Engine test, vLLM half","Same client for both engines. vLLM: 92 to 118 tokens/s for one short request."],
  ["2026-11-12","01:46","test","Engine test, Ollama half","Ollama Q8 29.3 to 29.4, Ollama MTP 59.7 to 81.5 tokens/s. More requests at once add nothing on Ollama as installed."],
  ["2026-11-12","02:05","fault","Fault back after load","Memory check 1 error at 02:05 and 7 at 02:07, right after 18 minutes of both cards loaded. Clean at 02:09 once cool."],
- ["2026-11-12","02:59","decision","vLLM from now on","The owner: <q>WAIT NO MORE OLLAMA WE ARE USING VLLM NOW</q>. The handoff moves its tests to vLLM."],
+ ["2026-11-12","02:59","decision","vLLM from now on","Joona: <q>WAIT NO MORE OLLAMA WE ARE USING VLLM NOW</q>. The handoff moves its tests to vLLM."],
  ["2026-11-12","03:09","test","The agent runs on vLLM","New backend for the agent: 34 of 34 unit tests, two real tasks in 14 s and 11 s. Git lock test: 3 git routes blocked, commit works."],
  ["2026-11-12","03:23","test","Lock test: 14 of 14","Every escape route blocked with the real model driving the agent; a normal commit still works."],
  ["2026-11-12","03:27","fault","Fault on a cool, idle machine","3 error events at 03:26, 5 at 03:27, cards at 34 and 42 °C. Not heat. The eval pilot stops itself before its first task."],
- ["2026-11-12","03:59","decision","Batches","The owner: <q>do tests in batches</q>. Batches of 5, memory check before and after, suspect batches kept apart."],
+ ["2026-11-12","03:59","decision","Batches","Joona: <q>do tests in batches</q>. Batches of 5, memory check before and after, suspect batches kept apart."],
  ["2026-11-12","04:11","test","Eval run 1 starts","Memory check clean. Batch 1: 5 of 5 passed, 28 to 95 s each."],
  ["2026-11-12","04:13","note","The bottom card whines","Coil whine: GPU 1 at 80 °C, 366 of its 370 W, fan at 53%. Top card at 50 °C."],
  ["2026-11-12","04:37","fault","Second hard stop","The journal ends at 04:37:59, no shutdown lines, while an unthrottled ~90 GB download from another session ran next to the eval."],
- ["2026-11-12","05:36","fix","Front fans","The owner restarts the Forge and adds front fans. GPU 1: 63 °C at 360 W in a spot reading, against 80 °C before. The eval resumes at 05:44 from its files."],
+ ["2026-11-12","05:36","fix","Front fans","Joona restarts the Forge and adds front fans. GPU 1: 63 °C at 360 W in a spot reading, against 80 °C before. The eval resumes at 05:44 from its files."],
  ["2026-11-12","06:37","note","CPU at 95 °C","The processor reaches its limit in the last two batches of run 1. Memory checks before and after both batches were clean."],
  ["2026-11-12","06:38","test","Run 1 complete; llama.cpp benchmark","Run 1: 7 clean batches, 35 task runs. A benchmark from the MacBook takes the lock 31 s later and runs until 07:10, then restarts vLLM."],
  ["2026-11-12","06:39","fault","12 of 13","From here the memory check fails 12 of 13 times, including on an idle server. The eval tries again at 07:13, 07:21 and 08:14."],
@@ -635,7 +635,7 @@ const ENTRIES = [
  ["2026-11-12","08:56","fault","Eval stopped","2 errors at 08:15 after 45 idle minutes, cards at 29 and 39 °C. The eval stops until the hardware is checked."],
  ["2026-11-12","12:36","mistake","Wrong advice: load BIOS defaults","The lead session advised pressing F5 (load optimized defaults) to reset the two suspects, CPU tuning and the memory profile, assuming EXPO was on and too aggressive. It had not checked: it could not read the running memory speed without sudo. The memory was in fact at the default 4800 MT/s with EXPO off, so loading defaults would not have changed the memory at all."],
  ["2026-11-12","12:41","note","What the memory is","Corsair DDR5, 2 × 32 GB, rated 6000 MT/s CL40 with EXPO; 4800 MT/s without it."],
- ["2026-11-12","12:57","fix","EXPO on, against the advice","The owner went with instinct instead: skipped F5, kept the CPU tuning and turned EXPO on (memory now 6000 MT/s with the kit's tested voltages and timings): <q>I just had a feeling and followed my intuition</q>. The lead session called it the opposite of what it expected."],
+ ["2026-11-12","12:57","fix","EXPO on, against the advice","Joona went with instinct instead: skipped F5, kept the CPU tuning and turned EXPO on (memory now 6000 MT/s with the kit's tested voltages and timings): <q>I just had a feeling and followed my intuition</q>. The lead session called it the opposite of what it expected."],
  ["2026-11-12","13:22","test","Clean retest","5 checks × 16 passes, 0 errors: after boot, after filling 55 GB with model files, after 16.5 minutes of 16-way load at 165 to 167 tokens/s."],
  ["2026-11-12","13:26","test","Eval resumes","Runs 2 and 3 start with the same code and safeguards. Every memory check since has been clean."],
  ["2026-11-12","16:25","test","Eval complete","Three runs on both sides, all from clean batches: 120 task runs. Side A passed 56 of 60 (median 82.5 s), side B 57 of 60 (median 68.5 s), with 0 refused bash calls on side B against 26 on side A. Both suspect batches re-ran clean. Since EXPO: 32 memory checks, 0 with errors."],

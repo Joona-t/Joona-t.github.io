@@ -1,5 +1,10 @@
 # Bugs & Iterations
 
+## 2026-11-12: ITER: Forge Notebook calls Joona by name
+
+**Change:** Joona asked to be called by his name. The notebook said "the owner" in 12 places (his decisions, the front fans, the EXPO fix); each now says Joona, and the lesson paragraph says "Joona's instinct about his own machine". First name only.
+**Files:** forge-notebook/index.html
+
 ## 2026-11-12: ITER: Forge Notebook gets the Korean themes and a reading-font menu
 
 **Change:** Joona asked for the Korean themes and a font option as a dropdown like the other LoveSpark pages. The Cream/Basalt switch is replaced by the Raw Thought reader's "◐ Change Font & Theme" menu: Match my device, Cream, Basalt; the four Korean themes (Seoul Y2K, Gingham Sticker, Holo Mochi, Neon Usagi, colour tokens from the fleet dashboard) and six reading fonts (Serif, Sans, OpenDyslexic, Lexend, Comfortaa, Atkinson Hyperlegible). The charcoal title and the glyph field follow the theme (Neon Usagi uses the light-ink title). Choices are saved in the browser only. OpenDyslexic (SIL OFL) is embedded, subset to Latin and punctuation (19 KB); the other fonts come from Google Fonts.
