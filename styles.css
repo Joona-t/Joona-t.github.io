@@ -2982,3 +2982,10 @@ html.theme-parchment .section-title {
   background-image: url("assets/glyph-ink-parchment.png"), linear-gradient(rgba(43, 34, 25, .45), rgba(43, 34, 25, .45));
   filter: none;
 }
+
+/* ── Perf: skip off-screen sections (2026-11-12, scripts/perf_switch.py) ──────────
+   A theme switch restyles the whole page; 626 of its 975 elements sit in The Suite, far below the fold.
+   content-visibility: auto lets the browser skip style, layout and paint for sections that are off screen and do
+   them when they scroll in. contain-intrinsic-size keeps the page height stable until a section is first laid out
+   ("auto" then remembers its real size). The hero (first screen) is not included. */
+main > section { content-visibility: auto; contain-intrinsic-size: auto 900px; }
