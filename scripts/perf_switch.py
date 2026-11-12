@@ -61,14 +61,17 @@ def sample(browser, side):
     cdp = pg.context.new_cdp_session(pg); cdp.send("Performance.enable")
     m0 = {m["name"]: m["value"] for m in cdp.send("Performance.getMetrics")["metrics"]}
     pg.evaluate(PROBE); bad = []
-    for t in CYCLE:
+    for t in CYCLE:                          # timed cycle: nothing but the switches (no style reads of our own)
         pg.locator(f'.theme-pill[data-theme="{t}"]').first.click()
         pg.wait_for_function("() => !document.documentElement.classList.contains('is-theme-wipe')", timeout=8000)
         pg.wait_for_timeout(250)
-        st = tuple(pg.evaluate(STATE))
-        if st != EXPECT[t]: bad.append(f"{t}: {st}")
     pg.evaluate("() => window.__stop()"); gap = max(pg.evaluate("() => window.__g.slice(1)"))
     m1 = {m["name"]: m["value"] for m in cdp.send("Performance.getMetrics")["metrics"]}
+    for t in CYCLE:                          # untimed cycle: check every theme ends in the right state
+        pg.locator(f'.theme-pill[data-theme="{t}"]').first.click()
+        pg.wait_for_function("() => !document.documentElement.classList.contains('is-theme-wipe')", timeout=8000)
+        st = tuple(pg.evaluate(STATE))
+        if st != EXPECT[t]: bad.append(f"{t}: {st}")
     pg.close()
     d = lambda k: (m1.get(k, 0) - m0.get(k, 0)) * 1000
     return {"task": d("TaskDuration"), "style": d("RecalcStyleDuration"), "layout": d("LayoutDuration"),
