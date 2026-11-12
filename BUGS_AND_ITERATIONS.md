@@ -1,5 +1,11 @@
 # Bugs & Iterations
 
+## 2026-11-12: ITER: Forge Notebook tells the EXPO fix honestly
+
+**Change:** Joona pointed out the notebook left out that the fix advice was wrong. The lead session told him to load BIOS defaults (F5) to reset the memory profile, assuming EXPO was on; it never checked (no sudo to read the memory speed). EXPO was off, and he turned it on by instinct, which is what made every memory check clean. Now in the timeline (a 12:36 "Wrong advice" entry and the 12:57 entry), the memory-fault section and the mistakes table.
+**Verification:** privacy and path greps clean; page re-exported from the notebook source.
+**Files:** forge-notebook/index.html
+
 ## 2026-11-12: BUG: Forge Notebook diagram labels sat behind their arrows; a box ran onto its frame
 
 **Symptom (Joona, screenshot):** in "The two-mode GPU lock", the labels "clients call in parallel, no lock" and "each job runs under flock" were thin 13 px text with the arrows drawn straight through them, and the "load test" box sat on the vLLM-mode frame's right edge. The same class was in the other diagram: both "SSH" labels crossed by their arrows, and "no NVLink…" ran past the Forge frame.

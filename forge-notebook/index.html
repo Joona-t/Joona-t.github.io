@@ -144,8 +144,6 @@ ol.tl .body q{font-style:italic}
 @media (max-width:760px){ .two{grid-template-columns:minmax(0,1fr)} ol.tl li{grid-template-columns:minmax(0,1fr)} }
 .diagram{overflow-x:auto} .diagram svg{display:block;width:100%;height:auto;min-width:640px}
 .diagram svg .box{fill:color-mix(in srgb,var(--card) 70%,transparent);stroke:var(--line);stroke-width:1.2}
-.diagram svg text{paint-order:stroke;stroke:var(--card);stroke-width:7px;stroke-linejoin:round}
-.diagram svg text.lbl{fill:var(--ink);font-weight:600;font-size:14px}
 .diagram svg .box.hot{stroke:var(--pc);stroke-width:1.6}
 .diagram svg .ttl{fill:var(--heading);font-family:var(--display);font-weight:600;font-size:14px;letter-spacing:.06em}
 .diagram svg .arrow{stroke:var(--dim);stroke-width:1.4;fill:none}
@@ -381,7 +379,8 @@ body{margin:0} img{max-width:100%} [hidden]{display:none!important}</style>
     <p><b>Something changed at 06:38 and stayed changed.</b> From 05:42 to 06:38, 1 of 11 checks failed. At 06:38 the llama.cpp benchmark stopped vLLM, read about 90 GB of model files and started vLLM again. After that, 12 of 13 failed. One explanation that fits: the errors sit in one region of physical memory, and whether a check lands there depends on what else fills memory. <span class="dim">[reading, not proven]</span></p>
   </div>
   <div class="callout good card">
-    <p><b>The fix, 12:57.</b> The owner went into the BIOS. The memory had been running at the board's default 4800 MT/s. They turned on EXPO, the kit's tested profile (6000 MT/s with its own voltages and timings), kept the old CPU tuning and did not load defaults: <q>I just had a feeling and followed my intuition</q>.</p>
+    <p><b>The fix, 12:57, and the advice it went against.</b> The advice at 12:36 was to load BIOS defaults (F5), on the guess that EXPO was on and pushing the memory too hard. That guess was never checked; the running memory speed couldn't be read without sudo. In the BIOS the owner found the memory at the board's default 4800 MT/s with EXPO off, so defaults would have changed nothing about it. They followed an instinct instead: kept the CPU tuning and turned EXPO on, the kit's tested profile (6000 MT/s with its own voltages and timings). <q>I just had a feeling and followed my intuition.</q> It worked.</p>
+    <p><b>Worth remembering.</b> This is a plain example that even a capable, intelligent AI can be wrong. The advice came from a model that had read every log of the night, and it still rested on a guess it never checked, delivered as "the most likely fix". What found the fix was a person's instinct about their own machine, and the willingness to go against the advice. Ask what the AI is assuming, check it when it matters, and trust your own read.</p>
     <p>Retest, 16 passes per check: clean right after boot, clean twice after filling 55 GB of memory with model files (the pattern that failed 12 of 13 times), clean twice after 16.5 minutes of 16-way vLLM load. The load run held 165 to 167 tokens/s with 0 request errors and GPU 1 at 75 °C. <span id="since-expo"></span></p>
     <p class="note">Two readings are still open: EXPO's settings fixed it, or the fresh boot did (the night before, each boot also started clean and got worse over hours). Hours of real use with checks will tell. If errors come back, the next step is CPU tuning back to defaults.</p>
   </div>
@@ -455,6 +454,7 @@ body{margin:0} img{max-width:100%} [hidden]{display:none!important}</style>
 <!-- ============ MISTAKES ============ -->
 <section id="mistakes">
   <div class="sechead"><span class="eyebrow">Told plainly, so they don't repeat</span><h2>Mistakes and what changed</h2></div>
+  <p class="col">Most of these were made by the AI sessions themselves. Capable models still make mistakes: they start heavy jobs at the wrong moment, write loops that never end, and give confident advice built on an unchecked guess. The 12:36 BIOS advice is the clearest case.</p>
   <div class="tbl card" style="padding:4px 6px">
     <table>
       <tr><th>When</th><th>What happened</th><th>What changed</th></tr>
@@ -466,6 +466,7 @@ body{margin:0} img{max-width:100%} [hidden]{display:none!important}</style>
       <tr><td class="mono">11-12 03:01</td><td>Claude Code's first request to vLLM failed: <code>400 Unexpected reasoning effort high</code>.</td><td>The agent always passes an effort level on vLLM (default <code>xhigh</code>).</td></tr>
       <tr><td class="mono">11-12 04:37:59</td><td>Power-off with no shutdown lines, while a roughly 90 GB unthrottled download (curl, tar, model download) from another session ran during the eval. Second hard stop during a big download under GPU load. Two of two is a pattern, not proof.</td><td>Rule 3 applies to every machine and account that logs in.</td></tr>
       <tr><td class="mono">11-12 07:12</td><td>A 16-request load test from another machine landed on the server during the eval's resume.</td><td>The eval checks the server is idle before each batch and records how busy it got.</td></tr>
+      <tr><td class="mono">11-12 12:36</td><td>The fix advice was wrong. The lead session told the owner to load BIOS defaults to reset the memory profile, assuming EXPO was on. It never confirmed that (no sudo to read the memory speed). EXPO was off; the owner turned it <i>on</i> by instinct, and that is what made every check clean.</td><td>Check the current setting before advising a change to it, or say plainly that it is a guess. The runbook records EXPO on as the setting that made the checks clean.</td></tr>
     </table>
   </div>
 </section>
@@ -539,8 +540,9 @@ const ENTRIES = [
  ["2026-11-12","06:39","fault","12 of 13","From here the memory check fails 12 of 13 times, including on an idle server. The eval tries again at 07:13, 07:21 and 08:14."],
  ["2026-11-12","07:12","mistake","A load test lands on the eval","16 requests at once from another machine, during the eval's resume. The eval gets an idle check before every batch."],
  ["2026-11-12","08:56","fault","Eval stopped","2 errors at 08:15 after 45 idle minutes, cards at 29 and 39 °C. The eval stops until the hardware is checked."],
+ ["2026-11-12","12:36","mistake","Wrong advice: load BIOS defaults","The lead session advised pressing F5 (load optimized defaults) to reset the two suspects, CPU tuning and the memory profile, assuming EXPO was on and too aggressive. It had not checked: it could not read the running memory speed without sudo. The memory was in fact at the default 4800 MT/s with EXPO off, so loading defaults would not have changed the memory at all."],
  ["2026-11-12","12:41","note","What the memory is","Corsair DDR5, 2 × 32 GB, rated 6000 MT/s CL40 with EXPO; 4800 MT/s without it."],
- ["2026-11-12","12:57","fix","EXPO on","The owner turns on EXPO (memory now 6000 MT/s), keeps the CPU tuning, skips loading defaults: <q>I just had a feeling and followed my intuition</q>."],
+ ["2026-11-12","12:57","fix","EXPO on, against the advice","The owner went with instinct instead: skipped F5, kept the CPU tuning and turned EXPO on (memory now 6000 MT/s with the kit's tested voltages and timings): <q>I just had a feeling and followed my intuition</q>. The lead session called it the opposite of what it expected."],
  ["2026-11-12","13:22","test","Clean retest","5 checks × 16 passes, 0 errors: after boot, after filling 55 GB with model files, after 16.5 minutes of 16-way load at 165 to 167 tokens/s."],
  ["2026-11-12","13:26","test","Eval resumes","Runs 2 and 3 start with the same code and safeguards. Every memory check since has been clean."],
  ["2026-11-12","16:25","test","Eval complete","Three runs on both sides, all from clean batches: 120 task runs. Side A passed 56 of 60 (median 82.5 s), side B 57 of 60 (median 68.5 s), with 0 refused bash calls on side B against 26 on side A. Both suspect batches re-ran clean. Since EXPO: 32 memory checks, 0 with errors."],
@@ -836,7 +838,7 @@ function arrow(svg, x1, y1, x2, y2, cls, label, lx, ly){
   S("path", {d: `M${x1} ${y1}L${x2} ${y2}`, class: "arrow " + (cls || "")}, svg);
   const a = Math.atan2(y2 - y1, x2 - x1), s = 7;
   S("path", {d: `M${x2} ${y2}L${x2 - s * Math.cos(a - .45)} ${y2 - s * Math.sin(a - .45)}L${x2 - s * Math.cos(a + .45)} ${y2 - s * Math.sin(a + .45)}Z`, class: "ah " + (cls || "")}, svg);
-  if (label) S("text", {x: lx, y: ly, "text-anchor": "middle", class: "lbl"}, svg, label);
+  if (label) S("text", {x: lx, y: ly, "text-anchor": "middle"}, svg, label);
 }
 function box(svg, x, y, w, h, title, lines, hot){
   S("rect", {x, y, width: w, height: h, rx: 6, class: "box" + (hot ? " hot" : "")}, svg);
@@ -850,7 +852,7 @@ function dgLayout(){
   box(svg, 360, 10, 530, 360, "The Forge", [], true);
   box(svg, 380, 50, 240, 92, "GPU 0 · RTX 3090 Ti", ["24 GB · 480 W limit · PCIe x8", "runs near 48 °C under load"]);
   box(svg, 630, 50, 240, 92, "GPU 1 · RTX 3090", ["24 GB · 370 W limit · PCIe x8", "runs 76 to 79 °C, at its limit"]);
-  S("text", {x: 625, y: 164, "text-anchor": "middle", class: "lbl"}, svg, "no NVLink: card to card over PCIe, 7.7 GB/s");
+  S("text", {x: 668, y: 164}, svg, "no NVLink: card to card over PCIe, 7.7 GB/s");
   box(svg, 380, 176, 240, 104, "vLLM server", ["Qwen3.8-27B FP8, both cards", "local-only endpoint", "holds the GPU lock while up"], true);
   box(svg, 630, 176, 240, 104, "Ollama", ["Q8 build, one job at a time", "idle in vLLM mode", "takes the lock per job"]);
   box(svg, 380, 292, 490, 64, "Eval runner · memory check · temperature logger", ["batches of 5, a 36 GB memory check before and after each"]);
@@ -867,8 +869,8 @@ function dgLock(){
   box(svg, 160, 52, 130, 56, "GPU lock", ["held by vLLM"], true);
   box(svg, 140, 150, 170, 60, "vLLM server", ["both cards, up to 16 at once"], true);
   arrow(svg, 225, 148, 225, 112, "on", "", 0, 0);
-  ["eval agent", "swarm", "load test"].forEach((n, i) => { const x = 30 + i * 135; box(svg, x, 250, 120, 50, n, []); arrow(svg, x + 60, 248, 225 - 40 + i * 40, 214, "on"); });
-  S("text", {x: 225, y: 236, "text-anchor": "middle", class: "lbl"}, svg, "clients call in parallel, no lock");
+  ["eval agent", "swarm", "load test"].forEach((n, i) => { const x = 40 + i * 140; box(svg, x, 250, 120, 50, n, []); arrow(svg, x + 60, 248, 225 - 40 + i * 40, 214, "on"); });
+  S("text", {x: 225, y: 236, "text-anchor": "middle"}, svg, "clients call in parallel, no lock");
   // Ollama mode
   box(svg, 460, 10, 430, 310, "Ollama mode", []);
   box(svg, 610, 52, 130, 56, "GPU lock", ["one holder"]);
@@ -880,7 +882,7 @@ function dgLock(){
   arrow(svg, 535, 248, 620, 214, "on");
   arrow(svg, 665, 248, 665, 214, "wait");
   arrow(svg, 805, 248, 730, 214, "wait");
-  S("text", {x: 675, y: 236, "text-anchor": "middle", class: "lbl"}, svg, "each job runs under flock");
+  S("text", {x: 675, y: 236, "text-anchor": "middle"}, svg, "each job runs under flock");
   $("dg-lock").appendChild(svg);
 }
 
