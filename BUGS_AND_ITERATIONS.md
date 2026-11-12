@@ -1,5 +1,17 @@
 # Bugs & Iterations
 
+## 2026-11-12: ITER: Basalt + parchment drop Sparky for the ankh
+
+**Change:** At Joona's request, the basalt and parchment themes no longer show Sparky anywhere: the nav logo, gallery mascot and footer avatar are hidden there, and the theme's own ankh art (`assets/hero-ankh-beige.png` for basalt, `hero-ankh-ink.png` for parchment, the hero ankh assets) takes the nav logo (36 px) and footer (56 px) spots via `::before`. Bubblegum and kawaii keep Sparky. CSS only; supersedes the older "Sparky stays, toned to ink" rule for these two themes.
+**Verification:** computed styles in all four themes (basalt/parchment: 3 Sparky images `display:none`, ankh `::before` present; bubblegum/kawaii: images shown, no `::before`); icons rendered at real size on each theme's ground to check legibility; nav seen in the local preview; no console errors.
+**Files:** styles.css
+
+## 2026-11-12: ITER: X / Twitter link back, plus a link row under the glyph line
+
+**Change:** Restored `x.com/the_null_path` in the footer "Elsewhere" nav (GitHub ✦ X / Twitter ✦ Substack ✦ Goodreads) at Joona's request, and added the same four links as a `hero-socials` row directly under the lore glyph line, above the hero panels. Fourth toggle of the footer link (removed 10-24, restored 10-27, removed 11-01, restored now).
+**Verification:** local preview (basalt theme) at 640 px and 1280 px: the row renders under the glyph divider and above the panels, one line at desktop width and wrapping cleanly when narrow; footer shows all four links; no console errors; `grep -c 'x.com/the_null_path' index.html` = 2.
+**Files:** index.html
+
 ## 2026-11-12: ITER: The Forge Notebook at /forge-notebook/, with a hero button
 
 **Change:** Joona asked for the Forge lab notebook on lovespark.love as a new button next to Forging. `/forge-notebook/` is a standalone export of the notebook (a dated timeline and every test from 2026-11-11 and 11-12 on the dual-GPU PC: vLLM tuning, the memory fault and the EXPO fix, the lock test, the 20-task eval), in Glyph Grid Studio's Cream and Basalt themes with its glyph-field background and a charcoal-sketch title (✺ The Forge Notebook, still plus a 4 s loop). A "✺ Forge Notebook" hero button sits right after "△ Forging" and reuses its ember colours. Nothing else on the home page changed.

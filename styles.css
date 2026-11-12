@@ -2887,7 +2887,7 @@ html.theme-parchment :is(.section-deco, .mission-sparkles span, .footer-heart, .
 }
 /* Pacifico script reads as cute; basalt engraves in Cinzel like parchment */
 html.theme-basalt { --font-display: 'Cinzel', 'Cormorant Garamond', Georgia, serif; }
-/* Sparky stays (suite rule) but loses the pink: toned into each theme's ink */
+/* Bubblegum + kawaii keep Sparky; basalt + parchment swap him for the ankh (end of file) */
 html.theme-basalt :is(.site-brand-mark, .gallery-mascot, .footer-sparky) { filter: grayscale(1) sepia(0.5) brightness(0.9); }
 html.theme-parchment :is(.site-brand-mark, .gallery-mascot, .footer-sparky) { filter: grayscale(1) sepia(0.85) contrast(1.05); }
 
@@ -2933,3 +2933,23 @@ html:root .hero-cta-group a.hero-cta.hero-cta--primary { overflow: visible; z-in
 .video-note { margin: 6px 0 0; font-size: 12px; opacity: .75; }
 html.theme-basalt .video-play { background: linear-gradient(180deg, #d9a23b, #a8761f); color: #16171a; }
 @media (prefers-reduced-motion: reduce) { .video-facade img { transition: none; } }
+
+/* ── Basalt + parchment: no Sparky, the ankh instead (Joona, 2026-11-12) ──────
+   The three Sparky images are hidden and the theme's own ankh art (the same
+   assets as the hero ankh) takes the nav logo and footer spots. */
+html:is(.theme-basalt, .theme-parchment) :is(.site-brand-mark, .gallery-mascot, .footer-sparky) { display: none; }
+html:is(.theme-basalt, .theme-parchment) .site-brand::before,
+html:is(.theme-basalt, .theme-parchment) .site-footer::before {
+  content: "";
+  display: block;
+  flex: 0 0 auto;
+  width: 36px;
+  height: 36px;
+  background: url("assets/hero-ankh-beige.png") center / 170% no-repeat;
+}
+html.theme-parchment :is(.site-brand, .site-footer)::before { background-image: url("assets/hero-ankh-ink.png"); }
+html:is(.theme-basalt, .theme-parchment) .site-footer::before {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto var(--sp-3);
+}
