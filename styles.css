@@ -2953,3 +2953,32 @@ html:is(.theme-basalt, .theme-parchment) .site-footer::before {
   height: 56px;
   margin: 0 auto var(--sp-3);
 }
+
+/* ── Glyph field: the Forge Notebook's animated background (Joona, 2026-11-12) ──
+   A fixed canvas of drifting ink strands (assets/glyph-field.js), above the page ground (body::before) and below
+   the content. Esoteric themes only: ink and strength match the notebook's basalt and cream. */
+#glyphField { display: none; position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: 0; transition: opacity 1.2s ease; }
+#glyphField.on { opacity: 1; }
+html:is(.theme-basalt, .theme-parchment) #glyphField { display: block; }
+html.theme-basalt { --field-ink: #e6d6ad; --field-alpha: .11; }
+html.theme-parchment { --field-ink: #5e3a24; --field-alpha: .13; }
+
+/* ── Charcoal section titles (Joona, 2026-11-12) ───────────────────────────────
+   Major titles are lettered in glyph ink like the Forge Notebook's title: a seamless tile of hatch strokes
+   (assets/glyph-ink-*.png, made by scripts/make_glyph_ink_tiles.py) fills the letters via background-clip.
+   The gold ornaments are separate .section-deco elements, so they keep their colour. */
+html:is(.theme-basalt, .theme-parchment) .section-title {
+  /* glyph strokes over a translucent wash of the same ink: texture with a solid enough body to read */
+  background: url("assets/glyph-ink-basalt.png") 0 0 / 160px repeat, linear-gradient(rgba(230, 214, 173, .42), rgba(230, 214, 173, .42));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  text-shadow: none;
+  font-weight: 700;
+  filter: drop-shadow(0 0 12px rgba(217, 162, 59, .14));
+}
+html.theme-parchment .section-title {
+  background-image: url("assets/glyph-ink-parchment.png"), linear-gradient(rgba(43, 34, 25, .45), rgba(43, 34, 25, .45));
+  filter: none;
+}
