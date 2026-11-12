@@ -1,5 +1,12 @@
 # Bugs & Iterations
 
+## 2026-11-12: ITER: Forge Notebook gets the Korean themes and a reading-font menu
+
+**Change:** Joona asked for the Korean themes and a font option as a dropdown like the other LoveSpark pages. The Cream/Basalt switch is replaced by the Raw Thought reader's "◐ Change Font & Theme" menu: Match my device, Cream, Basalt; the four Korean themes (Seoul Y2K, Gingham Sticker, Holo Mochi, Neon Usagi, colour tokens from the fleet dashboard) and six reading fonts (Serif, Sans, OpenDyslexic, Lexend, Comfortaa, Atkinson Hyperlegible). The charcoal title and the glyph field follow the theme (Neon Usagi uses the light-ink title). Choices are saved in the browser only. OpenDyslexic (SIL OFL) is embedded, subset to Latin and punctuation (19 KB); the other fonts come from Google Fonts.
+**Bug found while checking:** at phone width the header wraps and the button moves to the left edge, but the menu was anchored to the button's right and opened off-screen (left edge at -195 px). Below 680 px it now opens rightwards from the button (24 to 280 px on a 375 px screen).
+**Verification:** local preview: every theme renders with the right title art, every font loads (document.fonts.check true for all four web fonts), charts stay readable in Holo Mochi, Escape and outside clicks close the menu, no console errors, no sideways scroll at 375 px. Privacy and path greps clean.
+**Files:** forge-notebook/index.html
+
 ## 2026-11-12: ITER: Forge Notebook tells the EXPO fix honestly
 
 **Change:** Joona pointed out the notebook left out that the fix advice was wrong. The lead session told him to load BIOS defaults (F5) to reset the memory profile, assuming EXPO was on; it never checked (no sudo to read the memory speed). EXPO was off, and he turned it on by instinct, which is what made every memory check clean. Now in the timeline (a 12:36 "Wrong advice" entry and the 12:57 entry), the memory-fault section and the mistakes table.
