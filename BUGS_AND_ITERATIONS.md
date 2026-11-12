@@ -1,5 +1,37 @@
 # Bugs & Iterations
 
+## 2026-11-12: ITER: theme switches 55% cheaper on the main thread (6 proven runs), and the hero is centred
+
+**Ask (Joona):** center the ankh/wordmark; then optimise theme switching, 10 runs, each counting only if verifiably faster than the previous.
+**Centring:** measured, not changed. Ankh and wordmark are centred at every width from 360 to 2560 px (56 widths; the ankh's centre within 0.4 px of the page centre, the wordmark's ink extent centred to the pixel; light either side of the ankh equal within 1 level). Joona's screenshot could not be reproduced; asked for the window size.
+**Harness:** `scripts/perf_switch.py`. Metric: main-thread task time (Chrome Performance.getMetrics) for one theme cycle basalt -> parchment -> bubblegum -> kawaii -> basalt, clicking the real switcher. Old vs new served from one origin (git show vs working tree), samples interleaved A/B/A/B. Accept only if the median is lower AND a one-sided Mann-Whitney test gives p < 0.01 AND every theme ends in the right state. A/A runs: +1.7% p=0.64, -0.6% p=0.078 (so p<0.05 was too loose and was tightened). Harness fixes during the loop (both sides equally): state check moved out of the timed window, timer polling instead of rAF polling, measurement starts after the ~2.5 s intro animations.
+**Result, end to end:** live main 679.3 ms -> 302.3 ms per cycle (-55.5%, n=20 each, ranges 649-840 vs 278-341, p<0.0001); style 149 -> 57 ms, layout 65 -> 37, main-thread script 56 -> 9.5. Worst frame gap unchanged (67.4 ms median both): in headless Chromium it is bound by software raster, which this metric does not cover.
+
+| # | attempt | before | after | delta | p | verdict |
+|---|---|---|---|---|---|---|
+| 1 | content-visibility on below-fold sections | 684.3 | 581.3 | -15.1% | <0.0001 | ACCEPT |
+| 2 | glyph field drawn at 1.5x, not 2x (44% fewer canvas pixels) | 594.7 | 560.9 | -5.7% | 0.0001 | ACCEPT |
+| 3 | stop the CTA's 40 specks while the button is off screen | 550.2 | 524.8 | -4.6% | <0.0001 | ACCEPT |
+| 4 | glyph field in a Web Worker (OffscreenCanvas; in-page fallback) | 519.3 | 437.1 | -15.8% | <0.0001 | ACCEPT |
+| 5 | suspend CSS transitions during the wipe (~120 colour fades restyled every frame) | 447.0 | 322.0 | -28.0% | <0.0001 | ACCEPT |
+| 6 | add that class after the old page is captured (one restyle fewer) | 358.7 | 331.1 | -7.7% | 0.0012 | ACCEPT |
+| - | coalesce the field's observer into rAF | 728.5 | 736.1 | +1.0% | 0.73 | reject |
+| - | hoist noise work out of the cell loop (bit-identical, proven over 1.74M draw calls) | 556.6 | 550.2 | -1.1% | 0.19 | reject |
+| - | defer the video gate until after the wipe | 520.8 | 536.3 | +3.0% | 0.998 | reject |
+| - | pause the field's drift during the wipe | 523.6 | 514.8 | -1.7% | 0.07 | reject |
+| - | contain: layout on the Dyson swarm | 457.2 | 466.7 | +2.1% | 0.47 | reject |
+| - | warm Pacifico at idle (twice: p=0.018, then p=0.030 at n=20) | 442.1 | 421.9 | -4.6% | 0.0175 | reject |
+| - | content-visibility on the hero button group | 460.0 | 479.3 | +4.2% | 0.98 | reject |
+| - | grain overlay without a blend mode | 451.4 | 486.3 | +7.7% | 0.999 | reject |
+| - | pause hidden videos instead of resetting (twice) | 448.1 | 439.8 | -1.9% | 0.097 | reject |
+| - | specks on the Web Animations API | 333.1 | 333.6 | +0.2% | 0.29 | reject |
+| - | isolation on the hero buttons | 338.3 | 336.1 | -0.7% | 0.47 | reject |
+| - | build the Dyson swarm once, hide with CSS | 303.0 | 309.4 | +2.1% | 0.80 | reject |
+
+**Why it stopped at 6, not 10:** what is left is what a full-page circular wipe needs: three full-page style passes per switch (old capture, new state, end) and a full-viewport snapshot. The one sizeable movable piece is the clip-path wipe itself (probe: 26 main-thread frames, 21 ms per switch, vs 16 frames, 12 ms with a compositor-friendly animation). Making it compositor-only changes how the wipe looks, so that is a design call for Joona.
+**Instruments added:** perf_switch.py (A/B with significance); per-switch style-pass traces (element counts per pass) found the transition and capture wins; a Node draw-call recorder proved the noise refactor bit-identical.
+**Files:** styles.css, script.js, assets/glyph-field.js, scripts/perf_switch.py
+
 ## 2026-11-12: BUG: Forge Notebook labels still crossed by lines; figures broke in wider reading fonts; the check passed them
 
 **Symptom (Joona, screenshot):** in "The machine", the arrows from the vLLM server to both GPUs ran through "no NVLink: card to card over PCIe, 7.7 GB/s". Joona: the text should sit over the arrow with a small break in the line; the page is public and has to look professional.
