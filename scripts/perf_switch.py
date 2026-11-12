@@ -57,7 +57,7 @@ STATE = """() => { const c = document.getElementById('glyphField');
 def sample(browser, side):
     pg = browser.new_page(viewport={"width": 1440, "height": 900}, device_scale_factor=2)
     pg.route("**/*", serve(side))
-    pg.goto(ORIGIN + "/", wait_until="networkidle"); pg.wait_for_timeout(1500)
+    pg.goto(ORIGIN + "/", wait_until="networkidle"); pg.wait_for_timeout(3000)   # past the intro animations (~2.5 s)
     cdp = pg.context.new_cdp_session(pg); cdp.send("Performance.enable")
     m0 = {m["name"]: m["value"] for m in cdp.send("Performance.getMetrics")["metrics"]}
     pg.evaluate(PROBE); bad = []
