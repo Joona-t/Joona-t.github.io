@@ -453,7 +453,7 @@ document.querySelectorAll('.win-btn-close').forEach(btn => {
   // Optional U+FE0F variation selector rides along with the emoji it follows.
   const re = new RegExp('(' + Object.keys(ANCIENT).join('|') + ')️?', 'gu');
   const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
-    acceptNode: n => n.parentElement.closest('script, style, .lore') ? NodeFilter.FILTER_REJECT
+    acceptNode: n => n.parentElement.closest('script, style, .lore, .glyph-swap') ? NodeFilter.FILTER_REJECT
       : (re.lastIndex = 0, re.test(n.nodeValue)) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP,
   });
   const nodes = [];

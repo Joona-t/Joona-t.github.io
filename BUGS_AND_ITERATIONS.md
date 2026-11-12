@@ -1,5 +1,11 @@
 # Bugs & Iterations
 
+## 2026-11-12: ITER: Games button gets the scarab 𓆣 in the esoteric themes
+
+**Change:** In basalt and parchment the Games button showed 🜂 (the ancient-glyph swap turns every ✦ into fire). At Joona's request it now shows 𓆣 (scarab, L001): the button's ✦ is pre-wrapped as `<span class="glyph-swap" data-ancient="𓆣">`, and the swap walker now skips text already inside a `.glyph-swap` so a pre-wrapped glyph is never wrapped twice. Bubblegum and kawaii keep ✦; the other 43 ✦ still become 🜂.
+**Verification:** local preview: basalt and parchment render 𓆣 on Games (::before content), bubblegum and kawaii show ✦, one `.glyph-swap` on the button (no nesting), 43 other `data-ancient="🜂"` swaps unchanged; no console errors.
+**Files:** index.html, script.js
+
 ## 2026-11-12: ITER: Basalt + parchment drop Sparky for the ankh
 
 **Change:** At Joona's request, the basalt and parchment themes no longer show Sparky anywhere: the nav logo, gallery mascot and footer avatar are hidden there, and the theme's own ankh art (`assets/hero-ankh-beige.png` for basalt, `hero-ankh-ink.png` for parchment, the hero ankh assets) takes the nav logo (36 px) and footer (56 px) spots via `::before`. Bubblegum and kawaii keep Sparky. CSS only; supersedes the older "Sparky stays, toned to ink" rule for these two themes.
