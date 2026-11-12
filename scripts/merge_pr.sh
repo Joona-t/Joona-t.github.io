@@ -4,8 +4,9 @@
 #
 #   scripts/merge_pr.sh <pr-number>
 #
-# Workflow: check out the PR branch (clean tree), serve the repo on :8766, run
+# Workflow: check out the PR branch (clean tree) and run
 #   python3 scripts/verify_site.py --runs 3
+# (it serves the checkout itself on a free port and proves the pages it measures are this tree's)
 # which writes .verify/<commit>.json. This script then merges only if that file exists for the PR's head commit,
 # says ok=true and was made from a clean tree. Any new commit on the PR needs a new verify run.
 set -euo pipefail
@@ -17,10 +18,10 @@ if [[ ! -f "$report" ]]; then
   echo "REFUSED: no verification for PR #$pr head ${head:0:7}. Check out the PR, then run: python3 scripts/verify_site.py" >&2
   exit 1
 fi
-ok="$(python3 -c 'import json,sys; r=json.load(open(sys.argv[1])); print("yes" if r.get("ok") and not r.get("dirty") and r.get("commit")==sys.argv[2] else "no")' "$report" "$head")"
+ok="$(python3 -c 'import json,sys; r=json.load(open(sys.argv[1])); print("yes" if r.get("ok") and not r.get("dirty") and r.get("commit")==sys.argv[2] and r.get("identity")=="matched" else "no")' "$report" "$head")"
 if [[ "$ok" != "yes" ]]; then
   echo "REFUSED: .verify/${head:0:7}.json is not a clean passing run for this commit:" >&2
-  python3 -c 'import json,sys; r=json.load(open(sys.argv[1])); print(" dirty:", r.get("dirty"), " fails:", r.get("fails"))' "$report" >&2
+  python3 -c 'import json,sys; r=json.load(open(sys.argv[1])); print(" dirty:", r.get("dirty"), " identity:", r.get("identity"), " fails:", r.get("fails"))' "$report" >&2
   exit 1
 fi
 echo "verified ${head:0:7}: merging PR #$pr"
