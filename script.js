@@ -227,13 +227,23 @@ const isMotionTheme = () => {
     host.appendChild(specks);
   }
 
+  // Perf (2026-11-12): the button can be below the fold while the hero is still in view (basalt, parchment). The 40
+  // specks then animated off screen, each on its own compositor layer. Stop them (animation: none) until the button
+  // is within 100 px of the viewport.
+  let hostVisible = true;
   function sync() {
     const want = !mqReduce.matches;
     if (want && !specks) build();
     if (!want && specks) { specks.remove(); specks = null; }
-    if (specks) specks.classList.toggle('is-paused', !heroActivity.active());
+    if (specks) {
+      specks.classList.toggle('is-paused', !heroActivity.active());
+      specks.classList.toggle('is-off', !hostVisible);
+    }
   }
 
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(([e]) => { hostVisible = e.isIntersecting; sync(); }, { rootMargin: '100px' }).observe(host);
+  }
   sync();
   if (mqReduce.addEventListener) mqReduce.addEventListener('change', sync);
   heroActivity.subscribe(sync);

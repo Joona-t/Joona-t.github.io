@@ -2906,6 +2906,7 @@ html:root .hero-cta-group a.hero-cta.hero-cta--primary { overflow: visible; z-in
   animation-iteration-count: infinite;
 }
 .destiny-specks.is-paused > span { animation-play-state: paused; }
+.destiny-specks.is-off > span { animation: none; }   /* button off screen: no animation, no layers (script.js) */
 @keyframes destinySpeck {
   0%   { opacity: 0; translate: 0 0; }
   40%  { opacity: 0.9; }
