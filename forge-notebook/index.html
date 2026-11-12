@@ -157,7 +157,7 @@ header.top>div:first-child{min-width:0;flex:1 1 420px}
 @media (min-width:760px){.tiles{grid-template-columns:repeat(3,minmax(0,1fr))}}
 .tile{padding:14px 16px 13px;display:grid;grid-template-rows:auto auto 1fr;gap:4px;min-width:0}
 .tile .lab{font:600 10.5px/1.3 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tile .val{font:600 clamp(24px,3vw,30px)/1.1 var(--display);font-variant-numeric:lining-nums tabular-nums;color:var(--heading);white-space:nowrap}
+.tile .val{font:600 clamp(24px,3vw,30px)/1.1 var(--display);font-variant-numeric:lining-nums tabular-nums;color:var(--heading);overflow-wrap:anywhere}   /* may wrap: a wide reading font overflowed a phone (2026-11-12) */
 .tile .val small{font:500 14px/1 var(--text);color:var(--dim);letter-spacing:0}
 .tile .sub{font-size:14.5px;color:var(--dim);line-height:1.35}
 
@@ -174,7 +174,10 @@ figcaption b{color:var(--ink);font-weight:600}
 .chart{width:100%;overflow-x:auto}
 .chart svg{display:block;width:100%;height:auto;min-width:520px}
 .chart.narrow svg{min-width:340px}
-svg text{fill:var(--dim);font-family:var(--text);font-size:13px}
+/* Figures keep the fonts their geometry was measured in, whatever reading font is chosen (a wider font ran labels
+   out of their boxes, 2026-11-12); body text still follows the reader's choice. */
+:root{--fig:"EB Garamond",Georgia,"Times New Roman",serif;--fig-display:"Cinzel",Georgia,"Times New Roman",serif}
+svg text{fill:var(--dim);font-family:var(--fig);font-size:13px;paint-order:stroke;stroke:var(--card);stroke-width:5px;stroke-linejoin:round}
 svg .ax{stroke:var(--line);stroke-width:1} svg .grid{stroke:var(--grid);stroke-width:1}
 svg .lab-strong{fill:var(--ink);font-weight:600}
 .legend{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:14px;color:var(--dim);margin-top:6px}
@@ -222,7 +225,7 @@ ol.tl .body q{font-style:italic}
 .diagram svg text{paint-order:stroke;stroke:var(--card);stroke-width:7px;stroke-linejoin:round}
 .diagram svg text.lbl{fill:var(--ink);font-weight:600;font-size:14px}
 .diagram svg .box.hot{stroke:var(--pc);stroke-width:1.6}
-.diagram svg .ttl{fill:var(--heading);font-family:var(--display);font-weight:600;font-size:14px;letter-spacing:.06em}
+.diagram svg .ttl{fill:var(--heading);font-family:var(--fig-display);font-weight:600;font-size:14px;letter-spacing:.06em}
 .diagram svg .arrow{stroke:var(--dim);stroke-width:1.4;fill:none}
 .diagram svg .arrow.on{stroke:var(--pc)} .diagram svg .arrow.wait{stroke:var(--warn);stroke-dasharray:4 4}
 .diagram svg .ah{fill:var(--dim)} .diagram svg .ah.on{fill:var(--pc)} .diagram svg .ah.wait{fill:var(--warn)}
@@ -722,14 +725,17 @@ const hhmm = m => { const h = Math.floor(m / 60) % 24, mi = Math.round(m % 60); 
 /* Generic frame: returns scales and an SVG with gridlines and axes. */
 function frame(host, o){
   const W = o.w || 760, Hh = o.h || 300, m = Object.assign({l: 48, r: 16, t: 14, b: 38}, o.m || {});
+  /* Text is ~16.4 units tall (13.4 above the baseline). An axis title needs its own row clear of the tick labels. */
+  if (o.yl) m.t = Math.max(m.t, 30);
+  if (o.xl) m.b = Math.max(m.b, 42);
   const svg = S("svg", {viewBox: `0 0 ${W} ${Hh}`, role: "img", "aria-label": o.label || ""});
   const sx = v => m.l + (v - o.x[0]) / (o.x[1] - o.x[0]) * (W - m.l - m.r);
   const sy = v => Hh - m.b - (v - o.y[0]) / (o.y[1] - o.y[0]) * (Hh - m.t - m.b);
   (o.yt || []).forEach(v => { S("line", {class: "grid", x1: m.l, x2: W - m.r, y1: sy(v), y2: sy(v)}, svg); S("text", {x: m.l - 6, y: sy(v) + 4, "text-anchor": "end"}, svg, o.yf ? o.yf(v) : v); });
-  (o.xt || []).forEach(v => { S("line", {class: "ax", x1: sx(v), x2: sx(v), y1: Hh - m.b, y2: Hh - m.b + 4}, svg); S("text", {x: sx(v), y: Hh - m.b + 18, "text-anchor": "middle"}, svg, o.xf ? o.xf(v) : v); });
+  (o.xt || []).forEach(v => { S("line", {class: "ax", x1: sx(v), x2: sx(v), y1: Hh - m.b, y2: Hh - m.b + 4}, svg); S("text", {x: sx(v), y: Hh - m.b + 18, "text-anchor": sx(v) - m.l < 1 ? "start" : "middle"}, svg, o.xf ? o.xf(v) : v); });
   S("line", {class: "ax", x1: m.l, x2: W - m.r, y1: Hh - m.b, y2: Hh - m.b}, svg);
-  if (o.yl) S("text", {x: 4, y: 12, "text-anchor": "start"}, svg, o.yl);
-  if (o.xl) S("text", {x: W - m.r, y: Hh - 4, "text-anchor": "end"}, svg, o.xl);
+  if (o.yl) S("text", {x: 4, y: 15, "text-anchor": "start"}, svg, o.yl);
+  if (o.xl) S("text", {x: W - m.r, y: Hh - 5, "text-anchor": "end"}, svg, o.xl);
   host.appendChild(svg);
   return {svg, sx, sy, W, H: Hh, m};
 }
@@ -803,7 +809,8 @@ function chTune(){
     const p2 = ys[1] == null ? pts.filter(p => p[1] != null) : pts;
     line(f, p2, c, {dots: true, dash, w: n.startsWith("Chosen") ? 3 : 1.8});
   });
-  [[0, 77.3], [2, 139.4], [3, 163.3], [4, 165.1]].forEach(([x, y]) => S("text", {x: f.sx(x) + (x === 4 ? -6 : 6), y: f.sy(y) - 8, "text-anchor": x === 4 ? "end" : "start", class: "lab-strong"}, f.svg, y));
+  /* value labels sit above their point, clear of the rising line (not up-and-right, where the line runs into them) */
+  [[0, 77.3], [2, 139.4], [3, 163.3], [4, 165.1]].forEach(([x, y]) => S("text", {x: f.sx(x) - (x === 0 || x === 4 ? 2 : 0), y: f.sy(y) - (x === 0 ? 14 : 12), "text-anchor": x === 0 ? "start" : x === 4 ? "end" : "middle", class: "lab-strong"}, f.svg, y));
   legend($("lg-tune"), series.map(([c, n, , d]) => [c, n, d]));
 }
 function chCtx(){
@@ -877,7 +884,7 @@ function bytes(){
 function chMem(){
   const cs = allMem(), t0 = mins("11-11 23:00"), last = Math.max(cs[cs.length - 1].m + 20, mins("11-12 14:00"));
   const xt = []; for (let m = t0; m <= last; m += 120) xt.push(m);
-  const f = frame($("ch-mem"), {w: 920, h: 300, m: {l: 40, r: 14, t: 34, b: 40}, x: [t0, last], y: [0, 8], yt: [0, 2, 4, 6, 8], xt, xf: v => hhmm(v) + (v === t0 ? " (11-11)" : v === t0 + 120 ? " (11-12)" : ""), yl: "error events per check", label: "Timeline of memory checks"});
+  const f = frame($("ch-mem"), {w: 920, h: 300, m: {l: 40, r: 14, t: 34, b: 40}, x: [t0, last], y: [0, 8], yt: [0, 2, 4, 6, 8], xt, xf: v => hhmm(v) + (v === t0 ? " (11-11)" : ""), yl: "error events per check", label: "Timeline of memory checks"});
   const band = (a, b, label) => { const x1 = f.sx(mins(a)), x2 = f.sx(mins(b));
     S("rect", {x: x1, y: f.m.t, width: Math.max(2, x2 - x1), height: f.H - f.m.t - f.m.b, fill: "var(--line)", opacity: .55}, f.svg, null);
     S("text", {x: (x1 + x2) / 2, y: f.m.t - 8, "text-anchor": "middle"}, f.svg, label); };
@@ -887,8 +894,8 @@ function chMem(){
   const ex = f.sx(mins("11-12 12:57"));
   S("line", {x1: ex, x2: ex, y1: f.m.t, y2: f.H - f.m.b, stroke: "var(--ok)", "stroke-width": 1.5, "stroke-dasharray": "4 3"}, f.svg);
   S("text", {x: ex + 6, y: f.sy(7.2), class: "lab-strong"}, f.svg, "EXPO on, 12:57");
-  S("text", {x: f.sx(mins("11-12 09:30")), y: f.sy(1.4), "text-anchor": "middle"}, f.svg, "eval stopped, no checks");
-  S("text", {x: f.sx(mins("11-12 07:50")), y: f.sy(6.3), "text-anchor": "middle"}, f.svg, "12 of 13 fail");
+  S("text", {x: f.sx(mins("11-12 10:50")), y: f.sy(1.4), "text-anchor": "middle"}, f.svg, "eval stopped, no checks");
+  S("text", {x: f.sx(mins("11-12 07:58")), y: f.sy(6.3), "text-anchor": "middle"}, f.svg, "12 of 13 fail");
   cs.forEach(c => {
     const x = f.sx(c.m), y = f.sy(c.e);
     if (c.e > 0) S("line", {x1: x, x2: x, y1: f.sy(0), y2: y, stroke: "var(--fix)", "stroke-width": 1.5, opacity: .6}, f.svg);
@@ -908,7 +915,7 @@ function chTemps(){
   const xt = []; for (let m = Math.ceil(x0 / 60) * 60; m <= x1; m += 60) xt.push(m);
   const seg = (fn) => { const pts = []; let prev = null; T.forEach(r => { const x = tm(r); if (prev != null && x - prev > 15) pts.push([x - 1, null]); pts.push([x, fn(r)]); prev = x; }); return pts; };
   const f = frame($("ch-temps"), {w: 920, h: 260, m: {l: 40, r: 14, t: 26, b: 34}, x: [x0, x1], y: [20, 100], yt: [20, 40, 60, 80, 100], xt, xf: hhmm, yl: "°C, 5-minute peak", label: "Temperatures during the eval"});
-  const gap = (a, b, label) => { const xa = f.sx(mins(a)), xb = f.sx(mins(b)); S("rect", {x: xa, y: f.m.t, width: xb - xa, height: f.H - f.m.t - f.m.b, fill: "var(--line)", opacity: .45}, f.svg); S("text", {x: (xa + xb) / 2, y: f.m.t + 14, "text-anchor": "middle"}, f.svg, label); };
+  const gap = (a, b, label) => { const xa = f.sx(mins(a)), xb = f.sx(mins(b)); S("rect", {x: xa, y: f.m.t, width: xb - xa, height: f.H - f.m.t - f.m.b, fill: "var(--line)", opacity: .45}, f.svg); S("text", {x: (xa + xb) / 2, y: f.m.t - 8, "text-anchor": "middle"}, f.svg, label); };
   gap("11-12 08:58", "11-12 13:24", "eval stopped, logger off");
   gap("11-12 06:39", "11-12 07:10", "llama.cpp");
   line(f, seg(r => r[6]), "var(--ok)", {w: 1.6});
@@ -916,7 +923,7 @@ function chTemps(){
   line(f, seg(r => r[1]), "var(--pc)", {w: 2});
   line(f, seg(r => r[2]), "var(--warn)", {w: 2});
   S("line", {x1: f.sx(x0), x2: f.sx(x1), y1: f.sy(95), y2: f.sy(95), stroke: "var(--fix)", "stroke-dasharray": "3 4", "stroke-width": 1}, f.svg);
-  S("text", {x: f.sx(x1) - 4, y: f.sy(95) - 5, "text-anchor": "end"}, f.svg, "CPU limit 95 °C");
+  S("text", {x: f.sx(x1) - 4, y: f.sy(95) - 7, "text-anchor": "end"}, f.svg, "CPU limit 95 °C");
   const g = frame($("ch-power"), {w: 920, h: 170, m: {l: 40, r: 14, t: 24, b: 30}, x: [x0, x1], y: [0, 900], yt: [0, 300, 600, 900], xt, xf: hhmm, yl: "W, both cards", label: "Power of both cards during the eval"});
   const pts = seg(r => r[4]);
   let d = "", open = false, startX = 0, lastX = 0;
@@ -924,7 +931,7 @@ function chTemps(){
   if (open) d += `L${g.sx(lastX)} ${g.sy(0)}L${g.sx(startX)} ${g.sy(0)}Z`;
   S("path", {d, fill: "var(--amber)", opacity: .35, stroke: "var(--amber)", "stroke-width": 1.2}, g.svg);
   const pk = T.reduce((a, r) => r[4] > a[4] ? r : a, T[0]);
-  S("text", {x: g.sx(tm(pk)) + 6, y: g.sy(pk[4]) + 4, class: "lab-strong"}, g.svg, pk[4] + " W");
+  S("text", {x: g.sx(tm(pk)), y: g.sy(pk[4]) - 7, "text-anchor": "middle", class: "lab-strong"}, g.svg, pk[4] + " W");
 }
 
 /* ---------- Eval ---------- */
@@ -993,6 +1000,9 @@ function arrow(svg, x1, y1, x2, y2, cls, label, lx, ly){
   S("path", {d: `M${x2} ${y2}L${x2 - s * Math.cos(a - .45)} ${y2 - s * Math.sin(a - .45)}L${x2 - s * Math.cos(a + .45)} ${y2 - s * Math.sin(a + .45)}Z`, class: "ah " + (cls || "")}, svg);
   if (label) S("text", {x: lx, y: ly, "text-anchor": "middle", class: "lbl"}, svg, label);
 }
+/* Labels paint above every line, box and band, in every figure (run once after all are drawn): the halo (paint-order stroke) then cuts a clean gap in any line under the
+   text. A line drawn after a label paints over it, halo or not (the NVLink label, 2026-11-12). */
+function labelsOnTop(svg){ svg.querySelectorAll(":scope > text").forEach(t => svg.appendChild(t)); }
 function box(svg, x, y, w, h, title, lines, hot){
   S("rect", {x, y, width: w, height: h, rx: 6, class: "box" + (hot ? " hot" : "")}, svg);
   S("text", {x: x + 12, y: y + 22, class: "ttl"}, svg, title);
@@ -1002,11 +1012,11 @@ function box(svg, x, y, w, h, title, lines, hot){
 const MODELS = [{"lane":"Lead session","win":[[1244,1249,"fable-5-2","medium",14],[1265,1279,"fable-5-2","high",48],[1280,1282,"fable-5-2","medium",2],[1281,1286,"fable-5-2","high",45],[1289,1296,"fable-5-2","medium",19],[1297,1458,"fable-5-2","high",263],[1459,1461,"fable-5-2","medium",5],[1460,1462,"opus-5-5","medium",3],[1468,1492,"opus-5-5","high",14],[1569,1648,"opus-5-5","high",72],[1679,1707,"opus-5-5","high",30],[1750,1752,"opus-5-5","high",7],[1785,1787,"opus-5-5","high",7],[1846,1894,"opus-5-5","high",48],[1937,1939,"opus-5-5","high",4],[1977,1979,"opus-5-5","high",8],[2196,2248,"opus-5-5","high",53],[2393,2396,"opus-5-5","high",10],[2497,2499,"opus-5-5","high",4],[2542,2544,"opus-5-5","high",2],[2544,2584,"fable-5-2","high",72]],"count":{"fable-5-2|medium":40,"fable-5-2|high":428,"opus-5-5|medium":3,"opus-5-5|high":259}},{"lane":"Opus agents of the lead","win":[[2546,2688,"opus-5-5","medium",454]],"count":{"opus-5-5|medium":454}},{"lane":"Handoff session","win":[[1283,1302,"fable-5-2","high",106],[1343,1345,"fable-5-2","high",1],[1407,1409,"fable-5-2","high",19],[1460,1492,"fable-5-2","high",158],[1529,1718,"fable-5-2","high",305],[1749,1751,"fable-5-2","high",9],[1782,1806,"fable-5-2","high",54],[1845,1894,"fable-5-2","high",64],[1933,1936,"fable-5-2","high",9],[1976,1978,"fable-5-2","high",8],[2242,2266,"fable-5-2","high",32],[2425,2430,"fable-5-2","high",57]],"count":{"fable-5-2|high":822}},{"lane":"Opus agents of the handoff","win":[[1591,1636,"opus-5-5","medium",116],[1681,1689,"opus-5-5","medium",27],[1876,1894,"opus-5-5","medium",49]],"count":{"opus-5-5|medium":192}},{"lane":"Blitz Swarm session","win":[[1286,1353,"fable-5-2","medium",140],[1407,1409,"fable-5-2","medium",6],[1460,1491,"fable-5-2","medium",15],[1570,1619,"fable-5-2","medium",7],[2546,2548,"fable-5-2","medium",3]],"count":{"fable-5-2|medium":171}},{"lane":"Primordial session","win":[[1286,1298,"fable-5-2","medium",43],[1343,1345,"fable-5-2","medium",3],[1407,1409,"fable-5-2","medium",2],[1459,1491,"fable-5-2","medium",24],[1570,1619,"fable-5-2","medium",5],[2546,2583,"fable-5-2","medium",35]],"count":{"fable-5-2|medium":112}},{"lane":"Notebook session","win":[[2396,2465,"opus-5-5","high",432],[2590,2605,"opus-5-5","high",107],[2681,2688,"opus-5-5","high",85]],"count":{"opus-5-5|high":624}}];
 function dgModels(){
   const lanes = MODELS.concat([{lane: "MacBook session", win: [[1838, 1877, "unknown", null, 0]]}]);
-  const W = 900, L = 200, R = 14, T = 12, LH = 30, B = 40, Hh = T + lanes.length * LH + B, x0 = 1140, x1 = 2700;
+  const W = 900, L = 200, R = 14, T = 12, LH = 30, B = 45, Hh = T + lanes.length * LH + B, x0 = 1140, x1 = 2700;
   const sx = v => L + (v - x0) / (x1 - x0) * (W - L - R);
   const svg = S("svg", {viewBox: `0 0 ${W} ${Hh}`, role: "img", "aria-label": "Which Claude model worked in each session over the two days, and at what reasoning level"});
   for (let t = 1260; t <= 2700; t += 180) { S("line", {class: "grid", x1: sx(t), x2: sx(t), y1: T, y2: Hh - B}, svg); S("text", {x: sx(t), y: Hh - B + 18, "text-anchor": "middle"}, svg, hhmm(t)); }
-  S("text", {x: sx(1440), y: Hh - 6, "text-anchor": "middle"}, svg, "12 Nov");
+  S("text", {x: sx(1440), y: Hh - 5, "text-anchor": "middle"}, svg, "12 Nov");
   const col = m => m.startsWith("fable") ? "var(--heading)" : m.startsWith("opus") ? "var(--ok)" : "var(--dim)";
   lanes.forEach((ln, i) => {
     const y = T + i * LH;
@@ -1255,6 +1265,7 @@ applyPrefs(saved ? saved.theme : (document.documentElement.getAttribute("data-th
 
 /* ---------- Render ---------- */
 [tiles, filters, timeline, chTune, chCtx, chEngines, chMtp, chLlama, bytes, chMem, chTemps, evalTable, evalText, chTasks, dgLayout, dgLock, dgModels, ctTitle].forEach(fn => { try { fn(); } catch (e) { console.error(fn.name, e); } });
+document.querySelectorAll("svg").forEach(labelsOnTop);
 if (LIVE.updated) $("updated").textContent = `Live eval data last refreshed ${LIVE.updated}.`;
 </script>
 </body>
