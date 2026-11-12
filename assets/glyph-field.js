@@ -74,7 +74,9 @@
   }
 
   function resize() {
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    // Perf (2026-11-12): 1.5x, not 2x. The strokes are faint (10-13% ink), and every redraw uploads the whole canvas;
+    // 2880x1800 -> 2160x1350 is 44% fewer pixels per frame.
+    dpr = Math.min(window.devicePixelRatio || 1, 1.5);
     W = document.documentElement.clientWidth || window.innerWidth; H = window.innerHeight;   // clientWidth: excludes a classic scrollbar
     var cw0 = Math.ceil(W * dpr), ch0 = Math.ceil(H * dpr);
     // Reallocating a full-screen canvas is the expensive part: only do it when the size really changed.
