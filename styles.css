@@ -2906,6 +2906,7 @@ html:root .hero-cta-group a.hero-cta.hero-cta--primary { overflow: visible; z-in
   animation-iteration-count: infinite;
 }
 .destiny-specks.is-paused > span { animation-play-state: paused; }
+.destiny-specks.is-off > span { animation: none; }   /* button off screen: no animation, no layers (script.js) */
 @keyframes destinySpeck {
   0%   { opacity: 0; translate: 0 0; }
   40%  { opacity: 0.9; }
@@ -2982,3 +2983,17 @@ html.theme-parchment .section-title {
   background-image: url("assets/glyph-ink-parchment.png"), linear-gradient(rgba(43, 34, 25, .45), rgba(43, 34, 25, .45));
   filter: none;
 }
+
+/* ── Perf: skip off-screen sections (2026-11-12, scripts/perf_switch.py) ──────────
+   A theme switch restyles the whole page; 626 of its 975 elements sit in The Suite, far below the fold.
+   content-visibility: auto lets the browser skip style, layout and paint for sections that are off screen and do
+   them when they scroll in. contain-intrinsic-size keeps the page height stable until a section is first laid out
+   ("auto" then remembers its real size). The hero (first screen) is not included. */
+main > section { content-visibility: auto; contain-intrinsic-size: auto 900px; }
+
+/* Perf (2026-11-12, perf_switch.py): a theme change started ~120 colour/background/border transitions, restyled on
+   the main thread every frame for ~350 ms under the wipe that is already revealing the new theme. Suspend
+   transitions while the wipe runs (script.js adds is-theme-swap for exactly that span); hover fades are unaffected. */
+/* is-theme-swap is added inside the View Transition's update callback (after the old page is captured), so it rides
+   on the theme-swap restyle instead of forcing an extra full restyle just to capture the old page. */
+html.is-theme-swap *, html.is-theme-swap *::before, html.is-theme-swap *::after { transition: none !important; }

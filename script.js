@@ -58,7 +58,8 @@ const mqFine = window.matchMedia('(hover: hover) and (pointer: fine)');
       root.classList.add('is-theme-wipe');
       let vt;
       try {
-        vt = document.startViewTransition(() => apply(theme));
+        // is-theme-swap (no CSS transitions) goes on after the old page is captured: see styles.css.
+        vt = document.startViewTransition(() => { root.classList.add('is-theme-swap'); apply(theme); });
       } catch (_) {
         root.classList.remove('is-theme-wipe');
         apply(theme);
@@ -71,7 +72,7 @@ const mqFine = window.matchMedia('(hover: hover) and (pointer: fine)');
           { duration: 560, easing, pseudoElement: '::view-transition-new(root)' }
         );
       }).catch(() => {});
-      vt.finished.finally(() => root.classList.remove('is-theme-wipe'));
+      vt.finished.finally(() => root.classList.remove('is-theme-wipe', 'is-theme-swap'));
     }
 
     pills.forEach(p => {
@@ -227,13 +228,23 @@ const isMotionTheme = () => {
     host.appendChild(specks);
   }
 
+  // Perf (2026-11-12): the button can be below the fold while the hero is still in view (basalt, parchment). The 40
+  // specks then animated off screen, each on its own compositor layer. Stop them (animation: none) until the button
+  // is within 100 px of the viewport.
+  let hostVisible = true;
   function sync() {
     const want = !mqReduce.matches;
     if (want && !specks) build();
     if (!want && specks) { specks.remove(); specks = null; }
-    if (specks) specks.classList.toggle('is-paused', !heroActivity.active());
+    if (specks) {
+      specks.classList.toggle('is-paused', !heroActivity.active());
+      specks.classList.toggle('is-off', !hostVisible);
+    }
   }
 
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(([e]) => { hostVisible = e.isIntersecting; sync(); }, { rootMargin: '100px' }).observe(host);
+  }
   sync();
   if (mqReduce.addEventListener) mqReduce.addEventListener('change', sync);
   heroActivity.subscribe(sync);
