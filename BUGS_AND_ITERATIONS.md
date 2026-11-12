@@ -1,5 +1,9 @@
 # Bugs & Iterations
 
+## 2026-11-12: ITER: Forge Notebook says, task by task, which model orchestrated and which one built
+
+**Change:** Joona: "also mention if fable orchestrated but opus implemented be specific". The models section gets a table of the nine delegated tasks (chunked eval tools, the agent's vLLM backend, lock test gaps, A/B eval tooling, batches, idle check, clean stop, Primordial and Blitz Swarm on vLLM): who orchestrated and checked, who built, and what the check found, from the agents' briefs and the reviews that followed. It names where Fable wrote the code itself (the backend's core; the lock test after the Opus agent was stopped by a safety check) and what was done by one model alone.
+
 ## 2026-11-12: ITER: Forge Notebook names the models behind each task and their reasoning levels
 
 **Change:** At Joona's request a new section, "The models and their reasoning levels", sits after "The machine". It has a chart of which Claude model worked in each session over the two days (Fable 5.2 or Opus 5.5, solid for high reasoning, pale for medium), a table of every session with its model, reasoning level, step count and what it oversaw, a table of the local Qwen builds and their thinking setting, and Joona's own words on how the work was split. Three timeline entries record his model switches (00:19, 02:29, 18:23), and the mistakes table gets the fan-socket advice from the Claude app.
