@@ -16,6 +16,12 @@
 **Prevention (the gate):** `scripts/verify_site.py` clicks every real theme pill, measures each switch (frame gaps, long tasks), checks the field and titles per theme and runs `check_svg_diagrams.py`, writing `.verify/<commit>.json`; `scripts/merge_pr.sh` refuses to merge a PR without a clean passing run for its exact head commit. README "Before merging".
 **Files:** assets/glyph-field.js, forge-notebook/index.html, scripts/verify_site.py, scripts/merge_pr.sh, .gitignore, README.md
 
+## 2026-11-12: ITER: Forge Lab Notebook, theme button on the date line
+
+**Change:** Joona asked to lift "Change Font & Theme" to the level of the eyebrow date line, keeping its position. The header is a bottom-aligned flex row, so the button sat level with the title; `.theme-picker` now aligns to the top with a -11 px nudge, which centres the 38 px button on the 15 px eyebrow line. Same edit in the notebook source on the Mac mini.
+**Verification:** on the live page with the rule applied: button centre 36 px = eyebrow centre 36 px, right edge unchanged (1008 px).
+**Files:** forge-notebook/index.html
+
 ## 2026-11-12: ITER: Forge Lab Notebook tab icon ✺
 
 **Change:** Joona asked for ✺ as the notebook's browser-tab icon instead of the globe. One `<link rel="icon">` with an inline SVG of ✺ in the notebook's gold (#e6b04a), right after the `<title>`, in `forge-notebook/index.html`; the same line is in the notebook's source on the Mac mini, so the next export keeps it.
