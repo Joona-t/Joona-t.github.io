@@ -1,5 +1,12 @@
 # Bugs & Iterations
 
+## 2026-11-12: ITER: The Forge Notebook at /forge-notebook/, with a hero button
+
+**Change:** Joona asked for the Forge lab notebook on lovespark.love as a new button next to Forging. `/forge-notebook/` is a standalone export of the notebook (a dated timeline and every test from 2026-11-11 and 11-12 on the dual-GPU PC: vLLM tuning, the memory fault and the EXPO fix, the lock test, the 20-task eval), in Glyph Grid Studio's Cream and Basalt themes with its glyph-field background and a charcoal-sketch title (✺ The Forge Notebook, still plus a 4 s loop). A "✺ Forge Notebook" hero button sits right after "△ Forging" and reuses its ember colours. Nothing else on the home page changed.
+**Privacy:** the page loads only its Google Fonts; no IPs, hostnames, usernames, emails or local paths (grepped before commit).
+**Verification:** served locally and checked in the browser pane: the new button opens `/forge-notebook/`; the page renders in Cream and Basalt, the charcoal title loads, 375 px phone width with no sideways scroll.
+**Files:** index.html, forge-notebook/ (new)
+
 ## 2026-11-12: ITER: Agentic Repos section, first above the Sneak Peeks
 
 **Change:** Joona asked for an "Agentic Repos" section first, above the Sneak Peeks, with the Fleet Dashboard video embedded from YouTube (G_ldLkL11SY) so plays count for the channel, a one-line description and a GitHub button. Added `#agentic` with a Win98 card like the Suite's: badge "Open source · MIT", the line "A live dashboard for every machine you and your agents run on: GPUs, VRAM, temperatures and power on Mac, Linux and Windows. No installs, no accounts, everything stays local.", the video and a "GitHub ✦" link to Joona-t/lovespark-fleet-dashboard. A "Repos" link leads the nav bar.
