@@ -380,6 +380,7 @@ body{margin:0} img{max-width:100%} [hidden]{display:none!important}</style>
   </div>
   <div class="callout good card">
     <p><b>The fix, 12:57, and the advice it went against.</b> The advice at 12:36 was to load BIOS defaults (F5), on the guess that EXPO was on and pushing the memory too hard. That guess was never checked; the running memory speed couldn't be read without sudo. In the BIOS the owner found the memory at the board's default 4800 MT/s with EXPO off, so defaults would have changed nothing about it. They followed an instinct instead: kept the CPU tuning and turned EXPO on, the kit's tested profile (6000 MT/s with its own voltages and timings). <q>I just had a feeling and followed my intuition.</q> It worked.</p>
+    <p><b>Worth remembering.</b> This is a plain example that even a capable, intelligent AI can be wrong. The advice came from a model that had read every log of the night, and it still rested on a guess it never checked, delivered as "the most likely fix". What found the fix was a person's instinct about their own machine, and the willingness to go against the advice. Ask what the AI is assuming, check it when it matters, and trust your own read.</p>
     <p>Retest, 16 passes per check: clean right after boot, clean twice after filling 55 GB of memory with model files (the pattern that failed 12 of 13 times), clean twice after 16.5 minutes of 16-way vLLM load. The load run held 165 to 167 tokens/s with 0 request errors and GPU 1 at 75 °C. <span id="since-expo"></span></p>
     <p class="note">Two readings are still open: EXPO's settings fixed it, or the fresh boot did (the night before, each boot also started clean and got worse over hours). Hours of real use with checks will tell. If errors come back, the next step is CPU tuning back to defaults.</p>
   </div>
@@ -453,6 +454,7 @@ body{margin:0} img{max-width:100%} [hidden]{display:none!important}</style>
 <!-- ============ MISTAKES ============ -->
 <section id="mistakes">
   <div class="sechead"><span class="eyebrow">Told plainly, so they don't repeat</span><h2>Mistakes and what changed</h2></div>
+  <p class="col">Most of these were made by the AI sessions themselves. Capable models still make mistakes: they start heavy jobs at the wrong moment, write loops that never end, and give confident advice built on an unchecked guess. The 12:36 BIOS advice is the clearest case.</p>
   <div class="tbl card" style="padding:4px 6px">
     <table>
       <tr><th>When</th><th>What happened</th><th>What changed</th></tr>
