@@ -1,5 +1,13 @@
 # Bugs & Iterations
 
+## 2026-11-12: BUG: Forge Notebook diagram labels sat behind their arrows; a box ran onto its frame
+
+**Symptom (Joona, screenshot):** in "The two-mode GPU lock", the labels "clients call in parallel, no lock" and "each job runs under flock" were thin 13 px text with the arrows drawn straight through them, and the "load test" box sat on the vLLM-mode frame's right edge. The same class was in the other diagram: both "SSH" labels crossed by their arrows, and "no NVLink…" ran past the Forge frame.
+**Root cause:** free labels are placed where arrows run, with nothing masking the line; the client boxes were laid out at `x = 40 + i*140`, so the third ended at x=440, the frame's own edge. Nothing checked diagram geometry.
+**Fix:** every `.diagram svg text` gets a halo in the panel colour (`paint-order: stroke; stroke: var(--card); stroke-width: 7px`), so a line visibly stops at the text; free labels (`text.lbl`) are 14 px, weight 600, ink colour; client boxes at `x = 30 + i*135`; "no NVLink" centred in the Forge frame.
+**Prevention (the instrument):** `scripts/check_svg_diagrams.py` (Playwright) fails on boxes that touch or cross another box's edge (6 px margin), labels outside the viewBox or straddling a box edge, and any label crossed by a line without a halo; desktop and phone layouts. On the old page it reports 12 problems including every one above; on the fixed page 0, in basalt and cream.
+**Files:** forge-notebook/index.html, scripts/check_svg_diagrams.py
+
 ## 2026-11-12: ITER: Games button gets the scarab 𓆣 in the esoteric themes
 
 **Change:** In basalt and parchment the Games button showed 🜂 (the ancient-glyph swap turns every ✦ into fire). At Joona's request it now shows 𓆣 (scarab, L001): the button's ✦ is pre-wrapped as `<span class="glyph-swap" data-ancient="𓆣">`, and the swap walker now skips text already inside a `.glyph-swap` so a pre-wrapped glyph is never wrapped twice. Bubblegum and kawaii keep ✦; the other 43 ✦ still become 🜂.
