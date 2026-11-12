@@ -1,5 +1,12 @@
 # Bugs & Iterations
 
+## 2026-11-12: BUG: the verify gate could measure a server other than the tree it signs off
+
+**Symptom:** `scripts/verify_site.py` defaulted to `http://localhost:8766`. On the Mac mini, 8766 is the fleet dashboard (bound on all interfaces), and a site server bound to 127.0.0.1 starts beside it without an error, so which server answered was luck. Pointed at a stale copy of the site (bb11076), the old gate measured that copy and wrote its 176 diagram problems against the checked-out commit. A stale copy that happened to be clean would have been a false pass.
+**Root cause:** the gate trusted whatever answered on the port and never checked that the pages it measured were the tree it records in `.verify/<commit>.json`.
+**Fix:** with no base URL the gate serves the checkout itself on a free port (nothing to start first). With a base URL it first compares the served home page and notebook byte for byte with the tree, and refuses (exit 2) if they differ. Reports now carry `served` and `identity`, and `merge_pr.sh` merges only on `identity: matched`, so older reports and other servers can't pass the gate.
+**Proof:** old gate at :8766 crashed after a 30 s locator timeout; at the stale copy it reported the copy's problems as this commit's. The new gate refused both within a second, and passed when serving this checkout itself.
+
 ## 2026-11-12: BUG: Forge Notebook labels still crossed by lines; figures broke in wider reading fonts; the check passed them
 
 **Symptom (Joona, screenshot):** in "The machine", the arrows from the vLLM server to both GPUs ran through "no NVLink: card to card over PCIe, 7.7 GB/s". Joona: the text should sit over the arrow with a small break in the line; the page is public and has to look professional.

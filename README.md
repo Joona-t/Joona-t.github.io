@@ -36,7 +36,7 @@ Double-click `index.html` or open it in your browser.
 
 ## Before merging
 
-Every PR is verified before it merges (Joona, 2026-11-12). With the PR branch checked out and the repo served on `:8766`:
+Every PR is verified before it merges (Joona, 2026-11-12). With the PR branch checked out (the script serves the checkout itself on a free port and checks the pages it measures are byte for byte this tree's; on the Mac mini `:8766` is the fleet dashboard):
 
 ```
 python3 scripts/verify_site.py          # clicks every real theme pill, measures each switch, checks the diagrams
