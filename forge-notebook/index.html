@@ -144,6 +144,8 @@ ol.tl .body q{font-style:italic}
 @media (max-width:760px){ .two{grid-template-columns:minmax(0,1fr)} ol.tl li{grid-template-columns:minmax(0,1fr)} }
 .diagram{overflow-x:auto} .diagram svg{display:block;width:100%;height:auto;min-width:640px}
 .diagram svg .box{fill:color-mix(in srgb,var(--card) 70%,transparent);stroke:var(--line);stroke-width:1.2}
+.diagram svg text{paint-order:stroke;stroke:var(--card);stroke-width:7px;stroke-linejoin:round}
+.diagram svg text.lbl{fill:var(--ink);font-weight:600;font-size:14px}
 .diagram svg .box.hot{stroke:var(--pc);stroke-width:1.6}
 .diagram svg .ttl{fill:var(--heading);font-family:var(--display);font-weight:600;font-size:14px;letter-spacing:.06em}
 .diagram svg .arrow{stroke:var(--dim);stroke-width:1.4;fill:none}
@@ -834,7 +836,7 @@ function arrow(svg, x1, y1, x2, y2, cls, label, lx, ly){
   S("path", {d: `M${x1} ${y1}L${x2} ${y2}`, class: "arrow " + (cls || "")}, svg);
   const a = Math.atan2(y2 - y1, x2 - x1), s = 7;
   S("path", {d: `M${x2} ${y2}L${x2 - s * Math.cos(a - .45)} ${y2 - s * Math.sin(a - .45)}L${x2 - s * Math.cos(a + .45)} ${y2 - s * Math.sin(a + .45)}Z`, class: "ah " + (cls || "")}, svg);
-  if (label) S("text", {x: lx, y: ly, "text-anchor": "middle"}, svg, label);
+  if (label) S("text", {x: lx, y: ly, "text-anchor": "middle", class: "lbl"}, svg, label);
 }
 function box(svg, x, y, w, h, title, lines, hot){
   S("rect", {x, y, width: w, height: h, rx: 6, class: "box" + (hot ? " hot" : "")}, svg);
@@ -848,7 +850,7 @@ function dgLayout(){
   box(svg, 360, 10, 530, 360, "The Forge", [], true);
   box(svg, 380, 50, 240, 92, "GPU 0 · RTX 3090 Ti", ["24 GB · 480 W limit · PCIe x8", "runs near 48 °C under load"]);
   box(svg, 630, 50, 240, 92, "GPU 1 · RTX 3090", ["24 GB · 370 W limit · PCIe x8", "runs 76 to 79 °C, at its limit"]);
-  S("text", {x: 668, y: 164}, svg, "no NVLink: card to card over PCIe, 7.7 GB/s");
+  S("text", {x: 625, y: 164, "text-anchor": "middle", class: "lbl"}, svg, "no NVLink: card to card over PCIe, 7.7 GB/s");
   box(svg, 380, 176, 240, 104, "vLLM server", ["Qwen3.8-27B FP8, both cards", "local-only endpoint", "holds the GPU lock while up"], true);
   box(svg, 630, 176, 240, 104, "Ollama", ["Q8 build, one job at a time", "idle in vLLM mode", "takes the lock per job"]);
   box(svg, 380, 292, 490, 64, "Eval runner · memory check · temperature logger", ["batches of 5, a 36 GB memory check before and after each"]);
@@ -865,8 +867,8 @@ function dgLock(){
   box(svg, 160, 52, 130, 56, "GPU lock", ["held by vLLM"], true);
   box(svg, 140, 150, 170, 60, "vLLM server", ["both cards, up to 16 at once"], true);
   arrow(svg, 225, 148, 225, 112, "on", "", 0, 0);
-  ["eval agent", "swarm", "load test"].forEach((n, i) => { const x = 40 + i * 140; box(svg, x, 250, 120, 50, n, []); arrow(svg, x + 60, 248, 225 - 40 + i * 40, 214, "on"); });
-  S("text", {x: 225, y: 236, "text-anchor": "middle"}, svg, "clients call in parallel, no lock");
+  ["eval agent", "swarm", "load test"].forEach((n, i) => { const x = 30 + i * 135; box(svg, x, 250, 120, 50, n, []); arrow(svg, x + 60, 248, 225 - 40 + i * 40, 214, "on"); });
+  S("text", {x: 225, y: 236, "text-anchor": "middle", class: "lbl"}, svg, "clients call in parallel, no lock");
   // Ollama mode
   box(svg, 460, 10, 430, 310, "Ollama mode", []);
   box(svg, 610, 52, 130, 56, "GPU lock", ["one holder"]);
@@ -878,7 +880,7 @@ function dgLock(){
   arrow(svg, 535, 248, 620, 214, "on");
   arrow(svg, 665, 248, 665, 214, "wait");
   arrow(svg, 805, 248, 730, 214, "wait");
-  S("text", {x: 675, y: 236, "text-anchor": "middle"}, svg, "each job runs under flock");
+  S("text", {x: 675, y: 236, "text-anchor": "middle", class: "lbl"}, svg, "each job runs under flock");
   $("dg-lock").appendChild(svg);
 }
 
