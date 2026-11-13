@@ -1,5 +1,11 @@
 # Bugs & Iterations
 
+## 2026-11-13: ITER: tab icon is the fire triangle with the eye
+
+**What:** lovespark.love's browser-tab and home-screen icon is now the alchemical fire triangle with the eye 𓁿 and its beams inside (the T-Forge mark), in rose `#e05a68` (Joona's request). Before this the homepage, OpenAI Watch and both AI Signal pages set no icon and there was no root `favicon.ico`, so browsers showed their blank default.
+**How:** `scripts/build-favicon.py` draws `favicon.ico` (16/32/48), `favicon-16.png`, `favicon-32.png`, `apple-touch-icon.png`, `icon-192.png`, `icon-512.png`. Tab sizes are the mark alone on a transparent background with heavy strokes; home-screen sizes sit on a basalt tile. The eye is fitted at the largest size clear of the triangle's stroke and the script fails if it cannot. The four pages without an icon link to them; Forge Notebook, Sparky Brain and Bambu A1 keep their own.
+**Verified:** looked at 16 and 32 px on a light and a dark tab bar: the triangle reads at both, the eye and beams at 32 px; at 16 px the eye is a small shape (the size limit). `scripts/verify_site.py` on the PR head (see `.verify/`).
+
 ## 2026-11-12: BUG: the verify gate could measure a server other than the tree it signs off
 
 **Symptom:** `scripts/verify_site.py` defaulted to `http://localhost:8766`. On the Mac mini, 8766 is the fleet dashboard (bound on all interfaces), and a site server bound to 127.0.0.1 starts beside it without an error, so which server answered was luck. Pointed at a stale copy of the site (bb11076), the old gate measured that copy and wrote its 176 diagram problems against the checked-out commit. A stale copy that happened to be clean would have been a false pass.
