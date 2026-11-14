@@ -1024,6 +1024,24 @@ details.gallery-project[open] > .gallery-body {
   margin: 10px 0 0;
 }
 
+/* A project's short story above its shots (what it is, the plan, inspiration). Same type as the gallery intro. */
+.gallery-story {
+  font-family: var(--font-body);
+  font-size: var(--fs-md);
+  line-height: 1.6;
+  color: var(--ink);
+  max-width: 720px;
+  margin: 0 auto 22px;
+  overflow-wrap: anywhere;
+}
+.gallery-story p { margin: 0 0 12px; }
+.gallery-story a { color: inherit; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; font-weight: 700; }   /* default blue failed contrast on basalt */
+.gallery-story [lang="ja"], .gallery-caption [lang="ja"] { line-break: strict; word-break: keep-all; }
+#gal-kotoba-village .gallery-shot + .gallery-shot { margin-top: 26px; }
+/* the longest panel title (with ことばの村): let it wrap on phones instead of pushing the chevron off-screen */
+#gal-kotoba-village .category-title { min-width: 0; white-space: normal; overflow-wrap: anywhere; }
+#gal-kotoba-village .category-title [lang="ja"] { white-space: nowrap; }
+
 /* Project with no shots on disk yet. */
 .gallery-empty {
   display: flex;
