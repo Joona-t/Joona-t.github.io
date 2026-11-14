@@ -205,7 +205,35 @@ td.mono{white-space:nowrap;padding-top:8px}
 .filters{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 14px}
 .filters button{font:600 10.5px/1.5 var(--display);letter-spacing:.1em;text-transform:uppercase;background:none;border:1px solid var(--line);color:var(--dim);border-radius:999px;padding:3px 10px;cursor:pointer}
 .filters button[aria-pressed="true"]{border-color:var(--ink);color:var(--ink)}
-.day{margin:26px 0 8px;display:flex;align-items:baseline;gap:12px}
+.day{margin:26px 0 8px;display:flex;align-items:baseline;gap:12px;scroll-margin-top:16px}
+.day h3:focus{outline:none}
+
+/* ---- Calendar: click a date to jump to that day in the timeline ---- */
+.calcard{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:flex-start;justify-content:space-between;padding:12px 14px;margin-top:12px}
+.calcard>div:first-child{flex:1 1 240px;max-width:46ch}
+.calcard p{margin:4px 0 0;font-size:15px;line-height:1.45}
+.cal-days{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.cal-days button{font:600 12px/1.4 var(--mono);background:none;border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:5px 11px;cursor:pointer;white-space:nowrap}
+.cal-days button span{color:var(--dim);font-weight:500}
+.cal-days button:hover{border-color:var(--ink)}
+.cal{display:grid;gap:6px;justify-items:start}
+.cal-month{font:600 10.5px/1.3 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+.cal-grid{display:grid;grid-template-columns:repeat(7,38px);gap:4px}
+.cal-grid .wd{font:600 10px/1 var(--mono);letter-spacing:.06em;color:var(--dim);text-align:center;padding:2px 0 3px}
+.cal-grid .x,.cal-grid button{height:38px;display:grid;place-items:center;border-radius:6px;font:500 14px/1 var(--mono);font-variant-numeric:tabular-nums}
+.cal-grid .x{color:var(--dim)}
+.cal-grid button{position:relative;padding:0;border:1px solid var(--dim);background:var(--card);color:var(--heading);font-weight:700;cursor:pointer}
+.cal-grid button small{position:absolute;right:3px;top:3px;font:600 9px/1 var(--mono);color:var(--amber)}
+.cal-grid button:hover{border-color:var(--ink);background:color-mix(in srgb,var(--line) 55%,var(--card))}
+.cal-float{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:45}
+#cal-btn{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 15px;border:1px solid var(--line);border-radius:999px;background:var(--card);
+  color:var(--dim);font:700 10.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;cursor:pointer;white-space:nowrap;box-shadow:0 6px 18px rgba(0,0,0,.22)}
+#cal-btn svg{width:15px;height:15px;flex:none}
+#cal-btn:hover,#cal-btn[aria-expanded="true"]{color:var(--ink);border-color:var(--dim)}
+#cal-pop{position:absolute;right:0;bottom:calc(100% + 8px);max-width:calc(100vw - 32px);padding:12px;background:var(--card);border:1px solid var(--line);
+  border-radius:var(--radius);box-shadow:0 14px 34px rgba(0,0,0,.22)}
+#cal-pop .menu-label{margin:0 0 8px;font:600 10.5px/1.3 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+@media print{ .cal-float{display:none} }
 .day h3{margin:0;font-size:19px}
 ol.tl{list-style:none;margin:0;padding:0;border-left:1px solid var(--line);margin-left:6px}
 ol.tl li{position:relative;padding:4px 0 14px 22px;display:grid;grid-template-columns:62px minmax(0,1fr);gap:2px 12px}
@@ -285,6 +313,11 @@ body{margin:0} img{max-width:100%} [hidden]{display:none!important}</style>
   <a href="#engines">vLLM and Ollama</a><a href="#mtp">MTP on and off</a><a href="#llamacpp">llama.cpp</a><a href="#fault">The memory fault</a>
   <a href="#heat">Heat and power</a><a href="#locktest">Lock test</a><a href="#eval">The 20-task eval</a><a href="#zenith">Loop or single agent</a><a href="#mistakes">Mistakes</a><a href="#open">Still open</a><a href="#append">Adding entries</a>
 </nav>
+
+<div class="calcard card" id="cal-top">
+  <div><span class="eyebrow">Go to a day</span><p class="dim">Marked days have timeline entries; the small number says how many. Click one to jump to that day. The Dates button in the corner does the same from anywhere on the page.</p><div class="cal-days" id="cal-days"></div></div>
+  <div class="cal" data-cal></div>
+</div>
 
 <!-- ============ THE MACHINE ============ -->
 <section id="machine">
@@ -694,6 +727,11 @@ body{margin:0} img{max-width:100%} [hidden]{display:none!important}</style>
 </footer>
 </div>
 
+<div class="cal-float">
+  <div id="cal-pop" role="dialog" aria-label="Go to a day" hidden><div class="menu-label">Go to a day</div><div class="cal" data-cal></div></div>
+  <button id="cal-btn" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="cal-pop"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><rect x="2" y="3" width="12" height="11" rx="1.5"/><path d="M2 6.5h12M5.5 1.5v3M10.5 1.5v3"/></svg>Dates</button>
+</div>
+
 <!--LIVE-DATA--><script type="application/json" id="live">{"updated":"2026-11-12 16:34","last_log":"MINI-DONE 2026-11-12 16:25:06 exit=0 seconds=10738 batches=26 clean=24 suspect=2 reruns=2 task_runs_clean=120 task_runs_suspect=10 tries_run_now=17 tries_done_before=9 no_record=0","eval":{"batches":[{"id":"r1-c1-a","t":1,"side":"a","run":1,"start":"04:11","sec":339,"mb":[0],"ma":0,"status":"clean","passed":5,"n":5},{"id":"r1-c1-b","t":1,"side":"b","run":1,"start":"04:18","sec":315,"mb":[0],"ma":1,"status":"suspect","passed":4,"n":5},{"id":"r1-c2-b","t":1,"side":"b","run":1,"start":"04:24","sec":655,"mb":[0],"ma":0,"status":"clean","passed":5,"n":5},{"id":"r1-c2-a","t":1,"side":"a","run":1,"start":"05:45","sec":820,"mb":[0],"ma":0,"status":"clean","passed":4,"n":5},{"id":"r1-c3-a","t":1,"side":"a","run":1,"start":"06:03","sec":434,"mb":[1,0],"ma":0,"status":"clean","passed":5,"n":5},{"id":"r1-c3-b","t":1,"side":"b","run":1,"start":"06:11","sec":529,"mb":[0],"ma":0,"status":"clean","passed":4,"n":5},{"id":"r1-c4-b","t":1,"side":"b","run":1,"start":"06:21","sec":346,"mb":[0],"ma":0,"status":"clean","passed":5,"n":5},{"id":"r1-c4-a","t":1,"side":"a","run":1,"start":"06:28","sec":564,"mb":[0],"ma":0,"status":"clean","passed":5,"n":5},{"id":"r2-c1-a","t":1,"side":"a","run":2,"start":"08:25","sec":475,"mb":[2,0],"ma":1,"status":"suspect","passed":5,"n":5},{"id":"r2-c1-b","t":1,"side":"b","run":2,"start":"13:27","sec":527,"mb":[0],"ma":0,"status":"clean","passed":5,"n":5},{"id":"r2-c2-b","t":1,"side":"b","run":2,"start":"13:37","sec":522,"mb":[0],"ma":0,"status":"clean","passed":5,"n":5},{"id":"r2-c2-a","t":1,"side":"a","run":2,"start":"13:47","sec":601,"mb":[0],"ma":0,"status":"clean","passed":5,"n":5},{"id":"r2-c3-a","t":1,"side":"a","run":2,"start":"13:58","sec":676,"mb":[0],"ma":0,"status":"clean","passed":5,"n":5},{"id":"r2-c3-b","t":1,"side":"b","run":2,"start":"14:11","sec":359,"mb":[0],"ma":0,"status":"clean","passed":5,"n":5},{"id":"r2-c4-b","t":1,"side":"b","run":2,"start":"14:18","sec":555,"mb":[0],"ma":0,"status":"clean","passed":5,"n":5},{"id":"r2-c4-a","t":1,"side":"a","run":2,"start":"14:29","sec":730,"mb":[0],"ma":0,"status":"clean","passed":4,"n":5},{"id":"r3-c1-a","t":1,"side":"a","run":3,"start":"14:43","sec":553,"mb":[0],"ma":0,"status":"clean","passed":5,"n":5},{"id":"r3-c1-b","t":1,"side":"b","run":3,"start":"14:53","sec":367,"mb":[0],"ma":0,"status":"clean","passed":5,"n":5},{"id":"r3-c2-b","t":1,"side":"b","run":3,"start":"15:01","sec":686,"mb":[0],"ma":0,"status":"clean","passed":4,"n":5},{"id":"r3-c2-a","t":1,"side":"a","run":3,"start":"15:14","sec":807,"mb":[0],"ma":0,"status":"clean","passed":4,"n":5},{"id":"r3-c3-a","t":1,"side":"a","run":3,"start":"15:29","sec":415,"mb":[0],"ma":0,"status":"clean","passed":5,"n":5},{"id":"r3-c3-b","t":1,"side":"b","run":3,"start":"15:37","sec":570,"mb":[0],"ma":0,"status":"clean","passed":4,"n":5},{"id":"r3-c4-b","t":1,"side":"b","run":3,"start":"15:48","sec":607,"mb":[0],"ma":0,"status":"clean","passed":5,"n":5},{"id":"r3-c4-a","t":1,"side":"a","run":3,"start":"15:59","sec":502,"mb":[0],"ma":0,"status":"clean","passed":4,"n":5},{"id":"r1-c1-b","t":2,"side":"b","run":1,"start":"16:09","sec":432,"mb":[0],"ma":0,"status":"clean","passed":5,"n":5},{"id":"r2-c1-a","t":2,"side":"a","run":2,"start":"16:18","sec":375,"mb":[0],"ma":0,"status":"clean","passed":5,"n":5}],"per_run":{"r1a":{"n":20,"passed":19,"median_s":93.5,"total_s":2153,"limit":2,"tool_calls":198,"tool_errors":51,"bash_refused":11},"r1b":{"n":20,"passed":19,"median_s":68.0,"total_s":1956,"limit":1,"tool_calls":172,"tool_errors":43,"bash_refused":0},"r2a":{"n":20,"passed":19,"median_s":91.5,"total_s":2379,"limit":3,"tool_calls":194,"tool_errors":60,"bash_refused":7},"r2b":{"n":20,"passed":20,"median_s":63.0,"total_s":1958,"limit":2,"tool_calls":180,"tool_errors":44,"bash_refused":0},"r3a":{"n":20,"passed":18,"median_s":71.5,"total_s":2273,"limit":3,"tool_calls":188,"tool_errors":49,"bash_refused":8},"r3b":{"n":20,"passed":18,"median_s":74.5,"total_s":2226,"limit":2,"tool_calls":189,"tool_errors":39,"bash_refused":0},"alla":{"n":60,"passed":56,"median_s":82.5,"total_s":6805,"limit":8,"tool_calls":580,"tool_errors":160,"bash_refused":26},"allb":{"n":60,"passed":57,"median_s":68.5,"total_s":6140,"limit":5,"tool_calls":541,"tool_errors":126,"bash_refused":0}},"tasks":{"01-slugify":{"a":[[1,1,49],[3,1,38],[2,1,43]],"b":[[2,1,52],[3,1,58],[1,1,68]]},"02-fix-stats":{"a":[[1,1,28],[3,1,55],[2,1,37]],"b":[[2,1,38],[3,1,54],[1,1,42]]},"03-add-tests":{"a":[[1,1,94],[3,1,300],[2,1,117]],"b":[[2,1,252],[3,1,108],[1,1,111]]},"04-refactor-money":{"a":[[1,1,72],[3,1,70],[2,1,71]],"b":[[2,1,115],[3,1,70],[1,1,97]]},"05-parse-config":{"a":[[1,1,95],[3,1,90],[2,1,107]],"b":[[2,1,69],[3,1,77],[1,1,113]]},"06-cli-wc":{"a":[[1,1,129],[2,1,118],[3,1,284]],"b":[[1,1,240],[2,1,87],[3,1,251]]},"07-bash-rotate":{"a":[[1,0,300],[2,1,300],[3,0,300]],"b":[[1,1,300],[2,1,300],[3,0,300]]},"08-merge-intervals":{"a":[[1,1,271],[2,1,74],[3,1,60]],"b":[[1,1,52],[2,1,34],[3,1,31]]},"09-log-stats":{"a":[[1,1,97],[2,1,85],[3,1,112]],"b":[[1,1,37],[2,1,76],[3,1,83]]},"10-json-orders":{"a":[[1,1,22],[2,1,23],[3,1,50]],"b":[[1,1,23],[2,1,23],[3,1,19]]},"11-lru-cache":{"a":[[1,1,129],[2,1,79],[3,1,80]],"b":[[1,1,40],[2,1,51],[3,1,136]]},"12-read-explain":{"a":[[1,1,56],[2,1,105],[3,1,56]],"b":[[1,0,88],[2,1,57],[3,0,55]]},"13-rename-across-files":{"a":[[1,1,52],[2,1,58],[3,1,65]],"b":[[1,1,57],[2,1,54],[3,1,58]]},"14-bash-csvsum":{"a":[[1,1,93],[2,1,300],[3,1,102]],"b":[[1,1,62],[2,1,66],[3,1,68]]},"15-roman":{"a":[[1,1,104],[2,1,133],[3,1,111]],"b":[[1,1,281],[2,1,131],[3,1,252]]},"16-fix-deep-merge":{"a":[[1,1,61],[2,1,55],[3,0,46]],"b":[[1,1,68],[2,1,53],[3,1,44]]},"17-todo-feature":{"a":[[1,1,41],[2,1,60],[3,1,73]],"b":[[1,1,56],[2,1,51],[3,1,75]]},"18-word-wrap":{"a":[[1,1,123],[2,1,216],[3,1,40]],"b":[[1,1,90],[2,1,89],[3,1,300]]},"19-bash-fix-rename":{"a":[[1,1,301],[2,0,300],[3,1,300]],"b":[[1,1,61],[2,1,300],[3,1,113]]},"20-speed-up-dupes":{"a":[[1,1,36],[2,1,98],[3,1,41]],"b":[[1,1,70],[2,1,60],[3,1,74]]}}},"memchecks":[["11-12 04:11",0,"before","r1-c1-a"],["11-12 04:17",0,"after","r1-c1-a"],["11-12 04:18",0,"before","r1-c1-b"],["11-12 04:23",1,"after","r1-c1-b"],["11-12 04:24",0,"before","r1-c2-b"],["11-12 04:36",1,"before","r1-c2-a"],["11-12 05:45",0,"before","r1-c2-a"],["11-12 05:59",0,"after","r1-c2-a"],["11-12 06:00",1,"before","r1-c3-a"],["11-12 06:03",0,"before","r1-c3-a"],["11-12 06:10",0,"after","r1-c3-a"],["11-12 06:11",0,"before","r1-c3-b"],["11-12 06:20",0,"after","r1-c3-b"],["11-12 06:21",0,"before","r1-c4-b"],["11-12 06:27",0,"after","r1-c4-b"],["11-12 06:28",0,"before","r1-c4-a"],["11-12 06:38",0,"after","r1-c4-a"],["11-12 06:39",1,"before","r2-c1-a"],["11-12 06:42",1,"before","r2-c1-a"],["11-12 06:45",1,"before","r2-c1-a"],["11-12 07:13",2,"before","r2-c1-a"],["11-12 07:22",1,"before","r2-c1-a"],["11-12 07:24",4,"before","r2-c1-a"],["11-12 07:27",5,"before","r2-c1-a"],["11-12 08:15",2,"before","r2-c1-a"],["11-12 08:25",0,"before","r2-c1-a"],["11-12 08:34",1,"after","r2-c1-a"],["11-12 08:35",3,"before","r2-c1-b"],["11-12 08:45",2,"before","r2-c1-b"],["11-12 08:56",2,"before","r2-c1-b"],["11-12 13:26",0,"before","r2-c1-b"],["11-12 13:36",0,"before","r2-c2-b"],["11-12 13:46",0,"after","r2-c2-b"],["11-12 13:47",0,"before","r2-c2-a"],["11-12 13:57",0,"after","r2-c2-a"],["11-12 13:58",0,"before","r2-c3-a"],["11-12 14:10",0,"after","r2-c3-a"],["11-12 14:11",0,"before","r2-c3-b"],["11-12 14:18",0,"before","r2-c4-b"],["11-12 14:28",0,"after","r2-c4-b"],["11-12 14:29",0,"before","r2-c4-a"],["11-12 14:42",0,"before","r3-c1-a"],["11-12 14:52",0,"after","r3-c1-a"],["11-12 14:53",0,"before","r3-c1-b"],["11-12 15:00",0,"after","r3-c1-b"],["11-12 15:01",0,"before","r3-c2-b"],["11-12 15:13",0,"before","r3-c2-a"],["11-12 15:28",0,"before","r3-c3-a"],["11-12 15:36",0,"after","r3-c3-a"],["11-12 15:37",0,"before","r3-c3-b"],["11-12 15:47",0,"after","r3-c3-b"],["11-12 15:48",0,"before","r3-c4-b"],["11-12 15:59",0,"before","r3-c4-a"],["11-12 16:08",0,"after","r3-c4-a"],["11-12 16:09",0,"before","r1-c1-b"],["11-12 16:17",0,"before","r2-c1-a"],["11-12 16:25",0,"after","r2-c1-a"]],"temps":[["05:50",49.0,79.0,81.0,675,669,38.0],["05:55",49.0,78.0,81.0,675,586,40.0],["06:00",49.0,76.0,78.0,671,273,42.0],["06:05",49.0,78.0,82.0,675,666,40.0],["06:10",50.0,78.0,83.0,675,527,41.0],["06:15",50.0,79.0,82.0,676,670,39.0],["06:20",50.0,79.0,83.0,676,523,42.0],["06:25",50.0,78.0,95.0,674,523,42.0],["06:30",50.0,79.0,88.0,674,668,40.0],["06:35",57.0,79.0,95.0,822,502,43.0],["06:40",59.0,79.0,83.0,817,665,43.0],["06:45",56.0,77.0,80.0,810,810,43.0],["07:10",50.0,77.0,83.0,677,648,42.0],["07:15",49.0,77.0,81.0,673,669,41.0],["07:20",31.0,43.0,62.0,34,33,43.0],["07:25",30.0,42.0,61.0,33,33,44.0],["08:10",29.0,39.0,60.0,33,32,42.0],["08:15",29.0,39.0,58.0,33,32,42.0],["08:20",29.0,39.0,51.0,33,32,40.0],["08:25",50.0,78.0,81.0,675,543,42.0],["08:30",50.0,79.0,83.0,676,538,42.0],["08:35",33.0,48.0,64.0,35,34,42.0],["08:40",30.0,42.0,52.0,34,33,41.0],["08:45",30.0,41.0,60.0,33,32,43.0],["08:50",29.0,40.0,51.0,33,32,41.0],["08:55",29.0,40.0,60.0,33,32,42.0],["13:25",49.0,76.0,81.0,673,509,45.0],["13:30",49.0,78.0,83.0,673,656,41.0],["13:35",49.0,77.0,82.0,671,480,44.0],["13:40",49.0,79.0,83.0,675,655,41.0],["13:45",49.0,77.0,84.0,673,469,44.0],["13:50",49.0,79.0,83.0,673,654,41.0],["13:55",49.0,77.0,82.0,669,481,44.0],["14:00",49.0,78.0,83.0,675,650,42.0],["14:05",49.0,78.0,82.0,674,657,40.0],["14:10",49.0,77.0,84.0,672,476,44.0],["14:15",49.0,78.0,82.0,673,481,44.0],["14:20",49.0,78.0,82.0,673,655,42.0],["14:25",50.0,78.0,95.0,675,486,44.0],["14:30",49.0,78.0,83.0,675,649,43.0],["14:35",49.0,78.0,83.0,675,657,40.0],["14:40",50.0,78.0,95.0,675,478,44.0],["14:45",50.0,78.0,83.0,677,654,42.0],["14:50",49.0,77.0,83.0,662,481,44.0],["14:55",49.0,78.0,83.0,671,641,42.0],["15:00",50.0,78.0,82.0,677,492,44.0],["15:05",49.0,78.0,83.0,678,660,41.0],["15:10",50.0,79.0,83.0,675,488,44.0],["15:15",50.0,78.0,82.0,674,653,43.0],["15:20",50.0,78.0,83.0,678,661,40.0],["15:25",50.0,78.0,84.0,675,486,44.0],["15:30",50.0,78.0,83.0,674,647,43.0],["15:35",49.0,77.0,83.0,673,485,44.0],["15:40",50.0,78.0,83.0,676,658,41.0],["15:45",49.0,79.0,83.0,674,487,44.0],["15:50",49.0,79.0,84.0,674,658,42.0],["15:55",50.0,78.0,94.0,673,482,44.0],["16:00",50.0,78.0,83.0,677,649,44.0],["16:05",50.0,78.0,94.0,678,484,44.0],["16:10",49.0,78.0,83.0,671,651,44.0],["16:15",49.0,78.0,83.0,675,482,44.0],["16:20",50.0,78.0,84.0,675,604,42.0],["16:25",34.0,52.0,66.0,26,26,43.0]]}</script><!--/LIVE-DATA-->
 
 <script>
@@ -830,9 +868,8 @@ function timeline(){
   const host = $("tl"); host.innerHTML = "";
   const rows = ENTRIES.slice().sort((a, b) => (a[0] + a[1]).localeCompare(b[0] + b[1])).filter(r => !tlFilter || r[2] === tlFilter);
   let day = "", ol = null;
-  const names = {"2026-11-11": "Wednesday 11 November", "2026-11-12": "Thursday 12 November", "2026-11-13": "Friday 13 November", "2026-11-14": "Saturday 14 November"};
   for (const [d, t, k, h, b] of rows) {
-    if (d !== day) { day = d; const dh = H("div", {class: "day"}, `<h3>${names[d] || d}</h3><span class="eyebrow">${d}</span>`); host.appendChild(dh); ol = H("ol", {class: "tl"}); host.appendChild(ol); }
+    if (d !== day) { day = d; const dh = H("div", {class: "day", id: "day-" + d}, `<h3>${dayName(d)}</h3><span class="eyebrow">${d}</span>`); host.appendChild(dh); ol = H("ol", {class: "tl"}); host.appendChild(ol); }
     const li = H("li", {class: "k-" + k}, `<span class="t">${t}</span><div class="body"><span class="chip k-${k}">${k}</span> <b class="h">${h}</b><p>${b}</p></div>`);
     ol.appendChild(li);
   }
@@ -841,6 +878,58 @@ function filters(){
   const host = $("filters");
   host.innerHTML = [["", "All"]].concat(KINDS.map(k => [k, k])).map(([k, l]) => `<button type="button" data-k="${k}" aria-pressed="${k === tlFilter}">${l}</button>`).join("");
   host.querySelectorAll("button").forEach(btn => btn.addEventListener("click", () => { tlFilter = btn.dataset.k; filters(); timeline(); }));
+}
+
+/* ---------- Calendar: click a date, land on that day in the timeline ---------- */
+const WEEKDAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+function dayName(d){
+  const [y, m, n] = d.split("-").map(Number);
+  return `${WEEKDAYS[new Date(Date.UTC(y, m - 1, n)).getUTCDay()]} ${n} ${MONTHS[m - 1]}`;
+}
+function closeCal(){
+  const pop = $("cal-pop");
+  if (!pop.hidden) { pop.hidden = true; $("cal-btn").setAttribute("aria-expanded", "false"); }
+}
+function goDay(d){
+  let el = document.getElementById("day-" + d);
+  if (!el && tlFilter) { tlFilter = ""; filters(); timeline(); el = document.getElementById("day-" + d); }   // the kind filter hid that day
+  if (!el) return;
+  el.scrollIntoView({behavior: "auto", block: "start"});   // a jump, not a glide: a smooth scroll over the whole page took more than 2.8 s
+  const h = el.querySelector("h3"); h.setAttribute("tabindex", "-1"); h.focus({preventScroll: true});
+}
+function calendar(){
+  const counts = {};
+  for (const r of ENTRIES) counts[r[0]] = (counts[r[0]] || 0) + 1;
+  let html = "";
+  for (const ym of [...new Set(Object.keys(counts).map(d => d.slice(0, 7)))].sort()) {
+    const [y, m] = ym.split("-").map(Number);
+    const last = new Date(Date.UTC(y, m, 0)).getUTCDate(), lead = (new Date(Date.UTC(y, m - 1, 1)).getUTCDay() + 6) % 7;   // weeks start on Monday
+    html += `<div class="cal-month">${MONTHS[m - 1]} ${y}</div><div class="cal-grid">`
+      + ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"].map(w => `<span class="wd" aria-hidden="true">${w}</span>`).join("") + "<span></span>".repeat(lead);
+    for (let n = 1; n <= last; n++) {
+      const d = `${ym}-${String(n).padStart(2, "0")}`, c = counts[d];
+      html += c ? `<button type="button" data-d="${d}" aria-label="${dayName(d)}, ${c} ${c === 1 ? "entry" : "entries"}">${n}<small aria-hidden="true">${c}</small></button>`
+                : `<span class="x" aria-hidden="true">${n}</span>`;
+    }
+    html += "</div>";
+  }
+  document.querySelectorAll("[data-cal]").forEach(host => {
+    host.innerHTML = html;
+    host.querySelectorAll("button").forEach(b => b.addEventListener("click", () => { closeCal(); goDay(b.dataset.d); }));
+  });
+  $("cal-days").innerHTML = Object.keys(counts).sort().map(d => {
+    const [y, m, n] = d.split("-").map(Number), wd = WEEKDAYS[new Date(Date.UTC(y, m - 1, n)).getUTCDay()].slice(0, 3);
+    return `<button type="button" data-d="${d}" aria-label="${dayName(d)}, ${counts[d]} ${counts[d] === 1 ? "entry" : "entries"}">${wd} ${n} ${MONTHS[m - 1].slice(0, 3)} <span>· ${counts[d]}</span></button>`;
+  }).join("");
+  $("cal-days").querySelectorAll("button").forEach(b => b.addEventListener("click", () => goDay(b.dataset.d)));
+  const btn = $("cal-btn"), pop = $("cal-pop");
+  btn.addEventListener("click", () => {
+    const open = pop.hidden; pop.hidden = !open; btn.setAttribute("aria-expanded", String(open));
+    if (open) { const first = pop.querySelector("button"); if (first) first.focus(); }
+  });
+  document.addEventListener("keydown", e => { if (e.key === "Escape" && !pop.hidden) { closeCal(); btn.focus(); } });
+  document.addEventListener("click", e => { if (!pop.hidden && !e.target.closest(".cal-float")) closeCal(); });
 }
 
 /* ---------- Tuning ---------- */
@@ -1316,7 +1405,7 @@ let saved = null; try { saved = JSON.parse(localStorage.getItem(PREFS) || "null"
 applyPrefs(saved ? saved.theme : (document.documentElement.getAttribute("data-theme") || ""), saved ? saved.font : "serif", false);
 
 /* ---------- Render ---------- */
-[tiles, filters, timeline, chTune, chCtx, chEngines, chMtp, chLlama, bytes, chMem, chTemps, evalTable, evalText, chTasks, dgLayout, dgLock, dgModels, ctTitle].forEach(fn => { try { fn(); } catch (e) { console.error(fn.name, e); } });
+[tiles, filters, timeline, calendar, chTune, chCtx, chEngines, chMtp, chLlama, bytes, chMem, chTemps, evalTable, evalText, chTasks, dgLayout, dgLock, dgModels, ctTitle].forEach(fn => { try { fn(); } catch (e) { console.error(fn.name, e); } });
 document.querySelectorAll("svg").forEach(labelsOnTop);
 if (LIVE.updated) $("updated").textContent = `Live eval data last refreshed ${LIVE.updated}.`;
 </script>
