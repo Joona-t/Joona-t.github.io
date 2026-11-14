@@ -209,13 +209,21 @@ td.mono{white-space:nowrap;padding-top:8px}
 .day h3:focus{outline:none}
 
 /* ---- Calendar: click a date to jump to that day in the timeline ---- */
-.calcard{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:flex-start;justify-content:space-between;padding:12px 14px;margin-top:12px}
-.calcard>div:first-child{flex:1 1 240px;max-width:46ch}
-.calcard p{margin:4px 0 0;font-size:15px;line-height:1.45}
-.cal-days{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
-.cal-days button{font:600 12px/1.4 var(--mono);background:none;border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:5px 11px;cursor:pointer;white-space:nowrap}
-.cal-days button span{color:var(--dim);font-weight:500}
-.cal-days button:hover{border-color:var(--ink)}
+/* Day tiles: one per day with entries, stretched to fill the row so the block has no dead space and shares the
+   page's left and right edges with the tiles and the contents above it (2026-11-14: the first version was a wide
+   card with text at one end, a month grid at the other and a third of it empty). */
+.daynav{margin-top:14px}
+.daynav-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:2px 16px;margin:0 0 8px}
+.daynav-hint{font-size:14.5px;line-height:1.4}
+.daytiles{display:flex;flex-wrap:wrap;gap:12px}
+.daytile{flex:1 1 150px;min-width:0;display:grid;gap:6px;align-content:start;padding:12px 14px 13px;text-align:left;color:var(--ink);font:inherit;cursor:pointer}
+.daytile .lab{display:flex;justify-content:space-between;align-items:baseline;gap:8px;font:600 10.5px/1.3 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+.daytile .lab .n{color:var(--amber);letter-spacing:.06em;white-space:nowrap}
+.daytile .val{font:600 22px/1.15 var(--display);font-variant-numeric:lining-nums;color:var(--heading);white-space:nowrap}
+.daytile .sub{font:500 12.5px/1.3 var(--mono);color:var(--dim)}
+.daytile .kinds{display:flex;flex-wrap:wrap;gap:4px;height:21px;overflow:hidden}   /* one row: a chip that does not fit is dropped whole, so every tile is the same height */
+.daytile .chip{font-size:10px;padding:1px 7px;letter-spacing:.06em}
+.daytile:hover{border-color:var(--dim)}
 .cal{display:grid;gap:6px;justify-items:start}
 .cal-month{font:600 10.5px/1.3 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
 .cal-grid{display:grid;grid-template-columns:repeat(7,38px);gap:4px}
@@ -314,9 +322,9 @@ body{margin:0} img{max-width:100%} [hidden]{display:none!important}</style>
   <a href="#heat">Heat and power</a><a href="#locktest">Lock test</a><a href="#eval">The 20-task eval</a><a href="#zenith">Loop or single agent</a><a href="#mistakes">Mistakes</a><a href="#open">Still open</a><a href="#append">Adding entries</a>
 </nav>
 
-<div class="calcard card" id="cal-top">
-  <div><span class="eyebrow">Go to a day</span><p class="dim">Marked days have timeline entries; the small number says how many. Click one to jump to that day. The Dates button in the corner does the same from anywhere on the page.</p><div class="cal-days" id="cal-days"></div></div>
-  <div class="cal" data-cal></div>
+<div class="daynav" id="cal-top">
+  <div class="daynav-head"><span class="eyebrow">Go to a day</span><span class="dim daynav-hint">Click a day to jump to it in the timeline. The Dates button in the corner opens a calendar from anywhere on the page.</span></div>
+  <div class="daytiles" id="cal-days"></div>
 </div>
 
 <!-- ============ THE MACHINE ============ -->
@@ -919,8 +927,14 @@ function calendar(){
     host.querySelectorAll("button").forEach(b => b.addEventListener("click", () => { closeCal(); goDay(b.dataset.d); }));
   });
   $("cal-days").innerHTML = Object.keys(counts).sort().map(d => {
-    const [y, m, n] = d.split("-").map(Number), wd = WEEKDAYS[new Date(Date.UTC(y, m - 1, n)).getUTCDay()].slice(0, 3);
-    return `<button type="button" data-d="${d}" aria-label="${dayName(d)}, ${counts[d]} ${counts[d] === 1 ? "entry" : "entries"}">${wd} ${n} ${MONTHS[m - 1].slice(0, 3)} <span>· ${counts[d]}</span></button>`;
+    const [y, m, n] = d.split("-").map(Number), rows = ENTRIES.filter(r => r[0] === d), times = rows.map(r => r[1]).sort();
+    const kinds = {}; for (const r of rows) kinds[r[2]] = (kinds[r[2]] || 0) + 1;
+    const top = Object.entries(kinds).sort((a, b) => b[1] - a[1] || KINDS.indexOf(a[0]) - KINDS.indexOf(b[0])).slice(0, 3);
+    const c = counts[d], span = times[0] === times[times.length - 1] ? times[0] : `${times[0]} to ${times[times.length - 1]}`;
+    return `<button type="button" class="daytile card" data-d="${d}" aria-label="${dayName(d)}, ${c} ${c === 1 ? "entry" : "entries"}, ${span}">`
+      + `<span class="lab"><span>${WEEKDAYS[new Date(Date.UTC(y, m - 1, n)).getUTCDay()].slice(0, 3)}</span><span class="n">${c} ${c === 1 ? "entry" : "entries"}</span></span>`
+      + `<span class="val">${n} ${MONTHS[m - 1].slice(0, 3)}</span><span class="sub">${span}</span>`   // short names: "12 November" wrapped on a phone and "11 November" did not
+      + `<span class="kinds">${top.map(([k, v]) => `<span class="chip k-${k}">${k} ${v}</span>`).join("")}</span></button>`;
   }).join("");
   $("cal-days").querySelectorAll("button").forEach(b => b.addEventListener("click", () => goDay(b.dataset.d)));
   const btn = $("cal-btn"), pop = $("cal-pop");
