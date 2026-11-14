@@ -1,5 +1,15 @@
 # Bugs & Iterations
 
+## 2026-11-14: BUG: the "Go to a day" card was a third empty and its halves did not line up
+
+**Symptom (Joona, screenshot):** "make better use of the ui it is not aligned and so much empty space." The card had a short text block and day chips pinned left, a month grid pinned right and nothing between them.
+**Measured:** 37% of the card was one empty rectangle (376 x 284 px at 1280 and 1440 wide); the two halves' first lines started 9 px apart; one half held 160 px of content, the other 276 px.
+**Root cause:** a fixed-size widget (a 290 px month grid) was put in a box 1,048 px wide, with a second control for the same action beside it. It was only looked at in an 800 px pane, where the gap is smaller, and shown as "acceptable for a preview".
+**Fix:** the card is replaced by one tile per day with entries, stretched across the row and sharing the page's left and right edges with the contents bar above. Each tile shows the weekday, the date, the entry count, the first and last time and the day's most common kinds. Tiles are equal height (short month names, one chip row); two per row on a phone. The month grid stays only behind the corner Dates button, so each action has one control per block.
+**Prevention (the instrument):** a measuring script, kept with the assistant's design skill outside this repo, fails a block for dead space, lopsided columns and near-miss alignment at 1440, 1280, 768 and 375 px. It reports 8 problems on the old card and 0 in 12 measurements on the new one, also in the light, gingham and neon themes.
+**Verified:** `scripts/verify_site.py` on the PR head (see `.verify/`); tile and corner-calendar clicks land the day heading 16 px from the top; Joona approved the preview.
+**Files:** forge-notebook/index.html
+
 ## 2026-11-14: ITER: Forge Notebook says what Zenith is and links its repository
 
 **Change:** Joona: the notebook should explain Zenith and link the official repo so an outside reader can learn more, with a one-line description in brackets. The section "A loop against a single agent" now links Zenith to github.com/Intelligent-Internet/zenith and describes it in one bracketed line; the 13:40 timeline entry carries the same link.
