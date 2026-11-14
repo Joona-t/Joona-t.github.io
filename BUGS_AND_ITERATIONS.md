@@ -1,5 +1,12 @@
 # Bugs & Iterations
 
+## 2026-11-14: ITER: Forge Notebook says what Zenith is and links its repository
+
+**Change:** Joona: the notebook should explain Zenith and link the official repo so an outside reader can learn more, with a one-line description in brackets. The section "A loop against a single agent" now links Zenith to github.com/Intelligent-Internet/zenith and describes it in one bracketed line; the 13:40 timeline entry carries the same link.
+**Source:** the URL and author come from the harness's own `pyproject.toml` on the Forge (Repository, authors); the repository is public and answers 200.
+**Verified:** `scripts/verify_site.py` on the PR head (see `.verify/`); both links checked on the live page.
+**Files:** forge-notebook/index.html
+
 ## 2026-11-14: ITER: Forge Notebook gets a click-a-date calendar
 
 **Change:** Joona asked for a menu by date, "a small calender or such", to navigate quickly without scrolling. A "Go to a day" card under the contents shows a month grid (days with timeline entries are boxed, with their entry count) and a row of day buttons; a Dates button fixed in the bottom-right corner opens the same calendar from anywhere on the page. Each click lands on that day's heading in the timeline. The calendar is built from the timeline's own entries, so new days appear by themselves; day names are computed instead of kept in a hand-written list.
