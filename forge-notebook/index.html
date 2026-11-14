@@ -235,7 +235,7 @@ ol.tl .body q{font-style:italic}
 .bytes span.bad{background:var(--fix);border-color:var(--fix);color:var(--bg);font-weight:700}
 footer{margin-top:60px;font-size:15px;color:var(--dim)}
 </style>
-<meta name="description" content="A dated lab notebook of two days putting a local AI model on a dual-GPU home PC: vLLM tuning, a memory fault and its fix, the lock test and a 20-task eval, with charts and diagrams.">
+<meta name="description" content="A dated lab notebook of putting a local AI model on a dual-GPU home PC: vLLM tuning, a memory fault and its fix, the lock test, a 20-task eval and a loop against a single agent, with charts.">
 <style>/* the reset the Artifact host adds around the page */
 :root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 body{margin:0} img{max-width:100%} [hidden]{display:none!important}</style>
@@ -274,7 +274,7 @@ body{margin:0} img{max-width:100%} [hidden]{display:none!important}</style>
 </header>
 
 <div class="col">
-  <p class="lede">Two days of putting a local language model on one home PC with two graphics cards: what we installed, what we measured, what broke, and how we found it. Every number here comes from a log on the machine. Where something is a guess, it says so.</p>
+  <p class="lede">A running notebook of putting a local language model on one home PC with two graphics cards: what we installed, what we measured, what broke, and how we found it. Every number here comes from a log on the machine. Where something is a guess, it says so.</p>
   <p class="dim">The Forge is a desktop with an RTX 3090 Ti and an RTX 3090 (48 GB of graphics memory between them), a Ryzen 9 9950X and 64 GB of DDR5. The model is Qwen3.8-27B. Several Claude Code sessions worked on it at once; this notebook follows all of them.</p>
 </div>
 
@@ -283,7 +283,7 @@ body{margin:0} img{max-width:100%} [hidden]{display:none!important}</style>
 <nav class="toc card" aria-label="Contents">
   <a href="#machine">The machine</a><a href="#models">The models</a><a href="#timeline">Timeline</a><a href="#tuning">vLLM tuning</a><a href="#lock">The GPU lock</a>
   <a href="#engines">vLLM and Ollama</a><a href="#mtp">MTP on and off</a><a href="#llamacpp">llama.cpp</a><a href="#fault">The memory fault</a>
-  <a href="#heat">Heat and power</a><a href="#locktest">Lock test</a><a href="#eval">The 20-task eval</a><a href="#mistakes">Mistakes</a><a href="#open">Still open</a><a href="#append">Adding entries</a>
+  <a href="#heat">Heat and power</a><a href="#locktest">Lock test</a><a href="#eval">The 20-task eval</a><a href="#zenith">Loop or single agent</a><a href="#mistakes">Mistakes</a><a href="#open">Still open</a><a href="#append">Adding entries</a>
 </nav>
 
 <!-- ============ THE MACHINE ============ -->
@@ -603,6 +603,43 @@ body{margin:0} img{max-width:100%} [hidden]{display:none!important}</style>
   </div>
 </section>
 
+<!-- ============ ZENITH ============ -->
+<section id="zenith">
+  <div class="sechead"><span class="eyebrow">2026-11-13 17:47 to 2026-11-14 01:59, paused</span><h2>A loop against a single agent</h2></div>
+  <div class="col">
+    <p>Does a supervised loop beat one agent working alone? In the Zenith loop a Claude model plans the job, hands the work to the local model, then validates and reviews what comes back. The single agent is the local model by itself in the same agent. Both got three tasks from the 20-task eval (04 a refactor, 09 log statistics, 19 fixing a bash script), three runs each, with a 40-minute limit per run. The local model ran with thinking off and at most 8,192 output tokens per reply.</p>
+    <p>The plan was nine Claude settings: Haiku, Sonnet and Opus 5.5, each at low, medium and high reasoning. That is 81 loop missions and 9 single-agent runs. <b>40 of the 90 runs finished</b> before Joona paused the matrix at 01:59 on 14 November, because the Forge is needed for separate work. The mission in progress was stopped and left no record.</p>
+  </div>
+  <div class="tbl card" style="padding:4px 6px">
+    <table>
+      <tr><th>Who ran the task</th><th class="n">Runs</th><th class="n">Passed</th><th class="n">Median time</th><th class="n">Shortest to longest</th><th class="n">Hit the 40 min limit</th><th class="n">&ldquo;Done&rdquo; claims rejected</th><th class="n">Claude tokens, median</th><th class="n">Local tokens, median</th></tr>
+      <tr class="hi"><td>Local model alone</td><td class="n">9</td><td class="n">8</td><td class="n">45 s</td><td class="n">26 to 133 s</td><td class="n">0</td><td class="n">none to reject</td><td class="n">0</td><td class="n">0.19 M</td></tr>
+      <tr><td>Loop, Haiku 5.5 at low</td><td class="n">9</td><td class="n">4</td><td class="n">1,196 s</td><td class="n">271 to 2,401 s</td><td class="n">2</td><td class="n">10</td><td class="n">2.56 M</td><td class="n">3.05 M</td></tr>
+      <tr><td>Loop, Sonnet 5.5 at low</td><td class="n">9</td><td class="n">9</td><td class="n">557 s</td><td class="n">307 to 1,365 s</td><td class="n">0</td><td class="n">5</td><td class="n">1.85 M</td><td class="n">1.03 M</td></tr>
+      <tr><td>Loop, Opus 5.5 at low</td><td class="n">9</td><td class="n">9</td><td class="n">344 s</td><td class="n">249 to 736 s</td><td class="n">0</td><td class="n">1</td><td class="n">1.24 M</td><td class="n">0.95 M</td></tr>
+      <tr><td>Loop, Haiku 5.5 at medium (4 of 9 run)</td><td class="n">4</td><td class="n">2</td><td class="n">1,818 s</td><td class="n">832 to 2,405 s</td><td class="n">1</td><td class="n">7</td><td class="n">5.69 M</td><td class="n">3.33 M</td></tr>
+    </table>
+  </div>
+  <p class="col dim">A loop mission passes when Zenith reports the mission done and the task's own check passes. &ldquo;Done&rdquo; claims rejected: times the worker said it was finished and the validator or the reviewer said no. Claude tokens are everything the mission used on the subscription, mostly cached context read again; M is million. Not run: 5 more Haiku missions at medium, and all of Sonnet and Opus at medium and every model at high (50 missions).</p>
+  <div class="col">
+    <h3>What it shows so far</h3>
+    <ul>
+      <li><b>On these three tasks the loop bought almost nothing and cost a lot of time.</b> The local model alone passed 8 of 9 in a median of 45 s. The two loop settings that passed 9 of 9 took a median of 344 s (Opus at low) and 557 s (Sonnet at low), about 8 and 12 times longer, plus 1.2 to 1.9 million Claude tokens per mission. One more pass in nine runs is too small a gap to call.</li>
+      <li><b>Haiku at low made it worse than no loop:</b> 4 of 9. Across both Haiku settings 7 missions failed, and in 5 of those the files already passed the task's check. The mission failed because the loop never reached &ldquo;done&rdquo;: 3 ran into the time limit and 2 ended in the state &ldquo;attention needed&rdquo;.</li>
+      <li><b>A stronger supervisor rejected less and finished sooner.</b> Rejected &ldquo;done&rdquo; claims over 9 missions: 10 with Haiku, 5 with Sonnet, 1 with Opus.</li>
+      <li><b>The machine held.</b> The memory check before the matrix and the one at the pause both found 0 errors (8 passes over 36 GB). The model server returned 0 errors in all 31 missions, and no mission was stopped by a Claude usage limit.</li>
+    </ul>
+    <h3>What limits these numbers</h3>
+    <ul>
+      <li>Nine runs per setting, three small tasks. The settings ran one after another, and the single-agent runs all ran in the first ten minutes, so time of day is not controlled.</li>
+      <li>A first matrix earlier the same day was set aside. The lead session found the local worker had only 7,000 to 10,000 tokens of room before its context was compacted. After the fix the smallest room recorded in any mission was 14,081 tokens.</li>
+      <li>Five of the nine settings are unfinished or not started, so nothing here says what medium or high reasoning would do.</li>
+    </ul>
+    <h3>What comes next</h3>
+    <p>Joona's call on 14 November: these generic tasks are not the test he wants. The next evaluations will be our own, designed around real-world use cases. Whether the paused matrix is finished first is open.</p>
+  </div>
+</section>
+
 <!-- ============ MISTAKES ============ -->
 <section id="mistakes">
   <div class="sechead"><span class="eyebrow">Told plainly, so they don't repeat</span><h2>Mistakes and what changed</h2></div>
@@ -635,6 +672,9 @@ body{margin:0} img{max-width:100%} [hidden]{display:none!important}</style>
       <li>vLLM doesn't start at boot; it is started by hand.</li>
       <li>Answer quality, FP8 against Q8. Only speed was compared.</li>
       <li>Several agents at once on vLLM. The eval runs one at a time by design.</li>
+      <li>The other 50 missions of the loop matrix: Haiku at medium is 4 of 9 done; Sonnet and Opus at medium, and all three at high, have not started.</li>
+      <li>Two follow-up evals on the single agent, prepared and held: reasoning effort medium against xhigh, and thinking off against on.</li>
+      <li>Evaluations of our own design, on real-world use cases, to replace the generic tasks.</li>
     </ul>
   </div>
 </section>
@@ -644,11 +684,12 @@ body{margin:0} img{max-width:100%} [hidden]{display:none!important}</style>
   <div class="sechead"><span class="eyebrow">A living notebook</span><h2>Adding entries</h2></div>
   <div class="col">
     <p>The timeline lives in one list near the bottom of this page's source (<code>ENTRIES</code>). Each entry is a date, a time, a kind (setup, test, fault, fix, decision, mistake or note), a headline and a few sentences. New entries go at the end; the page sorts them. Eval numbers, memory checks and temperatures come from the Forge's own files and refresh with one script.</p>
+    <p><b>What belongs here</b> (Joona's rule, 2026-11-14): this notebook is for training and research on the Forge. Other work done on the machine is never added to it.</p>
   </div>
 </section>
 
 <footer>
-  <p>Sources: the Forge runbook (<code>forge-notes/FORGE.md</code>), the tuning and benchmark logs on the Forge, the handoff reports in <code>lovespark-local-ai-findings</code> (branch <code>mini/findings-2026-11</code>, files 01, 04, 08, 09, 10) and the sessions' own messages. <span id="updated"></span></p>
+  <p>Sources: the Forge runbook (<code>forge-notes/FORGE.md</code>), the tuning and benchmark logs on the Forge, the handoff reports in <code>lovespark-local-ai-findings</code> (branch <code>mini/findings-2026-11</code>, files 01, 04, 08, 09, 10, 11), the loop matrix's own run records on the Forge and the sessions' own messages. <span id="updated"></span></p>
   <p>LoveSpark is free and open source: no ads, no tracking, no accounts. This page loads nothing but its fonts. <a href="https://lovespark.love/">lovespark.love</a></p>
 </footer>
 </div>
@@ -702,6 +743,17 @@ const ENTRIES = [
  ["2026-11-12","13:26","test","Eval resumes","Runs 2 and 3 start with the same code and safeguards. Every memory check since has been clean."],
  ["2026-11-12","16:25","test","Eval complete","Three runs on both sides, all from clean batches: 120 task runs. Side A passed 56 of 60 (median 82.5 s), side B 57 of 60 (median 68.5 s), with 0 refused bash calls on side B against 26 on side A. Both suspect batches re-ran clean. Since EXPO: 32 memory checks, 0 with errors."],
  ["2026-11-12","18:23","decision","Fable 5.2 leads again","Joona switches the lead session back to Fable 5.2, as orchestrator and architect for Blitz Swarm and Primordial on vLLM, with two Opus 5.5 agents at medium building."],
+ ["2026-11-13","13:40","test","A loop against a single agent","The lead session starts a matrix on three eval tasks: the local model alone against the Zenith loop, where a Claude model plans, hands work to the local model, validates and reviews. Nine Claude settings, three runs per task, 40 minutes per run, end to end with one memory check before and one after."],
+ ["2026-11-13","14:36","note","Two follow-up evals prepared","For the single agent: reasoning effort medium against xhigh, and thinking off against on, three runs per side. Set to wait for the model server. Not run."],
+ ["2026-11-13","17:08","decision","First matrix stopped","The lead session found the local worker had only 7,000 to 10,000 tokens of room before its context was compacted, which muddied the results. Joona: <q>Yes, stop and fix</q>. Those results are set aside."],
+ ["2026-11-13","17:47","test","Matrix restarts","Same matrix on a roomier worker: replies capped at 8,192 tokens, compaction at 44,344. Memory check before the run: 0 errors."],
+ ["2026-11-13","17:57","test","Single agent: 8 of 9","The local model alone on the three tasks: 8 of 9 passed, median 45 s, 26 to 133 s."],
+ ["2026-11-13","21:09","test","Loop with Haiku at low: 4 of 9","Median 1,196 s per mission. Two missions ran into the 40-minute limit; the validator and the reviewer rejected 10 claims of being done."],
+ ["2026-11-13","22:54","test","Loop with Sonnet at low: 9 of 9","Median 557 s per mission, 307 to 1,365 s."],
+ ["2026-11-14","00:00","test","Loop with Opus at low: 9 of 9","Median 344 s per mission, 249 to 736 s. The fastest loop setting, and still about 8 times the single agent's median."],
+ ["2026-11-14","01:59","decision","Matrix paused at 40 of 90","Joona pauses the matrix: the Forge is needed for separate work. The mission in progress is stopped and leaves no record; the 40 finished runs stand. A memory check at the pause finds 0 errors. The model server is stopped at 02:02 and both cards are free."],
+ ["2026-11-14","02:01","decision","Our own evaluations next","Joona: the generic tasks are not to his liking. The next evaluations will be designed by us around real-world use cases."],
+ ["2026-11-14","02:01","decision","What this notebook is for","A rule from Joona: the notebook is for training and research on the Forge. Other work done on the machine is never logged here."],
 ];
 
 /* ---------- Hand-entered memory checks (the eval's own checks come from the live data) ---------- */
@@ -778,7 +830,7 @@ function timeline(){
   const host = $("tl"); host.innerHTML = "";
   const rows = ENTRIES.slice().sort((a, b) => (a[0] + a[1]).localeCompare(b[0] + b[1])).filter(r => !tlFilter || r[2] === tlFilter);
   let day = "", ol = null;
-  const names = {"2026-11-11": "Wednesday 11 November", "2026-11-12": "Thursday 12 November"};
+  const names = {"2026-11-11": "Wednesday 11 November", "2026-11-12": "Thursday 12 November", "2026-11-13": "Friday 13 November", "2026-11-14": "Saturday 14 November"};
   for (const [d, t, k, h, b] of rows) {
     if (d !== day) { day = d; const dh = H("div", {class: "day"}, `<h3>${names[d] || d}</h3><span class="eyebrow">${d}</span>`); host.appendChild(dh); ol = H("ol", {class: "tl"}); host.appendChild(ol); }
     const li = H("li", {class: "k-" + k}, `<span class="t">${t}</span><div class="body"><span class="chip k-${k}">${k}</span> <b class="h">${h}</b><p>${b}</p></div>`);

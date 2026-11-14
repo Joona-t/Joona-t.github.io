@@ -1,5 +1,12 @@
 # Bugs & Iterations
 
+## 2026-11-14: ITER: Forge Notebook logs the paused loop-against-single-agent matrix and its scope rule
+
+**Change:** Joona asked for the current results in the notebook with what had finished, his view of the tasks, and a rule about what the notebook is for. New section "A loop against a single agent" (40 of 90 runs finished before the pause: the local model alone 8 of 9 at a median of 45 s; the Zenith loop with Haiku at low 4 of 9, Sonnet at low 9 of 9 at 557 s, Opus at low 9 of 9 at 344 s, Haiku at medium 2 of 4), 11 timeline entries for 13 and 14 November, three "Still open" items, and under "Adding entries" the rule that the notebook is for training and research on the Forge and other work on the machine is never added.
+**Source of the numbers:** the matrix's own run records and log on the Forge, read after the pause; the two memory checks' result lines.
+**Verified:** the export differs from the live page only by these additions; `scripts/verify_site.py` on the PR head (see `.verify/`).
+**Files:** forge-notebook/index.html
+
 ## 2026-11-13: ITER: tab icon is the fire triangle with the eye
 
 **What:** lovespark.love's browser-tab and home-screen icon is now the alchemical fire triangle with the eye 𓁿 and its beams inside (the T-Forge mark), in rose `#e05a68` (Joona's request). Before this the homepage, OpenAI Watch and both AI Signal pages set no icon and there was no root `favicon.ico`, so browsers showed their blank default.
