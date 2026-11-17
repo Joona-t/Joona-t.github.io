@@ -524,6 +524,9 @@ body{margin:0} img{max-width:100%} [hidden]{display:none!important}</style>
     <p class="note">Not explained: MTP 4 stalled in the 16-request writing test (5.9 s before the last first token, in all three runs). And at 16 with long prompts, MTP 3 and 4 read more slowly (about 1,380 prompt tokens/s) than MTP off, 1 and 2 (1,650 to 1,740). A guess: while the later requests are still being read the earlier ones are already writing, and deeper drafts make each of those steps cost more.</p>
     <h3>So, was there merit?</h3>
     <p>Yes, as a checklist. Its method answered a question this notebook had carried for five days, and it did so in under an hour. It did not find a faster setting: Joona's follow-up was <q>so does this mean our tune was still better?</q>, and across the load levels the tune from 12 November still is. What the guide changed is where to look next. Writing already scales past 700 tokens/s, so any further speed for agent work has to come from reading prompts faster, or from reading fewer of them twice.</p>
+    <h3>One run settles nothing about the guide</h3>
+    <p>This was a single pass, fixed in advance: seven server starts in about an hour, on one machine, with one model. The guide is built to be run as a loop &mdash; keep changing one thing and re-measuring until the gains stop &mdash; and that is the part we did not use. <b>So the verdict above is about this run, not about the method.</b> Judging it properly means running more of it, as the loop it was written to be.</p>
+    <p><b>Joona's call (2026-11-17), and it comes first:</b> before more guide-driven tuning, he is doing harness engineering on his own real use cases, outside tests &mdash; exploring workflows with different orchestrations, on harnesses customised for them. The machine's speed is already understood well enough for that work; what is not yet known is which shape of harness the work actually wants. Further runs of the guide wait behind it.</p>
   </div>
 </section>
 
@@ -793,6 +796,8 @@ body{margin:0} img{max-width:100%} [hidden]{display:none!important}</style>
       <li>The other 50 missions of the loop matrix: Haiku at medium is 4 of 9 done; Sonnet and Opus at medium, and all three at high, have not started.</li>
       <li>Two follow-up evals on the single agent, prepared and held: reasoning effort medium against xhigh, and thinking off against on.</li>
       <li>Evaluations of our own design, on real-world use cases, to replace the generic tasks.</li>
+      <li>Whether 0xSero's method finds more when it is run as the loop it was written to be. One fixed pass (<a href="#tune4">tune 4</a>) is not enough to judge it.</li>
+      <li>Which shape of harness the real work wants: different orchestrations on harnesses customised for Joona's own use cases. This comes before more guide-driven tuning.</li>
     </ul>
   </div>
 </section>
@@ -880,6 +885,7 @@ const ENTRIES = [
  ["2026-11-17","02:35","decision","A public guide, put to the test","Joona sends 0xSero's <a href='https://github.com/sybil-solutions/inference-optimisation-skill'>inference-optimisation skill</a>, a guide to making local model servers faster, and asks whether it has merit for the Forge. After the read-through: <q>it is time for another training run</q>. Fable 5.2 takes the guide's method, not its scripts, and writes the plan and four predictions before anything runs. An Opus agent builds the test client and proves it on a stand-in server. The whole series runs under the GPU lock."],
  ["2026-11-17","02:39","test","Tune 4 starts","Memory check clean. Seven fresh server starts on both cards: the default (MTP 3) three times as a control, MTP 1, 2 and 4, and MTP off. Each request is split into reading the prompt and writing the answer."],
  ["2026-11-17","02:47","test","The plateau is prompt reading","Default setting, 16 requests of 2,311 tokens: 158.5 tokens/s, with 89% of the time gone before the last request starts answering. The same 16 with 30-token prompts write 737 tokens/s. Reading holds at about 1,700 prompt tokens/s for 1 request or 16. A repeated 14,282-token prompt reuses 12,800 tokens: first token after 1.00 s instead of 8.55 s."],
+ ["2026-11-17","05:25","decision","Harnesses before more tuning","One fixed pass of 0xSero's guide settles nothing about the method, which is written to be run as a loop; judging it properly means more runs. Joona's call: that waits. First he is doing harness engineering on his own real use cases, outside tests, exploring workflows with different orchestrations on harnesses customised for them."],
  ["2026-11-17","03:32","test","Draft sweep done: MTP 3 stays","0 failed requests, memory check clean again. MTP 2 is 7% faster at 16 with long prompts and 10% slower for one request. MTP 4 is fastest for one request and stalls with 16 writing at once. No setting beats MTP 3 across the load levels, so the default is unchanged."],
 ];
 
