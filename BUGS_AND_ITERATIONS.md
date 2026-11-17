@@ -1,5 +1,12 @@
 # Bugs & Iterations
 
+## 2026-11-17: ITER: tune 4 says one run settles nothing about the guide, and names what comes first
+
+**What:** a closing block "One run settles nothing about the guide" — the run was a single fixed pass, the guide is written to be run as a loop, and that part was not used, so the verdict above is about this run and not about the method. With it, Joona's call: harness engineering on his own real use cases, outside tests, exploring workflows with different orchestrations on harnesses customised for them, before any more guide-driven tuning. Two matching items in Still open and a 05:25 decision entry in the timeline.
+**Why it matters:** without it the section reads as a verdict on someone's published method from one hour of measurement on one machine.
+**Verified:** `check_svg_diagrams.py` 0 problems over 126 combinations; `verify_site.py --runs 3`; section read at 1440 and 375.
+**Files:** forge-notebook/index.html
+
 ## 2026-11-17: ITER: the tune 4 section says what the run actually was — a test of a public guide
 
 **What was missing:** the section published an hour earlier was the numbers alone. The run was a test of someone else's method, and the page did not say so beyond one credit line at the end. Added: what the guide is and who wrote it (a card with the repo, author, licence and its own RTX 3090 figures, marked as the author's and not comparable with ours), Joona's question that started it ("is there any merit to it though and us optimizing our own local model with vLLM"), what the read-through found (already our practice / missing from our tuning / not for this machine), six reasons the run was planned the way it was, and a closing "So, was there merit?" with Joona's follow-up and the verdict. The 02:35 timeline entry and the models-table row now name the guide too.
