@@ -1,5 +1,13 @@
 # Bugs & Iterations
 
+## 2026-11-17: ITER: the tune 4 section says what the run actually was — a test of a public guide
+
+**What was missing:** the section published an hour earlier was the numbers alone. The run was a test of someone else's method, and the page did not say so beyond one credit line at the end. Added: what the guide is and who wrote it (a card with the repo, author, licence and its own RTX 3090 figures, marked as the author's and not comparable with ours), Joona's question that started it ("is there any merit to it though and us optimizing our own local model with vLLM"), what the read-through found (already our practice / missing from our tuning / not for this machine), six reasons the run was planned the way it was, and a closing "So, was there merit?" with Joona's follow-up and the verdict. The 02:35 timeline entry and the models-table row now name the guide too.
+**Where it came from:** the Forge session rewrote its handoff note in the brain at 04:28 with this content, after its first branch had already been published from the Mac mini. The note's own state line said "NOT published", which was wrong — it could not see that its branch had been merged, because the clone it was written in had been deleted.
+**Checked before publishing:** the repo's owner, single commit (`fda968e`, 2026-11-16) and MIT licence from the GitHub API; the 96.2 / 141.1 figures against its README's own results table; "leans on Intel Arc" against the body of the skill (21 Intel/Arc/XPU mentions against 9 NVIDIA/CUDA/RTX, and nothing on two cards over PCIe).
+**Verified:** `check_svg_diagrams.py` 0 problems over 126 combinations; layout audit 0 problems in 20 measurements at 1440/1280/768/375; `verify_site.py --runs 3`; section read at 1440 light, 1440 dark and 375.
+**Files:** forge-notebook/index.html
+
 ## 2026-11-17: ITER: Forge Notebook logs tune 4, the 165 tokens/s plateau is prompt reading
 
 **What:** a new section "The 165 plateau: reading, not writing" after vLLM tuning (whole-request against writing-only chart, the split table, the MTP draft sweep, the prefix cache result, the predictions written before the run, caveats), four timeline entries for 2026-11-17, one row in the models task table, and three new items in Still open in place of the answered one.
