@@ -4,7 +4,17 @@
 
 **What:** a new section "The 165 plateau: reading, not writing" after vLLM tuning (whole-request against writing-only chart, the split table, the MTP draft sweep, the prefix cache result, the predictions written before the run, caveats), four timeline entries for 2026-11-17, one row in the models task table, and three new items in Still open in place of the answered one.
 **How it got here:** written on the Forge as a local branch (the Forge has no GitHub credentials), fetched over SSH from the Mac mini, reviewed there against the run's own log (`tune4.log`, 77 median lines, all with 0 errors) and published from the mini.
-**Changed in review:** the Ollama reading speed in Still open now cites the figure already logged on this page (2,971 tokens/s, 2026-11-11) instead of 2,960, which had no log behind it; "MTP off is 2.6% below the controls' median" replaces 2.8% (154.6 against 158.7); the models row names the reasoning levels from the session transcript (Fable 5.2 high, Opus 5.5 agent medium).
+**Changed in review:** "MTP off is 2.6% below the controls' median" replaces 2.8% (154.6 against 158.7); the models row names the reasoning levels from the session transcript (Fable 5.2 high, Opus 5.5 agent medium); the Ollama reading speed in Still open now names its prompt and links the section it comes from.
+
+## 2026-11-17: BUG: review "corrected" a right figure into a wrong one (2,960 to 2,971), shipped for 9 minutes
+
+**Symptom:** in the Still open list, "Ollama's Q8 build read 2,960 on the same cards" was changed to 2,971, merged in PR #55 (`46b6272`) and live from 04:04 to 04:13.
+**Root cause:** I grepped the brain's result notes for 2,960, found only 2,971 (the 2026-11-11 Ollama MTP A/B long prompt, 13,655 tokens), and called the figure unsourced. 2,960 is this page's own engines table, line 542: Ollama Q8 reading a 13,635-token prompt on 2026-11-12. I searched the brain and not the page I was editing.
+**Why it was missed:** the grep was for the digits alone across other files; the page under the cursor was never searched, and the sentence read as plausible either way.
+**Fix:** 2,960 restored, with the prompt length and a link to the section it comes from, so the next reader does not have to search for it.
+**Prevention:** before changing any number on a page, grep that page for the figure first; if the page itself states it, that is the source. Candidate check: a figure in prose that appears nowhere else in the repo and in no cited log is the one to question, not one the same page tabulates.
+**Verified:** `grep -o '2,96[0-9]' forge-notebook/index.html` returns both figures in their own sections; checks re-run on the fix (see below).
+**Files:** forge-notebook/index.html
 **Verified:** `scripts/check_svg_diagrams.py`: 0 problems over 126 theme x font x width combinations; layout audit of the new section and the day tiles: 0 problems at 1440, 1280, 768 and 375 px; `scripts/verify_site.py --runs 3` on the PR head (see `.verify/`).
 **Files:** forge-notebook/index.html
 

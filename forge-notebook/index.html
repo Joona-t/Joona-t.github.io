@@ -759,7 +759,7 @@ body{margin:0} img{max-width:100%} [hidden]{display:none!important}</style>
     <ul>
       <li>Whether EXPO fixed the fault or the fresh boot did. Needs hours of use with memory checks; a boot-time memory test would give failing addresses.</li>
       <li>Why the Forge hard-stopped at 21:31. The power supply's rating isn't known yet; the cards peaked at 836 W together.</li>
-      <li>Making vLLM read prompts faster. Reading, at about 1,700 prompt tokens/s, is what limits it near 165 tokens/s (<a href="#tune4">answered 2026-11-17</a>). Ollama's Q8 build read a long prompt at 2,971 on the same cards (<a href="#mtp">MTP on and off</a>).</li>
+      <li>Making vLLM read prompts faster. Reading, at about 1,700 prompt tokens/s, is what limits it near 165 tokens/s (<a href="#tune4">answered 2026-11-17</a>). Ollama's Q8 build read a 13,635-token prompt at 2,960 on the same cards (<a href="#engines">vLLM against Ollama</a>, 2026-11-12).</li>
       <li>Whether the agent's own turns reach the prefix cache. vLLM's log warns that Claude Code's per-turn reminders change the start of the prompt.</li>
       <li>Why MTP 4 stalls with 16 requests writing at once.</li>
       <li>vLLM doesn't start at boot; it is started by hand.</li>
