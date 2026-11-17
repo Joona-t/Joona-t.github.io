@@ -1,5 +1,13 @@
 # Bugs & Iterations
 
+## 2026-11-17: ITER: Forge Notebook logs tune 4, the 165 tokens/s plateau is prompt reading
+
+**What:** a new section "The 165 plateau: reading, not writing" after vLLM tuning (whole-request against writing-only chart, the split table, the MTP draft sweep, the prefix cache result, the predictions written before the run, caveats), four timeline entries for 2026-11-17, one row in the models task table, and three new items in Still open in place of the answered one.
+**How it got here:** written on the Forge as a local branch (the Forge has no GitHub credentials), fetched over SSH from the Mac mini, reviewed there against the run's own log (`tune4.log`, 77 median lines, all with 0 errors) and published from the mini.
+**Changed in review:** the Ollama reading speed in Still open now cites the figure already logged on this page (2,971 tokens/s, 2026-11-11) instead of 2,960, which had no log behind it; "MTP off is 2.6% below the controls' median" replaces 2.8% (154.6 against 158.7); the models row names the reasoning levels from the session transcript (Fable 5.2 high, Opus 5.5 agent medium).
+**Verified:** `scripts/check_svg_diagrams.py`: 0 problems over 126 theme x font x width combinations; layout audit of the new section and the day tiles: 0 problems at 1440, 1280, 768 and 375 px; `scripts/verify_site.py --runs 3` on the PR head (see `.verify/`).
+**Files:** forge-notebook/index.html
+
 ## 2026-11-14: BUG: the "Go to a day" card was a third empty and its halves did not line up
 
 **Symptom (Joona, screenshot):** "make better use of the ui it is not aligned and so much empty space." The card had a short text block and day chips pinned left, a month grid pinned right and nothing between them.
