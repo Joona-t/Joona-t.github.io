@@ -1,5 +1,13 @@
 # Bugs & Iterations
 
+## 2026-11-20: ITER: Forge Notebook logs seven models on one coding test, and speed round 2
+
+**What:** a new section "Seven models, one coding test" after the 20-task eval: a chart of tasks passed out of 60 for Qwen3.8-27B (58), Qwen3-Coder-Next (53), Qwen3.6-35B-A3B (52), gpt-oss-20b (47), Qwen3.5-9B (38), GLM-4.7-Flash (34) and Qwen3.5-4B (28), a table with runs, seconds per task and tokens/s, what it shows, the four Qwen3.8-27B GGUF builds from speed round 2, and what is not like for like. Fourteen timeline entries for 2026-11-20, three rows in Mistakes, rows in the three model tables, three items in Still open, the date range in the header, a contents link and the sources line.
+**Sources:** the run logs on the Forge (`forge-work/model-eval/night2/run.log`, each model's `-eval.jsonl` and `-speed.log`, `speed2/TABLE.md`); per-run counts recomputed from the JSONL. Joona's two requests are quoted from the session transcript with their times (02:03, 04:34).
+**Changed before publishing:** the layout audit found 8 near-misses (each table's note sat 10 px inside its table's edge); the notes moved out of the cards as `col note`, as tune 4 does. At 375 px the first draft's tables were 558 and 422 px wide in a 341 px card; engine and card count moved under the model name and the headers were shortened, and both now fit at 375 and 390 in the serif font (the page's older tables overflow by up to 985 px and scroll inside their cards).
+**Verified:** `check_svg_diagrams.py` 0 problems over 126 theme x font x width combinations, and 7 problems when the new chart's right margin was cut to 20 (so the check covers it); layout audit 0 problems in 16 measurements at 1440/1280/768/375 in every theme; section read at 1440 cream, 1440 basalt and 375.
+**Files:** forge-notebook/index.html
+
 ## 2026-11-17: ITER: tune 4 says one run settles nothing about the guide, and names what comes first
 
 **What:** a closing block "One run settles nothing about the guide" — the run was a single fixed pass, the guide is written to be run as a loop, and that part was not used, so the verdict above is about this run and not about the method. With it, Joona's call: harness engineering on his own real use cases, outside tests, exploring workflows with different orchestrations on harnesses customised for them, before any more guide-driven tuning. Two matching items in Still open and a 05:25 decision entry in the timeline.
