@@ -282,7 +282,7 @@ body{margin:0} img{max-width:100%} [hidden]{display:none!important}</style>
 <div class="wrap">
 <header class="top">
   <div>
-    <div class="eyebrow">LoveSpark · lab notebook · 2026-11-11 to 2026-11-17</div>
+    <div class="eyebrow">LoveSpark · lab notebook · 2026-11-11 to 2026-11-20</div>
     <h1 data-ct id="title"><span class="ct-text">The Forge Notebook</span></h1>
   </div>
   <div class="theme-picker">
@@ -319,7 +319,7 @@ body{margin:0} img{max-width:100%} [hidden]{display:none!important}</style>
 <nav class="toc card" aria-label="Contents">
   <a href="#machine">The machine</a><a href="#models">The models</a><a href="#timeline">Timeline</a><a href="#tuning">vLLM tuning</a><a href="#tune4">Reading and writing</a><a href="#lock">The GPU lock</a>
   <a href="#engines">vLLM and Ollama</a><a href="#mtp">MTP on and off</a><a href="#llamacpp">llama.cpp</a><a href="#fault">The memory fault</a>
-  <a href="#heat">Heat and power</a><a href="#locktest">Lock test</a><a href="#eval">The 20-task eval</a><a href="#zenith">Loop or single agent</a><a href="#mistakes">Mistakes</a><a href="#open">Still open</a><a href="#append">Adding entries</a>
+  <a href="#heat">Heat and power</a><a href="#locktest">Lock test</a><a href="#eval">The 20-task eval</a><a href="#models20">Seven models</a><a href="#zenith">Loop or single agent</a><a href="#mistakes">Mistakes</a><a href="#open">Still open</a><a href="#append">Adding entries</a>
 </nav>
 
 <div class="daynav" id="cal-top">
@@ -377,6 +377,7 @@ body{margin:0} img{max-width:100%} [hidden]{display:none!important}</style>
       <tr><td>Primordial eval on vLLM, 18:26</td><td>Fable 5.2, high (lead)</td><td>Opus 5.5 agent, medium</td><td>91 calls with thinking on and off, 0 errors, 0 timeouts. Fable sent one fix back (stray blank lines at the start of thinking-on answers) and checked the second round. The commit waits on Joona: one test module is red because a toolchain is missing.</td></tr>
       <tr><td>Blitz Swarm on vLLM, 18:26</td><td>Fable 5.2, high (lead)</td><td>Opus 5.5 agent, medium</td><td>Still running at 20:45, not reviewed yet.</td></tr>
       <tr><td>Tune 4 tools, 11-17 02:35</td><td>Fable 5.2, high (a session on the Forge itself)</td><td>Opus 5.5 agent, medium</td><td>For the test of 0xSero's guide: a streaming test client and a driver for seven server starts. The Opus agent checked the client against a stand-in server before any card was used. Fable read both files, added one server flag, then ran the series: 0 errors.</td></tr>
+      <tr><td>Speed round 2 and the seven-model eval, 11-20 02:03</td><td colspan="2">Opus 5.5, alone (a session on the MacBook)</td><td>Two scripts and one queue, each checked on the Forge before it took the cards. Two bugs were caught before launch (a misnamed result field, an edit to a live log file); two showed up during the run (see <a href="#mistakes">Mistakes</a>).</td></tr>
     </table>
     <p class="note" style="padding:6px 10px 2px"><b>One model did both, with no implementer:</b> the vLLM install, tuning, GPU lock and runbook (lead, Fable 5.2); the vLLM-against-Ollama test, the eval runs and the memory checks (handoff, Fable 5.2); the overnight coordination, the memory-fault work and the BIOS advice (lead, Opus 5.5 at high); Blitz Swarm's and Primordial's own work on 11-11 (Fable 5.2 at medium); and this notebook (Opus 5.5 at high, started by the lead while it was on Opus).</p>
   </div>
@@ -392,6 +393,7 @@ body{margin:0} img{max-width:100%} [hidden]{display:none!important}</style>
       <tr><td>Blitz Swarm, 11-11 21:26 on</td><td>Fable 5.2</td><td>medium</td><td class="n">171</td><td>Ran its four baseline arms on Qwen (Ollama) and stopped at 22:32 when Joona paused it. It labelled those runs as taken on an unstable machine, then waited for Joona's own word before going on.</td></tr>
       <tr><td>Primordial, 11-11 21:26 on</td><td>Fable 5.2</td><td>medium</td><td class="n">112</td><td>Wrote the local-model backend for its eval. It held the commit while a test suite was red, and waited for Joona's yes before copying anything to the Forge.</td></tr>
       <tr><td>Notebook, 11-12 15:56 on</td><td>Opus 5.5</td><td>high</td><td class="n">624</td><td>This notebook, its charcoal title and the page on lovespark.love.</td></tr>
+      <tr><td>MacBook, 11-20 02:03 to 12:22</td><td>Opus 5.5</td><td>not recorded here</td><td class="n">&ndash;</td><td>Speed round 2 and the seven-model coding eval.</td></tr>
       <tr><td>MacBook, 06:38 to 07:17</td><td colspan="2">not recorded on the Mac mini</td><td class="n">&ndash;</td><td>The llama.cpp benchmark and a 16-request load test.</td></tr>
       <tr><td>Claude app chat, before 05:36</td><td>Opus (version not recorded)</td><td>&ndash;</td><td class="n">&ndash;</td><td>Which board socket the new front fans go in. The advice was wrong, and Joona moved them.</td></tr>
     </table>
@@ -402,7 +404,8 @@ body{margin:0} img{max-width:100%} [hidden]{display:none!important}</style>
       <tr><th>Local model</th><th>Engine</th><th>What it did</th><th>Thinking</th></tr>
       <tr><td>Qwen3.8-27B, FP8 (Qwen's own build)</td><td>vLLM 0.33.0, both cards, MTP 3 tokens</td><td>The agent in the lock test and the 20-task eval; the speed tests; Blitz Swarm and Primordial from 18:26</td><td>Eval: the server's default, on (the agent sends no setting). Speed tests: off. Blitz Swarm and Primordial: run both ways and compared, Joona's call at 18:31.</td></tr>
       <tr><td>Qwen3.8-27B, Q8</td><td>Ollama 0.40.16</td><td>The engine comparison; Blitz Swarm's four baseline arms on 11-11</td><td>off</td></tr>
-      <tr><td>Qwen3.8-27B, four GGUF builds</td><td>llama.cpp b12302</td><td>The MacBook's benchmark</td><td>not recorded here</td></tr>
+      <tr><td>Qwen3.8-27B, four GGUF builds</td><td>llama.cpp b12302</td><td>The MacBook's benchmark; speed round 2 on 11-20</td><td>not recorded here</td></tr>
+      <tr><td>Qwen3.6-35B-A3B, Qwen3.5-9B and 4B, GLM-4.7-Flash, gpt-oss-20b, Qwen3-Coder-Next</td><td>vLLM 0.33.0 both cards; Coder-Next on llama.cpp b12302</td><td>The seven-model coding eval and speed round 2, 11-20 (Qwen3.5-2B and 0.8B: speed only)</td><td>Eval: the agent's highest setting, <code>xhigh</code> (<code>high</code> for gpt-oss-20b). Speed tests: the server's default.</td></tr>
     </table>
   </div>
   <p class="col"><b>Reasoning is not certainty.</b> Both wrong pieces of advice in these two days came from capable models: the fan socket from Opus in the Claude app, and the BIOS plan from Opus 5.5 at high reasoning in the lead session (see <a href="#fault">The memory fault</a>). Thinking harder helps. It doesn't replace checking, and it doesn't replace Joona knowing his own machine.</p>
@@ -722,6 +725,62 @@ body{margin:0} img{max-width:100%} [hidden]{display:none!important}</style>
   </div>
 </section>
 
+<!-- ============ SEVEN MODELS ============ -->
+<section id="models20">
+  <div class="sechead"><span class="eyebrow">2026-11-20 02:06 to 12:22, a session on the MacBook</span><h2>Seven models, one coding test</h2></div>
+  <div class="col">
+    <p>Until now this notebook measured one model, Qwen3.8-27B. On 20 November every other complete model on the Forge got the same two tests. Joona asked for the first one at 02:03: <q>run the benchmark token test with all our local models on teh forge</q>. At 04:34 he asked for the second: <q>get the Quen 3 coder and shit, man. Let's keep on running the tests. Don't stop</q>.</p>
+    <ul>
+      <li><b>Speed round 2</b>, 02:06 to 03:52: the tune 4 client from <a href="#tune4">Reading and writing</a> against every model, one fresh server start each. vLLM models repeat a first round from 18 November; new are the four Qwen3.8-27B GGUF builds on llama.cpp b12302, the same client and the same prompts.</li>
+      <li><b>The coding eval</b>, 04:39 to 12:22: <a href="#eval">the 20 tasks</a>, three runs per model, 300 s and 30 turns per task, one agent at a time. Each model was served on both cards, given a two-task smoke test first, and only then the full eval. Two new downloads, Qwen3-Coder-Next and gpt-oss-20b, also got the speed test first.</li>
+    </ul>
+    <p>One queue ran it all, under the GPU lock, and put the usual Qwen3.8-27B server back when it finished. Opus 5.5 planned, wrote and checked it alone, with no implementer.</p>
+  </div>
+  <figure class="card">
+    <div class="chart" id="ch-models20"></div>
+    <figcaption><b>Tasks passed out of 60</b> (20 tasks × 3 runs), with the median seconds per task. Every model passed both smoke tasks except Qwen3.5-4B, which passed one of two and still ran the full eval.</figcaption>
+  </figure>
+  <div class="tbl card" style="padding:4px 6px">
+    <table>
+      <tr><th>Model</th><th class="n">Passed</th><th class="n">s/task</th><th class="n">Tok/s</th></tr>
+      <tr class="hi"><td>Qwen3.8-27B, FP8<br><span class="dim">vLLM, both cards, MTP 3</span></td><td class="n">19, 19, 20</td><td class="n">78.5</td><td class="n">77 / 165</td></tr>
+      <tr><td>Qwen3-Coder-Next, Q4_K_M<br><span class="dim">llama.cpp, both cards, 12 layers' experts in system memory</span></td><td class="n">18, 18, 17</td><td class="n">57.5</td><td class="n">48 / 62</td></tr>
+      <tr><td>Qwen3.6-35B-A3B, FP8<br><span class="dim">vLLM, both cards, MTP 3</span></td><td class="n">18, 17, 17</td><td class="n">21</td><td class="n">212 / 649</td></tr>
+      <tr><td>gpt-oss-20b<br><span class="dim">vLLM, both cards</span></td><td class="n">16, 16, 15</td><td class="n">31.5</td><td class="n">162 / 706</td></tr>
+      <tr><td>Qwen3.5-9B, FP8<br><span class="dim">vLLM, both cards</span></td><td class="n">13, 13, 12</td><td class="n">36.5</td><td class="n">103 / 456</td></tr>
+      <tr><td>GLM-4.7-Flash, FP8<br><span class="dim">vLLM, both cards</span></td><td class="n">12, 12, 10</td><td class="n">47</td><td class="n">92 / 404</td></tr>
+      <tr><td>Qwen3.5-4B<br><span class="dim">vLLM, both cards</span></td><td class="n">9, 10, 9</td><td class="n">44.5</td><td class="n">80 / 521*</td></tr>
+    </table>
+  </div>
+  <p class="col note">Passed: tasks passed in each of the three runs. Tok/s, for 1 / 16 requests at once: whole requests with a 2,311-token prompt and 300 tokens out, total over all requests, median of three runs, from speed round 2 (the two new models from their own speed test in the eval queue). *Qwen3.5-4B's speed was measured on one card; the eval served it on two.</p>
+  <div class="col">
+    <h3>What it shows</h3>
+    <p><b>Qwen3.8-27B stays the default.</b> 58 of 60, against 56 and 57 on 12 November. It is also the slowest at a task.</p>
+    <p><b>Qwen3.6-35B is the fast one.</b> 52 of 60 at 21 s a task, almost four times quicker. Only about 3 billion of its 35 billion parameters work on each token, so it writes 212 tokens/s for one request. It failed two tasks every time: the word-count tool (06) and the deep-merge fix (16).</p>
+    <p><b>Qwen3-Coder-Next is second on score and slow here.</b> Its 48.4 GB of weights don't fit the cards with room to work: the first start exited after 15 seconds while loading, and the queue's retry kept 12 layers' experts in system memory. That gave 53 of 60, at 62 tokens/s for 16 requests. On cards with room for the whole model the speed would be different; the score should not be.</p>
+    <p><b>gpt-oss-20b is the quickest under load:</b> 706 tokens/s for 16 requests, prompts read at about 10,000 tokens/s, and 47 of 60. It was the only model besides Qwen3.8-27B to pass the deep-merge fix all three times.</p>
+    <p><b>Small models fall off.</b> Qwen3.5-9B 38, GLM-4.7-Flash 34, Qwen3.5-4B 28. The bash tasks and the config parser go first.</p>
+    <h3>The GGUF builds on llama.cpp</h3>
+    <p>The same speed test, the same model as the vLLM server:</p>
+  </div>
+  <div class="tbl card" style="padding:4px 6px">
+    <table>
+      <tr><th>Build</th><th class="n">1 req</th><th class="n">16 req</th><th class="n">Peak W</th></tr>
+      <tr class="hi"><td>FP8, vLLM, MTP 3<br><span class="dim">both cards</span></td><td class="n">77</td><td class="n">165</td><td class="n">684</td></tr>
+      <tr><td>Q8_0, MTP<br><span class="dim">both cards</span></td><td class="n">58</td><td class="n">168</td><td class="n">759</td></tr>
+      <tr><td>Q8_0<br><span class="dim">both cards</span></td><td class="n">27</td><td class="n">126</td><td class="n">838</td></tr>
+      <tr><td>UD-Q4_K_XL<br><span class="dim">one card</span></td><td class="n">38</td><td class="n">118</td><td class="n">509</td></tr>
+      <tr><td>Q4_K_M<br><span class="dim">one card</span></td><td class="n">35</td><td class="n">116</td><td class="n">510</td></tr>
+      <tr><td>UD-Q6_K, 32k context<br><span class="dim">one card</span></td><td class="n">32</td><td class="n dim">88 at 8</td><td class="n">509</td></tr>
+    </table>
+  </div>
+  <p class="col note">Qwen3.8-27B builds. Tokens/s for 1 and 16 requests at once: whole requests, 2,311-token prompt, total tokens/s, median of three. llama.cpp ran with one shared 65,536-token cache (32,768 for Q6_K, whose 22 GB of weights leave room for 8 long requests, not 16). 0 failed requests except Q6_K at 16.</p>
+  <div class="col">
+    <p>With MTP, Q8_0 on llama.cpp matches vLLM at 16 requests (168 against 165) and is a quarter slower for one. The 4-bit builds fit on one card, so two of them could run side by side, each near 117.</p>
+    <p class="note">Not like for like. Each model used its own tool-call and reasoning format, and the agent asked for its highest reasoning setting (<code>xhigh</code>; <code>high</code> for gpt-oss-20b, which has no higher). GLM-4.7-Flash had a 65,536-token context, the vLLM Qwen models 131,072. The 12 November runs used the eval's own A/B tooling with memory checks around every batch; this queue ran no memory checks. Three runs per model show how steady a score is, not how a model does on real work.</p>
+  </div>
+</section>
+
 <!-- ============ ZENITH ============ -->
 <section id="zenith">
   <div class="sechead"><span class="eyebrow">2026-11-13 17:47 to 2026-11-14 01:59, paused</span><h2>A loop against a single agent</h2></div>
@@ -776,7 +835,10 @@ body{margin:0} img{max-width:100%} [hidden]{display:none!important}</style>
       <tr><td class="mono">11-12 05:36</td><td>The new front fans first went on the wrong board socket. The socket came from Opus in the Claude app, not one of these sessions, and wasn't checked against the board's manual. Joona saw they weren't spinning and moved them.</td><td>Wiring advice is checked against the exact board's manual first.</td></tr>
       <tr><td class="mono">11-12 07:12</td><td>A 16-request load test from another machine landed on the server during the eval's resume.</td><td>The eval checks the server is idle before each batch and records how busy it got.</td></tr>
       <tr><td class="mono">11-12 12:36</td><td>The fix advice was wrong. The lead session told Joona to load BIOS defaults to reset the memory profile, assuming EXPO was on. It never confirmed that (no sudo to read the memory speed). EXPO was off; Joona turned it <i>on</i> by instinct, and that is what made every check clean.</td><td>Check the current setting before advising a change to it, or say plainly that it is a guess. The runbook records EXPO on as the setting that made the checks clean.</td></tr>
-    </table>
+          <tr><td class="mono">11-20 02:40</td><td>Speed round 2 first ran two GGUF copies at once, one per card. Together they drew 837 to 850 W against the test's 780 W stop, and llama.cpp's 16 slots of 3,072 tokens each refused the 13,600-token prompt.</td><td>One build at a time with one shared 65,536-token cache. The re-run reached 16 requests with 0 errors.</td></tr>
+      <tr><td class="mono">11-20 06:20</td><td>gpt-oss-20b was skipped as "not downloaded" although every weight file was complete. The check looked for any partial file in the model's folder, and two were left over from the download interrupted on 18 November. Qwen3-Coder-Next had three and would have been skipped next.</td><td>Removed after checking each finished file was full size; gpt-oss-20b ran at the end of the queue. The check itself still looks at the folder (Still open).</td></tr>
+      <tr><td class="mono">11-20 06:21</td><td>The session's watcher for the next result read the run log from the MacBook's own disk instead of the Forge's, so Qwen3.5-9B's score was not reported until Joona asked at 08:28.</td><td>Remote paths are written so they expand on the Forge. The watchers after it reported every result.</td></tr>
+</table>
   </div>
 </section>
 
@@ -797,6 +859,9 @@ body{margin:0} img{max-width:100%} [hidden]{display:none!important}</style>
       <li>Two follow-up evals on the single agent, prepared and held: reasoning effort medium against xhigh, and thinking off against on.</li>
       <li>Evaluations of our own design, on real-world use cases, to replace the generic tasks.</li>
       <li>Whether 0xSero's method finds more when it is run as the loop it was written to be. One fixed pass (<a href="#tune4">tune 4</a>) is not enough to judge it.</li>
+      <li>Qwen3-Coder-Next with the whole model on the cards: a smaller build or a shorter context. Its 11-20 speed came with part of it in system memory.</li>
+      <li>Whether Qwen3.6-35B, four times faster at 52 of 60, holds up against Qwen3.8-27B on real work rather than the generic tasks.</li>
+      <li>The download check in the eval queue looks for any partial file in a model's folder instead of checking the model's own files.</li>
       <li>Which shape of harness the real work wants: different orchestrations on harnesses customised for Joona's own use cases. This comes before more guide-driven tuning.</li>
     </ul>
   </div>
@@ -812,7 +877,7 @@ body{margin:0} img{max-width:100%} [hidden]{display:none!important}</style>
 </section>
 
 <footer>
-  <p>Sources: the Forge runbook (<code>forge-notes/FORGE.md</code>), the tuning and benchmark logs on the Forge, the handoff reports in <code>lovespark-local-ai-findings</code> (branch <code>mini/findings-2026-11</code>, files 01, 04, 08, 09, 10, 11), the loop matrix's own run records on the Forge and the sessions' own messages. <span id="updated"></span></p>
+  <p>Sources: the Forge runbook (<code>forge-notes/FORGE.md</code>), the tuning and benchmark logs on the Forge, the handoff reports in <code>lovespark-local-ai-findings</code> (branch <code>mini/findings-2026-11</code>, files 01, 04, 08, 09, 10, 11), the loop matrix's own run records on the Forge, the speed and eval runs' own files (<code>forge-work/model-eval/speed2</code> and <code>night2</code>) and the sessions' own messages. <span id="updated"></span></p>
   <p>LoveSpark is free and open source: no ads, no tracking, no accounts. This page loads nothing but its fonts. <a href="https://lovespark.love/">lovespark.love</a></p>
 </footer>
 </div>
@@ -887,6 +952,20 @@ const ENTRIES = [
  ["2026-11-17","02:47","test","The plateau is prompt reading","Default setting, 16 requests of 2,311 tokens: 158.5 tokens/s, with 89% of the time gone before the last request starts answering. The same 16 with 30-token prompts write 737 tokens/s. Reading holds at about 1,700 prompt tokens/s for 1 request or 16. A repeated 14,282-token prompt reuses 12,800 tokens: first token after 1.00 s instead of 8.55 s."],
  ["2026-11-17","05:25","decision","Harnesses before more tuning","One fixed pass of 0xSero's guide settles nothing about the method, which is written to be run as a loop; judging it properly means more runs. Joona's call: that waits. First he is doing harness engineering on his own real use cases, outside tests, exploring workflows with different orchestrations on harnesses customised for them."],
  ["2026-11-17","03:32","test","Draft sweep done: MTP 3 stays","0 failed requests, memory check clean again. MTP 2 is 7% faster at 16 with long prompts and 10% slower for one request. MTP 4 is fastest for one request and stalls with 16 writing at once. No setting beats MTP 3 across the load levels, so the default is unchanged."],
+ ["2026-11-20","02:06","test","Speed round 2 starts","Joona at 02:03: <q>run the benchmark token test with all our local models on teh forge</q>. The tune 4 client against every complete model on the Forge, one fresh server each: the vLLM setups of a first round on 11-18, and the four Qwen3.8-27B GGUF builds on llama.cpp."],
+ ["2026-11-20","02:40","mistake","Two GGUF copies trip the power stop","One copy per card drew 837 to 850 W together, over the test's 780 W stop, and the 13,600-token prompt was refused by slots of 3,072 tokens. Re-run one build at a time with one shared cache from 03:08."],
+ ["2026-11-20","03:52","test","Speed round 2 done","vLLM repeats the first round within a few percent (Qwen3.8-27B: 77 tokens/s for one request, 165 for 16). Q8_0 with MTP on llama.cpp: 58 and 168. Qwen3.6-35B with MTP: 212 and 649."],
+ ["2026-11-20","04:39","test","Seven models, one coding test","Joona at 04:34: <q>Let's keep on running the tests. Don't stop</q>. One queue: each model on both cards, a two-task smoke test, then the 20-task eval three times."],
+ ["2026-11-20","05:05","test","Qwen3.6-35B: 52 of 60","Median 21 s per task, the fastest of the night. It fails the word-count tool and the deep-merge fix every time."],
+ ["2026-11-20","06:20","test","GLM-4.7-Flash: 34 of 60","Median 47 s per task."],
+ ["2026-11-20","06:20","mistake","A finished download skipped","gpt-oss-20b is passed over as not downloaded: two partial files from the interrupted 11-18 download are still in its folder. Removed after checking every finished file; it runs at the end of the queue."],
+ ["2026-11-20","07:17","test","Qwen3.5-9B: 38 of 60","Median 36.5 s per task."],
+ ["2026-11-20","07:18","fault","Qwen3-Coder-Next doesn't fit","The first start exits 15 s into loading its 48.4 GB of weights. The queue's retry keeps 12 layers' experts in system memory, and it loads."],
+ ["2026-11-20","08:40","test","Qwen3-Coder-Next: 53 of 60","Median 57.5 s per task, at 48 tokens/s for one request and 62 for 16 with part of it off the cards."],
+ ["2026-11-20","10:25","test","Qwen3.8-27B: 58 of 60","Median 78.5 s per task. The same score band as 12 November (56 and 57), and still the best."],
+ ["2026-11-20","11:27","test","Qwen3.5-4B: 28 of 60","Median 44.5 s per task; it passed one of the two smoke tasks."],
+ ["2026-11-20","12:20","test","gpt-oss-20b: 47 of 60","Median 31.5 s per task. 706 tokens/s for 16 requests, the most of the seven."],
+ ["2026-11-20","12:22","note","Back to the default server","The queue ends after 7 h 43 min and restarts the usual Qwen3.8-27B server."],
 ];
 
 /* ---------- Hand-entered memory checks (the eval's own checks come from the live data) ---------- */
@@ -1114,6 +1193,22 @@ function chMtp(){
     S("text", {x: sx(on) + 6, y: y + 26, class: "lab-strong"}, svg, (on / off).toFixed(2) + "×");
   });
   $("ch-mtp").appendChild(svg);
+}
+
+/* ---------- Seven models (2026-11-20) ---------- */
+function chModels20(){
+  const rows = [["Qwen3.8-27B", 58, 78.5], ["Qwen3-Coder-Next", 53, 57.5], ["Qwen3.6-35B-A3B", 52, 21], ["gpt-oss-20b", 47, 31.5], ["Qwen3.5-9B", 38, 36.5], ["GLM-4.7-Flash", 34, 47], ["Qwen3.5-4B", 28, 44.5]];
+  const W = 760, rowH = 36, m = {l: 170, r: 150, t: 8, b: 26}, Hh = m.t + m.b + rows.length * rowH;
+  const svg = S("svg", {viewBox: `0 0 ${W} ${Hh}`, role: "img", "aria-label": "Coding tasks passed out of 60 for seven local models"});
+  const sx = v => m.l + v / 60 * (W - m.l - m.r);
+  [0, 20, 40, 60].forEach(v => { S("line", {class: "grid", x1: sx(v), x2: sx(v), y1: m.t, y2: Hh - m.b}, svg); S("text", {x: sx(v), y: Hh - 8, "text-anchor": "middle"}, svg, v); });
+  rows.forEach(([n, p, sec], i) => {
+    const y = m.t + i * rowH + 9;
+    S("text", {x: m.l - 10, y: y + 13, "text-anchor": "end"}, svg, n);
+    S("rect", {x: m.l, y, width: sx(p) - m.l, height: 16, rx: 2, fill: i === 0 ? "var(--heading)" : "var(--pc)"}, svg);
+    S("text", {x: sx(60) + 8, y: y + 13, class: "lab-strong"}, svg, p + " · " + sec + " s");
+  });
+  $("ch-models20").appendChild(svg);
 }
 
 /* ---------- llama.cpp ---------- */
@@ -1524,7 +1619,7 @@ let saved = null; try { saved = JSON.parse(localStorage.getItem(PREFS) || "null"
 applyPrefs(saved ? saved.theme : (document.documentElement.getAttribute("data-theme") || ""), saved ? saved.font : "serif", false);
 
 /* ---------- Render ---------- */
-[tiles, filters, timeline, calendar, chTune, chSplit, chCtx, chEngines, chMtp, chLlama, bytes, chMem, chTemps, evalTable, evalText, chTasks, dgLayout, dgLock, dgModels, ctTitle].forEach(fn => { try { fn(); } catch (e) { console.error(fn.name, e); } });
+[tiles, filters, timeline, calendar, chTune, chSplit, chCtx, chEngines, chMtp, chLlama, chModels20, bytes, chMem, chTemps, evalTable, evalText, chTasks, dgLayout, dgLock, dgModels, ctTitle].forEach(fn => { try { fn(); } catch (e) { console.error(fn.name, e); } });
 document.querySelectorAll("svg").forEach(labelsOnTop);
 if (LIVE.updated) $("updated").textContent = `Live eval data last refreshed ${LIVE.updated}.`;
 </script>
