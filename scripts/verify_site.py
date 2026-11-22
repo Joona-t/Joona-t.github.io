@@ -7,7 +7,8 @@ What it does, the way a visitor would:
   2. clicks every theme button in turn (the real switcher, View Transition wipe included) and, for each switch,
      records the longest frame gap and long tasks from click until the wipe finishes, plus whether the glyph field and
      the section titles are right for the theme afterwards;
-  3. runs the diagram geometry check (scripts/check_svg_diagrams.py) on the notebook.
+  3. runs the diagram geometry check (scripts/check_svg_diagrams.py) on the notebook,
+     and the Bvby Ash card-order check (scripts/check_set_order.py: newest video first).
 Fails when a switch has a frame gap over --max-gap ms (default 120) or a long task over --max-task ms (default 100),
 or any theme ends in the wrong state. Writes .verify/<commit>.json with the numbers.
 
@@ -102,6 +103,11 @@ if not blocks:
                        capture_output=True, text=True)
     report["diagrams"] = d.stdout.strip().splitlines()[-1] if d.stdout.strip() else d.stderr[-200:]
     if d.returncode: fails.append("diagrams: " + report["diagrams"])
+
+o = subprocess.run([sys.executable, str(ROOT / "scripts/check_set_order.py"), str(ROOT / "bvby-ash/index.html")],
+                   capture_output=True, text=True)
+report["set_order"] = o.stdout.strip()
+if o.returncode: fails.append("bvby-ash card order: " + report["set_order"])
 
 by = {}
 for r in report["switches"]: by.setdefault(r["to"], []).append(r["max_gap_ms"])
