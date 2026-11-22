@@ -98,13 +98,13 @@ main { overflow-x: clip; } /* the floating Claudios swing past the stage edge on
 .ash-wave { transform-origin: 148px 196px; }
 .cups { transform-origin: 110px 120px; }
 .glint { transform-origin: 150px 106px; }
-.orbit { position: absolute; width: 22%; height: auto; aspect-ratio: 24 / 13; overflow: visible; filter: drop-shadow(3px 3px 0 var(--shadow-ink)); }
+.orbit { position: absolute; width: 22%; height: auto; aspect-ratio: 24 / 18; overflow: visible; filter: drop-shadow(3px 3px 0 var(--shadow-ink)); }
 .o1 { left: -2%; top: 18%; } .o2 { right: -3%; top: 46%; } .o3 { left: 2%; bottom: 14%; width: 18%; }
 
 /* ── conga line ── */
 .conga { position: relative; overflow: hidden; margin: 18px 0 8px; padding: 10px 0; border-block: 3px solid var(--line); background: color-mix(in srgb, var(--sheet) 82%, transparent); }
 .conga-track { display: flex; gap: 46px; width: max-content; }
-.cl { width: 68px; height: auto; aspect-ratio: 24 / 13; overflow: visible; flex: none; filter: drop-shadow(2px 2px 0 var(--shadow-ink)); }
+.cl { width: 68px; height: auto; aspect-ratio: 24 / 18; overflow: visible; flex: none; filter: drop-shadow(2px 2px 0 var(--shadow-ink)); }
 
 /* ── sections ── */
 .sets, .crew, .art { max-width: var(--page-w); margin: 0 auto; padding: 40px 16px 8px; }
