@@ -3000,3 +3000,10 @@ html.theme-parchment .section-title {
   background-image: url("assets/glyph-ink-parchment.png"), linear-gradient(rgba(43, 34, 25, .45), rgba(43, 34, 25, .45));
   filter: none;
 }
+
+/* ── Music panel: links to the Bvby Ash page (2026-11-22) ── */
+.music-panel-art { display: block; margin: 14px 0 16px; border-radius: 10px; overflow: hidden; aspect-ratio: 16 / 9; background: #000; }
+.music-panel-art img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .25s ease, filter .25s ease; }
+.music-panel-art:hover img, .music-panel-art:focus-visible img { transform: scale(1.02); filter: brightness(1.08) saturate(1.1); }
+.music-panel-art:focus-visible { outline: 3px solid currentColor; outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { .music-panel-art img { transition: none; } }

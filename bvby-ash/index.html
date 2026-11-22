@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bvby Ash · Transmissions from Cyber Space</title>
+  <meta name="description" content="Bvby Ash: club sets live-coded in Strudel and sent out from Cyber Space with her crew of seven Claudios. Watch Six Seven Claudios, Slow Light and Aura.">
+  <meta name="theme-color" content="#120b18">
+  <meta property="og:title" content="Bvby Ash · Transmissions from Cyber Space">
+  <meta property="og:description" content="Club sets from Cyber Space with seven Claudios on the decks.">
+  <meta property="og:image" content="https://lovespark.love/bvby-ash/img/ash-banner.webp">
+  <script>
+    try {
+      var t = localStorage.getItem("bvby-theme"); if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+      var f = localStorage.getItem("bvby-font"); if (f) document.documentElement.dataset.font = f;
+    } catch (e) {}
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Mochiy+Pop+One&family=M+PLUS+Rounded+1c:wght@400;700&family=Yusei+Magic&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+  <link rel="stylesheet" href="styles.css?v=1">
+  <script defer src="app.js?v=1"></script>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+</head>
+<body>
+  <a class="skip-link" href="#sets">Skip to the videos</a>
+
+  <!-- Shared art: the Claudio, a pixel critter in shades (from the Six Seven Claudios club video) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="claudio" viewBox="-4 0 24 13">
+        <rect x="4" y="0" width="8" height="1" fill="var(--cl-o)"/><rect x="2" y="1" width="12" height="1" fill="var(--cl-o)"/><rect x="1" y="2" width="14" height="1" fill="var(--cl-o)"/><rect x="1" y="3" width="1" height="1" fill="var(--cl-o)"/><rect x="2" y="3" width="12" height="1" fill="#14101a"/><rect x="14" y="3" width="1" height="1" fill="var(--cl-o)"/><rect x="1" y="4" width="1" height="1" fill="var(--cl-o)"/><rect x="2" y="4" width="1" height="1" fill="#14101a"/><rect x="3" y="4" width="2" height="1" fill="#ffffff"/><rect x="5" y="4" width="5" height="1" fill="#14101a"/><rect x="10" y="4" width="2" height="1" fill="#ffffff"/><rect x="12" y="4" width="2" height="1" fill="#14101a"/><rect x="14" y="4" width="1" height="1" fill="var(--cl-o)"/><rect x="1" y="5" width="1" height="1" fill="var(--cl-o)"/><rect x="2" y="5" width="1" height="1" fill="#14101a"/><rect x="3" y="5" width="1" height="1" fill="#ffffff"/><rect x="4" y="5" width="6" height="1" fill="#14101a"/><rect x="10" y="5" width="1" height="1" fill="#ffffff"/><rect x="11" y="5" width="3" height="1" fill="#14101a"/><rect x="14" y="5" width="1" height="1" fill="var(--cl-o)"/><rect x="1" y="6" width="2" height="1" fill="var(--cl-o)"/><rect x="3" y="6" width="4" height="1" fill="#14101a"/><rect x="7" y="6" width="3" height="1" fill="var(--cl-o)"/><rect x="10" y="6" width="3" height="1" fill="#14101a"/><rect x="13" y="6" width="2" height="1" fill="var(--cl-o)"/><rect x="1" y="7" width="14" height="1" fill="var(--cl-o)"/><rect x="1" y="8" width="6" height="1" fill="var(--cl-o)"/><rect x="7" y="8" width="2" height="1" fill="var(--cl-m)"/><rect x="9" y="8" width="6" height="1" fill="var(--cl-o)"/><rect x="1" y="9" width="1" height="1" fill="var(--cl-d)"/><rect x="2" y="9" width="12" height="1" fill="var(--cl-o)"/><rect x="14" y="9" width="1" height="1" fill="var(--cl-d)"/><rect x="2" y="10" width="12" height="1" fill="var(--cl-d)"/><rect x="2" y="11" width="1" height="1" fill="var(--cl-d)"/><rect x="5" y="11" width="1" height="1" fill="var(--cl-d)"/><rect x="10" y="11" width="1" height="1" fill="var(--cl-d)"/><rect x="13" y="11" width="1" height="1" fill="var(--cl-d)"/>
+        <g class="arm arm-l"><rect x="-2" y="6" width="2" height="1" fill="var(--cl-d)"/><rect x="-4" y="4" width="2" height="3" fill="var(--cl-o)"/></g>
+        <g class="arm arm-r"><rect x="16" y="6" width="2" height="1" fill="var(--cl-d)"/><rect x="18" y="4" width="2" height="3" fill="var(--cl-o)"/></g>
+      </symbol>
+      <symbol id="heart" viewBox="0 0 32 32"><path d="M16 28 C4 19 2 12 6 7 c4-4 9-2 10 2 c1-4 6-6 10-2 c4 5 2 12-10 21z"/></symbol>
+      <symbol id="sparkle" viewBox="0 0 32 32"><path d="M16 2 C17 12 20 15 30 16 C20 17 17 20 16 30 C15 20 12 17 2 16 C12 15 15 12 16 2z"/></symbol>
+      <symbol id="star" viewBox="0 0 32 32"><path d="M16 3l3.6 8.4 9 .8-6.8 6 2 8.8L16 22.4 8.2 27l2-8.8-6.8-6 9-.8z"/></symbol>
+    </defs>
+  </svg>
+
+  <canvas class="glyph-rain" id="glyphRain" aria-hidden="true"></canvas>
+  <div class="grid-floor" aria-hidden="true"></div>
+
+  <!-- floating decals, kept to the page margins -->
+  <div class="decals" aria-hidden="true">
+    <svg class="decal d1"><use href="#heart"/></svg>
+    <svg class="decal d2"><use href="#sparkle"/></svg>
+    <svg class="decal d3"><use href="#star"/></svg>
+    <svg class="decal d4"><use href="#sparkle"/></svg>
+    <svg class="decal d5"><use href="#heart"/></svg>
+  </div>
+
+  <header class="topbar">
+    <a class="back" href="/">← lovespark.love</a>
+    <div class="controls">
+      <div class="theme-switch" role="group" aria-label="Page theme">
+        <button type="button" class="pill" data-set-theme="dark" aria-pressed="true">Cyber Night</button>
+        <button type="button" class="pill" data-set-theme="light" aria-pressed="false">Kawaii Day</button>
+      </div>
+      <label class="font-pick">
+        <span>Font</span>
+        <select id="fontPick">
+          <option value="">Theme font</option>
+          <option value="dyslexic">OpenDyslexic</option>
+          <option value="atkinson">Atkinson Hyperlegible</option>
+        </select>
+      </label>
+    </div>
+  </header>
+
+  <main>
+    <!-- ═══ HERO ═══ -->
+    <section class="hero" aria-labelledby="heroTitle">
+      <div class="hero-copy">
+        <p class="eyebrow">Now transmitting from Cyber Space</p>
+        <h1 class="wordmark" id="heroTitle"><span class="chrome">BVBY</span> <span class="chrome">ASH</span></h1>
+        <p class="kana" lang="ja">バビー・アッシュ</p>
+        <div class="hero-sheet">
+          <p>Club sets live-coded in Strudel, played from a neon booth in Cyber Space with a crew of seven Claudios on the decks.
+             Tech house, progressive house, and whatever the signal brings in next.</p>
+          <div class="cta-row">
+            <a class="cta cta-main" href="#sets">Watch the sets ↓</a>
+            <a class="cta" href="https://www.youtube.com/@bvby_ash" target="_blank" rel="noopener">YouTube @bvby_ash ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="stage" aria-hidden="true">
+        <div class="disc"></div>
+        <div class="eq"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <svg class="ash" viewBox="0 0 220 280">
+          <defs>
+            <linearGradient id="chromeG" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#ffffff"/><stop offset=".35" stop-color="#a7b0c6"/>
+              <stop offset=".55" stop-color="#f6f8ff"/><stop offset="1" stop-color="#717a92"/>
+            </linearGradient>
+            <linearGradient id="rainbowG" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#ff46d6"/><stop offset=".2" stop-color="#ffb547"/>
+              <stop offset=".4" stop-color="#f6ff5a"/><stop offset=".6" stop-color="#4dffa6"/>
+              <stop offset=".8" stop-color="#45c8ff"/><stop offset="1" stop-color="#8a5bff"/>
+            </linearGradient>
+          </defs>
+          <g class="ash-body" stroke="#2a1824" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+            <!-- hair, back -->
+            <path d="M50 100 C38 165 36 222 50 262 L170 262 C184 222 182 165 170 100 Z" fill="#62c824"/>
+            <path d="M62 160 C60 200 60 230 66 258 M158 160 C160 200 160 230 154 258" fill="none" stroke="#3f8f14" stroke-width="2"/>
+            <!-- arm down, to the decks -->
+            <path d="M74 196 L60 246" stroke="#2a1824" stroke-width="20"/>
+            <path d="M74 196 L60 246" stroke="#eef0ff" stroke-width="14"/>
+            <circle cx="58" cy="252" r="9" fill="#2a1830"/>
+            <!-- suit -->
+            <path d="M70 196 C70 180 86 172 110 172 C134 172 150 180 150 196 L157 280 L63 280 Z" fill="#eef0ff"/>
+            <path d="M93 178 L86 280 M127 178 L134 280" stroke="#8a3ffc" stroke-width="4" fill="none"/>
+            <path d="M70 232 L150 232" stroke="#2a1830" stroke-width="7"/>
+            <path d="M70 232 L150 232" stroke="url(#rainbowG)" stroke-width="2"/>
+            <!-- neck + collar -->
+            <rect x="100" y="152" width="20" height="18" fill="#f6e6ee"/>
+            <rect x="96" y="164" width="28" height="11" rx="4" fill="#2a1830"/>
+            <!-- head -->
+            <ellipse cx="110" cy="114" rx="52" ry="50" fill="#f6e6ee"/>
+            <ellipse cx="82" cy="142" rx="8" ry="4" fill="#ff8fc8" stroke="none" opacity=".7"/>
+            <ellipse cx="138" cy="142" rx="8" ry="4" fill="#ff8fc8" stroke="none" opacity=".7"/>
+            <path d="M103 148 Q110 154 117 148" fill="none" stroke-width="2.5"/>
+            <!-- bangs -->
+            <path d="M58 112 C55 70 80 52 110 52 C140 52 165 70 162 112 L151 104 L141 113 L129 102 L117 113 L104 102 L92 113 L80 102 L69 113 Z" fill="#62c824"/>
+            <path d="M84 66 C92 60 102 58 112 58" fill="none" stroke="#c8ff8a" stroke-width="3"/>
+            <!-- headphone band -->
+            <path d="M54 116 C48 44 172 44 166 116" fill="none" stroke="#2a1824" stroke-width="14"/>
+            <path d="M54 116 C48 44 172 44 166 116" fill="none" stroke="url(#chromeG)" stroke-width="8"/>
+            <!-- visor -->
+            <rect x="64" y="104" width="92" height="26" rx="13" fill="url(#rainbowG)"/>
+            <path d="M74 110 L146 110" stroke="#ffffff" stroke-width="2.5" opacity=".85"/>
+            <!-- ear cups -->
+            <g class="cups">
+              <circle cx="52" cy="120" r="17" fill="url(#chromeG)"/>
+              <circle cx="52" cy="120" r="9" fill="none" stroke="url(#rainbowG)" stroke-width="4"/>
+              <circle cx="168" cy="120" r="17" fill="url(#chromeG)"/>
+              <circle cx="168" cy="120" r="9" fill="none" stroke="url(#rainbowG)" stroke-width="4"/>
+            </g>
+          </g>
+          <!-- waving arm -->
+          <g class="ash-wave" stroke-linecap="round">
+            <path d="M148 196 L178 160 L186 124" fill="none" stroke="#2a1824" stroke-width="20" stroke-linejoin="round"/>
+            <path d="M148 196 L178 160 L186 124" fill="none" stroke="#eef0ff" stroke-width="14" stroke-linejoin="round"/>
+            <circle cx="187" cy="118" r="10" fill="#2a1830" stroke="#2a1824" stroke-width="3"/>
+          </g>
+          <g class="glint"><path d="M150 96 l2.5 6 6 2.5 -6 2.5 -2.5 6 -2.5 -6 -6 -2.5 6 -2.5z" fill="#ffffff"/></g>
+        </svg>
+        <svg class="orbit o1"><use href="#claudio"/></svg>
+        <svg class="orbit o2"><use href="#claudio"/></svg>
+        <svg class="orbit o3"><use href="#claudio"/></svg>
+      </div>
+    </section>
+
+    <!-- conga line of Claudios -->
+    <div class="conga" aria-hidden="true">
+      <div class="conga-track">
+        <svg class="cl"><use href="#claudio"/></svg><svg class="cl"><use href="#claudio"/></svg><svg class="cl"><use href="#claudio"/></svg><svg class="cl"><use href="#claudio"/></svg><svg class="cl"><use href="#claudio"/></svg><svg class="cl"><use href="#claudio"/></svg><svg class="cl"><use href="#claudio"/></svg>
+        <svg class="cl"><use href="#claudio"/></svg><svg class="cl"><use href="#claudio"/></svg><svg class="cl"><use href="#claudio"/></svg><svg class="cl"><use href="#claudio"/></svg><svg class="cl"><use href="#claudio"/></svg><svg class="cl"><use href="#claudio"/></svg><svg class="cl"><use href="#claudio"/></svg>
+      </div>
+    </div>
+
+    <!-- ═══ VIDEOS ═══ -->
+    <section class="sets" id="sets" aria-labelledby="setsTitle">
+      <h2 class="section-title" id="setsTitle"><span lang="ja" class="section-kana">放送</span> Transmissions</h2>
+      <p class="section-sub">Every Bvby Ash video. They play from YouTube only when you press play.</p>
+
+      <div class="set-grid">
+        <article class="set-card">
+          <button type="button" class="facade" data-yt="xv7RLIyr06g" aria-label="Play Aura (Festival Version) (loads YouTube)">
+            <img src="img/aura-frame.webp" width="1280" height="720" loading="lazy" decoding="async"
+                 alt="Aura video still: glowing glyph branches in pink, violet and cyan on deep navy">
+            <span class="play" aria-hidden="true">▶</span>
+          </button>
+          <div class="set-body">
+            <p class="set-meta"><span class="tag">New</span> 21 Nov 2026 · 4:19</p>
+            <h3>Aura (Festival Version)</h3>
+            <p>Tech house at 128 BPM in E minor: a short intro, a drumless bell breakdown, then two drops, the second one heavier.</p>
+          </div>
+        </article>
+
+        <article class="set-card">
+          <button type="button" class="facade" data-yt="N--OyuLFsCo" aria-label="Play Six Seven Claudios (loads YouTube)">
+            <img src="img/six-seven.webp" width="1280" height="720" loading="lazy" decoding="async"
+                 alt="Six Seven Claudios: Bvby Ash at the decks between a glowing 6 and 7, two pixel Claudios beside her">
+            <span class="play" aria-hidden="true">▶</span>
+          </button>
+          <div class="set-body">
+            <p class="set-meta"><span class="tag">First set</span> 19 Nov 2026 · 2:40</p>
+            <h3>Six Seven Claudios</h3>
+            <p>The first transmission: a cyber space boiler room set with a disco ball, a dancing crowd and the Claudios doing the six-seven.</p>
+          </div>
+        </article>
+
+        <article class="set-card">
+          <button type="button" class="facade" data-yt="if_QJNzyT6I" aria-label="Play Slow Light (loads YouTube)">
+            <img src="img/slow-light.webp" width="1280" height="720" loading="lazy" decoding="async"
+                 alt="Slow Light video still: an ink-drawn sun over a row of growing sprouts on cream paper">
+            <span class="play" aria-hidden="true">▶</span>
+          </button>
+          <div class="set-body">
+            <p class="set-meta"><span class="tag">Progressive</span> 20 Nov 2026 · 4:48</p>
+            <h3>Slow Light</h3>
+            <p>Progressive house at 128 BPM in F♯ minor, with an ink garden that grows toward the sun as the track builds.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ═══ CREW ═══ -->
+    <section class="crew" aria-labelledby="crewTitle">
+      <h2 class="section-title" id="crewTitle"><span lang="ja" class="section-kana">仲間</span> The Claudios</h2>
+      <p class="section-sub">Seven Claudios, one crew. Each one runs a part of the booth, and all of them do the six-seven.</p>
+      <ul class="crew-row">
+        <li><svg class="cl"><use href="#claudio"/></svg><span lang="ja">照明</span>Lights</li>
+        <li><svg class="cl"><use href="#claudio"/></svg><span lang="ja">低音</span>Bass</li>
+        <li><svg class="cl"><use href="#claudio"/></svg><span lang="ja">鍵盤</span>Keys</li>
+        <li><svg class="cl"><use href="#claudio"/></svg><span lang="ja">太鼓</span>Drums</li>
+        <li><svg class="cl"><use href="#claudio"/></svg><span lang="ja">声</span>Voice</li>
+        <li><svg class="cl"><use href="#claudio"/></svg><span lang="ja">踊り</span>Dance</li>
+        <li><svg class="cl"><use href="#claudio"/></svg><span lang="ja">愛</span>Love</li>
+      </ul>
+    </section>
+
+    <!-- ═══ ART ═══ -->
+    <section class="art" aria-labelledby="artTitle">
+      <h2 class="section-title" id="artTitle"><span lang="ja" class="section-kana">原画</span> Cover art</h2>
+      <div class="art-grid">
+        <figure class="art-card"><img src="img/cover-a.webp" width="900" height="900" loading="lazy" decoding="async" alt="Bvby Ash cover: neon Bvby and Ash signs either side of her at the decks, Claudios beside her, LoveSpark in neon above"><figcaption>Six Seven Claudios cover</figcaption></figure>
+        <figure class="art-card"><img src="img/aura-cover.webp" width="900" height="900" loading="lazy" decoding="async" alt="Aura cover: branching glyph lines in pink, violet, cyan and orange on navy"><figcaption>Aura cover</figcaption></figure>
+        <figure class="art-card"><img src="img/ash-pfp.webp" width="720" height="720" loading="lazy" decoding="async" alt="Bvby Ash portrait: green hair, rainbow visor, chrome headphones, a neon heart behind her"><figcaption>Bvby Ash, prismatic</figcaption></figure>
+        <figure class="art-card art-wide"><img src="img/ash-banner.webp" width="1920" height="1080" loading="lazy" decoding="async" alt="Wide banner: Bvby Ash with arms up at the decks, Claudios on the tables, a crowd under a disco ball and a neon love sign"><figcaption>The booth</figcaption></figure>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p>Music live-coded in Strudel. Made with love by LoveSpark: free, no ads, no tracking.</p>
+    <p><a href="https://www.youtube.com/@bvby_ash" target="_blank" rel="noopener">YouTube @bvby_ash</a> <span aria-hidden="true">✦</span> <a href="/">lovespark.love</a></p>
+  </footer>
+</body>
+</html>
