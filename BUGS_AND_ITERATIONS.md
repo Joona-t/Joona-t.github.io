@@ -647,3 +647,6 @@ The walk covers the whole page, so the generated gallery (`data/gallery.json`) n
 **Root cause:** Why it happened
 **Fix:** What was done to resolve it
 -->
+
+## ITER (2026-11-22): Bvby Ash bio in Joona's words
+Joona: "update the bio ... just a fun project to really just make concepts while I'm ... busy waiting for my other Claude Code sessions ... mention the Kotoba and the language games ... world building ... maybe I'll even add these tracks ... to my other games in the future. But for right now, it's just for fun and vibes." The hero card now says that in two short paragraphs, with a link to the Kotoba Village gallery on the home page. `scripts/check_page_layout.py bvby-ash/`: 42 combinations (2 themes x 3 fonts x 7 widths), 0 problems; hero screenshots looked at in Cyber Night at 1280 px and Kawaii Day at 390 px.
