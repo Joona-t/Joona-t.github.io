@@ -1,5 +1,15 @@
 # Bugs & Iterations
 
+## 2026-11-22: BUG: the Claudio conga bar was half empty on wide screens, plus a UI pass on the Bvby Ash page
+
+**Reported by Joona:** "The baby clouds that are loading aren't in the full bar."
+**Root cause:** the conga track was a fixed 14 Claudios (about 1,600 px, looping at half that), so any window wider than about 1,100 px showed an empty end: 158 px at 1280, 795 px at 1920, 1,445 px at 2560. The layout check only tested up to 1280 px and had no test for an animated strip being full, so it passed.
+**Fix:** app.js fills the track with enough Claudios for two widths of the bar (ResizeObserver, so it refills on resize) and sets the loop length from that, keeping the walk speed at 40 px/s at every width.
+**Same pass (found by the widened check and by reading screenshots at every width):** at 360 px with OpenDyslexic the footer links did not wrap (page 381 px wide); at 768 to 1024 px the three video cards went 2 + 1 with Slow Light alone at half width (now 3 across from 960 px, otherwise one centred column); the eyebrow pill was cramped when it wrapped; subtitles left one-word orphans; the crew Claudios touched at 768 and 360 px; the YouTube button's arrow wrapped onto its own line; the content column grows to 1,360 px on screens 1,800 px and wider.
+**Check made stronger:** `check_page_layout.py` now covers 2560, 1920, 1280, 1024, 768, 390 and 360 px, and fails when a strip marked `data-check-full` has more than 120 px empty at either end at any sampled moment. On the live code it failed with 22 problems (the bar in all 24 combinations at 1024 px and wider, the footer at 360 px); after the fix, 0 of 42.
+**Verified:** five full runs of `check_page_layout.py` (42 combinations each) and `verify_site.py --runs 5`, results below in the commit; screenshots read at 2560, 1920, 1024, 768 and 360 px.
+**Files:** bvby-ash/index.html, bvby-ash/styles.css, bvby-ash/app.js, scripts/check_page_layout.py
+
 ## 2026-11-22: ITER: Music panel on the home page and a Bvby Ash page
 
 **What:** a "Music" section after Agentic Repos with a Bvby Ash window card (the booth banner, "Enter the club") linking to the new `bvby-ash/` page. The page embeds all three public videos on @bvby_ash (Aura Festival Version, Six Seven Claudios, Slow Light) behind click-to-play facades (youtube-nocookie, nothing loads from YouTube until play), and is built around new art: a hand-drawn SVG chibi of Bvby Ash (green hair, rainbow visor, chrome headphones, waving), pixel Claudios in shades doing the six-seven (orbiting the stage, a conga line, a seven-piece crew with real Japanese role words), a spinning holographic disc, an EQ, kana glyph rain (real words only: 音楽, 夢, 愛, 光, オーラ, 踊れ, 六七, 電波) and a Y2K grid floor, all timed to 128 BPM. Two themes from the anime-design skill (Cyber Night = NEON, Kawaii Day = KAWAII gingham) and a font picker (theme / OpenDyslexic / Atkinson). Motion is off under reduced motion; the glyph rain pauses when the tab is hidden.
