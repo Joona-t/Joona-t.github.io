@@ -31,6 +31,22 @@
     }, { once: true });
   });
 
+  // conga line: enough Claudios to fill two screen widths, so the loop never shows an empty end at any width
+  // (2026-11-22: a fixed 14 only covered ~1100 px; at 1920 px the right 795 px of the bar were empty)
+  const track = document.querySelector(".conga-track");
+  const SPEED = 40; // px per second
+  function fillConga() {
+    const one = track.firstElementChild; if (!one) return;
+    const step = one.getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap || 0);
+    const perHalf = Math.ceil(track.parentElement.clientWidth / step) + 1;
+    if (track.children.length !== perHalf * 2) {
+      const tpl = one.cloneNode(true);
+      track.replaceChildren(...Array.from({ length: perHalf * 2 }, () => tpl.cloneNode(true)));
+    }
+    track.style.setProperty("--conga-dur", `${(perHalf * step) / SPEED}s`);
+  }
+  if (track) { fillConga(); new ResizeObserver(fillConga).observe(track.parentElement); }
+
   // glyph rain: real words only — 音楽 music, 夢 dream, 愛 love, 光 light, オーラ aura, 踊れ dance, 六七 six-seven, 電波 signal
   const WORDS = ["音楽", "夢", "愛", "光", "オーラ", "踊れ", "六七", "電波", "バビーアッシュ"];
   const canvas = document.getElementById("glyphRain");

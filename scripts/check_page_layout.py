@@ -1,11 +1,14 @@
 """Layout check for HTML pages with their own theme and font pickers (the Bvby Ash page by default). Exit 1 on any problem.
 
-For every theme button ([data-set-theme]) and every font option (#fontPick) at 1280, 768 and 390 px wide, it scrolls the
+For every theme button ([data-set-theme]) and every font option (#fontPick) at 2560, 1920, 1280, 1024, 768, 390 and 360 px
+wide, it scrolls the
 whole page (so lazy images load) and fails when:
   1. the page scrolls sideways (2026-11-22: the first Bvby Ash draft was 407 px wide on a 390 px phone);
   2. two pieces of text overlap (text on text);
   3. text spills out of its own box (scrollWidth past clientWidth) or off the screen;
-  4. an image fails to load.
+  4. an image fails to load;
+  5. an animated strip marked data-check-full="<item selector>" has an empty stretch at either end at any sampled moment
+     (2026-11-22: the Claudio conga bar was only filled to ~1100 px; at 1920 px its right 795 px were empty).
 Every theme and font is read from the page, so a new one is covered without editing this file.
 
 Usage: python3 scripts/check_page_layout.py [path-under-repo, default bvby-ash/] [--shots DIR]
@@ -20,7 +23,7 @@ argv = sys.argv[1:]
 shots = argv[argv.index("--shots") + 1] if "--shots" in argv else None
 args = [a for i, a in enumerate(argv) if not a.startswith("--") and (i == 0 or argv[i - 1] != "--shots")]
 page_path = (args[0] if args else "bvby-ash/").lstrip("/")
-WIDTHS = ((1280, 900), (768, 1024), (390, 844))
+WIDTHS = ((2560, 1200), (1920, 1080), (1280, 900), (1024, 768), (768, 1024), (390, 844), (360, 740))
 
 class Quiet(http.server.SimpleHTTPRequestHandler):
     def log_message(self, *a): pass
@@ -36,6 +39,13 @@ IMAGES = r"""async () => {  // every image must decode; a fresh load each, so a 
   }));
   return bad;
 }"""
+
+STRIPS = r"""() => [...document.querySelectorAll("[data-check-full]")].map((bar) => {
+  const b = bar.getBoundingClientRect(), kids = [...bar.querySelectorAll(bar.dataset.checkFull)].map((e) => e.getBoundingClientRect());
+  if (!kids.length) return [bar.className, Math.round(b.width)];
+  const left = Math.min(...kids.map((r) => r.left)), right = Math.max(...kids.map((r) => r.right));
+  return [bar.className, Math.round(Math.max(left - b.left, b.right - right))];
+})"""
 
 JS = r"""() => {
   const out = [], vw = document.documentElement.clientWidth;
@@ -96,10 +106,14 @@ with sync_playwright() as p:
             for f in fonts:
                 page.select_option("#fontPick", f); page.evaluate("document.fonts.ready"); page.wait_for_timeout(150)
                 combos += 1
-                widest = 0
-                for _ in range(8):  # animated art moves; sample a couple of beats for the widest moment
+                widest, gaps = 0, {}
+                for _ in range(10):  # animated art moves: sample about three seconds for the worst moment
                     widest = max(widest, page.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth"))
-                    page.wait_for_timeout(120)
+                    for name, gap in page.evaluate(STRIPS): gaps[name] = max(gaps.get(name, 0), gap)
+                    page.wait_for_timeout(300)
+                for name, gap in gaps.items():
+                    if gap > 120:  # more than one Claudio and its gap missing
+                        fails.append(f"[{w}px · {t or 'default'} · {f or 'theme font'}] strip not full: .{name} has {gap}px empty at an end")
                 if widest > 1: fails.append(f"[{w}px · {t or 'default'} · {f or 'theme font'}] sideways scroll: up to {widest}px wider than the window while animating")
                 for msg in page.evaluate(JS):
                     fails.append(f"[{w}px · {t or 'default'} · {f or 'theme font'}] {msg}")
