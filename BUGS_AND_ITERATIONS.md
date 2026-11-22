@@ -663,3 +663,6 @@ Found in the screenshots and fixed at the source: anti-aliased seams between the
 
 ## BUG (2026-11-22): Bvby Ash video cards out of date order
 Joona: "the 67 card should be at the bottom as it is the oldest". Six Seven Claudios (19 Nov) sat above Slow Light (20 Nov). Root cause: cards are added by hand and nothing checked their order. Fix: cards reordered newest first, and `scripts/check_set_order.py` (newest video first) now runs inside `scripts/verify_site.py`, so `merge_pr.sh` refuses a page with cards out of order. The check fails on the old page ("19 Nov 2026 card above the newer 20 Nov 2026 card") and passes on the fixed one.
+
+## ITER (2026-11-22): Bvby Ash videos as an Instagram-profile grid again
+Joona: "three cards on top and then one card on the bottom ... like the Instagram page format ... every time there's a new post, all cards get pushed to the right". The grid had been changed to two by two ("three columns left one card alone"); it is three across again on desktop, newest top-left (22, 21, 20 Nov on top, Six Seven Claudios 19 Nov below), two across at tablet width and one on phones, where a card's text needs the width. Card positions measured at 1280 px (3 per row), 800 px (2) and 390 px (1); layout check 42 combinations, 0 problems; order check OK.

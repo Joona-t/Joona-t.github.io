@@ -112,8 +112,9 @@ main { overflow-x: clip; } /* the floating Claudios swing past the stage edge on
 .section-kana { font: 400 .55em/1 var(--hand); color: var(--accent-ink); vertical-align: middle; margin-right: .3em; }
 .section-sub { margin: 0 0 22px; color: var(--muted); max-width: 46rem; background: var(--paper); display: inline-block; padding: 2px 6px; border-radius: 6px; text-wrap: pretty; }
 
-.set-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; }   /* four videos: two by two (three columns left one card alone) */
-@media (max-width: 959px) { .set-grid { grid-template-columns: minmax(0, 1fr); max-width: 640px; margin-inline: auto; } }
+.set-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }   /* Instagram-profile grid (Joona, 2026-11-22): three across, newest top-left, each new video pushes the rest along */
+@media (max-width: 959px) { .set-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 639px) { .set-grid { grid-template-columns: minmax(0, 1fr); max-width: 520px; margin-inline: auto; } }
 .set-card, .art-card { background: var(--sheet); border: 3px solid var(--line); border-radius: 18px; box-shadow: 0 0 0 5px var(--outline), 7px 8px 0 5px var(--shadow-ink); overflow: hidden; transform: rotate(-.8deg); }
 .set-card:nth-child(even), .art-card:nth-child(even) { transform: rotate(.8deg); }
 .facade { position: relative; display: block; width: 100%; padding: 0; border: 0; border-bottom: 3px solid var(--line); cursor: pointer; background: #000; aspect-ratio: 16 / 9; }
