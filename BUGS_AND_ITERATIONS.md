@@ -650,3 +650,9 @@ The walk covers the whole page, so the generated gallery (`data/gallery.json`) n
 
 ## ITER (2026-11-22): Bvby Ash bio in Joona's words
 Joona: "update the bio ... just a fun project to really just make concepts while I'm ... busy waiting for my other Claude Code sessions ... mention the Kotoba and the language games ... world building ... maybe I'll even add these tracks ... to my other games in the future. But for right now, it's just for fun and vibes." The hero card now says that in two short paragraphs, with a link to the Kotoba Village gallery on the home page. `scripts/check_page_layout.py bvby-ash/`: 42 combinations (2 themes x 3 fonts x 7 widths), 0 problems; hero screenshots looked at in Cyber Night at 1280 px and Kawaii Day at 390 px.
+
+## ITER (2026-11-22): First Thought on the Bvby Ash page
+Joona: "update our Bvby Ash site ... It doesn't have the latest song."
+- **Added:** First Thought (YouTube Yy4fJcuAeLk, 22 Nov 2026, 4:04) first in Transmissions with the New tag (Aura's tag is now Festival); a still from the video at 3:32 (the finished brain and the region list) and the cover in Cover art (`bvby-ash/img/first-thought-{frame,cover}.webp`, made with cwebp: this ffmpeg build has no WebP encoder). Meta description and the home page's music panel name it.
+- **Layout:** with four videos, three columns left Slow Light alone on a row, and four square covers left one alone; videos are now two by two (one column under 960 px, as before) and covers four across (two under 760 px, as before).
+- **Verified:** `check_page_layout.py bvby-ash/`: 42 combinations (2 themes x 3 fonts x 7 widths), 0 problems, before and after the grid change. Screenshots looked at in dark and light at 1920 and 1280 and in the phone view at 390.
