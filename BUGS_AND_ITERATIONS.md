@@ -666,3 +666,10 @@ Joona: "the 67 card should be at the bottom as it is the oldest". Six Seven Clau
 
 ## ITER (2026-11-22): Bvby Ash videos as an Instagram-profile grid again
 Joona: "three cards on top and then one card on the bottom ... like the Instagram page format ... every time there's a new post, all cards get pushed to the right". The grid had been changed to two by two ("three columns left one card alone"); it is three across again on desktop, newest top-left (22, 21, 20 Nov on top, Six Seven Claudios 19 Nov below), two across at tablet width and one on phones, where a card's text needs the width. Card positions measured at 1280 px (3 per row), 800 px (2) and 390 px (1); layout check 42 combinations, 0 problems; order check OK.
+
+## ITER (2026-11-24): Bvby Ash: Afterimage added, and a script that adds a video card
+Joona: "update Bvby Ash's website with this new song with a YouTube embed ... We should have a workflow to set that up automatically once it's public on YouTube."
+- `scripts/add_bvby_video.py card.json` does what was hand-edited before: checks the video is public (YouTube's oEmbed answers 200), writes the still and the cover as WebP, puts the new card first with the "New" tag (the card that had it gets the tag named in the json), puts the cover first under Cover art, and adds the title to the home page's "newest first" sentence. Running it twice changes nothing; a video id that is not public is refused ("AAAAAAAAAAA is not public on YouTube yet: not adding it").
+- Afterimage (`JDVBe4fGZzw`, 24 Nov 2026, 3:19) added with it. First Thought's tag is now "Brain".
+- Cover art is three across, like the videos: with a fifth cover, four across left one alone on a row. Seen in the first screenshots, fixed in the grid, not by reordering.
+- Verified: `check_set_order.py` 5 cards newest first; `check_page_layout.py bvby-ash/` 42 combinations (2 themes x 3 fonts x 7 widths), 0 problems, before and after the grid change; screenshots looked at in dark and light at 1920 px.

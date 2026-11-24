@@ -137,7 +137,7 @@ main { overflow-x: clip; } /* the floating Claudios swing past the stage edge on
 @media (max-width: 900px) { .crew-row { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 @media (max-width: 340px) { .crew-row { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 
-.art-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; margin-top: 20px; }
+.art-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 20px; }   /* three across, like the videos above (2026-11-24: a fifth cover left one alone on a row of four) */
 .art-card { margin: 0; }
 .art-card img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; border-bottom: 3px solid var(--line); }
 .art-wide { grid-column: 1 / -1; }
